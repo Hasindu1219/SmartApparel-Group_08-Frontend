@@ -155,6 +155,7 @@ export default function Navbar() {
           <AccountCircle />
         </IconButton>
         <p>Account Details</p>
+        
       </MenuItem>
 
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -166,6 +167,25 @@ export default function Navbar() {
           color="inherit"
         >
           <SettingsIcon />
+
+          <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                color="inherit"
+                >
+                <AccountCircle/>
+                <div style={{ padding: '10px' }}> {/* Added padding to the div */}
+                    <Typography variant="body1"  style={{ fontSize: '15px' }}>
+                    Madushan Liyanage
+                    </Typography>
+                    <Typography variant="body2" style={{ fontSize: '10px' ,color: '#BDBDBD'}}>
+                    Chief Executive Officer
+                    </Typography>
+                </div>
+            </IconButton>
         </IconButton>
         <p>Settings</p>
       </MenuItem>
@@ -192,24 +212,12 @@ export default function Navbar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            Smart Apparel
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
+            
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -228,8 +236,41 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <ForumIcon />
             </IconButton>
+
+            <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                color="inherit"
+                >
+                <AccountCircle/>
+                <div style={{ padding: '10px' }}> {/* Added padding to the div */}
+                    <Typography variant="body1"  style={{ fontSize: '15px' }}>
+                    Madushan Liyanage
+                    </Typography>
+                    <Typography variant="body2" style={{ fontSize: '10px' ,color: '#BDBDBD'}}>
+                    Chief Executive Officer
+                    </Typography>
+                </div>
+            </IconButton>
+
+
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <SettingsIcon  />
+            </IconButton>
+
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -242,6 +283,38 @@ export default function Navbar() {
             >
               <MoreIcon />
             </IconButton>
+
+            <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                color="inherit"
+                >
+                <AccountCircle/>
+                <div style={{ padding: '10px' }}> {/* Added padding to the div */}
+                    <Typography variant="body1"  style={{ fontSize: '15px' }}>
+                    Madushan Liyanage
+                    </Typography>
+                    <Typography variant="body2" style={{ fontSize: '10px' ,color: '#BDBDBD'}}>
+                    Chief Executive Officer
+                    </Typography>
+                </div>
+            </IconButton>
+
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <SettingsIcon  />
+            </IconButton>
+
           </Box>
         </Toolbar>
       </AppBar>
