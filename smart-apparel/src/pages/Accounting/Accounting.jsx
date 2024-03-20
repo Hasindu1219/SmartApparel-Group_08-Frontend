@@ -1,8 +1,21 @@
 import React from "react";
 import Sidebar from "../../components/Sidebar";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Navbar from "../../components/Navbar/Navbar";
+import BasicGrid from "../../components/Accounting/AccountingTilesGrid";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Stack from '@mui/material/Stack';
+import Paper from '@mui/material/Paper';
+import styled from '@mui/material/styles/styled';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function Accounting() {
   return (
@@ -14,25 +27,15 @@ export default function Accounting() {
 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <h1>Accounting</h1>
-          <div className="AccountingBody">
+          <BasicGrid />
 
-            <div className="AccountingTiles">
+          <Box height={30} />
 
-              <div className="division">
-                <h2>Accounting Body Left</h2>
-              </div>
-
-              <div className="division">
-                <h2>Accounting Body Left</h2>
-              </div>
-
-              <div className="division">
-                <h2>Accounting Body Right</h2>
-              </div>
-
-            </div>
-
-          </div>
+          <Stack spacing={2}>
+            <Item sx={{  maxWidth: 350, minHeight:80}}>Item 1</Item>
+            <Item sx={{  maxWidth: 350, minHeight:80}}>Item 2</Item>
+            <Item sx={{  maxWidth: 350, minHeight:80}}>Item 3</Item>
+          </Stack>
         </Box>
       </Box>
     </>
