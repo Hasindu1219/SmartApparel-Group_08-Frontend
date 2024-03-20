@@ -92,7 +92,7 @@ export default function Sidebar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Box height={30} />
+      <Box height={40} />
       
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>

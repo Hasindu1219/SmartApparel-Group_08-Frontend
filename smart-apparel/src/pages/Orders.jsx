@@ -7,7 +7,7 @@ export default function Orders() {
   return (
     <>
       <Navbar />
-      <Box height={30} />
+      <Box height={40} />
       <Box sx={{ display: "flex" }}>
         <Sidebar />
         

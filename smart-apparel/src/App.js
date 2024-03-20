@@ -2,7 +2,7 @@ import './App.css';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Overview from './pages/Overview';
-import Accounting from './pages/Accounting';
+import Accounting from './pages/Accounting/Accounting';
 import Employees from './pages/Employees';
 import Sidebar from './components/Sidebar';
 import Sales from './pages/Sales';

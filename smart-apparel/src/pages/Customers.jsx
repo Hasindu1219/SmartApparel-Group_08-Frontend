@@ -8,7 +8,7 @@ export default function Customers() {
   return (
     <>
       <Navbar />
-      <Box height={30} />
+      <Box height={40} />
       <Box sx={{ display: "flex" }}>
         <Sidebar />
         
