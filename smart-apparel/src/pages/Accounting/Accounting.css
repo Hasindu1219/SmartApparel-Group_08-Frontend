@@ -1,8 +1,19 @@
-.main-container {
+.AccountingTiles {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
+
+.AccountTilesLeft{
+    background-color: #aea6a6;
+    float: left;
+  }
   
-  .division {
-    border: 1px solid black; /* Optional: for demonstration */
+  .AccountTilesMiddle {
+    background-color: #371c1c;
+    float: left;
+  }
+  
+  .AccountTilesRight{
+    background-color: #a41313;
+    float: middle;
   }
