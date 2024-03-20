@@ -1,21 +1,30 @@
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
+import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { useAppStore } from '../../appStore';
 import ForumIcon from '@mui/icons-material/Forum';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Typography } from '@mui/material';
 
 
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({theme }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+}));
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -60,6 +69,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const updateOpen = useAppStore((state) => state.updateOpen);
+  const dopen = useAppStore((state) => state.dopen);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -120,9 +131,7 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-
-
-      <MenuItem>
+            <MenuItem>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
@@ -145,6 +154,7 @@ export default function Navbar() {
         >
           <AccountCircle />
         </IconButton>
+        <p>Account Details</p>
       </MenuItem>
 
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -157,51 +167,58 @@ export default function Navbar() {
         >
           <SettingsIcon />
         </IconButton>
-        <p>Profile</p>
+        <p>Settings</p>
       </MenuItem>
     </Menu>
   );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" >
+      <AppBar position="fixed">
         <Toolbar>
-          
-          
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+            onClick={() => updateOpen(!dopen)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: 'none', sm: 'block' } }}
+          >
+            MUI
+          </Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-
-            <IconButton
-              size= "large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-              style={{ color: "purple" }}
-            >
-              <Badge badgeContent={2} color="error">
-                <ForumIcon />
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={4} color="error">
+                <MailIcon />
               </Badge>
             </IconButton>
-
             <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                color="inherit"
-                >
-                <AccountCircle/>
-                <div style={{ padding: '10px' }}> {/* Added padding to the div */}
-                    <Typography variant="body1"  style={{ fontSize: '15px' }}>
-                    Madushan Liyanage
-                    </Typography>
-                    <Typography variant="body2" style={{ fontSize: '10px' ,color: '#BDBDBD'}}>
-                    Chief Executive Officer
-                    </Typography>
-                </div>
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="error">
+                <NotificationsIcon />
+              </Badge>
             </IconButton>
-
-
             <IconButton
               size="large"
               edge="end"
@@ -211,11 +228,9 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <SettingsIcon  />
+              <AccountCircle />
             </IconButton>
-
           </Box>
-          
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
