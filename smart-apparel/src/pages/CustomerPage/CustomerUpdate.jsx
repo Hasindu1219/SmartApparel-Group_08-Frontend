@@ -1,11 +1,10 @@
 import React from 'react'
-import Sidebar from '../components/Sidebar'
 import Box from '@mui/material/Box';
-import Navbar from "../components/Navbar/Navbar";
-import CustomerHome from "./CustomerPage/CustomerHome";
+import Navbar from '../../components/Navbar/Navbar';
+import Sidebar from '../../components/Sidebar';
+import Search from "./Search";
 
-
-export default function Customers() {
+export default function CustomerUpdate() {
   return (
     <>
       <Navbar />
@@ -14,8 +13,8 @@ export default function Customers() {
         <Sidebar />
         
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <h1>Customers</h1>
-        <CustomerHome/>
+        <h1>Update Customer</h1>
+        <Search />
         </Box>
       </Box>
     </>

@@ -11,8 +11,10 @@ import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
 import Login from './pages/Login';
-
-
+import CustomerRegister from './pages/CustomerPage/CustomerRegister';
+import CustomerViewDelete from './pages/CustomerPage/CustomerViewDelete';
+import CustomerUpdate from './pages/CustomerPage/CustomerUpdate';
+import CustomerStatus from './pages/CustomerPage/CustomerStatus';
 
 function App() {
   return (
@@ -27,6 +29,11 @@ function App() {
         <Route path="/suppliers" element={<Suppliers />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/login" element={<Login />}></Route>
+
+        <Route path="/customerregister" element={<CustomerRegister/>} />
+        <Route path="/customerviewdelete" element={<CustomerViewDelete />} />
+        <Route path="/customerupdate" element={<CustomerUpdate />} />
+        <Route path="/customerstatus" element={<CustomerStatus />} />
       </Routes>
     </BrowserRouter>
   );
