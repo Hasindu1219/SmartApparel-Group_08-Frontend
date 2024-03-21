@@ -1,0 +1,83 @@
+/* Table.css */
+
+.table-container {
+    margin: 20px auto;
+    margin-left: 30px;
+  }
+  
+  .custom-table {
+    /* width: 100%; */
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .custom-table th, .custom-table td {
+    border: 1px solid #ddd;
+    /* padding: 8px; */
+    text-align: left;
+    font-size: 14px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
+  }
+  
+  .custom-table th {
+    background-color: #0077b6;
+    color: white;
+  }
+  .tableBtn{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+  }
+  .editBtn{
+    background-color: #aacc00;
+    border: none;
+    width: 4rem;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .deleteBtn{
+    background-color: #c9184a;
+    border: none;
+    width: 5rem;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .tableUpdateBtn{
+    background-color: #4c956c;
+    border: none;
+    width: 5rem;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .tableUpdateBtn:hover{
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+  }
+  .editBtn:hover{
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+  }
+  .deleteBtn:hover{
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+  }
