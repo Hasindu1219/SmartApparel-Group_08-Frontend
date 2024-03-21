@@ -13,6 +13,7 @@ export default function Sales() {
         
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <h1>Sales</h1>
+        
         </Box>
       </Box>
     </>
