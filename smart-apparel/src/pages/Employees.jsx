@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar";
+
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -11,6 +12,12 @@ import Button from "@mui/material/Button";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import TrendingUpTwoToneIcon from "@mui/icons-material/TrendingUpTwoTone";
 import Stack from "@mui/material/Stack";
+import CustomizedTables from "../components/EmployeeComponent/EmployeeTable2";
+import ColorButtons from "../components/EmployeeComponent/Button";
+
+const gradientStyle = {
+  background: "linear-gradient(to right, #2980B9, #6DD5FA)", // Gradient colors
+};
 
 export default function Employees() {
   return (
@@ -26,89 +33,35 @@ export default function Employees() {
           {/* Cards */}
           <Grid container spacing={2}>
             <Grid item xs="auto">
-              <Card sx={{ minWidth: 350, backgroundColor: "yellow" }}>
+              <Card sx={{ minWidth: 350 }} style={gradientStyle}>
                 <CardContent style={{ textAlign: "center" }}>
                   <Typography variant="h5" component="div">
-                    <TrendingUpTwoToneIcon /> Total Employees
+                    Total Employees
                   </Typography>
-                  <Typography variant="h5" >
-                    5
-                  </Typography>
-                  {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    adjective
-                  </Typography>
-
-                  <Typography variant="body2">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                  </Typography> */}
+                  <Typography variant="h5">5</Typography>
                 </CardContent>
-
-                {/* <CardActions sx={{ float: "right" }}>
-                  <Button size="small">
-                    More
-                    <ArrowForwardIosIcon />
-                  </Button>
-                </CardActions> */}
               </Card>
             </Grid>
 
             <Grid item xs="auto">
-              <Card sx={{ minWidth: 350, backgroundColor: "yellow" }}>
+              <Card sx={{ minWidth: 350 }} style={gradientStyle}>
                 <CardContent style={{ textAlign: "center" }}>
                   <Typography variant="h5" component="div">
-                    <TrendingUpTwoToneIcon /> Today Working
+                    Today Working
                   </Typography>
-                  <Typography variant="h5" >
-                    5
-                  </Typography>
-                  {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    adjective
-                  </Typography>
-
-                  <Typography variant="body2">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                  </Typography> */}
+                  <Typography variant="h5">5</Typography>
                 </CardContent>
-
-                {/* <CardActions sx={{ float: "right" }}>
-                  <Button size="small">
-                    More
-                    <ArrowForwardIosIcon />
-                  </Button>
-                </CardActions> */}
               </Card>
             </Grid>
 
             <Grid item xs="auto">
-              <Card sx={{ minWidth: 350, backgroundColor: "yellow" }}>
+              <Card sx={{ minWidth: 350 }} style={gradientStyle}>
                 <CardContent style={{ textAlign: "center" }}>
                   <Typography variant="h5" component="div">
-                    <TrendingUpTwoToneIcon /> Today Absant
+                    Total Employees
                   </Typography>
-                  <Typography variant="h5" >
-                    0
-                  </Typography>
-                  {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    adjective
-                  </Typography>
-
-                  <Typography variant="body2">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                  </Typography> */}
+                  <Typography variant="h5">0</Typography>
                 </CardContent>
-
-                {/* <CardActions sx={{ float: "right" }}>
-                  <Button size="small">
-                    More
-                    <ArrowForwardIosIcon />
-                  </Button>
-                </CardActions> */}
               </Card>
             </Grid>
           </Grid>
@@ -119,11 +72,17 @@ export default function Employees() {
             <Grid item xs={8}>
               <Card
                 sx={{
-                  height: 60 + "vh",
-                  minWidth: 1000,
-                  backgroundColor: "yellow",
+                  minHeight: 60 + "vh",
+                  minWidth: 1090,
+                  background: 'linear-gradient(to top left, #ccffff 0%, #ffffff 100%)',
                 }}
-              ></Card>
+              >
+                <CardContent style={{ textAlign: "center" }}>
+                  <CustomizedTables />
+
+                  <ColorButtons />
+                </CardContent>
+              </Card>
             </Grid>
           </Grid>
         </Box>
