@@ -1,15 +1,18 @@
+.cardMainContainer{
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+}
 .Card_Container{
     width: 15rem;
     border-radius: 1rem;
     box-shadow:10px 10px 10px  #999;
-    display: flex;
-    flex-direction:column;
+    display: grid;
     background-color: rgb(209, 212, 213);
     margin: 2rem;
     height: fit-content;
-    display: grid;
     gap: 5px; 
-    margin-bottom: 400px;
+    padding: 10px;
     
 
     /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
@@ -23,15 +26,22 @@
 
 }
 
-.Material_Description,
-.Count{
-    margin:0.5rem 5%;
-
-
+.Count,
+.Material_Description{
+    margin: 0.5rem 5%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+/*zip space*/
+.cardSubTopic{
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-/* .Count{
-    margin: 0.5rem 5%;
-
-} */
+.iconBox{
+    display: flex;
+    align-items: center;
+}
 
