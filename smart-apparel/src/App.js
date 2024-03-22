@@ -10,17 +10,25 @@ import Customers from './pages/Customers';
 import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
-import Login from './pages/Login';
 import CustomerRegister from './pages/CustomerPage/CustomerRegister';
 import CustomerViewDelete from './pages/CustomerPage/CustomerViewDelete';
 import CustomerUpdate from './pages/CustomerPage/CustomerUpdate';
 import CustomerStatus from './pages/CustomerPage/CustomerStatus';
+// import Login from './pages/Login';
+import AddExpense from './pages/Accounting/AddExpense'
+import ViewExpense from './pages/Accounting/ViewExpense';
+import UpdateExpense from './pages/Accounting/UpdateExpense';
+import Login from "./pages/Login/Login";
+
+
 
 function App() {
   return (
+    
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Overview />}></Route>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="/overview" element={<Overview />}></Route>
         <Route path="/accounting" element={<Accounting />}></Route>
         <Route path="/sales" element={<Sales />}></Route>
         <Route path="/customers" element={<Customers />}></Route>
@@ -29,11 +37,14 @@ function App() {
         <Route path="/suppliers" element={<Suppliers />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/login" element={<Login />}></Route>
-
         <Route path="/customerregister" element={<CustomerRegister/>} />
         <Route path="/customerviewdelete" element={<CustomerViewDelete />} />
         <Route path="/customerupdate" element={<CustomerUpdate />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
+        <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
+        <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route>
+        <Route path="/accounting/updateexpense" element={<UpdateExpense />}></Route>
+        {/* <Route path="/overview" element={<App />}></Route> */}
       </Routes>
     </BrowserRouter>
   );
