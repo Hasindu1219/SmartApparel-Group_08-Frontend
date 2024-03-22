@@ -12,7 +12,7 @@ export default function Orders() {
         <Sidebar />
         
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <h1>Oders</h1>
+        <h1>Orders</h1>
         </Box>
       </Box>
     </>
