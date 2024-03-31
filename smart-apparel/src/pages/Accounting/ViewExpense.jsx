@@ -1,48 +1,125 @@
-import React, { useState, useEffect } from "react";
+import * as React from 'react';
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
+const dummyExpenses = [
+  {
+    expense_ID: 1,
+    date: "2024-03-01",
+    description: "Groceries",
+    category: "Food",
+    amount: 450.00
+  },
+  {
+    expense_ID: 2,
+    date: "2024-03-05",
+    description: "Electricity",
+    category: "Electricity",
+    amount: 8000.00
+  },
+  {
+    expense_ID: 3,
+    date: "2024-03-10",
+    description: "Gasoline",
+    category: "Transportation",
+    amount: 40000.00
+  },
+  {
+    expense_ID: 4,
+    date: "2024-03-15",
+    description: "Water",
+    category: "Water",
+    amount: 2500.00
+  },
+  {
+    expense_ID: 5,
+    date: "2024-03-20",
+    description: "Utilities",
+    category: "Other",
+    amount: 1200.00
+  },
+];
+
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
 const Rest_API_URL = "http://localhost:8080/api/v1/expense/viewExpense";
 
 const ListExpensesComponent = () => {
   const [expenses, setExpenses] = useState([]);
 
+
   useEffect(() => {
-    axios.get(Rest_API_URL)
-      .then((response) => {
-        setExpenses(response.data.content);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []); // Adding empty dependency array to ensure useEffect runs only once
+    setExpenses(dummyExpenses);
+  }, []);
+  
+
+  // useEffect(() => {
+  //   axios.get(Rest_API_URL)
+  //     .then((response) => {
+  //       setExpenses(response.data.content);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []); // Adding empty dependency array to ensure useEffect runs only once
 
   return (
-    <div  style={{ paddingTop: '65px', width: "95%" }}>
-      <h2 className="text-center"><center>List of Expenses</center></h2>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Expense ID</th>
-            <th scope="col">Date</th>
-            <th scope="col">Description</th>
-            <th scope="col">Category</th>
-            <th scope="col">Amount</th>
-          </tr>
-        </thead>
-        <tbody>
+    <>
+    <div><h2><center>Expense Details</center></h2></div>
+    <TableContainer component={Paper} style={{ paddingTop: '65px', width: "95%" }}>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Expense ID</StyledTableCell>
+            <StyledTableCell align="right">Date</StyledTableCell>
+            <StyledTableCell align="right">Description</StyledTableCell>
+            <StyledTableCell align="right">Category</StyledTableCell>
+            <StyledTableCell align="right">Amount</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {expenses.map((expense) => (
-            <tr key={expense.expense_ID}>
-              <td style={{ color: "black" }}>{expense.expense_ID}</td>
-              <td style={{ color: "black" }}>{expense.date}</td>
-              <td style={{ color: "black" }}>{expense.description}</td>
-              <td style={{ color: "black" }}>{expense.category}</td>
-              <td style={{ color: "black" }}>{expense.amount}</td>
-            </tr>
+            <StyledTableRow key={expense.expense_ID}>
+              <StyledTableCell component="th" scope="row">
+                {expense.expense_ID}
+              </StyledTableCell>
+              <StyledTableCell align="right">{expense.date}</StyledTableCell>
+              <StyledTableCell align="right">{expense.description}</StyledTableCell>
+              <StyledTableCell align="right">{expense.category}</StyledTableCell>
+              <StyledTableCell align="right">{expense.amount}</StyledTableCell>
+            </StyledTableRow>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </>
   );
 };
 

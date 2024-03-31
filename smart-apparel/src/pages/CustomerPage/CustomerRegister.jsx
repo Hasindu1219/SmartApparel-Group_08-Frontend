@@ -103,7 +103,7 @@ export default function CustomerRegister() {
   //   </div>
   // );
 }
-=======
+
 // import {useState} from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import './CustomerRegister.css';
