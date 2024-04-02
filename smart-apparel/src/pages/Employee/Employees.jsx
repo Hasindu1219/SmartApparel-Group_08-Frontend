@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../../components/Sidebar";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -12,8 +12,10 @@ import Button from "@mui/material/Button";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import TrendingUpTwoToneIcon from "@mui/icons-material/TrendingUpTwoTone";
 import Stack from "@mui/material/Stack";
-import CustomizedTables from "../components/EmployeeComponent/EmployeeTable2";
-import ColorButtons from "../components/EmployeeComponent/Button";
+import CustomizedTables from "../../components/EmployeeComponent/EmployeeTable2";
+import ColorButtons from "../../components/EmployeeComponent/Button";
+
+import EmployeeTable from "../../components/EmployeeComponent/EmployeeTable";
 
 const gradientStyle = {
   background: "linear-gradient(to right, #2980B9, #6DD5FA)", // Gradient colors
@@ -23,7 +25,7 @@ export default function Employees() {
   return (
     <>
       <Navbar />
-      <Box height={40} />
+      <Box height={60} />
       <Box sx={{ display: "flex" }}>
         <Sidebar />
 
@@ -78,9 +80,10 @@ export default function Employees() {
                 }}
               >
                 <CardContent style={{ textAlign: "center" }}>
-                  <CustomizedTables />
-
+                  {/* <CustomizedTables /> */}
+                  <EmployeeTable/>
                   <ColorButtons />
+
                 </CardContent>
               </Card>
             </Grid>
