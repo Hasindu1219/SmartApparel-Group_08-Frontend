@@ -99,7 +99,7 @@ export default function CustomerRegister() {
       
 
   //   </div>
-
+  
    );
 }
 
@@ -110,6 +110,7 @@ export default function CustomerRegister() {
 // import Navbar from '../../components/Navbar/Navbar';
 // import Error from '../../components/Error/Error';
 // import axios from 'axios';
+
 
 
 //     </div>
