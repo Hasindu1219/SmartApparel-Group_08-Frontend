@@ -16,15 +16,13 @@ import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
 import CustomerRegister from './pages/CustomerPage/CustomerRegister';
-import CustomerViewDelete from './pages/CustomerPage/CustomerViewDelete';
-import CustomerUpdate from './pages/CustomerPage/CustomerUpdate';
+import CustomerViewDelete from './pages/CustomerPage/CustomerDetails';
 import CustomerStatus from './pages/CustomerPage/CustomerStatus';
 // import Login from './pages/Login';
 import AddExpense from './pages/Accounting/AddExpense'
 import ViewExpense from './pages/Accounting/ViewExpense';
 import UpdateExpense from './pages/Accounting/UpdateExpense';
-import Login from "./pages/Login/Login";
-
+import Login from './pages/Login/Login';
 
 
 function App() {
@@ -48,8 +46,7 @@ function App() {
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/customerregister" element={<CustomerRegister/>} />
-        <Route path="/customerviewdelete" element={<CustomerViewDelete />} />
-        <Route path="/customerupdate" element={<CustomerUpdate />} />
+        <Route path="/customerdetails" element={<CustomerViewDelete />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
         <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route>

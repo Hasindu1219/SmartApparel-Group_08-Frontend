@@ -5,7 +5,6 @@
     align-items: center;
     margin-right: 23rem;
     margin-left: 1px;
-    display: inline;
     flex-direction: row;
 }
 .Botton{
@@ -37,6 +36,7 @@
     height:20rem;
     border: 2px soild rgb(10, 10, 10);
     flex-direction: row;
+    margin-right: 1rem;
 }
 .Image{
     width: 38rem;
