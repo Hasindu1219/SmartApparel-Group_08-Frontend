@@ -12,11 +12,8 @@ export default function CustomerHome() {
                 <button className="btn1" onClick={() => navigateTo("/customerregister")}>
                     <p className="Task1">Register Customer</p>
                 </button>
-                <button className="btn1" onClick={() => navigateTo("/customerviewdelete")}>
-                    <p className="Task1">View & Delete Customer</p>
-                </button>
-                <button className="btn1" onClick={() => navigateTo("/customerupdate")}>
-                    <p className="Task1">Update Customer</p>
+                <button className="btn1" onClick={() => navigateTo("/customerdetails")}>
+                    <p className="Task1">Customer Details</p>
                 </button>
                 <button className="btn1" onClick={() => navigateTo("/customerstatus")}>
                     <p className="Task1">Customer Status</p>
