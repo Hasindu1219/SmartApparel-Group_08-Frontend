@@ -15,7 +15,7 @@ export default function Accounting() {
   return (
     <>
       <Navbar />
-      <Box height={50} />
+      <Box height={60} />
       <Box sx={{ display: "flex" }}>
         <Sidebar />
 
