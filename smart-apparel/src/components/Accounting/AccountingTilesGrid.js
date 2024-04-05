@@ -38,7 +38,7 @@ export default function BasicGrid() {
               </Card>
         </Grid>
         <Grid item xs={3} sx={{ margin: 'auto' }}>
-            <Card sx={{ minWidth: 300 }} style={gradientStyle}>
+            <Card sx={{ maxwidth: 300 }} style={gradientStyle}>
                 <CardContent style={{ textAlign: "center" }}>
                   <Typography variant="h5" component="div">
                    <TrendingUpTwoToneIcon /> Total Expenses

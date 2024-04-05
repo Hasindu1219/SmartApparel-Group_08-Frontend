@@ -12,19 +12,19 @@ export default function HomePage() {
           
           <div className="Bottons">
             <Link to="/accounting/addexpense" className="btn">
-              <p className="Task">Add Expense Details</p>
+              <p className="Task">View Receivable Details</p>
             </Link>
           </div>
 
           <div className="Bottons">
             <Link to="/accounting/viewexpense" className="btn">
-              <p className="Task">View & Delete Expense Details</p>
+              <p className="Task">View Expense Details</p>
             </Link>
           </div>
 
           <div className="Bottons">
             <Link to="/accounting/updateexpense" className="btn">
-              <p className="Task">Update Expense Details</p>
+              <p className="Task">Generate Reports</p>
             </Link>
           </div>
 
