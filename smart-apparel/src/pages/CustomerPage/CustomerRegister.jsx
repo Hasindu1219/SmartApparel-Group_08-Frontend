@@ -99,7 +99,8 @@ export default function CustomerRegister() {
       
 
   //   </div>
-  );
+
+   );
 }
 
 // import {useState} from 'react';
@@ -110,6 +111,7 @@ export default function CustomerRegister() {
 // import Error from '../../components/Error/Error';
 // import axios from 'axios';
 
-//      </div>
-//    );
-//  }
+
+//     </div>
+//   );
+// }
