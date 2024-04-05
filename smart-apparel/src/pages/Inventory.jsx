@@ -9,7 +9,7 @@ export default function Inventory() {
   return (
     <>
       <Navbar />
-      <Box height={40} />
+      <Box height={60} />
       <Box sx={{ display: "flex" }}>
         <Sidebar />
         
