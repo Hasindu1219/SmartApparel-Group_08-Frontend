@@ -98,6 +98,19 @@ export default function CustomerRegister() {
       </div>
       
 
-     </div>
+  //   </div>
    );
- }
+}
+
+// import {useState} from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import './CustomerRegister.css';
+// import Sidebar from '../../components/Sidebar';
+// import Navbar from '../../components/Navbar/Navbar';
+// import Error from '../../components/Error/Error';
+// import axios from 'axios';
+
+
+//     </div>
+//   );
+// }

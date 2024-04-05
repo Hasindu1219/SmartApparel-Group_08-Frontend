@@ -3,7 +3,12 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Overview from './pages/Overview';
 import Accounting from './pages/Accounting/Accounting';
-import Employees from './pages/Employees';
+
+import Employees from './pages/Employee/Employees';
+import EmployeeAdd from './pages/Employee/EmployeeAdd';
+import EmployeeUpdate from './pages/Employee/EmployeeUpdate';
+import EmployeeDelete from './pages/Employee/EmployeeDelete';
+
 import Sidebar from './components/Sidebar';
 import Sales from './pages/Sales';
 import Customers from './pages/Customers';
@@ -32,6 +37,11 @@ function App() {
         <Route path="/customers" element={<Customers />}></Route>
         <Route path="/orders" element={<Orders />}></Route>
         <Route path="/employees" element={<Employees />}></Route>
+
+        <Route path="/employee/addemployee" element={<EmployeeAdd/>}> </Route>
+        <Route path="/employee/updateemployee" element={<EmployeeUpdate/>}> </Route>
+        <Route path="/employee/deleteemployee" element={<EmployeeDelete/>}> </Route>
+
         <Route path="/suppliers" element={<Suppliers />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/login" element={<Login />}></Route>
