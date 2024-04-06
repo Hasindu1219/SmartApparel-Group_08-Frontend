@@ -35,7 +35,7 @@ function App() {
         <Route path="/suppliers" element={<Suppliers />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/customerregister" element={<CustomerRegister/>} />
+        <Route path="/customers/customerregister" element={<CustomerRegister/>} />
         <Route path="/customerdetails" element={<CustomerViewDelete />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
