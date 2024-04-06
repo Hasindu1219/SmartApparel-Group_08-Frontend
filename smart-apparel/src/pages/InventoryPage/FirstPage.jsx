@@ -12,9 +12,11 @@ export default function FirstPage() {
       </div>
       <div className="Inventory_Page">
             <div className="Bottons">
-                <Link to={`/inventory/addInventory`}><button className="btn">
-                <p className="Task">Add Material Details</p>
-                </button></Link>
+                <Link to={`/inventory/addInventory`}>
+                  <button className="btn">
+                    <p className="Task">Add Material Details</p>
+                  </button>
+                </Link>
 
                 <Link to={`/inventory/viewInventory`}>
                   <button className="btn" onClick="url">

@@ -6,6 +6,7 @@ import Error1 from '../../components/Error1/Error1';
 import axios from 'axios';
 
 export default function CustomerDetails() {
+  // State variables
   const [tableData, setTableData] = useState([]);
   const [deleteCustomer, setDeleteCustomer] = useState(false);
 
@@ -31,6 +32,7 @@ export default function CustomerDetails() {
       });
   }, [deleteCustomer]);
 
+  // Function to handle delete button click
   const handleDeleteBtn = async (customerId) => {
     await axios.delete(`http://localhost:8080/smart-apperal/api/customer/deleteCustomer/${customerId}`)
       .then((res) => {
@@ -42,6 +44,7 @@ export default function CustomerDetails() {
       });
   };
 
+  // Function to handle edit button click
   const handleEditBtn = async (customerId) => {
     await axios.get(`http://localhost:8080/smart-apperal/api/customer/customer/${customerId}`)
       .then((res) => {
@@ -59,6 +62,7 @@ export default function CustomerDetails() {
       });
   };
 
+  // Function to handle update button click
   const handleUpdateBtn = async () => {
     if (!customerId || !customerName || !customerAddress || !customerEmail || !customerPhoneNum) {
       setError("block");
@@ -77,6 +81,7 @@ export default function CustomerDetails() {
     }
   };
 
+  // Function to handle close button click
   const handleCloseBtn = () => {
     window.location.href = "/customer/customerviewdelete";
   };
