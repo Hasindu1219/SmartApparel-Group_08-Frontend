@@ -10,7 +10,7 @@ export default function Customers() {
     <>
       {/* Navbar component */}
       <Navbar />
-      <Box height={40} />
+      <Box height={60} />
       <Box sx={{ display: "flex" }}>
         {/* Sidebar component */}
         <Sidebar />
