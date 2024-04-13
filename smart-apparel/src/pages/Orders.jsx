@@ -1,19 +1,34 @@
 import React from 'react'
-import Box from "@mui/material/Box";
-import Sidebar from "../components/Sidebar";
+import Sidebar from '../components/Sidebar.js'
+import Box from '@mui/material/Box';
 import Navbar from "../components/Navbar/Navbar";
+import OrderHome from "./OrderPage/OrderHome";
 
 export default function Orders() {
+  // Render Orders component
   return (
     <>
+      {/* Navbar component */}
       <Navbar />
       <Box height={60} />
       <Box sx={{ display: "flex" }}>
+        {/* Sidebar component */}
         <Sidebar />
-        
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <h1>Orders</h1>
-        </Box>
+        <div style={{ width: "100%", backgroundColor: "#d7e3fc", height: "100vh" }}>
+          {/* Title for Orders */}
+          <h1
+            style={{
+              color: "#000435",
+              marginTop: "6rem",
+              marginLeft: "2rem",
+              fontWeight: "bold",
+            }}
+          >
+            Orders
+          </h1>
+          {/* OrderHome component */}
+          <OrderHome/>
+        </div>
       </Box>
     </>
   )
