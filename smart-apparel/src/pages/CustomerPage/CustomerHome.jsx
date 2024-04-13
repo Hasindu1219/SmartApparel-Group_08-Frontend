@@ -7,7 +7,7 @@ export default function CustomerHome() {
   return (
     <div>
         {/* Customer Home Page */}
-        <div className="CustomerHomePage">
+        <div className="CustomeHomePage">
             <div className="Botton">
                 {/* Link to Customer Registration */}
                 <Link to={`/customers/customerregister`}>

@@ -4,14 +4,14 @@
     margin-left: 30px;
   }
   
-  .customer-table {
+  .custome-table {
     width: 80%;
     border-collapse: collapse;
     margin-top: 10px;
     margin: 2px auto;
   }
   
-  .customer-table th, .customer-table td {
+  .custome-table th, .custome-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -20,11 +20,11 @@
     
   }
   
-  .customer-table th {
+  .custome-table th {
     background-color: #0077b6;
     color: white;
   }
-  .customer-table tr,td {
+  .custome-table tr,td {
     background-color: #fff;
     color: black;
   }
