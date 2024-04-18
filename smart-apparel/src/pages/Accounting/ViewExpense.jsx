@@ -75,20 +75,20 @@ const ListExpensesComponent = () => {
   const [expenses, setExpenses] = useState([]);
 
 
-  useEffect(() => {
-    setExpenses(dummyExpenses);
-  }, []);
+  // useEffect(() => {
+  //   setExpenses(dummyExpenses);
+  // }, []);
   
 
-  // useEffect(() => {
-  //   axios.get(Rest_API_URL)
-  //     .then((response) => {
-  //       setExpenses(response.data.content);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []); // Adding empty dependency array to ensure useEffect runs only once
+  useEffect(() => {
+    axios.get(Rest_API_URL)
+      .then((response) => {
+        setExpenses(response.data.content);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []); // Adding empty dependency array to ensure useEffect runs only once
 
   return (
     <>
