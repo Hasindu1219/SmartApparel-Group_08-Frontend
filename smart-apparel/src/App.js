@@ -19,7 +19,7 @@ import CustomerRegister from './pages/CustomerPage/CustomerRegister';
 import CustomerViewDelete from './pages/CustomerPage/CustomerDetails';
 import CustomerStatus from './pages/CustomerPage/CustomerStatus';
 // import Login from './pages/Login';
-import AddExpense from './pages/Accounting/AddExpense'
+import RevenueController from './pages/Accounting/RevenueController'
 import ViewExpense from './pages/Accounting/ViewExpense';
 import UpdateExpense from './pages/Accounting/UpdateExpense';
 import Login from './pages/Login/Login';
@@ -48,7 +48,7 @@ function App() {
         <Route path="/customers/customerregister" element={<CustomerRegister/>} />
         <Route path="/customerdetails" element={<CustomerViewDelete />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
-        <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
+        <Route path="/accounting/RevenueController" element={<RevenueController />}></Route>
         <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route>
         <Route path="/accounting/updateexpense" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}

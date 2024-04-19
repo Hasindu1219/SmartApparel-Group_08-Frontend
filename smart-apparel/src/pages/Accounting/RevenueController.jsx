@@ -71,7 +71,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const Rest_API_URL = "http://localhost:8080/api/v1/expense/viewExpense";
 
-const ListExpensesComponent = () => {
+const RevenueController = () => {
   const [expenses, setExpenses] = useState([]);
 
 
@@ -123,4 +123,4 @@ const ListExpensesComponent = () => {
   );
 };
 
-export default ListExpensesComponent;
+export default RevenueController;

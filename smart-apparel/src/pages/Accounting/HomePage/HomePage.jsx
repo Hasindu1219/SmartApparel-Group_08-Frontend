@@ -11,7 +11,7 @@ export default function HomePage() {
         <div className="Bottons" float="left">
           
           <div className="Bottons">
-            <Link to="/accounting/addexpense" className="btn">
+            <Link to="/accounting/RevenueController" className="btn">
               <p className="Task">View Receivable Details</p>
             </Link>
           </div>
