@@ -19,7 +19,7 @@ export default function Accounting() {
       <Box sx={{ display: "flex" }}>
         <Sidebar />
 
-        <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <h1>Accounting</h1>
           <BasicGrid />
 
