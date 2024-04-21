@@ -40,6 +40,18 @@ top: 20px;
  z-index: 2;
  ${props => (props.signinIn !== true ? `transform: translateX(100%);` : null)}
  `;
+
+ export const ForgotPasswordContainer = styled.div`
+ position: absolute;
+top: 20px;
+ height: 100%;
+ transition: all 0.6s ease-in-out;
+ left: 0;
+ width: 50%;
+ z-index: 2;
+ ${props => (props.ForgotPassword !== true ? `transform: translateX(100%);` : null)}
+ `;
+ 
  
  export const Form = styled.form`
  background-color: #ffffff;
@@ -53,6 +65,11 @@ top: 20px;
  `;
  
  export const Title = styled.h1`
+ font-weight: bold;
+ margin: 0;
+ `;
+
+ export const Title1 = styled.h2`
  font-weight: bold;
  margin: 0;
  `;
@@ -85,6 +102,17 @@ top: 20px;
         outline: none;
     }
  `;
+
+ const ErrorText = styled.p`
+  color: red;
+  font-size: 14px;
+  margin-top: 8px; /* Adjust as needed */
+`;
+
+export const ErrorMessage = ({ message }) => {
+  return <ErrorText>{message}</ErrorText>;
+};
+
  export const GhostButton = styled(Button)`
  background-color: transparent;
  border-color: #ffffff;
@@ -92,7 +120,7 @@ top: 20px;
  `;
  
  export const Anchor = styled.a`
- color: #333;
+ color: #ffff;
  font-size: 14px;
  text-decoration: none;
  margin: 15px 0;

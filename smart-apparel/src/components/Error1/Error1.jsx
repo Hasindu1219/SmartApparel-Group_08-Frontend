@@ -13,4 +13,4 @@ const Error1 = (props) => {
   )
 }
 
-export default Error
+export default Error1
