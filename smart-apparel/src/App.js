@@ -9,7 +9,7 @@ import EmployeeAdd from './pages/Employee/EmployeeAdd';
 import EmployeeUpdate from './pages/Employee/EmployeeUpdate';
 import EmployeeDelete from './pages/Employee/EmployeeDelete';
 
-import Sidebar from './components/Sidebar';
+// import Sidebar from './components/Sidebar';
 import Sales from './pages/Sales';
 import Customers from './pages/Customers';
 import Orders from './pages/Orders';
@@ -23,7 +23,7 @@ import RevenueController from './pages/Accounting/RevenueController'
 import ViewExpense from './pages/Accounting/ViewExpense';
 import UpdateExpense from './pages/Accounting/UpdateExpense';
 import Login from './pages/Login/Login';
-
+import ForgotPassword from './pages/Login/ForgotPassword';
 
 function App() {
   return (
@@ -43,11 +43,17 @@ function App() {
         <Route path="/employee/deleteemployee" element={<EmployeeDelete/>}> </Route>
 
         <Route path="/suppliers" element={<Suppliers />}></Route>
+
         <Route path="/inventory" element={<Inventory />}></Route>
+
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
+        
+
         <Route path="/customers/customerregister" element={<CustomerRegister/>} />
         <Route path="/customerdetails" element={<CustomerViewDelete />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
+
         <Route path="/accounting/RevenueController" element={<RevenueController />}></Route>
         <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route>
         <Route path="/accounting/updateexpense" element={<UpdateExpense />}></Route>

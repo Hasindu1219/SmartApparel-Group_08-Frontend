@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./HomePage.css";
 import LineChart from "../../../components/Accounting/Linechart";
 import { Link } from "react-router-dom";
-import AccountingTiles from "../../../components/Accounting/AccountingTilesGrid";
+
 
 export default function HomePage() {
   return (

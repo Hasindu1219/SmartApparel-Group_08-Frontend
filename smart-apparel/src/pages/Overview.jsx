@@ -1,7 +1,6 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Navbar from "../components/Navbar/Navbar";
 
 export default function Overview() {
