@@ -19,10 +19,16 @@ export default function LineChart() {
   return (
   <Chart style={{ float: 'left' }}
     chartType="LineChart"
-    width="800px"
+    width="700px"
     height="400px"
     data={data}
     options={options}
   />
+  
   );
+}
+
+function lineChartData()
+{
+  console.log(data);
 }
