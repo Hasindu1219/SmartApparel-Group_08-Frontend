@@ -15,19 +15,22 @@ import Customers from './pages/Customers';
 import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
+
 import CustomerRegister from './pages/CustomerPage/CustomerRegister';
 import CustomerViewDelete from './pages/CustomerPage/CustomerDetails';
 import CustomerStatus from './pages/CustomerPage/CustomerStatus';
 // import Login from './pages/Login';
 import RevenueController from './pages/Accounting/RevenueController'
-import ViewExpense from './pages/Accounting/ViewExpense';
+import AddExpense from './pages/Accounting/AddExpense';
 import UpdateExpense from './pages/Accounting/UpdateExpense';
 import Login from './pages/Login/Login';
 import ForgotPassword from './pages/Login/ForgotPassword';
+import ExpenseController from './pages/Accounting/ExpenseController'
+
+
 
 function App() {
   return (
-    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />}></Route>
@@ -55,11 +58,14 @@ function App() {
         <Route path="/customerstatus" element={<CustomerStatus />} />
 
         <Route path="/accounting/RevenueController" element={<RevenueController />}></Route>
-        <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route>
+        {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}
+        <Route path="/accounting/viewexpense" element={<ExpenseController />}></Route>
+        <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
         <Route path="/accounting/updateexpense" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}
       </Routes>
     </BrowserRouter>
+  
   );
 }
 

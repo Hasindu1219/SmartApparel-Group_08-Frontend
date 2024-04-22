@@ -1,124 +1,114 @@
-import * as React from 'react';
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import Box from "@mui/material/Box";
+import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../../components/Sidebar";
 
-const dummyExpenses = [
-  {
-    expense_ID: 1,
-    date: "2024-03-01",
-    description: "Sales",
-    category: "Sales",
-    amount: 50000.00
-  },
-  {
-    expense_ID: 2,
-    date: "2024-03-05",
-    description: "other",
-    category: "other",
-    amount: 8000.00
-  },
-  {
-    expense_ID: 3,
-    date: "2024-03-10",
-    description: "other",
-    category: "other",
-    amount: 40000.00
-  },
-  {
-    expense_ID: 4,
-    date: "2024-03-15",
-    description: "sales",
-    category: "sales",
-    amount: 250000.00
-  },
-  {
-    expense_ID: 5,
-    date: "2024-03-20",
-    description: "rent income",
-    category: "Rent",
-    amount: 12000.00
-  },
-];
-
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
-
-const Rest_API_URL = "http://localhost:8080/api/v1/expense/viewExpense";
 
 const RevenueController = () => {
-  const [expenses, setExpenses] = useState([]);
+  const [revenuedata, setRevenueData] = useState([]);
+  const navigate = useNavigate();
 
+//   const loadDetail = (id) => {
+//     navigate(`/employee/detail/${id}`);
+//   };
+
+  const loadEdit = (id) => {
+    navigate(`/employee/edit/${id}`);
+  };
+
+  const removeExpense = (id) => {
+    if (window.confirm("Do you want to remove?")) {
+      axios
+        .delete(`http://localhost:8080/api/v1/expense/${id}`)
+        .then((response) => {
+          if (response.status === 200) {
+            alert("Removed successfully.");
+            //fetchExpenseData();
+          } else {
+            throw new Error("Failed to remove expense.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error removing expense:", error.message);
+        });
+    }
+  };
 
   useEffect(() => {
-    setExpenses(dummyExpenses);
+    axios
+      .get("http://localhost:8080/api/v1/expense/viewExpense")
+      .then((response) => {
+        setRevenueData(response.data.content);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
-  
-
-  // useEffect(() => {
-  //   axios.get(Rest_API_URL)
-  //     .then((response) => {
-  //       setExpenses(response.data.content);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []); // Adding empty dependency array to ensure useEffect runs only once
 
   return (
     <>
-    <div><h2><center>Receivable Details</center></h2></div>
-    <TableContainer component={Paper} style={{ paddingTop: '65px', width: "95%" }}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Expense ID</StyledTableCell>
-            <StyledTableCell align="right">Date</StyledTableCell>
-            <StyledTableCell align="right">Description</StyledTableCell>
-            <StyledTableCell align="right">Category</StyledTableCell>
-            <StyledTableCell align="right">Amount</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {expenses.map((expense) => (
-            <StyledTableRow key={expense.expense_ID}>
-              <StyledTableCell component="th" scope="row">
-                {expense.expense_ID}
-              </StyledTableCell>
-              <StyledTableCell align="right">{expense.date}</StyledTableCell>
-              <StyledTableCell align="right">{expense.description}</StyledTableCell>
-              <StyledTableCell align="right">{expense.category}</StyledTableCell>
-              <StyledTableCell align="right">{expense.amount}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <Navbar />
+      <Box height={60} />
+      <Box sx={{ display: "flex", backgroundColor: "#d7e3fc" }}>
+        <Sidebar />
+        <div className="container">
+          <div className="card" style={{ backgroundColor: '#d7e3fc' }}>
+            <Box height={30} />
+            <div className="card-title">
+              <h2>Revenue Listing</h2>
+            </div>
+            <div className="card-body">
+              <div className="divbtn">
+                <button className="btn btn-primary btn-sm">
+                  <Link to="/employee/create" style={{ color: "inherit", textDecoration: "none" }}>
+                    Add New (+)
+                  </Link>
+                </button>
+              </div>
+              <table className="table table-bordered">
+                <thead className="bg-dark text-white">
+                  <tr>
+                    <th>Expense ID</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {revenuedata.map((item) => (
+                    <tr key={item.expense_ID}>
+                      <td>{item.expense_ID}</td>
+                      <td>{item.category}</td>
+                      <td>{item.date}</td>
+                      <td>{item.description}</td>
+                      <td>{item.amount}</td>
+                      <td>
+                        <button
+                          onClick={() => loadEdit(item.expense_id)}
+                          className="btn btn-success btn-sm" // Small-sized Edit button
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => removeExpense(item.expense_id)}
+                          className="btn btn-danger btn-sm" // Small-sized Remove button
+                        >
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {revenuedata.length === 0 && <p>Loading...</p>}
+            </div>
+          </div>
+        </div>
+      </Box>
     </>
   );
 };
