@@ -57,9 +57,9 @@ function App() {
         <Route path="/customerdetails" element={<CustomerViewDelete />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
 
-        <Route path="/accounting/RevenueController" element={<RevenueController />}></Route>
+        <Route path="/accounting/revenuecontroller" element={<RevenueController />}></Route>
         {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}
-        <Route path="/accounting/viewexpense" element={<ExpenseController />}></Route>
+        <Route path="/accounting/expensecontroller" element={<ExpenseController />}></Route>
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
         <Route path="/accounting/updateexpense" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}

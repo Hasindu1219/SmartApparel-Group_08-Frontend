@@ -4,6 +4,8 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 
 
 const RevenueController = () => {
@@ -56,12 +58,16 @@ const RevenueController = () => {
         <div className="container">
           <div className="card" style={{ backgroundColor: '#d7e3fc' }}>
             <Box height={30} />
-            <div className="card-title">
-              <h2>Revenue Listing</h2>
+            <div className="card-title" style={{ display: "flex", flexDirection: "row", marginLeft: "10px"}}>
+              {/* Expense Listing title */}
+              <button id="backBtnExpense" onClick={() => navigate("/accounting")}>
+                <ArrowBackIcon /> 
+              </button>
+              <h2 style={{ marginLeft: "40px" }}>Revenue Listing</h2>
             </div>
             <div className="card-body">
               <div className="divbtn">
-                <button className="btn btn-primary btn-sm">
+                <button id="addBtnExpense">
                   <Link to="/employee/create" style={{ color: "inherit", textDecoration: "none" }}>
                     Add New (+)
                   </Link>
@@ -89,13 +95,13 @@ const RevenueController = () => {
                       <td>
                         <button
                           onClick={() => loadEdit(item.expense_id)}
-                          className="btn btn-success btn-sm" // Small-sized Edit button
+                          id="updateBtnExpense" 
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => removeExpense(item.expense_id)}
-                          className="btn btn-danger btn-sm" // Small-sized Remove button
+                          id="deleteBtnExpense" 
                         >
                           Remove
                         </button>
