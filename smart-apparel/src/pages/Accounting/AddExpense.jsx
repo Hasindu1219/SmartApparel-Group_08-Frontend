@@ -1,117 +1,164 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-import { Box, Button, TextField } from "@mui/material";
-import Portal from '@mui/material/Portal';
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Box from "@mui/material/Box";
+import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../../components/Sidebar";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import "./styles.css";
 
-export default function AddExpense() {
-    const [itemCategory, setItemCategory] = useState("");
-    const [itemName, setItemName] = useState("");
-    const [stockQty, setStockQty] = useState(0);
-    const [unit, setUnit] = useState("");
-    const [purchasePrice, setPurchasePrice] = useState(0);
-    const [purchaseDate, setPurchaseDate] = useState("");
+const ExpenseAdd = () => {
+//   const [id, idchange] = useState("");
+  const [name, namechange] = useState("");
+  const [email, emailchange] = useState("");
+  const [phone, phonechange] = useState("");
+  const [active, activechange] = useState(true);
+  const [validation, valchange] = useState(false);
+  const [expenseCategory, setExpenseCategory] = useState('');
 
-    const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const handlesubmit = (e) => {
+    e.preventDefault();
+    const empdata = { name, email, phone, active };
 
-    const handleAddBtn = async () => {
-        try {
-            if (!itemCategory || !itemName || !stockQty || !unit || !purchasePrice || !purchaseDate) {
-                setError("All fields are required");
-                return;
-            }
+    fetch("http://localhost:8000/employee", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(empdata),
+    })
+      .then((res) => {
+        alert("Saved successfully.");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
-            const formData = { itemCategory, itemName, stockQty, unit, purchasePrice, purchaseDate };
-            await axios.post(`http://localhost:8080/smart-apperal/api/inventories/addItem`, formData);
-            alert("Successfully Added");
-            navigate("/inventory");
-        } catch (error) {
-            console.error("Error:", error.message);
-            alert("Failed to add item. Please try again.");
-        }
-    };
+  return (
+    <>
+      <Navbar />
+      <Box height={60} />
+      <Box
+        sx={{
+          display: "flex",
+          backgroundColor: "#d7e3fc",
+          alignItems: "center",
+        }}
+      >
+        {/* Button to navigate back */}
+        <Sidebar />
+        <div className="container">
+          <div className="card" style={{ backgroundColor: "#d7e3fc" }}>
+            <Box height={30} />
+            <div
+              className="card-title"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                marginLeft: "10px",
+              }}
+            >
+              {/* Expense Listing title */}
+              <button
+                id="backBtnExpense"
+                onClick={() => navigate("/accounting/expensecontroller")}
+              >
+                <ArrowBackIcon />
+              </button>
+              <h2 style={{ marginLeft: "40px" }}>Expense Addidng Form</h2>
+            </div>
 
-    const handleBackBtn = () => {
-        navigate("/inventory");
-    };
+          <div className="row">
+            <div className="offset-lg-2 col-lg-8">
+              <form className="container" onSubmit={handlesubmit}>
+                <div  style={{ textAlign: "left" }}>
+                  <div className="card-body">
+                    <div className="row">
 
-    const handleClearBtn = () => {
-        setItemCategory("");
-        setItemName("");
-        setStockQty(0);
-        setUnit("");
-        setPurchasePrice(0);
-        setPurchaseDate("");
-        setError(null);
-    };
+                    <div className="col-lg-12">
+                        <div className="form-group">
+                            <label htmlFor="categorySelect">Category</label>
+                            <select
+                            id="categorySelect"
+                            className="form-control"
+                            value={expenseCategory}  // Set the selected value here
+                            onChange={(e) => setExpenseCategory(e.target.value)}  // Handle change event to update the selected value
+                            >
+                            <option value="">Select a category...</option>
+                            <option value="Electricity">Electricity</option>
+                            <option value="Water">Water</option>
+                            <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
 
-    return (
-        <div className="add-material-container">
-            <h2>Add Material</h2>
-            <form>
-                <TextField
-                    label="Item Category"
-                    value={itemCategory}
-                    onChange={(e) => setItemCategory(e.target.value)}
-                    fullWidth
-                    required
-                />
-                <TextField
-                    label="Item Name"
-                    value={itemName}
-                    onChange={(e) => setItemName(e.target.value)}
-                    fullWidth
-                    required
-                />
-                <TextField
-                    label="Stock Quantity"
-                    type="number"
-                    value={stockQty}
-                    onChange={(e) => setStockQty(e.target.value)}
-                    fullWidth
-                    required
-                />
-                <TextField
-                    label="Unit"
-                    value={unit}
-                    onChange={(e) => setUnit(e.target.value)}
-                    fullWidth
-                    required
-                />
-                <TextField
-                    label="Purchase Price"
-                    type="number"
-                    value={purchasePrice}
-                    onChange={(e) => setPurchasePrice(e.target.value)}
-                    fullWidth
-                    required
-                />
-                <TextField
-                    label="Purchase Date"
-                    type="date"
-                    value={purchaseDate}
-                    onChange={(e) => setPurchaseDate(e.target.value)}
-                    fullWidth
-                    required
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                />
-                {error && <p className="error-message">{error}</p>}
-                <div className="button-group">
-                    <Button variant="contained" color="primary" onClick={handleAddBtn}>
-                        Add
-                    </Button>
-                    <Button variant="contained" onClick={handleClearBtn}>
-                        Clear
-                    </Button>
-                    <Button variant="contained" onClick={handleBackBtn}>
-                        Back
-                    </Button>
+
+                      <div className="col-lg-12">
+                        <div className="form-group">
+                          <label>Date</label>
+                          <input type="date"
+                            required
+                            value={name}
+                            onMouseDown={(e) => valchange(true)}
+                            onChange={(e) => namechange(e.target.value)}
+                            className="form-control"
+                          ></input>
+                          {name.length == 0 && validation && (
+                            <span className="text-danger">Enter the name</span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="col-lg-12">
+                        <div className="form-group">
+                          <label>Description</label>
+                          <input type="textarea"
+                            required
+                            value={email}
+                            onChange={(e) => emailchange(e.target.value)}
+                            className="form-control"
+                          ></input>
+                        </div>
+                      </div>
+
+                      <div className="col-lg-12">
+                        <div className="form-group">
+                          <label>Currency</label>
+                          <input type="currency"
+                            required
+                            value={phone}
+                            onChange={(e) => phonechange(e.target.value)}
+                            className="form-control"
+                          ></input>
+                        </div>
+                      </div>
+
+                      <div className="col-lg-12">
+                        <div className="form-group">
+                          <button id="updateBtnExpense" type="submit">
+                            Save
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </form>
+              </form>
+            </div>
+          </div>
+        
+
+
+
+
+
+          </div>
         </div>
-    );
-}
+      </Box>
+    </>
+  );
+};
+
+export default ExpenseAdd;

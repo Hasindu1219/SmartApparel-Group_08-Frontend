@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import "./styles.css";
 
 const ExpenseController = () => {
   const [expensedata, setExpenseData] = useState([]);
@@ -55,14 +56,14 @@ const ExpenseController = () => {
             <Box height={30} />
             <div className="card-title" style={{ display: "flex", flexDirection: "row", marginLeft: "10px"}}>
               {/* Expense Listing title */}
-              <button className="btn btn-outline-primary" onClick={() => navigate(-1)}>
-                <ArrowBackIcon /> Back
+              <button id="backBtnExpense" onClick={() => navigate("/accounting")}>
+                <ArrowBackIcon /> 
               </button>
-              <h2 style={{ marginLeft: "40px",marginTop: "30px" }}>Expense Listing</h2>
+              <h2 style={{ marginLeft: "40px" }}>Expense Listing</h2>
             </div>
             <div className="card-body">
               <div className="divbtn">
-                <button className="btn btn-primary btn-sm">
+                <button id="addBtnExpense">
                   <Link to="/accounting/addexpense" style={{ color: "inherit", textDecoration: "none" }}>
                     Add New (+)
                   </Link>
@@ -90,13 +91,13 @@ const ExpenseController = () => {
                       <td>
                         <button
                           onClick={() => loadEdit(item.expense_id)}
-                          className="btn btn-success btn-sm" // Small-sized Edit button
+                          id="updateBtnExpense" 
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => removeExpense(item.expense_id)}
-                          className="btn btn-danger btn-sm" // Small-sized Remove button
+                          id="deleteBtnExpense" 
                         >
                           Remove
                         </button>
