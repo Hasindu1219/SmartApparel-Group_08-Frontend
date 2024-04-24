@@ -8,16 +8,13 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateExpense = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Extract the 'id' parameter from the URL
-  console.log(id);
+  const { id } = useParams();
 
-  // State variables to manage form inputs
   const [expenseCategory, setExpenseCategory] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [currency, setCurrency] = useState("");
 
-  // Function to fetch existing expense data by ID
   useEffect(() => {
     const fetchExpenseData = async () => {
       try {
@@ -25,60 +22,45 @@ const UpdateExpense = () => {
           `http://localhost:8080/api/v1/expense/searchExpense/${id}`
         );
 
-        const expenseData = response.data;
+        const expenseData = response.data.content;
 
-        console.log(expenseData);
-
-        // Populate form fields with fetched expense data
         setExpenseCategory(expenseData.category);
         setDate(expenseData.date);
         setDescription(expenseData.description);
-        setCurrency(expenseData.amount.toString());
+        setCurrency(String(expenseData.amount)); // Convert amount to string
 
-        window.location.reload();
       } catch (error) {
         console.error("Error fetching expense data:", error);
-        // Handle error fetching data (e.g., redirect to error page)
       }
     };
 
-    // Call fetchExpenseData() when the component mounts with the correct 'id'
     fetchExpenseData();
   }, [id]);
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
-    // Create updated expense object to send to backend
     const updatedExpenseData = {
+      expense_ID: id,
       category: expenseCategory,
       date: date,
       description: description,
-      amount: parseFloat(currency), // Assuming currency input represents amount
+      amount: parseFloat(currency),
     };
 
     try {
-      // Make POST request to update expense data
-      const response = await axios.post(
-        `http://localhost:8080/api/v1/expense/updateExpense/${id}`,
+      const response = await axios.put(
+        "http://localhost:8080/api/v1/expense/updateExpense",
         updatedExpenseData
       );
 
-      // Handle different response statuses
       if (response.status === 202) {
-        // Successful response
         alert("Expense updated successfully.");
         navigate("/accounting/expensecontroller");
-      } else if (response.status === 400) {
-        // Duplicate or invalid request
-        alert("Expense update failed: Invalid request.");
       } else {
-        // Other failure cases
         alert("Error occurred while updating expense.");
       }
     } catch (error) {
-      // Handle network or server errors
       alert("An error occurred while updating expense.");
       console.error("Expense update error:", error);
     }
@@ -156,7 +138,7 @@ const UpdateExpense = () => {
                           <div className="form-group">
                             <label>Description</label>
                             <input
-                              type="textarea"
+                              type="text"
                               required
                               value={description}
                               onChange={(e) => setDescription(e.target.value)}
@@ -166,9 +148,10 @@ const UpdateExpense = () => {
                         </div>
                         <div className="col-lg-12">
                           <div className="form-group">
-                            <label>Currency</label>
+                            <label>Amount (Currency)</label>
                             <input
-                              type="text"
+                              type="number"
+                              step="0.01"
                               required
                               value={currency}
                               onChange={(e) => setCurrency(e.target.value)}
@@ -177,12 +160,9 @@ const UpdateExpense = () => {
                           </div>
                         </div>
                         <div className="col-lg-12">
-                          <div
-                            className="form-group"
-                            style={{ textAlign: "center" }}
-                          >
+                          <div className="form-group" style={{ textAlign: "center" }}>
                             <button id="updateBtnExpense" type="submit">
-                              Update
+                              Update Expense
                             </button>
                           </div>
                         </div>
