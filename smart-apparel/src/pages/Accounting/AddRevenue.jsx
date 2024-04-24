@@ -7,11 +7,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
-const ExpenseAdd = () => {
+const RevenueAdd = () => {
   const navigate = useNavigate();
 
   // State variables to manage form inputs
-  const [expenseCategory, setExpenseCategory] = useState("");
+  const [revenueCategory, setRevenueCategory] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [currency, setCurrency] = useState("");
@@ -21,8 +21,8 @@ const ExpenseAdd = () => {
     e.preventDefault(); // Prevent default form submission behavior
 
     // Create expense object to send to backend
-    const expenseData = {
-      category: expenseCategory,
+    const RevenueeData = {
+      category: revenueCategory,
       date: date,
       description: description,
       amount: parseFloat(currency), // Assuming currency input represents amount
@@ -30,28 +30,28 @@ const ExpenseAdd = () => {
 
     try {
       // Make POST request to backend API
-      console.log(expenseData);
+      console.log(RevenueeData);
       const response = await axios.post(
-        "http://localhost:8080/api/v1/expense/saveExpense",
-        expenseData
+        "http://localhost:8080/api/v1/revenue/saveRevenue",
+        RevenueeData
       );
 
       // Handle different response statuses
       if (response.status === 202) {
         // Successful response
-        alert("Expense saved successfully.");
-        navigate("/accounting/expensecontroller");
+        alert("Revenue saved successfully.");
+        navigate("/accounting/revenuecontroller");
       } else if (response.status === 400) {
         // Duplicate or invalid request
         alert("Expense already registered or invalid request.");
       } else {
         // Other failure cases
-        alert("Error occurred while saving expense.");
+        alert("Error occurred while saving revenue.");
       }
     } catch (error) {
       // Handle network or server errors
-      alert("An error occurred while saving expense.");
-      console.error("Expense save error:", error);
+      alert("An error occurred while saving revenue.");
+      console.error("Revenue save error:", error);
     }
   };
 
@@ -80,11 +80,11 @@ const ExpenseAdd = () => {
             >
               <button
                 id="backBtnExpense"
-                onClick={() => navigate("/accounting/expensecontroller")}
+                onClick={() => navigate("/accounting/revenuecontroller")}
               >
                 <ArrowBackIcon />
               </button>
-              <h2 style={{ marginLeft: "40px" }}>Expense Adding Form</h2>
+              <h2 style={{ marginLeft: "40px" }}>Revenue Adding Form</h2>
             </div>
             <div className="row">
               <div className="offset-lg-2 col-lg-8">
@@ -99,15 +99,15 @@ const ExpenseAdd = () => {
                               required
                               id="categorySelect"
                               className="form-control"
-                              value={expenseCategory}
+                              value={revenueCategory}
                               onChange={(e) =>
-                                setExpenseCategory(e.target.value)
+                                setRevenueCategory(e.target.value)
                               }
                             >
                               <option value="">Select a category...</option>
-                              <option value="Electricity">Electricity</option>
-                              <option value="Water">Water</option>
-                              <option value="Other">Other</option>
+                              <option value="SalesIncome ">Sales Income</option>
+                              <option value="Rent Income">Rent Income</option>
+                              <option value="Other Income">Other Income</option>
                             </select>
                           </div>
                         </div>
@@ -170,4 +170,4 @@ const ExpenseAdd = () => {
   );
 };
 
-export default ExpenseAdd;
+export default RevenueAdd;

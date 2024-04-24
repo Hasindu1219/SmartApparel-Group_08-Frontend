@@ -26,6 +26,8 @@ import UpdateExpense from './pages/Accounting/UpdateExpense';
 import Login from './pages/Login/Login';
 import ForgotPassword from './pages/Login/ForgotPassword';
 import ExpenseController from './pages/Accounting/ExpenseController'
+import RevenueAdd from './pages/Accounting/AddRevenue';
+import UpdateRevenue from './pages/Accounting/UpdateRevenue';
 
 
 
@@ -58,6 +60,10 @@ function App() {
         <Route path="/customerstatus" element={<CustomerStatus />} />
 
         <Route path="/accounting/revenuecontroller" element={<RevenueController />}></Route>
+        <Route path="/accounting/addrevenue" element={<RevenueAdd />}></Route>
+        <Route path="/accounting/updaterevenue/:id" element={<UpdateRevenue />}></Route>
+
+
         {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}
         <Route path="/accounting/expensecontroller" element={<ExpenseController />}></Route>
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>

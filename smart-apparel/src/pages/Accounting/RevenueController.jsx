@@ -12,35 +12,33 @@ const RevenueController = () => {
   const [revenuedata, setRevenueData] = useState([]);
   const navigate = useNavigate();
 
-//   const loadDetail = (id) => {
-//     navigate(`/employee/detail/${id}`);
-//   };
-
-  const loadEdit = (id) => {
-    navigate(`/employee/edit/${id}`);
+  const updateRevenue = (id) => {
+    navigate(`/accounting/updaterevenue/${id}`);
   };
 
-  const removeExpense = (id) => {
+
+  const removeRevenue = (id) => {
+    console.log("Removing revenue with ID:", id); // Check if id is logged correctly
     if (window.confirm("Do you want to remove?")) {
       axios
-        .delete(`http://localhost:8080/api/v1/expense/${id}`)
+        .delete(`http://localhost:8080/api/v1/revenue/deleteRevenue/${id}`)
         .then((response) => {
-          if (response.status === 200) {
+          if (response.status === 202) {
             alert("Removed successfully.");
-            //fetchExpenseData();
           } else {
-            throw new Error("Failed to remove expense.");
+            throw new Error("Failed to remove revenue.");
           }
         })
         .catch((error) => {
-          console.error("Error removing expense:", error.message);
+          console.error("Error removing revenue:", error.message);
         });
+        window.location.reload();
     }
   };
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/expense/viewExpense")
+      .get("http://localhost:8080/api/v1/revenue/viewRevenue")
       .then((response) => {
         setRevenueData(response.data.content);
       })
@@ -68,7 +66,7 @@ const RevenueController = () => {
             <div className="card-body">
               <div className="divbtn">
                 <button id="addBtnExpense">
-                  <Link to="/employee/create" style={{ color: "inherit", textDecoration: "none" }}>
+                  <Link to="/accounting/addrevenue" style={{ color: "inherit", textDecoration: "none" }}>
                     Add New (+)
                   </Link>
                 </button>
@@ -76,7 +74,7 @@ const RevenueController = () => {
               <table className="table table-bordered">
                 <thead className="bg-dark text-white">
                   <tr>
-                    <th>Expense ID</th>
+                    <th>Revenue ID</th>
                     <th>Category</th>
                     <th>Date</th>
                     <th>Description</th>
@@ -86,21 +84,21 @@ const RevenueController = () => {
                 </thead>
                 <tbody>
                   {revenuedata.map((item) => (
-                    <tr key={item.expense_ID}>
-                      <td>{item.expense_ID}</td>
+                    <tr key={item.revenue_ID}>
+                      <td>{item.revenue_ID}</td>
                       <td>{item.category}</td>
                       <td>{item.date}</td>
                       <td>{item.description}</td>
                       <td>{item.amount}</td>
                       <td>
                         <button
-                          onClick={() => loadEdit(item.expense_id)}
+                          onClick={() => updateRevenue(item.revenue_ID)}
                           id="updateBtnExpense" 
                         >
                           Edit
                         </button>
                         <button
-                          onClick={() => removeExpense(item.expense_id)}
+                          onClick={() => removeRevenue(item.revenue_ID)}
                           id="deleteBtnExpense" 
                         >
                           Remove
