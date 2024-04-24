@@ -11,18 +11,18 @@ const ExpenseController = () => {
   const [expensedata, setExpenseData] = useState([]);
   const navigate = useNavigate();
 
-  const loadEdit = (id) => {
-    navigate(`/employee/edit/${id}`);
+  const updateExpense = (id) => {
+    navigate(`/accounting/updateexpense/${id}`);
   };
 
   const removeExpense = (id) => {
+    console.log("Removing expense with ID:", id); // Check if id is logged correctly
     if (window.confirm("Do you want to remove?")) {
       axios
-        .delete(`http://localhost:8080/api/v1/expense/${id}`)
+        .delete(`http://localhost:8080/api/v1/expense/deleteExpense/${id}`)
         .then((response) => {
-          if (response.status === 200) {
+          if (response.status === 202) {
             alert("Removed successfully.");
-            //fetchExpenseData();
           } else {
             throw new Error("Failed to remove expense.");
           }
@@ -30,8 +30,12 @@ const ExpenseController = () => {
         .catch((error) => {
           console.error("Error removing expense:", error.message);
         });
+        window.location.reload();
     }
   };
+  
+  
+  
 
   useEffect(() => {
     axios
@@ -90,13 +94,13 @@ const ExpenseController = () => {
                       <td>{item.amount}</td>
                       <td>
                         <button
-                          onClick={() => loadEdit(item.expense_id)}
+                          onClick={() => updateExpense(item.expense_ID)}
                           id="updateBtnExpense" 
                         >
                           Edit
                         </button>
                         <button
-                          onClick={() => removeExpense(item.expense_id)}
+                          onClick={() => removeExpense(item.expense_ID)}
                           id="deleteBtnExpense" 
                         >
                           Remove

@@ -61,7 +61,7 @@ function App() {
         {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}
         <Route path="/accounting/expensecontroller" element={<ExpenseController />}></Route>
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
-        <Route path="/accounting/updateexpense" element={<UpdateExpense />}></Route>
+        <Route path="/accounting/updateexpense/:id" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}
       </Routes>
     </BrowserRouter>
