@@ -1,57 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-
-const ExpenseAdd = () => {
+const UpdateRevenue = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  // State variables to manage form inputs
-  const [expenseCategory, setExpenseCategory] = useState("");
+  const [revenueCategory, setRevenueCategory] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [currency, setCurrency] = useState("");
 
-  // Function to handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+  useEffect(() => {
+    const fetchRevenueData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/v1/revenue/searchRevenue/${id}`
+        );
 
-    // Create expense object to send to backend
-    const expenseData = {
-      category: expenseCategory,
+        const revenueData = response.data.content;
+
+        setRevenueCategory(revenueData.category);
+        console.log(revenueData.category);
+        setDate(revenueData.date);
+        setDescription(revenueData.description);
+        setCurrency(String(revenueData.amount)); // Convert amount to string
+
+      } catch (error) {
+        console.error("Error fetching expense data:", error);
+      }
+    };
+
+    fetchRevenueData();
+  }, [id]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedRevenueData = {
+      revenue_ID: id,
+      category: revenueCategory,
       date: date,
       description: description,
-      amount: parseFloat(currency), // Assuming currency input represents amount
+      amount: parseFloat(currency),
     };
 
     try {
-      // Make POST request to backend API
-      console.log(expenseData);
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/expense/saveExpense",
-        expenseData
+      const response = await axios.put(
+        "http://localhost:8080/api/v1/revenue/updateRevenue",
+        updatedRevenueData
       );
 
-      // Handle different response statuses
       if (response.status === 202) {
-        // Successful response
-        alert("Expense saved successfully.");
-        navigate("/accounting/expensecontroller");
-      } else if (response.status === 400) {
-        // Duplicate or invalid request
-        alert("Expense already registered or invalid request.");
+        alert("Revenue updated successfully.");
+        navigate("/accounting/revenuecontroller");
       } else {
-        // Other failure cases
-        alert("Error occurred while saving expense.");
+        alert("Error occurred while updating revenue.");
       }
     } catch (error) {
-      // Handle network or server errors
-      alert("An error occurred while saving expense.");
-      console.error("Expense save error:", error);
+      alert("An error occurred while updating revenue.");
+      console.error("Revenue update error:", error);
     }
   };
 
@@ -80,11 +92,11 @@ const ExpenseAdd = () => {
             >
               <button
                 id="backBtnExpense"
-                onClick={() => navigate("/accounting/expensecontroller")}
+                onClick={() => navigate("/accounting/revenuecontroller")}
               >
                 <ArrowBackIcon />
               </button>
-              <h2 style={{ marginLeft: "40px" }}>Expense Adding Form</h2>
+              <h2 style={{ marginLeft: "40px" }}>Revenue Updating Form</h2>
             </div>
             <div className="row">
               <div className="offset-lg-2 col-lg-8">
@@ -99,15 +111,15 @@ const ExpenseAdd = () => {
                               required
                               id="categorySelect"
                               className="form-control"
-                              value={expenseCategory}
+                              value={revenueCategory}
                               onChange={(e) =>
-                                setExpenseCategory(e.target.value)
+                                setRevenueCategory(e.target.value)
                               }
                             >
                               <option value="">Select a category...</option>
-                              <option value="Electricity">Electricity</option>
-                              <option value="Water">Water</option>
-                              <option value="Other">Other</option>
+                              <option value="Sales Income">Sales Income</option>
+                              <option value="Rent Income">Rent Income</option>
+                              <option value="Other Income">Other Income</option>
                             </select>
                           </div>
                         </div>
@@ -127,7 +139,7 @@ const ExpenseAdd = () => {
                           <div className="form-group">
                             <label>Description</label>
                             <input
-                              type="textarea"
+                              type="text"
                               required
                               value={description}
                               onChange={(e) => setDescription(e.target.value)}
@@ -137,9 +149,10 @@ const ExpenseAdd = () => {
                         </div>
                         <div className="col-lg-12">
                           <div className="form-group">
-                            <label>Currency</label>
+                            <label>Amount (Currency)</label>
                             <input
-                              type="text"
+                              type="number"
+                              step="0.01"
                               required
                               value={currency}
                               onChange={(e) => setCurrency(e.target.value)}
@@ -148,12 +161,9 @@ const ExpenseAdd = () => {
                           </div>
                         </div>
                         <div className="col-lg-12">
-                          <div
-                            className="form-group"
-                            style={{ textAlign: "center" }}
-                          >
+                          <div className="form-group" style={{ textAlign: "center" }}>
                             <button id="updateBtnExpense" type="submit">
-                              Save
+                              Update Revenue
                             </button>
                           </div>
                         </div>
@@ -170,4 +180,4 @@ const ExpenseAdd = () => {
   );
 };
 
-export default ExpenseAdd;
+export default UpdateRevenue;

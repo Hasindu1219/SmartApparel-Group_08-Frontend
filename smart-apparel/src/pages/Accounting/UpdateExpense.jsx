@@ -1,111 +1,182 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import { Box } from "@mui/material";
+import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../../components/Sidebar";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
+const UpdateExpense = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
 
+  const [expenseCategory, setExpenseCategory] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [currency, setCurrency] = useState("");
 
-function UpdateExpense() {
-  // Define state variables to store form data and error messages
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [designation, setDesignation] = useState('');
-  const [nameError, setNameError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [designationError, setDesignationError] = useState('');
+  useEffect(() => {
+    const fetchExpenseData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/v1/expense/searchExpense/${id}`
+        );
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
+        const expenseData = response.data.content;
+
+        setExpenseCategory(expenseData.category);
+        setDate(expenseData.date);
+        setDescription(expenseData.description);
+        setCurrency(String(expenseData.amount)); // Convert amount to string
+
+      } catch (error) {
+        console.error("Error fetching expense data:", error);
+      }
+    };
+
+    fetchExpenseData();
+  }, [id]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Reset previous error messages
-    setNameError('');
-    setEmailError('');
-    setDesignationError('');
 
-    let isValid = true;
+    const updatedExpenseData = {
+      expense_ID: id,
+      category: expenseCategory,
+      date: date,
+      description: description,
+      amount: parseFloat(currency),
+    };
 
-    // Validate name
-    if (!name.trim()) {
-      setNameError('*Name is required');
-      isValid = false;
+    try {
+      const response = await axios.put(
+        "http://localhost:8080/api/v1/expense/updateExpense",
+        updatedExpenseData
+      );
+
+      if (response.status === 202) {
+        alert("Expense updated successfully.");
+        navigate("/accounting/expensecontroller");
+      } else {
+        alert("Error occurred while updating expense.");
+      }
+    } catch (error) {
+      alert("An error occurred while updating expense.");
+      console.error("Expense update error:", error);
     }
-
-    // Validate email
-    if (!email.trim()) {
-      setEmailError('*Email is required');
-      isValid = false;
-    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setEmailError('Please enter a valid email address');
-      isValid = false;
-    }
-
-    // Validate designation
-    if (!designation.trim()) {
-      setDesignationError('*Designation is required');
-      isValid = false;
-    }
-
-    if (isValid) {
-      // Process form submission here
-      console.log('Employee updated', { name, email, designation });
-      alert('Employee updated', { name, email, designation });  
-
-      // Clear form fields after submission
-      setName('');
-      setEmail('');
-      setDesignation('');
-    }
-  };
-
-  // Function to handle form reset
-  const handleReset = () => {
-    setName('');
-    setEmail('');
-    setDesignation('');
-    // Clear error messages on reset
-    setNameError('');
-    setEmailError('');
-    setDesignationError('');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="employee-update-form">
-      <div className="form-group">
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="input-field"
-        />
-        {nameError && <p className="error-message">{nameError}</p>}
-      </div>
-      <div className="form-group">
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="input-field"
-        />
-        {emailError && <p className="error-message">{emailError}</p>}
-      </div>
-      <div className="form-group">
-        <label htmlFor="designation">Designation:</label>
-        <input
-          type="text"
-          id="designation"
-          value={designation}
-          onChange={(e) => setDesignation(e.target.value)}
-          className="input-field"
-        />
-        {designationError && <p className="error-message">{designationError}</p>}
-      </div>
-      <div className="button-group">
-        <button type="submit" className="submit-button">Submit</button>
-        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
-      </div>
-    </form>
+    <>
+      <Navbar />
+      <Box height={60} />
+      <Box
+        sx={{
+          display: "flex",
+          backgroundColor: "#d7e3fc",
+          alignItems: "center",
+        }}
+      >
+        <Sidebar />
+        <div className="container">
+          <div className="card" style={{ backgroundColor: "#d7e3fc" }}>
+            <Box height={30} />
+            <div
+              className="card-title"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                marginLeft: "10px",
+              }}
+            >
+              <button
+                id="backBtnExpense"
+                onClick={() => navigate("/accounting/expensecontroller")}
+              >
+                <ArrowBackIcon />
+              </button>
+              <h2 style={{ marginLeft: "40px" }}>Expense Updating Form</h2>
+            </div>
+            <div className="row">
+              <div className="offset-lg-2 col-lg-8">
+                <form className="container" onSubmit={handleSubmit}>
+                  <div style={{ textAlign: "left" }}>
+                    <div className="card-body">
+                      <div className="row">
+                        <div className="col-lg-12">
+                          <div className="form-group">
+                            <label htmlFor="categorySelect">Category</label>
+                            <select
+                              required
+                              id="categorySelect"
+                              className="form-control"
+                              value={expenseCategory}
+                              onChange={(e) =>
+                                setExpenseCategory(e.target.value)
+                              }
+                            >
+                              <option value="">Select a category...</option>
+                              <option value="Electricity">Electricity</option>
+                              <option value="Water">Water</option>
+                              <option value="Other">Other</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div className="col-lg-12">
+                          <div className="form-group">
+                            <label>Date</label>
+                            <input
+                              type="date"
+                              required
+                              value={date}
+                              onChange={(e) => setDate(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-12">
+                          <div className="form-group">
+                            <label>Description</label>
+                            <input
+                              type="text"
+                              required
+                              value={description}
+                              onChange={(e) => setDescription(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-12">
+                          <div className="form-group">
+                            <label>Amount (Currency)</label>
+                            <input
+                              type="number"
+                              step="0.01"
+                              required
+                              value={currency}
+                              onChange={(e) => setCurrency(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-12">
+                          <div className="form-group" style={{ textAlign: "center" }}>
+                            <button id="updateBtnExpense" type="submit">
+                              Update Expense
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Box>
+    </>
   );
-}
+};
 
 export default UpdateExpense;
