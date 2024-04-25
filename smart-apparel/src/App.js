@@ -25,9 +25,11 @@ import AddExpense from './pages/Accounting/AddExpense';
 import UpdateExpense from './pages/Accounting/UpdateExpense';
 import Login from './pages/Login/Login';
 import ForgotPassword from './pages/Login/ForgotPassword';
-import ExpenseController from './pages/Accounting/ExpenseController'
+
+import ExpenseController from './pages/Accounting/ExpenseController';
 import RevenueAdd from './pages/Accounting/AddRevenue';
 import UpdateRevenue from './pages/Accounting/UpdateRevenue';
+import SalaryHomePage from './pages/Salary/SalaryHomePage';
 
 
 
@@ -42,10 +44,15 @@ function App() {
         <Route path="/customers" element={<Customers />}></Route>
         <Route path="/orders" element={<Orders />}></Route>
         <Route path="/employees" element={<Employees />}></Route>
+        <Route path="/salary" element={<SalaryHomePage/>}></Route>
 
+        {/* routings inside the employee section */}
         <Route path="/employee/addemployee" element={<EmployeeAdd/>}> </Route>
         <Route path="/employee/updateemployee" element={<EmployeeUpdate/>}> </Route>
         <Route path="/employee/deleteemployee" element={<EmployeeDelete/>}> </Route>
+
+        {/* routings inside Salary section */}
+
 
         <Route path="/suppliers" element={<Suppliers />}></Route>
 
