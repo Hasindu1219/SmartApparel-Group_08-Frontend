@@ -34,8 +34,6 @@ const ExpenseController = () => {
     }
   };
   
-  
-  
 
   useEffect(() => {
     axios
