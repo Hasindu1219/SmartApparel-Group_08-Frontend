@@ -39,6 +39,27 @@ const EmployeeTable = () => {
       });
   }, []);
 
+  const handleDelete = (empId) => {
+    
+    // Check if id is logged correctly
+    console.log("Removing Employee with ID:", empId); 
+
+    if (window.confirm("Are you sure you want to delete this Employee?")) {
+      axios.delete(`http://localhost:8080/employee/delete/${empId}`)
+        .then((response) => {
+          if (response.status === 202) {
+            alert("Removed successfully.");
+          } else {
+            throw new Error("Failed to remove Employee.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error removing Employee", error.message);
+        });
+        window.location.reload();
+    }
+  };
+
   return (
     <TableContainer component={Paper} sx={{ maxWidth: 1200 }}>
       <Table>
@@ -105,7 +126,7 @@ const EmployeeTable = () => {
                   {/* { state: { employee } } */}
                     Update
                   </Button>
-                  <Button sx={{ margin: '0px 10px' }} onClick={() => navigate('/employee/deleteemployee')}>
+                  <Button sx={{ margin: '0px 10px' }} onClick={() => handleDelete(employee.empId)}>
                     Delete
                   </Button>
                 </TableCell>
