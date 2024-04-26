@@ -10,14 +10,13 @@ function ForgotPassword() {
   const [otpSent, setOtpSent] = useState(false); // State to track whether OTP has been sent
 
   const validateEmail = () => {
-    // Simple email validation logic (you can replace with a more robust validation)
     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     setIsValidEmail(isValid);
     if (!isValid) {
       alert("Please enter a valid email address.");
     }
     if (isValid && otpSent) {
-      setOtpSent(false); // Reset otpSent if email is valid and OTP was sent
+      setOtpSent(false);
     }
   };
 
@@ -26,11 +25,9 @@ function ForgotPassword() {
       alert("Please enter a valid email address before sending OTP.");
       return;
     }
-
     // Simulating OTP sending (replace with actual OTP sending logic)
-    console.log("valied Email");
+    console.log("Valid Email");
     setOtpSent(true);
-    
   };
 
   return (
@@ -51,28 +48,26 @@ function ForgotPassword() {
                 Please enter a valid email address
               </Components.ErrorMessage>
             )}
-            <Components.Anchor
-              onClick={sendOTP}
-              disabled={!isValidEmail || otpSent}
-            >
+            <Components.Anchor onClick={sendOTP} disabled={!isValidEmail || otpSent}>
               Send Code
             </Components.Anchor>
             {otpSent && (
               <Components.Input type="password" placeholder="OTP" />
             )}
-            <Link to="/overview">
-              <Components.Button disabled={!otpSent}>Submit</Components.Button>
-            </Link>
+            {otpSent && ( // Render submit button only if OTP is sent
+              <Link to="/overview">
+                <Components.Button>Submit</Components.Button>
+              </Link>
+            )}
+            <Components.Anchor href="/login">
+              Back to Login
+            </Components.Anchor>
           </Components.Form>
         </Components.SignInContainer>
 
         <Components.LeftOverlayPanel>
           <Components.Title>Apparel Management System</Components.Title>
-          <img
-            src={logo}
-            alt="Apparel Management System Logo"
-            width={500}
-          />
+          <img src={logo} alt="Apparel Management System Logo" width={500} />
         </Components.LeftOverlayPanel>
       </Components.Container>
     </div>

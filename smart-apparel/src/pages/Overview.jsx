@@ -8,7 +8,6 @@ import CardModel from "../components/Card";
 
 export default function Overview() {
 
-
   const [totalExpense, setTotalExpense] = useState(undefined);
   const [totalRevenue, setTotalRevenue] = useState(undefined);
   const [totalSales, setTotalSales] = useState(undefined);
@@ -59,11 +58,11 @@ export default function Overview() {
   };
 
   const gradientStyle2 = {
-    background: "linear-gradient(to right, #354781, #EFB77870)"
+    background: "linear-gradient(to right, #FFDDE1, #EE9CA7)"
   };
 
   const gradientStyle3 = {
-    background: "linear-gradient(to right, #3E97891, #EFB7C020)"
+    background: "linear-gradient(to right, #E2D1C3, #FDFCFB)"
   };
   
   return (
@@ -76,13 +75,13 @@ export default function Overview() {
           <h1>Home</h1>
           <Grid container spacing={7}>
             <CardModel totalvalue={totalExpense} cardname={"Total Expenses"} style={gradientStyle}  />
-            <CardModel totalvalue={totalRevenue} cardname={"Total Revenue"} style={gradientStyle2} />
-            <CardModel totalvalue={789546} cardname={"Total Receivables"} style={gradientStyle3} />
-            <CardModel totalvalue={150000} cardname={"Total Expenses"} style={gradientStyle}  />
+            <CardModel totalvalue={totalRevenue} cardname={"Total Revenue"} style={gradientStyle} />
+            <CardModel totalvalue={789546} cardname={"Total Receivables"} style={gradientStyle} />
+            <CardModel totalvalue={150000} cardname={"Total Expenses"} style={gradientStyle2}  />
             <CardModel totalvalue={445200} cardname={"Total Revenue"} style={gradientStyle2} />
-            <CardModel totalvalue={789546} cardname={"Total Receivables"} style={gradientStyle3} />
-            <CardModel totalvalue={150000} cardname={"Total Expenses"} style={gradientStyle}  />
-            <CardModel totalvalue={445200} cardname={"Total Revenue"} style={gradientStyle2} />
+            <CardModel totalvalue={789546} cardname={"Total Receivables"} style={gradientStyle2} />
+            <CardModel totalvalue={150000} cardname={"Total Expenses"} style={gradientStyle3}  />
+            <CardModel totalvalue={445200} cardname={"Total Revenue"} style={gradientStyle3} />
             <CardModel totalvalue={789546} cardname={"Total Receivables"} style={gradientStyle3} />
           </Grid>
         </Box>
