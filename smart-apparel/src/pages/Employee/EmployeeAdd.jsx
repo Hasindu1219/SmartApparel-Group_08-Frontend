@@ -57,11 +57,12 @@
 // export default AddEmployeeComponent;
 
 import { Button, Grid, Input, Typography } from "@mui/material";
-import EmployeeAddForm from "../../components/EmployeeComponent/EmployeeAddForm";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const EmlpoyeeAddPage= () =>{
+  const navigate = useNavigate();
 
   const [empID, setEmpID] = useState('');
   const [name, setName] = useState('');
@@ -110,6 +111,22 @@ const EmlpoyeeAddPage= () =>{
   }
 
   const handleSubmit = async () => {
+
+    // Resetting all error messages before validation
+    setIdError('');
+    setNameError('');
+    setAddressError('');
+    setNicError('');
+    setPositionError('');
+    setEmailError('');
+    setPasswordError('');
+    setPhoneNumberError('');
+    setDobError('');
+    setAccNumberError('');
+    setHolderNameError('');
+    setBranchNameError('');
+    setBankNameError('');
+    
     // Validation for Employee ID
     if (!empID.trim()) {
       setIdError("Employee ID is required");
@@ -224,7 +241,9 @@ const EmlpoyeeAddPage= () =>{
 
   return (
     <>
-    {/* <EmployeeAddForm/> */}
+    <Grid>
+      <Button onClick={()=>{navigate('/employees')}}> Back </Button>
+    </Grid>
 
     <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'100px', display:'block'}}>
       

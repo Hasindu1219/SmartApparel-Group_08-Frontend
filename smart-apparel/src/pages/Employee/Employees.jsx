@@ -2,21 +2,11 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
-
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import TrendingUpTwoToneIcon from "@mui/icons-material/TrendingUpTwoTone";
-import Stack from "@mui/material/Stack";
-import CustomizedTables from "../../components/EmployeeComponent/EmployeeTable2";
-import ColorButtons from "../../components/EmployeeComponent/Button";
-
-import EmployeeTable2 from "../../components/EmployeeComponent/EmployeeTable2";
-import EmployeeTable3 from "../../components/EmployeeComponent/EmployeeTable3";
 import EmployeeTable4 from "../../components/EmployeeComponent/EmployeeTable4";
 import { useNavigate } from "react-router-dom";
 
@@ -25,24 +15,23 @@ const gradientStyle = {
 };
 
 
-
 export default function Employees() {
   
-  const EmployeesList =[{
-    empId: "emp001",
-    name: "Michael Johnson",
-    address: "789 Oak Avenue",
-    nic: "543216789Z",
-    position: "sales associate",
-    email: "michael@example.com",
-    password: "securepassword",
-    phoneNumber: "+9551234567",
-    dateOfBirth: "1988-09-20",
-    accountNumber: "1357924680",
-    holderName: "Michael Johnson",
-    branchName: "West Branch",
-    bankName: "Test Bank"
-  }];
+  // const EmployeesList =[{
+  //   empId: "emp001",
+  //   name: "Michael Johnson",
+  //   address: "789 Oak Avenue",
+  //   nic: "543216789Z",
+  //   position: "sales associate",
+  //   email: "michael@example.com",
+  //   password: "securepassword",
+  //   phoneNumber: "+9551234567",
+  //   dateOfBirth: "1988-09-20",
+  //   accountNumber: "1357924680",
+  //   holderName: "Michael Johnson",
+  //   branchName: "West Branch",
+  //   bankName: "Test Bank"
+  // }];
 
   const navigate = useNavigate();
 
@@ -98,7 +87,7 @@ export default function Employees() {
             <Button onClick={()=>{navigate('/employee/addemployee')}}>Add new Employee</Button>
           </Grid>
 
-          <EmployeeTable4 rows={EmployeesList}/>
+          <EmployeeTable4 />
           
 
           {/* <Grid container spacing={2}>
