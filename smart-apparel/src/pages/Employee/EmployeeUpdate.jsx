@@ -1,14 +1,14 @@
 import { Button, Grid, Input, Typography } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EmlpoyeeUpdatePage= () =>{
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { state: { employee } } = location; // Destructure the state object properly
 
-  console.log(employee);
+
+  const navigate = useNavigate();
+  const { Id } = useParams();
+  const employee={};
 
   // States for field values
   const [empID, setEmpID] = useState('');
@@ -25,23 +25,6 @@ const EmlpoyeeUpdatePage= () =>{
   const [branchName, setBranchName] = useState('');
   const [bankName, setBankName] = useState('');
 
-  // UseEffect to set the state values when component mounts
-  useEffect(() => {
-    setEmpID(employee.empId);
-    setName(employee.name);
-    setAddress(employee.address);
-    setNic(employee.nic);
-    setPosition(employee.position);
-    setEmail(employee.email);
-    setPassword(employee.password);
-    setPhoneNumber(employee.phoneNumber);
-    setDob(employee.dateOfBirth);
-    setAccNumber(employee.accountNumber);
-    setHolderName(employee.holderName);
-    setBranchName(employee.branchName);
-    setBankName(employee.bankName);
-  }, [employee]);
-
   // States for error messages
   const [idError, setIdError] = useState('');
   const [nameError, setNameError] = useState('');
@@ -57,24 +40,58 @@ const EmlpoyeeUpdatePage= () =>{
   const [branchNameError, setBranchNameError] = useState('');
   const [bankNameError, setBankNameError] = useState('');
 
-  //entered values for new employee
-  const updatedEmployee = {
-    empId:empID,
-    name:name,
-    address:address,
-    nic:nic,
-    position:position,
-    email:email,
-    password:password,
-    phoneNumber:phoneNumber,
-    dateOfBirth:dob,
-    accountNumber:accNumber,
-    holderName:holderName,
-    branchName:branchName,
-    bankName:bankName
-  }
+  // UseEffect to set the state values to fields
+  useEffect( async () => {
+
+    const fetchEmployeeData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/employee/search/${Id}`);
+
+        employee = response.data.content;
+        
+        console.log("fetched data:"+employee);
+
+        setEmpID(employee.empId);
+        setName(employee.name);
+        setAddress(employee.address);
+        setNic(employee.nic);
+        setPosition(employee.position);
+        setEmail(employee.email);
+        setPassword(employee.password);
+        setPhoneNumber(employee.phoneNumber);
+        setDob(employee.dateOfBirth);
+        setAccNumber(employee.accountNumber);
+        setHolderName(employee.holderName);
+        setBranchName(employee.branchName);
+        setBankName(employee.bankName);
+
+      } catch (error) {
+        console.error("Error fetching employee data:", error);
+      }
+    };
+
+    fetchEmployeeData();
+  }, [Id]);
 
   const handleSubmit = async () => {
+
+    //updating values of employee
+    const updatedEmployee = {
+      empId:empID,
+      name:name,
+      address:address,
+      nic:nic,
+      position:position,
+      email:email,
+      password:password,
+      phoneNumber:phoneNumber,
+      dateOfBirth:dob,
+      accountNumber:accNumber,
+      holderName:holderName,
+      branchName:branchName,
+      bankName:bankName
+    }
+
     // Resetting all error messages before validation
     setIdError('');
     setNameError('');
@@ -154,7 +171,7 @@ const EmlpoyeeUpdatePage= () =>{
       setBankNameError("Bank Name is required");
     }
 
-    console.log(updatedEmployee);
+    console.log("Updated employee data" + updatedEmployee);
 
     try {
       const response = await axios.put(
