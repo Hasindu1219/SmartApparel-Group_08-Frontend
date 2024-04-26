@@ -39,8 +39,12 @@ const EmployeeTable = () => {
       });
   }, []);
 
+  const updateEmployee = (id) => {
+    navigate(`/accounting/updateexpense/${id}`);
+  };
+
   const handleDelete = (empId) => {
-    
+
     // Check if id is logged correctly
     console.log("Removing Employee with ID:", empId); 
 
@@ -122,7 +126,7 @@ const EmployeeTable = () => {
                 <TableCell>{employee.branchName}</TableCell>
                 <TableCell>{employee.bankName}</TableCell>
                 <TableCell>
-                  <Button sx={{ margin: '0px 10px' }} onClick={() => navigate('/employee/updateemployee', {state: { employees }} )}> 
+                  <Button sx={{ margin: '0px 10px' }} onClick={() => updateEmployee(employee.empId)}> 
                   {/* { state: { employee } } */}
                     Update
                   </Button>
