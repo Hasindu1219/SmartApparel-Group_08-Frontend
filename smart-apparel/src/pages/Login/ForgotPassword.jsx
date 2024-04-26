@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as Components from "./LoginComponent";
+import * as Components from "../../components/Login/LoginComponent";
 import logo from "../../Assets/Garment-Industry.png";
 import "./stylelogin.css"; // Assuming stylelogin.css contains the necessary styles
 import { Link } from "react-router-dom";
