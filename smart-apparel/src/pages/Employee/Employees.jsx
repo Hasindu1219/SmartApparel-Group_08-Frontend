@@ -18,6 +18,7 @@ import ColorButtons from "../../components/EmployeeComponent/Button";
 import EmployeeTable2 from "../../components/EmployeeComponent/EmployeeTable2";
 import EmployeeTable3 from "../../components/EmployeeComponent/EmployeeTable3";
 import EmployeeTable4 from "../../components/EmployeeComponent/EmployeeTable4";
+import { useNavigate } from "react-router-dom";
 
 const gradientStyle = {
   background: "linear-gradient(to right, #2980B9, #6DD5FA)", // Gradient colors
@@ -42,6 +43,8 @@ export default function Employees() {
     branchName: "West Branch",
     bankName: "Test Bank"
   }];
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -91,7 +94,10 @@ export default function Employees() {
 
           <Box height={30} />
 
-        
+          <Grid>
+            <Button onClick={()=>{navigate('/employee/addemployee')}}>Add new Employee</Button>
+          </Grid>
+
           <EmployeeTable4 rows={EmployeesList}/>
           
 
