@@ -15,6 +15,8 @@ import Customers from './pages/Customers';
 import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
+import Add_Material from './pages/InventoryPage/AddMaterial';
+import ViewMaterials from './pages/InventoryPage/ViewMaterials';
 
 import CustomerRegister from './pages/CustomerPage/CustomerRegister';
 import CustomerViewDelete from './pages/CustomerPage/CustomerDetails';
@@ -57,6 +59,9 @@ function App() {
         <Route path="/suppliers" element={<Suppliers />}></Route>
 
         <Route path="/inventory" element={<Inventory />}></Route>
+        <Route path="/inventory" element={<Inventory />}></Route>
+        <Route path="/inventory/addInventory" element={<Add_Material />}></Route>
+        <Route path="/inventory/viewInventory" element={<ViewMaterials />}></Route>
 
         <Route path="/login" element={<Login />}></Route>
         <Route path="/forgotpassword" element={<ForgotPassword />}></Route>

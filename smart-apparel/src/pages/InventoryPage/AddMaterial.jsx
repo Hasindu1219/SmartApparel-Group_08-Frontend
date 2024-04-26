@@ -5,6 +5,9 @@ import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import Error from "../../components/Error/Error";
 import axios from 'axios';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 export default function Add_Material() {
     const[itemCategory,setItemCategory] = useState("");
@@ -12,19 +15,19 @@ export default function Add_Material() {
     const[stockQty,setStockQty] = useState(0);
     const[unit,setUnit] = useState("");
     const[purchasePrice,setPurchasePrice] = useState(0);
-    const[purchaseDate,setPurchaseDate] = useState("");
+    const[purchaseDate,setPurchaseDate] = useState(new Date);
 
     const[error, setError] = useState("none");
-    const[errorType, setErrorType] = useState("none");
+    // const[errorType, setErrorType] = useState("none");
     const errorMsg = ["All fields are requierd"];
 
     const navigate = useNavigate();
 
     //Handle add btn
     const handleAddBtn=async()=>{
-        if(!itemCategory || !itemName, !stockQty, !unit, !purchasePrice, !purchaseDate){
+        if(!itemCategory || !itemName || !stockQty || !unit || !purchasePrice || !purchaseDate){
             setError("block");
-            setErrorType(errorMsg[0]);
+            // setErrorType(errorMsg[0]);
             setTimeout(()=>{
               setError("none");
             },2000);
@@ -105,9 +108,7 @@ export default function Add_Material() {
           </div>
           <div className="formBox">
             <label htmlFor="" style={{marginRight:"6.6rem"}}>Date: </label>
-            <input type="text" placeholder="2xxx/xx/xx" onChange={(e)=>{
-                setPurchaseDate(e.target.value)
-            }}/>
+            <DatePicker selected={purchaseDate} onChange={(date)=>setPurchaseDate(date)} placeholderText='Select Date'/>
           </div>
         </form>
         <div className="formButtonSection">
