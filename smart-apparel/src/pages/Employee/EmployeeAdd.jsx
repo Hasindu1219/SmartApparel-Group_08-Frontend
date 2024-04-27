@@ -245,7 +245,7 @@ const EmlpoyeeAddPage= () =>{
       <Button onClick={()=>{navigate('/employees')}}> Back </Button>
     </Grid>
 
-    <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'100px', display:'block'}}>
+    <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'auto', display:'block'}}>
       
       <Grid>
         <Typography component={'h1'} sx={{color:'#000000',fontSize:'30px', textAlign:'center'}}>Add New Employee</Typography>

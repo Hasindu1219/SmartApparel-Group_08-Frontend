@@ -43,7 +43,7 @@ const EmlpoyeeUpdatePage= () =>{
   // UseEffect to set the state values to fields
   useEffect( async () => {
 
-    const fetchEmployeeData = async () => {
+    // const fetchEmployeeData = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/employee/search/${Id}`);
 
@@ -68,9 +68,9 @@ const EmlpoyeeUpdatePage= () =>{
       } catch (error) {
         console.error("Error fetching employee data:", error);
       }
-    };
+    // };
 
-    fetchEmployeeData();
+    // fetchEmployeeData();
   }, [Id]);
 
   const handleSubmit = async () => {
@@ -231,7 +231,7 @@ const EmlpoyeeUpdatePage= () =>{
       <Button onClick={()=>{navigate('/employees')}}> Back </Button>
     </Grid>
 
-    <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'100px', display:'block'}}>
+    <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'auto', display:'block'}}>
       
       <Grid>
         <Typography component={'h1'} sx={{color:'#000000',fontSize:'30px', textAlign:'center'}}>Update Employee</Typography>
