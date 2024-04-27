@@ -1,0 +1,77 @@
+#backBtnExpense{
+    background-color: #675a5d;
+    padding: 2px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    width: 4rem;
+    height: 2rem;
+    font-size: 15px;
+}
+
+#backBtnExpense:hover{
+    border: 2px solid #675a5d;
+    color: #675a5d;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#addBtnExpense{
+    background-color: #204ee4;
+    padding: 8px;
+    margin: 10px 10px 15px 1px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 9rem;
+    height: 3rem;
+    font-size: 16px;
+}
+
+#addBtnExpense:hover{
+    border: 2px solid #193db4;
+    color: #ffffff;
+    background-color: #0e32aa;
+    cursor: pointer;
+}
+
+
+#updateBtnExpense{
+    background-color: #40d453;
+    padding: 8px;
+    margin: 10px 10px 15px 1px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 9rem;
+    height: 3rem;
+    font-size: 16px;
+}
+
+#updateBtnExpense:hover{
+    border: 2px solid #1b7327;
+    color: #ffffff;
+    background-color: #1b7327;
+    cursor: pointer;
+}
+
+
+#deleteBtnExpense{
+    background-color: #df3434;
+    padding: 8px;
+    margin: 10px 10px 15px 1px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 9rem;
+    height: 3rem;
+    font-size: 16px;
+}
+
+#deleteBtnExpense:hover{
+    border: 2px solid #990a0a;
+    color: #ffffff;
+    background-color: #990a0a;
+    cursor: pointer;
+}

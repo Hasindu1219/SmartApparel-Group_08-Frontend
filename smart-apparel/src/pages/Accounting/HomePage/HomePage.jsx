@@ -3,35 +3,35 @@ import "./HomePage.css";
 import LineChart from "../../../components/Accounting/Linechart";
 import { Link } from "react-router-dom";
 
+
 export default function HomePage() {
   return (
     <div className="firstPageContainer">
-      <div className="cardContainerBox"></div>
+      
       <div className="Inventory_Page">
+        
         <div className="Bottons" float="left">
           
           <div className="Bottons">
-            <Link to="/accounting/addexpense" className="btn">
-              <p className="Task">View Receivable Details</p>
+            <Link to="/accounting/revenuecontroller" className="btns">
+              <p className="Task">Manage Receivables</p>
             </Link>
           </div>
 
           <div className="Bottons">
-            <Link to="/accounting/viewexpense" className="btn">
-              <p className="Task">View Expense Details</p>
+            <Link to="/accounting/expensecontroller" className="btns">
+              <p className="Task">Manage Expenses</p>
             </Link>
           </div>
 
           <div className="Bottons">
-            <Link to="/accounting/updateexpense" className="btn">
+            <Link to="/accounting/updateexpense" className="btns">
               <p className="Task">Generate Reports</p>
             </Link>
           </div>
 
         </div>
-        <div className="Graph" float="left">
           <LineChart />
-        </div>
       </div>
     </div>
   );

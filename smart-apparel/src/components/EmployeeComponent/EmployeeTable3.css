@@ -1,0 +1,50 @@
+.table-container {
+    border-collapse: collapse;
+    width: 90%;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+}
+  
+.table-container th,
+.table-container td {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 1px;
+    white-space: nowrap;
+}
+
+.table-header {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+}
+
+.table-container button {
+    border: none;
+    color: white;
+    padding: 2px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.table-container .update-button{
+    background-color: #4caf50; /* Green */
+}
+
+.table-container .delete-button{
+    background-color: #ff4f34; /* Green */
+}
+
+.table-container .update-button:hover {
+    background-color: #228327; /* Darker Green */
+}
+
+.table-container .delete-button:hover {
+    background-color: #b72b16; /* Darker Green */
+}
