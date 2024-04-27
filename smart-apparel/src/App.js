@@ -33,6 +33,8 @@ import RevenueAdd from './pages/Accounting/AddRevenue';
 import UpdateRevenue from './pages/Accounting/UpdateRevenue';
 import SalaryHomePage from './pages/Salary/SalaryHomePage';
 
+//Website imports
+import WHomepage from './pages/Website/Pages/WHomepage';
 
 
 function App() {
@@ -81,6 +83,10 @@ function App() {
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
         <Route path="/accounting/updateexpense/:id" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}
+
+        {/* Website Route */}
+        <Route path="/web/home" element={<WHomepage />}></Route>
+        
       </Routes>
     </BrowserRouter>
   
