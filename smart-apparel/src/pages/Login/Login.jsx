@@ -9,7 +9,7 @@ function Login() {
   const [error, setError] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [Position, setPosition] = useState(""); // State to store user's position
-  const navigate = useNavigate(); // Use useNavigate hook for navigation
+  const navigate = useNavigate(); // Use useNavigate hook for navigation 
 
   // Function to handle login
   const handleLogin = async (e) => {
