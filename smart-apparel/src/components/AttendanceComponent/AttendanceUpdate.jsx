@@ -13,7 +13,7 @@ const AttendanceUpdate = ({Id}) => {
     date: '',
     inTime: '',
     outTime: '',
-    employeeId: '',
+    empId: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -60,7 +60,7 @@ const AttendanceUpdate = ({Id}) => {
         date: '',
         inTime: '',
         outTime: '',
-        employeeId: '',
+        empId: '',
     });
 
     // Clear all error messages
