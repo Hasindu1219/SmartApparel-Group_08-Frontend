@@ -6,28 +6,23 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import EmployeeTable4 from "../../components/EmployeeComponent/EmployeeTable4";
-import { useNavigate } from "react-router-dom";
 
 const gradientStyle = {
   background: "linear-gradient(to right, #2980B9, #6DD5FA)", // Gradient colors
 };
 
-
 export default function Employees() {
-
-  const navigate = useNavigate();
 
   return (
     <>
       <Navbar />
       <Box height={60} />
       <Box sx={{ display: "flex" }}>
-        <Sidebar />
+      <Sidebar />
 
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <h1>Employees</h1>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <h1>Employees</h1>
 
           {/* Cards */}
           <Grid container spacing={2}>
@@ -67,26 +62,7 @@ export default function Employees() {
 
           <Box height={30} />
 
-          
-
           <EmployeeTable4 />
-          
-
-          {/* <Grid container spacing={2}>
-            <Grid item xs={8}>
-              <Card sx={{minHeight: 60 + "vh",minWidth: 1090,background: 'linear-gradient(to top left, #ccffff 0%, #ffffff 100%)'}}>
-                
-                <CardContent style={{ textAlign: "center" }}>
-                  <CustomizedTables />
-                  <EmployeeTable/>
-                  <EmployeeTable2/>
-                  <EmployeeTable3/>
-                  <ColorButtons />
-
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid> */}
           
         </Box>
       </Box>

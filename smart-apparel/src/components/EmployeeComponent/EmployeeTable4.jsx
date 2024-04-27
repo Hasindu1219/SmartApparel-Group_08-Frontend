@@ -90,7 +90,7 @@ const EmployeeTable = () => {
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            {/* <TableBody>
 
               {employees.length > 0 ? (
                 employees.map((employee) => (
@@ -125,7 +125,44 @@ const EmployeeTable = () => {
                   </TableCell>
                 </TableRow>
               )}
-            </TableBody>
+            </TableBody> */}
+
+          <TableBody>
+            {filteredEmployees.length > 0 ? (
+              filteredEmployees.map((employee) => (
+                <TableRow key={employee.empId}>
+                  <TableCell>{employee.empId}</TableCell>
+                  <TableCell>{employee.name}</TableCell>
+                  <TableCell>{employee.address}</TableCell>
+                  <TableCell>{employee.nic}</TableCell>
+                  <TableCell>{employee.position}</TableCell>
+                  <TableCell>{employee.email}</TableCell>
+                  <TableCell>{employee.password}</TableCell>
+                  <TableCell>{employee.phoneNumber}</TableCell>
+                  <TableCell>{employee.dateOfBirth}</TableCell>
+                  <TableCell>{employee.accountNumber}</TableCell>
+                  <TableCell>{employee.holderName}</TableCell>
+                  <TableCell>{employee.branchName}</TableCell>
+                  <TableCell>{employee.bankName}</TableCell>
+                  <TableCell>
+                    <Button sx={{ margin: '0px 10px' }} onClick={() => updateEmployee(employee.empId)}>
+                      Update
+                    </Button>
+                    <Button sx={{ margin: '0px 10px' }} onClick={() => handleDelete(employee.empId)}>
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={14} align="center">
+                  No Data
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+
           </Table>
         </TableContainer>
       </div>
