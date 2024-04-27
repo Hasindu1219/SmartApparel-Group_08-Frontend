@@ -9,12 +9,16 @@ import EmployeeAdd from './pages/Employee/EmployeeAdd';
 import EmployeeUpdate from './pages/Employee/EmployeeUpdate';
 import EmployeeDelete from './pages/Employee/EmployeeDelete';
 
-import Sidebar from './components/Sidebar';
+// import Sidebar from './components/Sidebar';
 import Sales from './pages/Sales';
 import Customers from './pages/Customers';
 import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
+
+import Add_Material from './pages/InventoryPage/AddMaterial';
+import ViewMaterials from './pages/InventoryPage/ViewMaterials';
+
 
 import CustomerRegister from './pages/CustomerPage/CustomerRegister';
 import CustomerDetails from './pages/CustomerPage/CustomerDetails';
@@ -28,15 +32,22 @@ import InventoryCheckForm from './pages/OrderPage/InventoryCheckForm';
 
 
 // import Login from './pages/Login';
-import AddExpense from './pages/Accounting/AddExpense'
-import ViewExpense from './pages/Accounting/ViewExpense';
+import RevenueController from './pages/Accounting/RevenueController'
+import AddExpense from './pages/Accounting/AddExpense';
 import UpdateExpense from './pages/Accounting/UpdateExpense';
 import Login from './pages/Login/Login';
+import ForgotPassword from './pages/Login/ForgotPassword';
+
+import ExpenseController from './pages/Accounting/ExpenseController';
+import RevenueAdd from './pages/Accounting/AddRevenue';
+import UpdateRevenue from './pages/Accounting/UpdateRevenue';
+import SalaryHomePage from './pages/Salary/SalaryHomePage';
+import AttendanceHomePage from './pages/Attendance/AttendanceHomePage';
+
 
 
 function App() {
   return (
-    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />}></Route>
@@ -46,18 +57,32 @@ function App() {
         <Route path="/customers" element={<Customers />}></Route>
         <Route path="/orders" element={<Orders />}></Route>
         <Route path="/employees" element={<Employees />}></Route>
+        <Route path="/salary" element={<SalaryHomePage/>}></Route>
+        <Route path='/attendance' element={<AttendanceHomePage/>}></Route>
 
+        {/* routings inside the employee section */}
         <Route path="/employee/addemployee" element={<EmployeeAdd/>}> </Route>
-        <Route path="/employee/updateemployee" element={<EmployeeUpdate/>}> </Route>
+        <Route path="/employee/updateemployee/:Id" element={<EmployeeUpdate/>}> </Route>
         <Route path="/employee/deleteemployee" element={<EmployeeDelete/>}> </Route>
 
+        {/* routings inside Salary section */}
+
+
         <Route path="/suppliers" element={<Suppliers />}></Route>
+
         <Route path="/inventory" element={<Inventory />}></Route>
+        <Route path="/inventory" element={<Inventory />}></Route>
+        <Route path="/inventory/addInventory" element={<Add_Material />}></Route>
+        <Route path="/inventory/viewInventory" element={<ViewMaterials />}></Route>
+
         <Route path="/login" element={<Login />}></Route>
+
+        <Route path="/forgotpassword" element={<ForgotPassword />}></Route
 
         <Route path="/customers/customerregister" element={<CustomerRegister/>} />
         <Route path="/customerdetails" element={<CustomerDetails />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
+
 
         <Route path="/orderregister" element={<OrderRegister />} />
         <Route path="/orderdetails" element={<OrderDetails />} />
@@ -65,12 +90,21 @@ function App() {
         <Route path="/inventorycheck" element={<InventoryCheck />} />
         <Route path="/inventorycheckform" element={<InventoryCheckForm />} />
 
+
+        <Route path="/accounting/revenuecontroller" element={<RevenueController />}></Route>
+        <Route path="/accounting/addrevenue" element={<RevenueAdd />}></Route>
+        <Route path="/accounting/updaterevenue/:id" element={<UpdateRevenue />}></Route>
+
+
+        {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}
+        <Route path="/accounting/expensecontroller" element={<ExpenseController />}></Route>
+
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
-        <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route>
-        <Route path="/accounting/updateexpense" element={<UpdateExpense />}></Route>
+        <Route path="/accounting/updateexpense/:id" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}
       </Routes>
     </BrowserRouter>
+  
   );
 }
 

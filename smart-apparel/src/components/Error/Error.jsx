@@ -1,8 +1,8 @@
 import React from 'react'
-import './Error1.css'
+import './error.css'
 import ErrorIcon from '@mui/icons-material/Error';
 
-const Error1 = (props) => {
+const Error = (props) => {
   return (
     <div className='errorContainer' style={{display:props.errorDisplay}}>
         <div style={{display:"flex", alignItems:"center", gap:"10px"}}>
@@ -13,4 +13,4 @@ const Error1 = (props) => {
   )
 }
 
-export default Error1
+export default Error
