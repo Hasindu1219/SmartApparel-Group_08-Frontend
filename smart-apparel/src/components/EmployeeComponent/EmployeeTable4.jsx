@@ -40,7 +40,7 @@ const EmployeeTable = () => {
   }, []);
 
   const updateEmployee = (id) => {
-    navigate(`/accounting/updateexpense/${id}`);
+    navigate(`/employee/updateemployee/${id}`);
   };
 
   const handleDelete = (empId) => {

@@ -50,7 +50,7 @@ function App() {
 
         {/* routings inside the employee section */}
         <Route path="/employee/addemployee" element={<EmployeeAdd/>}> </Route>
-        <Route path="/employee/updateemployee" element={<EmployeeUpdate/>}> </Route>
+        <Route path="/employee/updateemployee/:Id" element={<EmployeeUpdate/>}> </Route>
         <Route path="/employee/deleteemployee" element={<EmployeeDelete/>}> </Route>
 
         {/* routings inside Salary section */}
