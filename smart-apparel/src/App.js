@@ -33,7 +33,8 @@ import RevenueAdd from './pages/Accounting/AddRevenue';
 import UpdateRevenue from './pages/Accounting/UpdateRevenue';
 import SalaryHomePage from './pages/Salary/SalaryHomePage';
 import AttendanceHomePage from './pages/Attendance/AttendanceHomePage';
-
+import AttendanceAddPage from './pages/Attendance/AttendanceAddPage';
+import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
 
 
 function App() {
@@ -55,6 +56,9 @@ function App() {
         <Route path="/employee/updateemployee/:Id" element={<EmployeeUpdate/>}> </Route>
         <Route path="/employee/deleteemployee" element={<EmployeeDelete/>}> </Route>
 
+        {/* routings inside the attendance section */}
+        <Route path='/attendance/addattendance' element={<AttendanceAddPage/>}> </Route>
+        <Route path='/attendance/updateattendance/:Id' element={<AttendanceUpdatePage/>}> </Route>
         {/* routings inside Salary section */}
 
 
