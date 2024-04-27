@@ -69,6 +69,7 @@ const AttendanceTable =()=>{
                 
             <TableContainer component={Paper} sx={{ maxWidth: 1200 }}>
                 <Table>
+
                     <TableHead>
                         <TableRow>
                             <TableCell>Attendance ID</TableCell>
@@ -76,8 +77,10 @@ const AttendanceTable =()=>{
                             <TableCell>IN Time</TableCell>
                             <TableCell>OUT Time</TableCell>
                             <TableCell>Employee ID</TableCell>
+                            <TableCell>Action</TableCell>
                         </TableRow>
                     </TableHead>
+                    
                     <TableBody>
                     
                     {/* {
@@ -89,31 +92,31 @@ const AttendanceTable =()=>{
                     } */}
                     
 
-                    {attendanceList.length > 0 ? (
-                        attendanceList.map((attendance) => (
-                            <TableRow key={attendance.attendanceId}>
-                                <TableCell>{attendance.attendanceId}</TableCell>
-                                <TableCell>{attendance.date}</TableCell>
-                                <TableCell>{attendance.inTime}</TableCell>
-                                <TableCell>{attendance.outTime}</TableCell>
-                                <TableCell>{attendance.empId}</TableCell>
-                                <TableCell>
-                                    <Button sx={{ margin: '0px 10px' }} onClick={() => updateAttendance(attendance.attendanceId)}> 
-                                        Update
-                                    </Button>
-                                    <Button sx={{ margin: '0px 10px' }} onClick={() => handleDelete(attendance.attendanceId)}>
-                                        Delete
-                                    </Button>
+                        {attendanceList.length > 0 ? (
+                            attendanceList.map((attendance) => (
+                                <TableRow key={attendance.attendanceId}>
+                                    <TableCell>{attendance.attendanceId}</TableCell>
+                                    <TableCell>{attendance.date}</TableCell>
+                                    <TableCell>{attendance.inTime}</TableCell>
+                                    <TableCell>{attendance.outTime}</TableCell>
+                                    <TableCell>{attendance.empId}</TableCell>
+                                    <TableCell>
+                                        <Button sx={{ margin: '0px 10px' }} onClick={() => updateAttendance(attendance.attendanceId)}> 
+                                            Update
+                                        </Button>
+                                        <Button sx={{ margin: '0px 10px' }} onClick={() => handleDelete(attendance.attendanceId)}>
+                                            Delete
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        ) : (
+                            <TableRow>
+                                <TableCell colSpan={14} align="center">
+                                    No Data
                                 </TableCell>
                             </TableRow>
-                        ))
-                    ) : (
-                        <TableRow>
-                        <TableCell colSpan={14} align="center">
-                            No Data
-                        </TableCell>
-                        </TableRow>
-                    )}
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>
