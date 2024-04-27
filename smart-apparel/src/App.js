@@ -62,7 +62,7 @@ function App() {
         <Route path="/orderregister" element={<OrderRegister />} />
         <Route path="/orderdetails" element={<OrderDetails />} />
         <Route path="/orderstatus" element={<OrderStatus />} />
-        <Route path="/checkinventory" element={<InventoryCheck />} />
+        <Route path="/inventorycheck" element={<InventoryCheck />} />
         <Route path="/inventorycheckform" element={<InventoryCheckForm />} />
 
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>

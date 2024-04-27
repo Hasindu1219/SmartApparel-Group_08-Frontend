@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './CustomerPage/CustomerDetails.css';
+//import './CustomerPage/CustomerDetails.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Error1 from '../../components/Error1/Error1';

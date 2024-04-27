@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './CustomerPage/CustomerRegister.css';
+//import './CustomerPage/CustomerRegister.css';
 import Sidebar from '../../components/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
 import Error from '../../components/Error1/Error1';
