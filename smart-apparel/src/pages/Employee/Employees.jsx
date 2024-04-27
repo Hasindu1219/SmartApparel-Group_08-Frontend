@@ -6,44 +6,23 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import EmployeeTable4 from "../../components/EmployeeComponent/EmployeeTable4";
-import { useNavigate } from "react-router-dom";
 
 const gradientStyle = {
   background: "linear-gradient(to right, #2980B9, #6DD5FA)", // Gradient colors
 };
 
-
 export default function Employees() {
-  
-  // const EmployeesList =[{
-  //   empId: "emp001",
-  //   name: "Michael Johnson",
-  //   address: "789 Oak Avenue",
-  //   nic: "543216789Z",
-  //   position: "sales associate",
-  //   email: "michael@example.com",
-  //   password: "securepassword",
-  //   phoneNumber: "+9551234567",
-  //   dateOfBirth: "1988-09-20",
-  //   accountNumber: "1357924680",
-  //   holderName: "Michael Johnson",
-  //   branchName: "West Branch",
-  //   bankName: "Test Bank"
-  // }];
-
-  const navigate = useNavigate();
 
   return (
     <>
       <Navbar />
       <Box height={60} />
       <Box sx={{ display: "flex" }}>
-        <Sidebar />
+      <Sidebar />
 
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <h1>Employees</h1>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <h1>Employees</h1>
 
           {/* Cards */}
           <Grid container spacing={2}>
@@ -83,28 +62,7 @@ export default function Employees() {
 
           <Box height={30} />
 
-          <Grid>
-            <Button onClick={()=>{navigate('/employee/addemployee')}}>Add new Employee</Button>
-          </Grid>
-
           <EmployeeTable4 />
-          
-
-          {/* <Grid container spacing={2}>
-            <Grid item xs={8}>
-              <Card sx={{minHeight: 60 + "vh",minWidth: 1090,background: 'linear-gradient(to top left, #ccffff 0%, #ffffff 100%)'}}>
-                
-                <CardContent style={{ textAlign: "center" }}>
-                  <CustomizedTables />
-                  <EmployeeTable/>
-                  <EmployeeTable2/>
-                  <EmployeeTable3/>
-                  <ColorButtons />
-
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid> */}
           
         </Box>
       </Box>

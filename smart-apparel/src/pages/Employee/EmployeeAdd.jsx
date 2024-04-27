@@ -245,14 +245,14 @@ const EmlpoyeeAddPage= () =>{
       <Button onClick={()=>{navigate('/employees')}}> Back </Button>
     </Grid>
 
-    <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'100px', display:'block'}}>
+    <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'auto', display:'block'}}>
       
       <Grid>
         <Typography component={'h1'} sx={{color:'#000000',fontSize:'30px', textAlign:'center'}}>Add New Employee</Typography>
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="id" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="id" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
           Employee ID:
         </Typography>
         <Input type="text" name="empId" id="id" sx={{ width:'400px'}} value={empID} onChange={ e=>{setEmpID(e.target.value)}}/>
@@ -260,7 +260,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empName" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empName" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
           Employee Name:
         </Typography>
         <Input type="text" name="empId" id="empName" sx={{ width:'400px'}} value={name} onChange={ e=>{setName(e.target.value)}}/>
@@ -268,7 +268,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
       
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empAddress" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empAddress" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
           Address:
         </Typography>
         <Input type="text" name="empId" id="empAddress" sx={{ width:'400px'}} value={address} onChange={ e=>{setAddress(e.target.value)}}/>
@@ -276,7 +276,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empNic" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empNic" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
           NIC:
         </Typography>
         <Input type="text" name="empId" id="empNic" sx={{ width:'400px'}} value={nic} onChange={ e=>{setNic(e.target.value)}}/>
@@ -284,7 +284,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empPosition" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empPosition" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
         Position:
         </Typography>
         <Input type="text" name="empId" id="empPosition" sx={{ width:'400px'}} value={position} onChange={ e=>{setPosition(e.target.value)}}/>
@@ -292,7 +292,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
       
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empEmail" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empEmail" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
         Email:
         </Typography>
         <Input type="email" name="empId" id="empEmail" sx={{ width:'400px'}} value={email} onChange={ e=>{setEmail(e.target.value)}}/>
@@ -300,7 +300,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empPassword" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empPassword" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
         password:
         </Typography>
         <Input type="password" name="empId" id="empPassword" sx={{ width:'400px'}} value={password} onChange={ e=>{setPassword(e.target.value)}}/>
@@ -308,7 +308,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empTp" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empTp" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
         Phone Number:
         </Typography>
         <Input type="number" name="empId" id="empTp" sx={{ width:'400px'}} value={phoneNumber} onChange={ e=>{setPhoneNumber(e.target.value)}}/>
@@ -316,7 +316,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empDob" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empDob" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
         Date Of Birth:
         </Typography>
         <Input type="date" name="empId" id="empDob" sx={{ width:'400px'}} value={dob} onChange={ e=>{setDob(e.target.value)}}/>
@@ -324,7 +324,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empAccNo" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empAccNo" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
         Account Number:
         </Typography>
         <Input type="number" name="empId" id="empAccNo" sx={{ width:'400px'}} value={accNumber} onChange={ e=>{setaccNumber(e.target.value)}}/>
@@ -332,7 +332,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empAccHoldName" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empAccHoldName" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
         Account Holder Name:
         </Typography>
         <Input type="text" name="empId" id="empAccHoldName" sx={{ width:'400px'}} value={holderName} onChange={ e=>{setHolderName(e.target.value)}}/>
@@ -340,7 +340,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empBrnchName" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empBrnchName" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
         Branch Name:
         </Typography>
         <Input type="text" name="empId" id="empBrnchName" sx={{ width:'400px'}} value={branchName} onChange={ e=>{setBrnchName(e.target.value)}}/>
@@ -348,7 +348,7 @@ const EmlpoyeeAddPage= () =>{
       </Grid>
 
       <Grid item sx={{ display:'flex'}}>
-        <Typography component={'label'} htmlFor="empBankName" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'100px',display:'block'}}>
+        <Typography component={'label'} htmlFor="empBankName" sx={{color:'#000000',marginLeft:'20px',fontSize:'16px',width:'150px',display:'block'}}>
         Bank Name:
         </Typography>
         <Input type="text" name="empId" id="empBankName" sx={{ width:'400px'}} value={bankName} onChange={ e=>{setBankName(e.target.value)}}/>

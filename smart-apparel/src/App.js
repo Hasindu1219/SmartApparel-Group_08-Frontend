@@ -32,6 +32,7 @@ import ExpenseController from './pages/Accounting/ExpenseController';
 import RevenueAdd from './pages/Accounting/AddRevenue';
 import UpdateRevenue from './pages/Accounting/UpdateRevenue';
 import SalaryHomePage from './pages/Salary/SalaryHomePage';
+import AttendanceHomePage from './pages/Attendance/AttendanceHomePage';
 
 
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="/orders" element={<Orders />}></Route>
         <Route path="/employees" element={<Employees />}></Route>
         <Route path="/salary" element={<SalaryHomePage/>}></Route>
+        <Route path='/attendance' element={<AttendanceHomePage/>}></Route>
 
         {/* routings inside the employee section */}
         <Route path="/employee/addemployee" element={<EmployeeAdd/>}> </Route>

@@ -26,8 +26,10 @@ const EmployeeUpdatePage = () => {
 
   const [errors, setErrors] = useState({});
 
+
   useEffect(() => {
     const fetchEmployeeData = async () => {
+
       try {
         const response = await axios.get(`http://localhost:8080/employee/search/${Id}`);
         const fetchedEmployee = response.data.content;
@@ -37,9 +39,9 @@ const EmployeeUpdatePage = () => {
       } catch (error) {
         console.error("Error fetching employee data:", error);
       }
-    };
+     };
 
-    fetchEmployeeData();
+     fetchEmployeeData();
   }, [Id]);
 
   const handleSubmit = async () => {
@@ -96,7 +98,7 @@ const EmployeeUpdatePage = () => {
         <Button onClick={() => navigate('/employees')}>Back</Button>
       </Grid>
 
-      <Grid container spacing={2} sx={{ backgroundColor: '#EEEEEE', margin: '100px', display: 'block' }}>
+      <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'auto', display:'block'}}>
         <Grid>
           <Typography component={'h1'} sx={{ color: '#000000', fontSize: '30px', textAlign: 'center' }}>Update Employee</Typography>
         </Grid>
@@ -104,7 +106,7 @@ const EmployeeUpdatePage = () => {
         {/* Render form fields */}
         {Object.keys(employee).map((field) => (
           <Grid key={field} item sx={{ display: 'flex' }}>
-            <Typography component={'label'} htmlFor={field} sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '100px', display: 'block' }}>
+            <Typography component={'label'} htmlFor={field} sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '150px', display: 'block' }}>
               {field === 'empId' ? 'Employee ID' : field}
             </Typography>
             <Input
