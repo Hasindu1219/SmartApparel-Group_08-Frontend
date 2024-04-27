@@ -23,7 +23,7 @@ const EmployeeAddPage = () => {
     date: date,
     inTime: inTime,
     outTime: outTime,
-    employeeId: employeeId,
+    empId: employeeId,
   }
 
   const handleSubmit = async () => {
@@ -62,6 +62,8 @@ const EmployeeAddPage = () => {
     console.log(newAttendance);
 
     try {
+
+      console.log(newAttendance);
       const response = await axios.post("http://localhost:8080/attendance/add", newAttendance);
 
       if (response.status === 202) {
@@ -119,7 +121,7 @@ const EmployeeAddPage = () => {
           <Typography component={'label'} htmlFor="inTime" sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '150px', display: 'block' }}>
             IN Time:
           </Typography>
-          <Input type="time" name="inTime" id="inTime" sx={{ width: '400px' }} value={inTime} onChange={e => { setInTime(e.target.value) }} />
+          <Input type="text" name="inTime" id="inTime" sx={{ width: '400px' }} value={inTime} onChange={e => { setInTime(e.target.value) }} />
           <Typography sx={{ color: 'red' }}>{inTimeError && inTimeError}</Typography>
         </Grid>
 
@@ -127,7 +129,7 @@ const EmployeeAddPage = () => {
           <Typography component={'label'} htmlFor="outTime" sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '150px', display: 'block' }}>
             OUT Time:
           </Typography>
-          <Input type="time" name="outTime" id="outTime" sx={{ width: '400px' }} value={outTime} onChange={e => { setOutTime(e.target.value) }} />
+          <Input type="text" name="outTime" id="outTime" sx={{ width: '400px' }} value={outTime} onChange={e => { setOutTime(e.target.value) }} />
           <Typography sx={{ color: 'red' }}>{outTimeError && outTimeError}</Typography>
         </Grid>
 
