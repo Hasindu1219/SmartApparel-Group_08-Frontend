@@ -39,10 +39,10 @@ const EmployeeUpdatePage = () => {
       } catch (error) {
         console.error("Error fetching employee data:", error);
       }
-    // };
+     };
 
-    // fetchEmployeeData();
-  }}, [Id]);
+     fetchEmployeeData();
+  }, [Id]);
 
   const handleSubmit = async () => {
     try {
@@ -106,7 +106,7 @@ const EmployeeUpdatePage = () => {
         {/* Render form fields */}
         {Object.keys(employee).map((field) => (
           <Grid key={field} item sx={{ display: 'flex' }}>
-            <Typography component={'label'} htmlFor={field} sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '100px', display: 'block' }}>
+            <Typography component={'label'} htmlFor={field} sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '150px', display: 'block' }}>
               {field === 'empId' ? 'Employee ID' : field}
             </Typography>
             <Input

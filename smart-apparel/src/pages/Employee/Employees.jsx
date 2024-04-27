@@ -16,22 +16,6 @@ const gradientStyle = {
 
 
 export default function Employees() {
-  
-  // const EmployeesList =[{
-  //   empId: "emp001",
-  //   name: "Michael Johnson",
-  //   address: "789 Oak Avenue",
-  //   nic: "543216789Z",
-  //   position: "sales associate",
-  //   email: "michael@example.com",
-  //   password: "securepassword",
-  //   phoneNumber: "+9551234567",
-  //   dateOfBirth: "1988-09-20",
-  //   accountNumber: "1357924680",
-  //   holderName: "Michael Johnson",
-  //   branchName: "West Branch",
-  //   bankName: "Test Bank"
-  // }];
 
   const navigate = useNavigate();
 
@@ -83,9 +67,7 @@ export default function Employees() {
 
           <Box height={30} />
 
-          <Grid>
-            <Button onClick={()=>{navigate('/employee/addemployee')}}>Add new Employee</Button>
-          </Grid>
+          
 
           <EmployeeTable4 />
           
