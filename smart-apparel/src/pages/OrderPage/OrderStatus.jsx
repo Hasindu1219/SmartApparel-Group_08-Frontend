@@ -4,16 +4,23 @@ import axios from 'axios';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar';
 
-export default function OrderStatus() {
+const OrderStatus = ( ) => {
+  const [loading, setLoading] = useState(false);
   const [orderId, setOrderId] = useState(''); // State to hold the orderId entered by the user
   const [status, setStatus] = useState('');
 
-  const handleUpdateStatus = async (newStatus) => {
+  const handleUpdateStatus = async () => {
+    setLoading(true);
     try {
-      await axios.put(`/api/orders/${orderId}/status`, { status: newStatus });
-      setStatus(newStatus); // Update status in the component state
+      // Call the backend API to update order status and perform quality certification
+      const response = await axios.put(`/api/orderstatus/updateOrderStatus/${orderId}`);
+      // Handle success response
+      console.log(response.data);
     } catch (error) {
+      // Handle error
       console.error('Error updating order status:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,3 +67,5 @@ export default function OrderStatus() {
     </div>
   );
 }
+
+export default OrderStatus;
