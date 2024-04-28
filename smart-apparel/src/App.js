@@ -32,13 +32,11 @@ import ExpenseController from './pages/Accounting/ExpenseController';
 import RevenueAdd from './pages/Accounting/AddRevenue';
 import UpdateRevenue from './pages/Accounting/UpdateRevenue';
 import SalaryHomePage from './pages/Salary/SalaryHomePage';
-
-import WHomepage from './pages/Website/Pages/WHomepage';
-
 import AttendanceHomePage from './pages/Attendance/AttendanceHomePage';
 import AttendanceAddPage from './pages/Attendance/AttendanceAddPage';
 import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
 
+import WHomepage from './pages/Website/Pages/WHomepage'
 
 
 function App() {
@@ -68,8 +66,6 @@ function App() {
 
         <Route path="/suppliers" element={<Suppliers />}></Route>
 
-         {/* Routings inside Inventory section */}
-
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/inventory/addInventory" element={<Add_Material />}></Route>
@@ -94,9 +90,7 @@ function App() {
         <Route path="/accounting/updateexpense/:id" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}
 
-        {/* Website Route */}
-        <Route path="/web/home" element={<WHomepage />}></Route>
-        
+        <Route path="/WHomepage" element={<WHomepage />}></Route>
       </Routes>
     </BrowserRouter>
   
