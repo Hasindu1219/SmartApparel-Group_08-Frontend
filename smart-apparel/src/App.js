@@ -33,8 +33,12 @@ import RevenueAdd from './pages/Accounting/AddRevenue';
 import UpdateRevenue from './pages/Accounting/UpdateRevenue';
 import SalaryHomePage from './pages/Salary/SalaryHomePage';
 
-//Website imports
 import WHomepage from './pages/Website/Pages/WHomepage';
+
+import AttendanceHomePage from './pages/Attendance/AttendanceHomePage';
+import AttendanceAddPage from './pages/Attendance/AttendanceAddPage';
+import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
+
 
 
 function App() {
@@ -49,12 +53,16 @@ function App() {
         <Route path="/orders" element={<Orders />}></Route>
         <Route path="/employees" element={<Employees />}></Route>
         <Route path="/salary" element={<SalaryHomePage/>}></Route>
+        <Route path='/attendance' element={<AttendanceHomePage/>}></Route>
 
         {/* routings inside the employee section */}
         <Route path="/employee/addemployee" element={<EmployeeAdd/>}> </Route>
-        <Route path="/employee/updateemployee" element={<EmployeeUpdate/>}> </Route>
+        <Route path="/employee/updateemployee/:Id" element={<EmployeeUpdate/>}> </Route>
         <Route path="/employee/deleteemployee" element={<EmployeeDelete/>}> </Route>
 
+        {/* routings inside the attendance section */}
+        <Route path='/attendance/addattendance' element={<AttendanceAddPage/>}> </Route>
+        <Route path='/attendance/updateattendance/:Id' element={<AttendanceUpdatePage/>}> </Route>
         {/* routings inside Salary section */}
 
 
@@ -94,6 +102,7 @@ function App() {
   
   );
 }
+
 
 export default App;
 const root = ReactDOM.createRoot(document.getElementById('root'));

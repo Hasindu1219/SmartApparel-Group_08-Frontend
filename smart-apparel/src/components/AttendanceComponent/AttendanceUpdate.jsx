@@ -1,82 +1,66 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Grid, Input, Typography } from "@mui/material";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const EmployeeUpdatePage = () => {
+const AttendanceUpdate = ({Id}) => {
   const navigate = useNavigate();
-  const { Id } = useParams();
+//   const { Id } = useParams();
 
-  // State for employee data and error messages
-  const [employee, setEmployee] = useState({
+  // State for attendance record data and error messages
+  const [attendanceRecord, setAttendanceRecord] = useState({
+    attendanceId: '',
+    date: '',
+    inTime: '',
+    outTime: '',
     empId: '',
-    name: '',
-    address: '',
-    nic: '',
-    position: '',
-    email: '',
-    password: '',
-    phoneNumber: '',
-    dob: '',
-    accNumber: '',
-    holderName: '',
-    branchName: '',
-    bankName: ''
   });
 
   const [errors, setErrors] = useState({});
 
 
   useEffect(() => {
-    const fetchEmployeeData = async () => {
+    const fetchAttendanceRecordData = async () => {
 
       try {
-        const response = await axios.get(`http://localhost:8080/employee/search/${Id}`);
-        const fetchedEmployee = response.data.content;
+        const response = await axios.get(`http://localhost:8080/attendance/search/${Id}`);
+        const fetchedAttendanceRecordData = response.data.content;
 
-        setEmployee(fetchedEmployee);
+        setAttendanceRecord(fetchedAttendanceRecordData);
 
       } catch (error) {
-        console.error("Error fetching employee data:", error);
+        console.error("Error fetching attendance data:", error);
       }
      };
 
-     fetchEmployeeData();
+     fetchAttendanceRecordData();
   }, [Id]);
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.put("http://localhost:8080/employee/update", employee);
+      const response = await axios.put("http://localhost:8080/attendance/update", attendanceRecord);
 
       if (response.status === 202) {
-        alert("Employee updated successfully.");
-        navigate("/employees");
+        alert("Attendance record updated successfully.");
+        navigate("/attendance");
       } else {
-        alert("Error occurred while updating employee.");
+        alert("Error occurred while updating attendance record.");
       }
     } catch (error) {
-      alert("An error occurred while updating employee.");
-      console.error("Employee update error:", error);
+      alert("An error occurred while updating attendance record.");
+      console.error("attendance record update error:", error);
     }
   };
 
   const handleReset = () => {
-    // Reset employee data to original state
-    setEmployee({
-      ...employee,
-      empId: '',
-      name: '',
-      address: '',
-      nic: '',
-      position: '',
-      email: '',
-      password: '',
-      phoneNumber: '',
-      dob: '',
-      accNumber: '',
-      holderName: '',
-      branchName: '',
-      bankName: ''
+    // Reset attendance record data to original state
+    setAttendanceRecord({
+        ...attendanceRecord,
+        attendanceId: '',
+        date: '',
+        inTime: '',
+        outTime: '',
+        empId: '',
     });
 
     // Clear all error messages
@@ -85,8 +69,8 @@ const EmployeeUpdatePage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEmployee((prevEmployee) => ({
-      ...prevEmployee,
+    setAttendanceRecord((prevAttendanceRecord) => ({
+      ...prevAttendanceRecord,
       [name]: value
     }));
   };
@@ -95,7 +79,7 @@ const EmployeeUpdatePage = () => {
   return (
     <>
       <Grid>
-        <Button onClick={() => navigate('/employees')}>Back</Button>
+        <Button onClick={() => navigate('/attendance')}>Back</Button>
       </Grid>
 
       <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'auto', display:'block'}}>
@@ -104,17 +88,17 @@ const EmployeeUpdatePage = () => {
         </Grid>
 
         {/* Render form fields */}
-        {Object.keys(employee).map((field) => (
+        {Object.keys(attendanceRecord).map((field) => (
           <Grid key={field} item sx={{ display: 'flex' }}>
             <Typography component={'label'} htmlFor={field} sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '150px', display: 'block' }}>
-              {field === 'empId' ? 'Employee ID' : field}
+              {field === 'attendanceId' ? 'Attendance ID' : field}
             </Typography>
             <Input
               type="text"
               name={field}
               id={field}
               sx={{ width: '400px' }}
-              value={employee[field]}
+              value={attendanceRecord[field]}
               onChange={handleChange}
             />
             <Typography sx={{ color: 'red' }}>{errors[field]}</Typography>
@@ -140,4 +124,4 @@ const EmployeeUpdatePage = () => {
   );
 };
 
-export default EmployeeUpdatePage;
+export default AttendanceUpdate;

@@ -27,6 +27,12 @@ export default function OrderHome() {
                         <p className="Task1">Order Status</p>
                     </button>
                 </Link>
+                {/* Link to Check Inventory*/}
+                <Link to={'/checkinventory'}>
+                    <button className="btn1">
+                        <p className="Task1">Check Inventory</p>
+                    </button>
+                </Link>
             </div>
             {/* Image Frame */}
             <div className="Frame">
