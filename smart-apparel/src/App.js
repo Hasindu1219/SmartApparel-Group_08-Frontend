@@ -60,6 +60,8 @@ function App() {
 
         <Route path="/suppliers" element={<Suppliers />}></Route>
 
+         {/* Routings inside Inventory section */}
+
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/inventory/addInventory" element={<Add_Material />}></Route>

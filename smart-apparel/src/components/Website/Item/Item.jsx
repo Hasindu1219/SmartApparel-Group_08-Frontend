@@ -1,15 +1,15 @@
 import React from 'react'
-import './Frocks.css'
+import './Item.css'
 
-export default function Frocks() {
+export default function Item() {
   return (
-    <div className='item'>
+    <div className='Item'>
         <img src={props.image} alt=""/>
-        <div className="item-prices">
-            <div className="item-price-new">
+        <div className="Item-prices">
+            <div className="Item-price-new">
                 {props.new_price}
             </div>
-            <div className="item-price-old">
+            <div className="Item-price-old">
                 {props.old_price}
             </div>
         </div>
