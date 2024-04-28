@@ -36,6 +36,9 @@ import AttendanceHomePage from './pages/Attendance/AttendanceHomePage';
 import AttendanceAddPage from './pages/Attendance/AttendanceAddPage';
 import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
 
+import ReportController from './pages/Report/ReportController';
+import ReportStructure from './pages/Report/ReportStructure';
+
 
 function App() {
   return (
@@ -80,6 +83,9 @@ function App() {
         <Route path="/accounting/revenuecontroller" element={<RevenueController />}></Route>
         <Route path="/accounting/addrevenue" element={<RevenueAdd />}></Route>
         <Route path="/accounting/updaterevenue/:id" element={<UpdateRevenue />}></Route>
+
+        <Route path="/report" element={<ReportController />}></Route>
+        <Route path="/report/reportStructure" element={<ReportStructure />}></Route>
 
 
         {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}
