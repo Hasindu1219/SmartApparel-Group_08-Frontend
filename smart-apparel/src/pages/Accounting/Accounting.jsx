@@ -18,7 +18,6 @@ export default function Accounting() {
       <Box height={60} />
       <Box sx={{ display: "flex" }}>
         <Sidebar />
-
         <Box component="main" sx={{ flexGrow: 1, p: 3 , backgroundColor: "#d7e3fc"}}>
           <h1>Accounting</h1>
           <BasicGrid />
