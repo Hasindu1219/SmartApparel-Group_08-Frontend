@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
@@ -6,37 +6,61 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 const RevenueAdd = () => {
   const navigate = useNavigate();
 
   // State variables to manage form inputs
-  const [revenueCategory, setRevenueCategory] = useState("");
+  const [chequeId, setChequeId] = useState("");
+  const [orderId, setOrderId] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [currency, setCurrency] = useState("");
+  const [completedOrderIds, setCompletedOrderIds] = useState([]);
+
+  // Function to fetch completed order IDs from the API
+  const fetchCompletedOrderIds = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/v1/order/completedOrderId"
+      );
+
+      if (response.data && response.data.content) {
+        setCompletedOrderIds(response.data.content);
+      }
+
+    } catch (error) {
+      console.error("Error fetching completed order IDs:", error);
+    }
+  };
+
+  // Use useEffect to fetch completed order IDs when the component mounts
+  useEffect(() => {
+    fetchCompletedOrderIds();
+  }, []); // Empty dependency array ensures this effect runs only once on component mount
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
-    // Create expense object to send to backend
-    const RevenueeData = {
-      category: revenueCategory,
+    // Create revenue data object to send to backend
+    const revenueData = {
+      order_Id: orderId,
+      cheque_Id: chequeId,
       date: date,
       description: description,
+      status: "Pending",
       amount: parseFloat(currency), // Assuming currency input represents amount
     };
 
     try {
+      console.log("Revenue data:", revenueData);
       // Make POST request to backend API
-      console.log(RevenueeData);
       const response = await axios.post(
         "http://localhost:8080/api/v1/revenue/saveRevenue",
-        RevenueeData
+        revenueData
       );
 
-      // Handle different response statuses
+      // Handle response statuses
       if (response.status === 202) {
         // Successful response
         alert("Revenue saved successfully.");
@@ -92,25 +116,40 @@ const RevenueAdd = () => {
                   <div style={{ textAlign: "left" }}>
                     <div className="card-body">
                       <div className="row">
+
                         <div className="col-lg-12">
                           <div className="form-group">
-                            <label htmlFor="categorySelect">Category</label>
+                            <label htmlFor="categorySelect">Order Id</label>
                             <select
                               required
-                              id="categorySelect"
+                              id="orderId"
                               className="form-control"
-                              value={revenueCategory}
-                              onChange={(e) =>
-                                setRevenueCategory(e.target.value)
-                              }
+                              value={orderId}
+                              onChange={(e) => setOrderId(e.target.value)}
                             >
-                              <option value="">Select a category...</option>
-                              <option value="SalesIncome ">Sales Income</option>
-                              <option value="Rent Income">Rent Income</option>
-                              <option value="Other Income">Other Income</option>
+                              <option value="">Select an order ID...</option>
+                              {completedOrderIds.map((orderId) => (
+                                <option key={orderId} value={orderId}>
+                                  {orderId}
+                                </option>
+                              ))}
                             </select>
                           </div>
                         </div>
+
+                        <div className="col-lg-12">
+                          <div className="form-group">
+                            <label>Cheque Id</label>
+                            <input
+                              type="text"
+                              required
+                              value={chequeId}
+                              onChange={(e) => setChequeId(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
                         <div className="col-lg-12">
                           <div className="form-group">
                             <label>Date</label>
@@ -123,11 +162,12 @@ const RevenueAdd = () => {
                             />
                           </div>
                         </div>
+
                         <div className="col-lg-12">
                           <div className="form-group">
                             <label>Description</label>
                             <input
-                              type="textarea"
+                              type="text"
                               required
                               value={description}
                               onChange={(e) => setDescription(e.target.value)}
@@ -135,6 +175,7 @@ const RevenueAdd = () => {
                             />
                           </div>
                         </div>
+
                         <div className="col-lg-12">
                           <div className="form-group">
                             <label>Currency</label>
@@ -147,6 +188,7 @@ const RevenueAdd = () => {
                             />
                           </div>
                         </div>
+
                         <div className="col-lg-12">
                           <div
                             className="form-group"
