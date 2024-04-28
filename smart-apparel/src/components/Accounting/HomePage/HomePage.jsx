@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import "./HomePage.css";
-import LineChart from "../../../components/Accounting/Linechart";
+import LineChart from "../Linechart";
 import { Link } from "react-router-dom";
 
 

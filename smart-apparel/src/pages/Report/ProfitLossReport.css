@@ -1,0 +1,65 @@
+.report-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .report-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .report-section {
+    margin-bottom: 30px;
+  }
+  
+  .report-section h2 {
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+  }
+  
+  .financial-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    display: flex;
+    flex-direction: column; 
+  }
+  
+  .summary-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .report-footer {
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  #printBtn{
+    background-color: #204ee4;
+    padding: 8px;
+    margin: 10px 10px 15px 1px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 9rem;
+    height: 3rem;
+    font-size: 16px;
+}
+
+#printBtn:hover{
+    border: 2px solid #193db4;
+    color: #ffffff;
+    background-color: #0e32aa;
+    cursor: pointer;
+}
+
+#table{
+  border: 2px solid #193db4;
+  color: #ffffff;
+  background-color: #0e32aa;
+  cursor: pointer;
+}

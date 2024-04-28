@@ -3,11 +3,7 @@ import Sidebar from "../../components/Sidebar";
 import Box from "@mui/material/Box";
 import Navbar from "../../components/Navbar/Navbar";
 import BasicGrid from "../../components/Accounting/AccountingTilesGrid";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
-import HomePage from "./HomePage/HomePage";
+import HomePage from "../../components/Accounting/HomePage/HomePage";
 
 
 
