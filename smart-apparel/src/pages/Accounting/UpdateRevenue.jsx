@@ -10,12 +10,37 @@ const UpdateRevenue = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [revenueCategory, setRevenueCategory] = useState("");
+  const [chequeId, setChequeId] = useState("");
+  const [orderId, setOrderId] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [currency, setCurrency] = useState("");
+  const [status, setStatus] = useState("");
+  const [completedOrderIds, setCompletedOrderIds] = useState([]);
+
+  const fetchCompletedOrderIds = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/v1/order/completedOrderId"
+      );
+
+      if (response.data && response.data.content) {
+        setCompletedOrderIds(response.data.content);
+      }
+
+    } catch (error) {
+      console.error("Error fetching completed order IDs:", error);
+    }
+  };
+
+  // Use useEffect to fetch completed order IDs when the component mounts
+  useEffect(() => {
+    fetchCompletedOrderIds();
+  }, []);
+
 
   useEffect(() => {
+
     const fetchRevenueData = async () => {
       try {
         const response = await axios.get(
@@ -24,8 +49,9 @@ const UpdateRevenue = () => {
 
         const revenueData = response.data.content;
 
-        setRevenueCategory(revenueData.category);
-        console.log(revenueData.category);
+        setOrderId(revenueData.order_Id);
+        setChequeId(revenueData.cheque_Id);
+        setStatus(revenueData.status);
         setDate(revenueData.date);
         setDescription(revenueData.description);
         setCurrency(String(revenueData.amount)); // Convert amount to string
@@ -43,13 +69,16 @@ const UpdateRevenue = () => {
 
     const updatedRevenueData = {
       revenue_ID: id,
-      category: revenueCategory,
+      order_Id: orderId,
+      cheque_Id: chequeId,
       date: date,
       description: description,
-      amount: parseFloat(currency),
+      status: status,
+      amount: parseFloat(currency), 
     };
 
     try {
+      console.log("Updated revenue data:", updatedRevenueData);
       const response = await axios.put(
         "http://localhost:8080/api/v1/revenue/updateRevenue",
         updatedRevenueData
@@ -104,25 +133,40 @@ const UpdateRevenue = () => {
                   <div style={{ textAlign: "left" }}>
                     <div className="card-body">
                       <div className="row">
-                        <div className="col-lg-12">
+
+                      <div className="col-lg-12">
                           <div className="form-group">
-                            <label htmlFor="categorySelect">Category</label>
+                            <label htmlFor="categorySelect">Order Id</label>
                             <select
                               required
-                              id="categorySelect"
+                              id="orderId"
                               className="form-control"
-                              value={revenueCategory}
-                              onChange={(e) =>
-                                setRevenueCategory(e.target.value)
-                              }
+                              value={orderId}
+                              onChange={(e) => setOrderId(e.target.value)}
                             >
-                              <option value="">Select a category...</option>
-                              <option value="Sales Income">Sales Income</option>
-                              <option value="Rent Income">Rent Income</option>
-                              <option value="Other Income">Other Income</option>
+                              <option value="">Select an order ID...</option>
+                              {completedOrderIds.map((orderId) => (
+                                <option key={orderId} value={orderId}>
+                                  {orderId}
+                                </option>
+                              ))}
                             </select>
                           </div>
                         </div>
+
+                        <div className="col-lg-12">
+                          <div className="form-group">
+                            <label>Cheque Id</label>
+                            <input
+                              type="text"
+                              required
+                              value={chequeId}
+                              onChange={(e) => setChequeId(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
                         <div className="col-lg-12">
                           <div className="form-group">
                             <label>Date</label>
@@ -135,6 +179,7 @@ const UpdateRevenue = () => {
                             />
                           </div>
                         </div>
+
                         <div className="col-lg-12">
                           <div className="form-group">
                             <label>Description</label>
@@ -147,12 +192,29 @@ const UpdateRevenue = () => {
                             />
                           </div>
                         </div>
+
                         <div className="col-lg-12">
                           <div className="form-group">
-                            <label>Amount (Currency)</label>
+                            <label htmlFor="categorySelect">Status</label>
+                            <select
+                              required
+                              id="status"
+                              className="form-control"
+                              value={status}
+                              onChange={(e) => setStatus(e.target.value)} // Update status state
+                            >
+                              <option value="Pending">Pending</option>
+                              <option value="Successful">Successful</option>
+                              <option value="Rejected">Rejected</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div className="col-lg-12">
+                          <div className="form-group">
+                            <label>Currency</label>
                             <input
-                              type="number"
-                              step="0.01"
+                              type="text"
                               required
                               value={currency}
                               onChange={(e) => setCurrency(e.target.value)}
@@ -160,6 +222,7 @@ const UpdateRevenue = () => {
                             />
                           </div>
                         </div>
+
                         <div className="col-lg-12">
                           <div className="form-group" style={{ textAlign: "center" }}>
                             <button id="updateBtnExpense" type="submit">
