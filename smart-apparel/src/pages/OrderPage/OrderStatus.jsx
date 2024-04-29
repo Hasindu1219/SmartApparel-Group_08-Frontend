@@ -1,67 +1,50 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-//import './CustomerPage/CustomerStatus.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar';
+import './OrderStatus.css'; 
 
-const OrderStatus = ( ) => {
-  const [loading, setLoading] = useState(false);
-  const [orderId, setOrderId] = useState(''); // State to hold the orderId entered by the user
-  const [status, setStatus] = useState('');
+const OrderStatus = () => {
+  // State variables for managing loading state, order ID, and status
+  const [loading, setLoading] = useState(false); 
+  const [orderId, setOrderId] = useState(''); 
+  const [status, setStatus] = useState(''); 
 
-  const handleUpdateStatus = async () => {
-    setLoading(true);
+  // Function to handle updating order status
+  const handleUpdateStatus = async (newStatus) => {
+    setLoading(true); 
     try {
-      // Call the backend API to update order status and perform quality certification
+      // Send PUT request to update order status
       const response = await axios.put(`/api/orderstatus/updateOrderStatus/${orderId}`);
-      // Handle success response
-      console.log(response.data);
+      console.log(response.data); 
     } catch (error) {
-      // Handle error
-      console.error('Error updating order status:', error);
+      console.error('Error updating order status:', error); 
     } finally {
-      setLoading(false);
+      setLoading(false); 
     }
   };
 
   return (
-    <div className="addItemContainer">
-      <div>
-        {/* Navbar component */}
-        <Navbar />
-      </div>
-      <div className="formBodyContainer">
-        {/* Sidebar component */}
-        <Sidebar />
-        <div style={{ width: "100%", backgroundColor: "#d7e3fc", height: "100vh" }}>
-          {/* Title for Order Status */}
-          <h1
-            style={{
-              color: "black",
-              marginTop: "6rem",
-              marginLeft: "2rem",
-              fontWeight: "bold",
-            }}
-          >
-            Order Status
-          </h1>
-          {/* Order ID input */}
-          <input
-            type="text"
-            value={orderId}
-            onChange={(e) => setOrderId(e.target.value)}
-            placeholder="Enter Order ID"
-          />
-          {/* Order Status Page */}
-          <div className="OrderStatusPage">
-            <div className="Botton">
-              <button onClick={() => handleUpdateStatus('CREATED')}>Created</button>
-              <button onClick={() => handleUpdateStatus('PROCESSING')}>Processing</button>
-              <button onClick={() => handleUpdateStatus('QUALITY_CERTIFIED')}>Quality Certified</button>
-              <button onClick={() => handleUpdateStatus('SHIPPED')}>Shipped</button>
-              <button onClick={() => handleUpdateStatus('DELIVERED')}>Delivered</button>
-            </div>
-          </div>
+    <div className="CustomeHomePage">
+      <Navbar /> {/* Render Navbar component */}
+      <Sidebar /> {/* Render Sidebar component */}
+      <div className="OrderStatusContainer">
+        <h1 className="Task1">Order Status</h1>
+        {/* Input field to enter order ID */}
+        <input
+          type="text"
+          value={orderId}
+          onChange={(e) => setOrderId(e.target.value)}
+          placeholder="Enter Order ID"
+        />
+        {/* Buttons to update order status */}
+        <div className="Botton">
+          <button className="btn1" onClick={() => handleUpdateStatus('PENDING')}>Pending</button>
+          <button className="btn1" onClick={() => handleUpdateStatus('CREATED')}>Created</button>
+          <button className="btn1" onClick={() => handleUpdateStatus('PROCESSING')}>Processing</button>
+          <button className="btn1" onClick={() => handleUpdateStatus('QUALITY_CERTIFIED')}>Quality Certified</button>
+          <button className="btn1" onClick={() => handleUpdateStatus('SHIPPED')}>Shipped</button>
+          <button className="btn1" onClick={() => handleUpdateStatus('DELIVERED')}>Delivered</button>
         </div>
       </div>
     </div>

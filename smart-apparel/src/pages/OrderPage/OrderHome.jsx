@@ -1,5 +1,6 @@
 import React from 'react';
 import './OrderHome.css';
+//import '../CustomerPage/CustomerHome.css';
 import OrderHomeImage from '../../Images/OrderHome.jpg';
 import { Link } from "react-router-dom";
 
@@ -10,7 +11,7 @@ export default function OrderHome() {
         <div className="CustomeHomePage">
             <div className="Botton">
                 {/* Link to Order Registration */}
-                <Link to={`/orders/orderregister`}>
+                <Link to={`/orderregister`}>
                     <button className="btn1">
                         <p className="Task1">Register Order</p>
                     </button>
@@ -28,7 +29,7 @@ export default function OrderHome() {
                     </button>
                 </Link>
                 {/* Link to Check Inventory*/}
-                <Link to={'/checkinventory'}>
+                <Link to={'/inventorycheck'}>
                     <button className="btn1">
                         <p className="Task1">Check Inventory</p>
                     </button>

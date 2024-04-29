@@ -17,7 +17,10 @@ export default function CustomerDetails() {
   const [customerName, setCustomerName] = useState("");
   const [customerAddress, setCustomerAddress] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
+  const [customerCompanyName, setCustomerCompanyName] = useState("");
+  const [customerReference, setCustomerReference] = useState("");
   const [customerPhoneNum, setCustomerPhoneNum] = useState("");
+  const [customerPassword, setCustomerPassword] = useState("");
 
   const [error, setError] = useState("none");
 
@@ -52,7 +55,10 @@ export default function CustomerDetails() {
         setCustomerName(res.data.customerName);
         setCustomerAddress(res.data.customerAddress);
         setCustomerEmail(res.data.customerEmail);
+        setCustomerCompanyName(res.data.customerCompanyName);
+        setCustomerReference(res.data.customerReference);
         setCustomerPhoneNum(res.data.customerPhoneNum);
+        setCustomerPassword(res.data.customerPassword);
 
         setModelView("block");
         setTableView("none");
@@ -64,13 +70,13 @@ export default function CustomerDetails() {
 
   // Function to handle update button click
   const handleUpdateBtn = async () => {
-    if (!customerId || !customerName || !customerAddress || !customerEmail || !customerPhoneNum) {
+    if (!customerId || !customerName || !customerAddress || !customerEmail || !customerCompanyName || !customerReference || !customerPhoneNum || !customerPassword) {
       setError("block");
       setTimeout(() => {
         setError("none");
       }, 2000);
     } else {
-      const updateData = { customerId, customerName, customerAddress, customerEmail, customerPhoneNum };
+      const updateData = {customerId,customerName,customerAddress,customerEmail,customerCompanyName,customerReference,customerPhoneNum,customerPassword};
       await axios.put('http://localhost:8080/smart-apperal/api/customer/updatecustomer', updateData)
         .then((res) => {
           window.location.href = "/customer/customerviewdelete";
@@ -136,11 +142,33 @@ export default function CustomerDetails() {
               </div>
 
               <div className="formBox">
+                <label htmlFor="" style={{ marginRight: "4rem" }}>Customer Company Name: </label>
+                <input type="text" placeholder="Enter Customer Company Name" value={customerCompanyName} onChange={(e) => {
+                  setCustomerCompanyName(e.target.value);
+                }} />
+              </div>
+
+              <div className="formBox">
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Customer Reference: </label>
+                <input type="text" placeholder="Enter Customer Reference" value={customerReference} onChange={(e) => {
+                  setCustomerReference(e.target.value);
+                }} />
+              </div>
+
+              <div className="formBox">
                 <label htmlFor="" style={{ marginRight: "4.1rem" }}>Customer Phone Number: </label>
                 <input type="text" placeholder="Enter Customer Phone Number" value={customerPhoneNum} onChange={(e) => {
                   setCustomerPhoneNum(e.target.value);
                 }} />
               </div>
+
+              <div className="formBox">
+                <label htmlFor="" style={{ marginRight: "4rem" }}>Customer Password: </label>
+                <input type="text" placeholder="Enter Customer Password" value={customerPassword} onChange={(e) => {
+                  setCustomerPassword(e.target.value);
+                }} />
+              </div>
+
             </form>
             <div className="formButtonSection">
               <button id="backBtn" onClick={handleCloseBtn}>Close</button>
@@ -157,7 +185,10 @@ export default function CustomerDetails() {
                   <th>Customer Name</th>
                   <th>Customer Address</th>
                   <th>Customer Email</th>
+                  <th>Customer Company Name</th>
+                  <th>Customer Reference</th>
                   <th>Customer Phone Number</th>
+                  <th>Customer Password</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -169,7 +200,10 @@ export default function CustomerDetails() {
                     <td>{data.customerName}</td>
                     <td>{data.customerAddress}</td>
                     <td>{data.customerEmail}</td>
+                    <td>{data.customerCompanyName}</td>
+                    <td>{data.customerReference}</td>
                     <td>{data.customerPhoneNum}</td>
+                    <td>{data.customerPassword}</td>
                     <td>
                       <div className="tableBtn">
                         <button className="editBtn" onClick={() => handleEditBtn(data.customerID)}>Edit</button>

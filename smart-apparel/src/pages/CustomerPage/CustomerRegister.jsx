@@ -8,11 +8,15 @@ import axios from 'axios';
 
 export default function CustomerRegister() {
     // State variables
-    const [CustomerId, setCustomerId] = useState("");
-    const [CustomerName, setCustomerName] = useState("");
-    const [CustomerAddress, setCustomerAddress] = useState(0);
-    const [CustomerEmail, setCustomerEmail] = useState(0);
-    const [CustomerPhoneNum, setCustomerPhoneNum] = useState("");
+    const [customerId, setCustomerId] = useState("");
+    const [customerName, setCustomerName] = useState("");
+    const [customerAddress, setCustomerAddress] = useState(0);
+    const [customerEmail, setCustomerEmail] = useState(0);
+    const [customerCompanyName, setCustomerCompanyName] = useState(0);
+    const [customerReference, setCustomerReference] = useState(0);
+    const [customerPhoneNum, setCustomerPhoneNum] = useState("");
+    const [customerPassword, setCustomerPassword] = useState(0);
+   
 
     const [error, setError] = useState("none");
     const [errorType, setErrorType] = useState("none");
@@ -23,14 +27,14 @@ export default function CustomerRegister() {
 
     // Function to handle the Add button click
     const handleAddBtn = async () => {
-        if (!CustomerId || !CustomerName || !CustomerAddress || !CustomerEmail || !CustomerPhoneNum) {
+        if (!customerId || !customerName || !customerAddress || !customerEmail || !customerCompanyName || !customerReference || !customerPhoneNum || !customerPassword) {
             setError("block");
             setErrorType(errorMsg[0]);
             setTimeout(() => {
                 setError("none");
             }, 2000);
         } else {
-            const formData = { CustomerId, CustomerName, CustomerAddress, CustomerEmail, CustomerPhoneNum };
+            const formData = {customerId,customerName,customerAddress,customerEmail,customerCompanyName,customerReference,customerPhoneNum,customerPassword};
             await axios.post("http://localhost:8080/smart-apperal/api/customer/customerregister", formData)
                 .then((res) => {
                     alert("Successfully Registered");
@@ -91,11 +95,30 @@ export default function CustomerRegister() {
                             }} />
                         </div>
                         <div className="formBox">
+                            <label htmlFor="" style={{ marginRight: "4rem" }}>Customer Company Name: </label>
+                            <input type="text" placeholder="Enter Customer Company Name" onChange={(e) => {
+                                setCustomerCompanyName(e.target.value);
+                            }} />
+                        </div>
+                        <div className="formBox">
+                            <label htmlFor="" style={{ marginRight: "4.1rem" }}>Customer Reference: </label>
+                            <input type="text" placeholder="Enter Customer Reference" onChange={(e) => {
+                                setCustomerReference(e.target.value);
+                            }} />
+                        </div>
+                        <div className="formBox">
                             <label htmlFor="" style={{ marginRight: "6.6rem" }}>Customer Phone Number: </label>
                             <input type="text" placeholder="Enter Customer Phone Number" onChange={(e) => {
                                 setCustomerPhoneNum(e.target.value);
                             }} />
                         </div>
+                        <div className="formBox">
+                            <label htmlFor="" style={{ marginRight: "4rem" }}>Customer Password: </label>
+                            <input type="text" placeholder="Enter Customer Address" onChange={(e) => {
+                                setCustomerPassword(e.target.value);
+                            }} />
+                        </div>
+                        
                     </form>
                     {/* Form action buttons */}
                     <div className="formButtonSection">

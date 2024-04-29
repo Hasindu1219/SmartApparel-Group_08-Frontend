@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-//import './CustomerPage/CustomerRegister.css';
+import './OrderRegister.css';
 import Sidebar from '../../components/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
 import Error from '../../components/Error1/Error1';
@@ -8,11 +8,11 @@ import axios from 'axios';
 
 export default function OrderRegister() {
     // State variables
-    const [OrderId, setOrderId] = useState("");
-    const [OrderCustomerName, setOrderCustomerName] = useState("");
-    const [OrderAddress, setOrderAddress] = useState(0);
-    const [OrderEmail, setOrderEmail] = useState(0);
-    const [OrderPhoneNum, setOrderPhoneNum] = useState("");
+    const [orderId, setOrderId] = useState("");
+    const [orderCustomerName, setOrderCustomerName] = useState("");
+    const [orderAgreedPrice, setOrderAgreedPrice] = useState("");
+    const [orderSize, setOrderSize] = useState("");
+    const [orderAmount, setOrderAmount] = useState("");
 
     const [error, setError] = useState("none");
     const [errorType, setErrorType] = useState("none");
@@ -23,14 +23,14 @@ export default function OrderRegister() {
 
     // Function to handle the Add button click
     const handleAddBtn = async () => {
-        if (!OrderId || !OrderCustomerName || !OrderAddress || !OrderEmail || !OrderPhoneNum) {
+        if (!orderId || !orderCustomerName || !orderAgreedPrice || !orderSize || !orderAmount) {
             setError("block");
             setErrorType(errorMsg[0]);
             setTimeout(() => {
                 setError("none");
             }, 2000);
         } else {
-            const formData = { OrderId, OrderCustomerName, OrderAddress, OrderEmail, OrderPhoneNum };
+            const formData = { orderId,orderCustomerName,orderAgreedPrice,orderSize,orderAmount };
             await axios.post("http://localhost:8080/smart-apperal/api/order/orderregister", formData)
                 .then((res) => {
                     alert("Successfully Registered");
@@ -42,7 +42,7 @@ export default function OrderRegister() {
 
     // Function to handle the Back button click
     const handleBackBtn = () => {
-        navigate("/order");
+        navigate("/orders");
     }
 
     // Function to handle the Clear button click
@@ -78,21 +78,21 @@ export default function OrderRegister() {
                             }} />
                         </div>
                         <div className="formBox">
-                            <label htmlFor="" style={{ marginRight: "4rem" }}>Order Address: </label>
-                            <input type="text" placeholder="Enter Order Address" onChange={(e) => {
-                                setOrderAddress(e.target.value);
+                            <label htmlFor="" style={{ marginRight: "4rem" }}>Order Agreed Price: </label>
+                            <input type="text" placeholder="Enter Order Agreed Price" onChange={(e) => {
+                                setOrderAgreedPrice(e.target.value);
                             }} />
                         </div>
                         <div className="formBox">
-                            <label htmlFor="" style={{ marginRight: "4.1rem" }}>Order Email: </label>
-                            <input type="text" placeholder="Enter Order Email" onChange={(e) => {
-                                setOrderEmail(e.target.value);
+                            <label htmlFor="" style={{ marginRight: "4.1rem" }}>Order Size: </label>
+                            <input type="text" placeholder="Enter Order Size" onChange={(e) => {
+                                setOrderSize(e.target.value);
                             }} />
                         </div>
                         <div className="formBox">
-                            <label htmlFor="" style={{ marginRight: "6.6rem" }}>Order Phone Number: </label>
-                            <input type="text" placeholder="Enter Order Phone Number" onChange={(e) => {
-                                setOrderPhoneNum(e.target.value);
+                            <label htmlFor="" style={{ marginRight: "6.6rem" }}>Order Amount: </label>
+                            <input type="text" placeholder="Enter Order Amount" onChange={(e) => {
+                                setOrderAmount(e.target.value);
                             }} />
                         </div>
                     </form>

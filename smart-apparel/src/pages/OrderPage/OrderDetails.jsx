@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-//import './CustomerPage/CustomerDetails.css';
+import './OrderDetails.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Error1 from '../../components/Error1/Error1';
@@ -14,10 +14,10 @@ export default function OrderDetails() {
   const [tableView, setTableView] = useState("block");
 
   const [orderId, setOrderId] = useState("");
-  const [ordercustomerName, setOrderCustomerName] = useState("");
-  const [orderAddress, setOrderAddress] = useState("");
-  const [orderEmail, setOrderEmail] = useState("");
-  const [orderPhoneNum, setOrderPhoneNum] = useState("");
+  const [orderCustomerName, setOrderCustomerName] = useState("");
+  const [orderAgreedPrice, setOrderAgreedPrice] = useState("");
+  const [orderSize, setOrderSize] = useState("");
+  const [orderAmount, setOrderAmount] = useState("");
 
   const [error, setError] = useState("none");
 
@@ -45,14 +45,14 @@ export default function OrderDetails() {
   };
 
   // Function to handle edit button click
-  const handleEditBtn = async (customerId) => {
+  const handleEditBtn = async (orderId) => {
     await axios.get(`http://localhost:8080/smart-apperal/api/order/order/${orderId}`)
       .then((res) => {
         setOrderId(res.data.orderID);
         setOrderCustomerName(res.data.orderCustomerName);
-        setOrderAddress(res.data.orderAddress);
-        setOrderEmail(res.data.orderEmail);
-        setOrderPhoneNum(res.data.orderPhoneNum);
+        setOrderAgreedPrice(res.data.orderAgreedPrice);
+        setOrderSize(res.data.orderSize);
+        setOrderAmount(res.data.orderAmount);
 
         setModelView("block");
         setTableView("none");
@@ -64,13 +64,13 @@ export default function OrderDetails() {
 
   // Function to handle update button click
   const handleUpdateBtn = async () => {
-    if (!orderId || !ordercustomerName || !orderAddress || !orderEmail || !orderPhoneNum) {
+    if (!orderId || !orderCustomerName || !orderAgreedPrice || !orderSize || !orderAmount) {
       setError("block");
       setTimeout(() => {
         setError("none");
       }, 2000);
     } else {
-      const updateData = { orderId, ordercustomerName, orderAddress, orderEmail, orderPhoneNum };
+      const updateData = { orderId,orderCustomerName,orderAgreedPrice,orderSize,orderAmount };
       await axios.put('http://localhost:8080/smart-apperal/api/order/updateorder', updateData)
         .then((res) => {
           window.location.href = "/order/orderviewdelete";
@@ -116,29 +116,29 @@ export default function OrderDetails() {
 
               <div className="formBox">
                 <label htmlFor="" style={{ marginRight: "3.5rem" }}>Order Customer Name: </label>
-                <input type="text" placeholder="Enter Order Customer Name" value={ordercustomerName} onChange={(e) => {
+                <input type="text" placeholder="Enter Order Customer Name" value={orderCustomerName} onChange={(e) => {
                   setOrderCustomerName(e.target.value);
                 }} />
               </div>
 
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "4rem" }}>Order Address: </label>
-                <input type="text" placeholder="Enter Order Address" value={orderAddress} onChange={(e) => {
-                  setOrderAddress(e.target.value);
+                <label htmlFor="" style={{ marginRight: "4rem" }}>Order Agreed Price: </label>
+                <input type="text" placeholder="Enter Order Agreed Price" value={orderAgreedPrice} onChange={(e) => {
+                  setOrderAgreedPrice(e.target.value);
                 }} />
               </div>
 
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Order Email: </label>
-                <input type="text" placeholder="Enter Order Email" value={orderEmail} onChange={(e) => {
-                  setOrderEmail(e.target.value);
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Order Size: </label>
+                <input type="text" placeholder="Enter Order Size" value={orderSize} onChange={(e) => {
+                  setOrderSize(e.target.value);
                 }} />
               </div>
 
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Order Phone Number: </label>
-                <input type="text" placeholder="Enter Order Phone Number" value={orderPhoneNum} onChange={(e) => {
-                  setOrderPhoneNum(e.target.value);
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Order Amount: </label>
+                <input type="text" placeholder="Enter Order Phone Number" value={orderAmount} onChange={(e) => {
+                  setOrderAmount(e.target.value);
                 }} />
               </div>
             </form>
@@ -155,9 +155,9 @@ export default function OrderDetails() {
                   <th>No</th>
                   <th>Order Id</th>
                   <th>Order Customer Name</th>
-                  <th>Order Address</th>
-                  <th>Order Email</th>
-                  <th>Order Phone Number</th>
+                  <th>Order Agreed Price</th>
+                  <th>Order Size</th>
+                  <th>Order Amount</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -167,9 +167,9 @@ export default function OrderDetails() {
                     <td>{index + 1}</td>
                     <td>{data.orderID}</td>
                     <td>{data.ordercustomerName}</td>
-                    <td>{data.orderAddress}</td>
-                    <td>{data.orderEmail}</td>
-                    <td>{data.orderPhoneNum}</td>
+                    <td>{data.orderAgreedPrice}</td>
+                    <td>{data.orderSize}</td>
+                    <td>{data.orderAmount}</td>
                     <td>
                       <div className="tableBtn">
                         <button className="editBtn" onClick={() => handleEditBtn(data.orderID)}>Edit</button>
