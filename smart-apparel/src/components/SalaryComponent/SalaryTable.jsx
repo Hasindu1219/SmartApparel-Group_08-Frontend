@@ -55,7 +55,6 @@ const SalaryTable = () => {
         <div>
             <Grid container justifyContent="space-between" alignItems="center" style={{ marginBottom: '1rem' }}>
                 <Button onClick={() => { navigate('/salary/addsalary') }}>Add new Record</Button>
-                <Button onClick={() => { navigate('/salary/updatesalary') }}>Update Record</Button>
                 <TextField
                     label="Search by ID"
                     variant="outlined"

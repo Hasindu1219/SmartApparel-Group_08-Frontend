@@ -5,62 +5,70 @@ import { useNavigate } from "react-router-dom";
 
 const SalaryUpdate = ({Id}) => {
   const navigate = useNavigate();
-//   const { Id } = useParams();
 
-  // State for attendance record data and error messages
-  const [attendanceRecord, setAttendanceRecord] = useState({
-    attendanceId: '',
-    date: '',
-    inTime: '',
-    outTime: '',
-    empId: '',
+  // State for Salary record data 
+  const [salaryRecord, setSalaryRecord] = useState({
+    salaryId:'',
+    empId:'',
+    status:'',
+    yearNMonth:'',
+    basic:'',
+    epfByEmployee:'',
+    epfByCompany:'',
+    etfPayment:'',
+    netSalary:''
   });
 
+  // State for error messages
   const [errors, setErrors] = useState({});
 
 
   useEffect(() => {
-    const fetchAttendanceRecordData = async () => {
+    const fetchSalaryRecordData = async () => {
 
       try {
-        const response = await axios.get(`http://localhost:8080/attendance/search/${Id}`);
-        const fetchedAttendanceRecordData = response.data.content;
+        const response = await axios.get(`http://localhost:8080/salary/search/${Id}`);
+        const fetchedSalaryRecordData = response.data.content;
 
-        setAttendanceRecord(fetchedAttendanceRecordData);
+        setSalaryRecord(fetchedSalaryRecordData);
 
       } catch (error) {
-        console.error("Error fetching attendance data:", error);
+        console.error("Error fetching salary data:", error);
       }
      };
 
-     fetchAttendanceRecordData();
+     fetchSalaryRecordData();
   }, [Id]);
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.put("http://localhost:8080/attendance/update", attendanceRecord);
+      const response = await axios.put("http://localhost:8080/salary/update", salaryRecord);
 
       if (response.status === 202) {
-        alert("Attendance record updated successfully.");
-        navigate("/attendance");
+        alert("Salary record updated successfully.");
+        navigate("/salary");
       } else {
-        alert("Error occurred while updating attendance record.");
+        alert("Error occurred while updating salary record.");
       }
     } catch (error) {
-      alert("An error occurred while updating attendance record.");
-      console.error("attendance record update error:", error);
+      alert("An error occurred while updating salary record.");
+      console.error("salary record update error:", error);
     }
   };
 
   const handleReset = () => {
-    // Reset attendance record data to original state
-    setAttendanceRecord({
-        ...attendanceRecord,
-        attendanceId: '',
-        date: '',
-        inTime: '',
-        outTime: '',
-        empId: '',
+    // Reset Salary record data to original state
+    setSalaryRecord({
+        ...salaryRecord,
+        salaryId:'',
+        empId:'',
+        status:'',
+        yearNMonth:'',
+        basic:'',
+        epfByEmployee:'',
+        epfByCompany:'',
+        etfPayment:'',
+        netSalary:''
     });
 
     // Clear all error messages
@@ -69,8 +77,8 @@ const SalaryUpdate = ({Id}) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAttendanceRecord((prevAttendanceRecord) => ({
-      ...prevAttendanceRecord,
+    setSalaryRecord((prevSalaryRecord) => ({
+      ...prevSalaryRecord,
       [name]: value
     }));
   };
@@ -79,26 +87,26 @@ const SalaryUpdate = ({Id}) => {
   return (
     <>
       <Grid>
-        <Button onClick={() => navigate('/attendance')}>Back</Button>
+        <Button onClick={() => navigate('/salary')}>Back</Button>
       </Grid>
 
       <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'auto', display:'block'}}>
         <Grid>
-          <Typography component={'h1'} sx={{ color: '#000000', fontSize: '30px', textAlign: 'center' }}>Update Employee</Typography>
+          <Typography component={'h1'} sx={{ color: '#000000', fontSize: '30px', textAlign: 'center' }}>Update Salary</Typography>
         </Grid>
 
         {/* Render form fields */}
-        {Object.keys(attendanceRecord).map((field) => (
+        {Object.keys(salaryRecord).map((field) => (
           <Grid key={field} item sx={{ display: 'flex' }}>
             <Typography component={'label'} htmlFor={field} sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '150px', display: 'block' }}>
-              {field === 'attendanceId' ? 'Attendance ID' : field}
+              {field === 'salaryId' ? 'Salary ID' : field}
             </Typography>
             <Input
               type="text"
               name={field}
               id={field}
               sx={{ width: '400px' }}
-              value={attendanceRecord[field]}
+              value={salaryRecord[field]}
               onChange={handleChange}
             />
             <Typography sx={{ color: 'red' }}>{errors[field]}</Typography>

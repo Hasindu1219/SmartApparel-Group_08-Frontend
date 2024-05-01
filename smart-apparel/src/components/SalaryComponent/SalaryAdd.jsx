@@ -4,7 +4,7 @@ import axios from "axios";
 
 const SalaryAddPage = () => {
 
-    // States for error messages
+    // States for fields
     const [empId, setEmpId] = useState('');
     const [status, setStatus] = useState('Pending');
     const [yearNMonth, setYearNMonth] = useState('');

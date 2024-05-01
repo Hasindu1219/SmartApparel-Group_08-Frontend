@@ -7,6 +7,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import EmployeeTable4 from "../../components/EmployeeComponent/EmployeeTable4";
+import CardModel from "../../components/Card";
 
 const gradientStyle = {
   background: "linear-gradient(to right, #2980B9, #6DD5FA)", // Gradient colors

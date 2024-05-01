@@ -62,7 +62,7 @@ function App() {
         <Route path='/attendance/updateattendance/:Id' element={<AttendanceUpdatePage/>}> </Route>
         {/* routings inside Salary section */}
         <Route path='/salary/addsalary' element={<SalaryAddPage/>}></Route>
-        <Route path='/salary/updatesalary' element={<SalaryUpdatePage/>}></Route>
+        <Route path='/salary/updatesalary/:Id' element={<SalaryUpdatePage/>}></Route>
 
 
         <Route path="/suppliers" element={<Suppliers />}></Route>
