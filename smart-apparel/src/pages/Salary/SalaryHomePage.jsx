@@ -2,6 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
+import SalaryTable from "../../components/SalaryComponent/SalaryTable";
 
 export default function SalaryHomePage(){
 
@@ -14,7 +15,8 @@ export default function SalaryHomePage(){
                 <Sidebar/>
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <h1>Salary</h1>
-                    
+                    <Box height={30} />
+                    <SalaryTable/>
                 </Box>
             </Box>
         </>

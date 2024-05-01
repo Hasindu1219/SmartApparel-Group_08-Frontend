@@ -58,7 +58,7 @@ const EmployeeTable = () => {
   return (
       <div>
 
-        <Grid item sx={{ display: 'inline-flex',marginBottom: '1rem' }}>
+        <Grid container justifyContent="space-between" alignItems="center" style={{ marginBottom: '1rem' }}>
           <Button onClick={()=>{navigate('/employee/addemployee')}} >Add new Employee</Button>
 
           <TextField
@@ -66,11 +66,10 @@ const EmployeeTable = () => {
             variant="outlined"
             value={searchQuery}
             onChange={handleSearchChange}
-            sx={{marginLeft:'800px' }}
           />
         </Grid>
 
-        <TableContainer component={Paper} sx={{ maxWidth: 1200 }}>
+        <TableContainer component={Paper} container justifyContent="space-between" style={{ marginBottom: '1rem' }}>
           <Table>
             <TableHead>
               <TableRow>
