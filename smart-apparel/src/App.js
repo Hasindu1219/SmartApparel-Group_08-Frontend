@@ -38,6 +38,7 @@ import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
 
 import ReportController from './pages/Report/ReportController';
 import ReportStructure from './pages/Report/ReportStructure';
+import ProfitandLossReport from './pages/Report/ProfitandLossReport';
 
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
 
         <Route path="/report" element={<ReportController />}></Route>
         <Route path="/report/reportStructure" element={<ReportStructure />}></Route>
+        <Route path="/report/ProfitandLoss" element={<ProfitandLossReport />}></Route>
 
 
         {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}
