@@ -1,4 +1,6 @@
+
 .footer{
+    margin-top: 40rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

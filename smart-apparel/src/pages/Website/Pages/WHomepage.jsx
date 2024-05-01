@@ -1,4 +1,3 @@
-import './WHomepage.css';
 import WNavbar from '../../../components/Website/Navbar/WNavbar';
 import Hero from '../../../components/Website/Hero/Hero';
 import Popular from '../../../components/Website/Popular/Popular';
