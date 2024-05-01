@@ -54,7 +54,7 @@ export default function ReportController() {
                         image={ReportImage} 
                         title="P/L Report" 
                         content="Financial report that summarizes a company's revenues and expenses over a specific period of time"
-                        url="" />
+                        url="/report/ProfitandLoss" />
                     </div>
                     <div style={{ margin: '40px' }}>
                         <ReportCard image={ReportImage} 
