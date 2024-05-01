@@ -1,11 +1,11 @@
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
-import SalaryUpdate from "../../components/SalaryComponent/SalaryUpdate";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import SalaryUpdate from "../../components/SalaryComponent/SalaryUpdate";
 
 const SalaryUpdatePage =()=>{
-
+    const { Id } = useParams();
     const navigate = useNavigate();
     
     return (
@@ -25,7 +25,7 @@ const SalaryUpdatePage =()=>{
                     </Grid>
 
                     <Box height={30} />
-                    <SalaryUpdate/>
+                    <SalaryUpdate Id={Id}/>
                 </Box>
             </Box>
 
