@@ -24,9 +24,12 @@ import CustomerStatus from './pages/CustomerPage/CustomerStatus';
 
 import OrderRegister from './pages/OrderPage/OrderRegister';
 import OrderDetails from './pages/OrderPage/OrderDetails';
-import OrderStatus from './pages/OrderPage/OrderStatus';
+import OrderStatus from './pages/OrderPage/AddNewModel';
 import InventoryCheck from './pages/OrderPage/InventoryCheck';
 import InventoryCheckForm from './pages/OrderPage/InventoryCheckForm';
+import ModelsPage from './pages/OrderPage/ModelsPage';
+import CustomModel from './pages/OrderPage/CustomModel';
+import AddNewModel from './pages/OrderPage/AddNewModel';
 
 // import Login from './pages/Login';
 import RevenueController from './pages/Accounting/RevenueController'
@@ -90,6 +93,9 @@ function App() {
         <Route path="/orderstatus" element={<OrderStatus />} />
         <Route path="/inventorycheck" element={<InventoryCheck />} />
         <Route path="/inventorycheckform" element={<InventoryCheckForm />} />
+        <Route path="/ordermodels" element={<ModelsPage />} />
+        <Route path="/customizemodels" element={<CustomModel />} />
+        <Route path="/addNewModel" element={<AddNewModel />} />
 
         <Route path="/accounting/revenuecontroller" element={<RevenueController />}></Route>
         <Route path="/accounting/addrevenue" element={<RevenueAdd />}></Route>

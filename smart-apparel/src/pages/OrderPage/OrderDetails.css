@@ -9,6 +9,7 @@
     border-collapse: collapse;
     margin-top: 10px;
     margin: 2px auto;
+    margin-left: 3rem;
   }
   
   .custome-table th, .custome-table td {

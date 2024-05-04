@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Error1 from '../../components/Error1/Error1';
 import axios from 'axios';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 export default function OrderDetails() {
   // State variables
@@ -16,8 +17,11 @@ export default function OrderDetails() {
   const [orderId, setOrderId] = useState("");
   const [orderCustomerName, setOrderCustomerName] = useState("");
   const [orderAgreedPrice, setOrderAgreedPrice] = useState("");
-  const [orderSize, setOrderSize] = useState("");
-  const [orderAmount, setOrderAmount] = useState("");
+  const [smallSize, setSmallSize] = useState("");
+  const [mediumSize, setMediumSize] = useState("");
+  const [largeSize, setLargeSize] = useState("");
+  const [clothMaterial, setClothMaterial] = useState("");
+  const [orderStatus, setOrderStatus] = useState("");
 
   const [error, setError] = useState("none");
 
@@ -51,8 +55,11 @@ export default function OrderDetails() {
         setOrderId(res.data.orderID);
         setOrderCustomerName(res.data.orderCustomerName);
         setOrderAgreedPrice(res.data.orderAgreedPrice);
-        setOrderSize(res.data.orderSize);
-        setOrderAmount(res.data.orderAmount);
+        setSmallSize(res.data.smallSize);
+        setMediumSize(res.data.mediumSize);
+        setLargeSize(res.data.largeSize);
+        setClothMaterial(res.data.clothMaterial);
+        setOrderStatus(res.data.orderStatus);
 
         setModelView("block");
         setTableView("none");
@@ -64,13 +71,13 @@ export default function OrderDetails() {
 
   // Function to handle update button click
   const handleUpdateBtn = async () => {
-    if (!orderId || !orderCustomerName || !orderAgreedPrice || !orderSize || !orderAmount) {
+    if (!orderId || !orderCustomerName || !orderAgreedPrice || !smallSize || !mediumSize || !largeSize || !clothMaterial || !orderStatus) {
       setError("block");
       setTimeout(() => {
         setError("none");
       }, 2000);
     } else {
-      const updateData = { orderId,orderCustomerName,orderAgreedPrice,orderSize,orderAmount };
+      const updateData = { orderId,orderCustomerName,orderAgreedPrice,smallSize,mediumSize,largeSize,clothMaterial,orderStatus };
       await axios.put('http://localhost:8080/smart-apperal/api/order/updateorder', updateData)
         .then((res) => {
           window.location.href = "/order/orderviewdelete";
@@ -129,18 +136,37 @@ export default function OrderDetails() {
               </div>
 
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Order Size: </label>
-                <input type="text" placeholder="Enter Order Size" value={orderSize} onChange={(e) => {
-                  setOrderSize(e.target.value);
+                            <label htmlFor="" style={{ marginLeft: "4.1rem" }}>Order Size</label>
+              </div>
+
+              <div className="formBox">
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Small Size: </label>
+                <input type="text" placeholder="Enter Small Size" value={smallSize} onChange={(e) => {
+                  setSmallSize(e.target.value);
                 }} />
               </div>
 
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Order Amount: </label>
-                <input type="text" placeholder="Enter Order Phone Number" value={orderAmount} onChange={(e) => {
-                  setOrderAmount(e.target.value);
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Medium Size: </label>
+                <input type="text" placeholder="Enter Medium Size" value={mediumSize} onChange={(e) => {
+                  setMediumSize(e.target.value);
                 }} />
               </div>
+
+              <div className="formBox">
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Large Size: </label>
+                <input type="text" placeholder="Enter Lerge Size" value={largeSize} onChange={(e) => {
+                  setLargeSize(e.target.value);
+                }} />
+              </div>
+
+              <div className="formBox">
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Cloth Material: </label>
+                <input type="text" placeholder="Enter Cloth Material" value={clothMaterial} onChange={(e) => {
+                  setClothMaterial(e.target.value);
+                }} />
+              </div>
+              {/* Cloth Material drop down */}
             </form>
             <div className="formButtonSection">
               <button id="backBtn" onClick={handleCloseBtn}>Close</button>
@@ -156,8 +182,11 @@ export default function OrderDetails() {
                   <th>Order Id</th>
                   <th>Order Customer Name</th>
                   <th>Order Agreed Price</th>
-                  <th>Order Size</th>
-                  <th>Order Amount</th>
+                  <th>Cloth Material</th>
+                  <th>Small Size</th>
+                  <th>Medium Size</th>
+                  <th>Large Size</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -168,14 +197,34 @@ export default function OrderDetails() {
                     <td>{data.orderID}</td>
                     <td>{data.ordercustomerName}</td>
                     <td>{data.orderAgreedPrice}</td>
-                    <td>{data.orderSize}</td>
-                    <td>{data.orderAmount}</td>
+                    <td>{data.clothMaterial}</td>
+                    <td>{data.smallSize}</td>
+                    <td>{data.mediumSize}</td>
+                    <td>{data.largeSize}</td>
+                    <td>{data.orderStatus}
+                    <Dropdown>
+                      {/* <Dropdown.Toggle onChange={(e) => {setClothMaterial(e.target.value);}}>
+                        Select Material
+                      </Dropdown.Toggle> */}
+
+                      <Dropdown.Menu onChange={(e) => {setOrderStatus(e.target.value);}}>
+                        <Dropdown.Item>Pending</Dropdown.Item>
+                        <Dropdown.Item>Started</Dropdown.Item>
+                        <Dropdown.Item>Processing</Dropdown.Item>
+                        <Dropdown.Item>Quality Certified</Dropdown.Item>
+                        <Dropdown.Item>Shipped</Dropdown.Item>
+                        <Dropdown.Item>Delivered</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    </td>
                     <td>
                       <div className="tableBtn">
                         <button className="editBtn" onClick={() => handleEditBtn(data.orderID)}>Edit</button>
                         <button className="deleteBtn" onClick={() => handleDeleteBtn(data.orderID)}>Delete</button>
                       </div>
                     </td>
+                    {/* Add row for Order status */}
+
                   </tr>
                 ))}
               </tbody>

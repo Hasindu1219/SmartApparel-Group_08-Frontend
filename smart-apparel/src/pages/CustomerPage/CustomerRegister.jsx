@@ -72,7 +72,7 @@ export default function CustomerRegister() {
                         {/* Form input fields */}
                         <div className="formBox">
                             <label htmlFor="" style={{ marginRight: "3.5rem" }}>Customer ID: </label>
-                            <input type="text" placeholder="Enter Customer Id" onChange={(e) => {
+                            <input type="number" placeholder="Enter Customer Id" onChange={(e) => {
                                 setCustomerId(e.target.value);
                             }} />
                         </div>
@@ -108,7 +108,7 @@ export default function CustomerRegister() {
                         </div>
                         <div className="formBox">
                             <label htmlFor="" style={{ marginRight: "6.6rem" }}>Customer Phone Number: </label>
-                            <input type="text" placeholder="Enter Customer Phone Number" onChange={(e) => {
+                            <input type="number" placeholder="Enter Customer Phone Number" onChange={(e) => {
                                 setCustomerPhoneNum(e.target.value);
                             }} />
                         </div>

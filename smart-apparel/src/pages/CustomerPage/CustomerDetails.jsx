@@ -26,7 +26,7 @@ export default function CustomerDetails() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080/smart-apperal/api/customer/customer')
+      .get('http://localhost:8080/customer/customer')
       .then((res) => {
         setTableData(res.data);
       })
