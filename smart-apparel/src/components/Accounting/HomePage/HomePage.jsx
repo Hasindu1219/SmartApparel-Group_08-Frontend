@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import "./HomePage.css";
-import LineChart from "../../../components/Accounting/Linechart";
+import LineChart from "../Linechart";
 import { Link } from "react-router-dom";
 
 
@@ -21,12 +21,6 @@ export default function HomePage() {
           <div className="Bottons">
             <Link to="/accounting/expensecontroller" className="btns">
               <p className="Task">Manage Expenses</p>
-            </Link>
-          </div>
-
-          <div className="Bottons">
-            <Link to="/accounting/updateexpense" className="btns">
-              <p className="Task">Generate Reports</p>
             </Link>
           </div>
 

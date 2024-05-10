@@ -87,7 +87,7 @@ const RevenueController = () => {
                 <tbody>
                   {revenuedata.map((item) => (
                     <tr key={item.revenue_ID}>
-                      <td>{item.revenue_ID}</td>          
+                      <td>{item.revenue_ID}</td>  
                       <td>{item.order_Id}</td>
                       <td>{item.cheque_Id}</td>
                       <td>{item.date}</td>

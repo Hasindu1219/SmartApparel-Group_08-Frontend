@@ -74,15 +74,13 @@ export default function Overview() {
         <Box component="main" sx={{ flexGrow: 1, p: 3 ,backgroundColor: "#d7e3fc"}} >
           <h1>Home</h1>
           <Grid container spacing={7}>
-            <CardModel totalvalue={totalExpense} cardname={"Total Expenses"} style={gradientStyle}  />
-            <CardModel totalvalue={totalRevenue} cardname={"Total Revenue"} style={gradientStyle} />
-            <CardModel totalvalue={789546} cardname={"Total Receivables"} style={gradientStyle} />
-            <CardModel totalvalue={150000} cardname={"Total Expenses"} style={gradientStyle2}  />
-            <CardModel totalvalue={445200} cardname={"Total Revenue"} style={gradientStyle2} />
-            <CardModel totalvalue={789546} cardname={"Total Receivables"} style={gradientStyle2} />
-            <CardModel totalvalue={150000} cardname={"Total Expenses"} style={gradientStyle3}  />
-            <CardModel totalvalue={445200} cardname={"Total Revenue"} style={gradientStyle3} />
-            <CardModel totalvalue={789546} cardname={"Total Receivables"} style={gradientStyle3} />
+            <CardModel totalvalue={(totalExpense/1000)+"Mn"} cardname={"Total Expenses"} style={gradientStyle}  />
+            <CardModel totalvalue={(totalRevenue/1000)+"Mn"} cardname={"Total Revenue"} style={gradientStyle} />
+            <CardModel totalvalue={789456/1000+"Mn"} cardname={"Total Receivables"} style={gradientStyle} />
+            <CardModel totalvalue={50} cardname={"Total Employees"} style={gradientStyle2}  />
+            <CardModel totalvalue={27} cardname={"Total Customers"} style={gradientStyle2} />
+            <CardModel totalvalue={17} cardname={"Total Suppliers"} style={gradientStyle2} />
+            <CardModel totalvalue={22+"/"+25} cardname={"Order Completion"} style={gradientStyle3}  />
           </Grid>
         </Box>
       </Box>
