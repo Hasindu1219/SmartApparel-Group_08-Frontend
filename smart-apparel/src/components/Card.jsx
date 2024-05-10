@@ -16,7 +16,7 @@ const CardModel = ({ totalvalue,cardname,style, loading }) => {
           {loading ? (
             <CircularProgress /> // Display loading indicator while loading is true
           ) : (
-            <Typography variant="h5">{`${totalvalue / 1000000} Mn`}</Typography>
+            <Typography variant="h5">{`${totalvalue} `}</Typography>
           )}
         </CardContent>
       </MuiCard>
