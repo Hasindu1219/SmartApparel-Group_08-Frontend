@@ -1,26 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import './ProfitLossReport.css'; // Import CSS for styling
+import Box from "@mui/material/Box";
+import { Padding } from "@mui/icons-material";
 
-const ReportStructure = () => {
+
+const ReportStructureforSalary = () => {
+
   const [revenuedata, setRevenueData] = useState([]);
   const [expensedata, setExpenseData] = useState([]);
   const [totalRevenueAmount, setTotalRevenueAmount] = useState(0);
   const [totalExpenseAmount, setTotalExpenseAmount] = useState(0);
 
   const handlePrint = () => {
-    // Hide other sections before printing
-    document.querySelectorAll('.hide-on-print').forEach(section => {
-      section.style.display = 'none';
-    });
-
-    // Trigger print
     window.print();
-
-    // Restore display styles after printing
-    document.querySelectorAll('.hide-on-print').forEach(section => {
-      section.style.display = 'block';
-    });
   };
 
   useEffect(() => {
@@ -76,10 +69,12 @@ const ReportStructure = () => {
       </section>
 
       <h2>Financial Summary</h2>
+      
 
-      <section className="printable-section">
+      <Box sx={{ display: "flex" }}>
         <div className="container">
           <div className="card">
+            <Box height={30} />
             <div className="card-body">
               <table className="table borderless">
                 <thead className="bg-dark text-white">
@@ -100,11 +95,12 @@ const ReportStructure = () => {
             </div>
           </div>
         </div>
-      </section>
+      </Box>
 
-      <section className="printable-section">
+      <Box sx={{ display: "flex" }}>
         <div className="container">
           <div className="card">
+            <Box height={30} />
             <div className="card-body">
               <table className="table borderless">
                 <thead className="bg-dark text-white">
@@ -125,12 +121,14 @@ const ReportStructure = () => {
             </div>
           </div>
         </div>
-      </section>
+      </Box>
 
-      <section className="report-section">
-        <p style={{ textAlign: "right", fontSize: 25 }}>Net Profit: <b>Rs.{totalRevenueAmount - totalExpenseAmount}</b></p>
+      <Box height={30} />
+      <section className="report-section" sx={{Padding:50}}>
+        <p style={{ textAlign: "right",fontSize: 25}}>Net Profit: <b>Rs.{totalRevenueAmount - totalExpenseAmount}</b></p>
       </section>
      
+      <Box height={30} />
       <section className="report-section">
         <h2>Key Metrics</h2>
         <p>The Profit and Loss (P & L) account, also known as the income statement, summarizes a company's financial performance over a specific period, usually a fiscal year. It presents the revenues generated from sales and other sources against the expenses incurred to generate those revenues.</p>
@@ -142,11 +140,11 @@ const ReportStructure = () => {
       </footer>
 
       {/* Print button */}
-      <button className="print-button hide-on-print" id="printBtn" onClick={handlePrint}>
+      <button className="print-button" id="printBtn" onClick={handlePrint}>
         Print Report
       </button>
     </div>
   );
 };
 
-export default ReportStructure;
+export default ReportStructureforSalary;

@@ -24,12 +24,6 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="Bottons">
-            <Link to="/accounting/updateexpense" className="btns">
-              <p className="Task">Generate Reports</p>
-            </Link>
-          </div>
-
         </div>
           <LineChart />
       </div>
