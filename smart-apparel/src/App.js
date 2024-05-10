@@ -24,9 +24,8 @@ import CustomerStatus from './pages/CustomerPage/CustomerStatus';
 
 import OrderRegister from './pages/OrderPage/OrderRegister';
 import OrderDetails from './pages/OrderPage/OrderDetails';
-import OrderStatus from './pages/OrderPage/AddNewModel';
-import InventoryCheck from './pages/OrderPage/InventoryCheck';
-import InventoryCheckForm from './pages/OrderPage/InventoryCheckForm';
+import CheckInventory from './pages/OrderPage/CheckInventory';
+import InventoryChecked from './pages/OrderPage/InventoryChecked';
 import ModelsPage from './pages/OrderPage/ModelsPage';
 import CustomModel from './pages/OrderPage/CustomModel';
 import AddNewModel from './pages/OrderPage/AddNewModel';
@@ -90,9 +89,8 @@ function App() {
 
         <Route path="/orderregister" element={<OrderRegister />} />
         <Route path="/orderdetails" element={<OrderDetails />} />
-        <Route path="/orderstatus" element={<OrderStatus />} />
-        <Route path="/inventorycheck" element={<InventoryCheck />} />
-        <Route path="/inventorycheckform" element={<InventoryCheckForm />} />
+        <Route path="/checkinventory" element={<CheckInventory />} />
+        <Route path="/inventorychecked" element={<InventoryChecked />} />
         <Route path="/ordermodels" element={<ModelsPage />} />
         <Route path="/customizemodels" element={<CustomModel />} />
         <Route path="/addNewModel" element={<AddNewModel />} />

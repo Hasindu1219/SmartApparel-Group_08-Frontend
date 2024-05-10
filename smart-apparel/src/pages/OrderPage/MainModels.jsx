@@ -14,15 +14,19 @@ export default function MainModels() {
     navigate("/addNewModel");
   };
 
+  const handleRegisterOrder = (modelName) => {
+    navigate('/orderregister', { state: { modelName } });
+  };
+
   return (
     <div>
         <div class = "frame1">
-            <CustomModel mainText='Button Dress' Image={ButtonDressImage}/>
-            <CustomModel mainText='Zipper Dress' Image={ZipperDressImage}/>
+            <CustomModel mainText='Button Dress' Image={ButtonDressImage} onRegisterOrder={handleRegisterOrder}/>
+            <CustomModel mainText='Zipper Dress' Image={ZipperDressImage} onRegisterOrder={handleRegisterOrder}/>
         </div>
         <div class = "frame1">
-            <CustomModel mainText='Short Skirt' Image={ShortSkirtImage}/>
-            <CustomModel mainText='Tide Skirt' Image={TideSkirtImage}/>
+            <CustomModel mainText='Short Skirt' Image={ShortSkirtImage} onRegisterOrder={handleRegisterOrder}/>
+            <CustomModel mainText='Tide Skirt' Image={TideSkirtImage} onRegisterOrder={handleRegisterOrder}/>
         </div> 
         <div class = "frame1">
         <button

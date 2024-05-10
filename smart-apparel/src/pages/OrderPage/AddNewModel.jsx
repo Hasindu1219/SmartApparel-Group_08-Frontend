@@ -5,6 +5,8 @@ import Sidebar from "../../components/Sidebar";
 import Error from "../../components/Error1/Error1";
 import "./AddNewModel.css";
 import { useNavigate } from "react-router-dom";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function AddNewModel() {
   // State variables
@@ -19,6 +21,7 @@ export default function AddNewModel() {
   const [error, setError] = useState("none");
   const [errorType, setErrorType] = useState("none");
   const errorMsg = ["All fields are required"];
+  const [file, setFile] = useState();
 
   // Navigate between routes
   const navigate = useNavigate();
@@ -28,6 +31,8 @@ export default function AddNewModel() {
     if (
       !modelName ||
       !modelImage ||
+      !clothMaterial ||
+      !clothAmount ||
       !buttonAmount ||
       !zipperAmount ||
       !elasticAmount
@@ -41,6 +46,8 @@ export default function AddNewModel() {
       const formData = {
         modelName,
         modelImage,
+        clothMaterial,
+        clothAmount,
         buttonAmount,
         zipperAmount,
         elasticAmount,
@@ -69,6 +76,11 @@ export default function AddNewModel() {
     window.location.reload();
   };
 
+  function handleChange(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
+
   return (
     <div className="addItemContainer">
       <div>
@@ -91,91 +103,152 @@ export default function AddNewModel() {
           <form action="">
             {/* Form input fields */}
             <div className="formBox">
-              <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
-              Model Name
-              </label>
-              <input
-                type="text"
-                placeholder="Enter Model Name"
-                onChange={(e) => {
-                  setModelName(e.target.value);
-                }}
-              />
-            </div>
-            <div className="formBox">
-              <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
-              Model Image
-              </label>
-              {/* <input
-                type="text"
-                placeholder="Enter Order Customer Name"
-                onChange={(e) => {
-                  setOrderCustomerName(e.target.value);
-                }}
-              /> */}
-              {/* Add 4to as PDF with both front and back views*/}
-
-            </div>
-            <div>
-              <label htmlFor="" style={{ marginLeft: "1rem", display: "grid" }}>
-              Cloth Material with Colour
-              </label>
-              <input
-                type="text"
-                placeholder="Enter cloth material with colour"
-                onChange={(e) => {
-                  setClothMaterial(e.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <label htmlFor="" style={{ marginLeft: "1rem", display: "grid" }}>
-              Cloth Amount
-              </label>
-              <input
-                type="number"
-                placeholder="Enter Average amount of cloth in meters"
-                onChange={(e) => {
-                  setClothAmount(e.target.value);
-                }}
-              />
-            </div>
-            <div className="formBox">
-              <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
-              Button Amount
-              </label>
-              <input
-                type="number"
-                placeholder="Enter Average amount of Buttons"
-                onChange={(e) => {
-                  setButtonAmount(e.target.value);
-                }}
-              />
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                    Model Name
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="text"
+                    placeholder="Enter Model Name"
+                    onChange={(e) => {
+                      setModelName(e.target.value);
+                    }}
+                  />
+                </Col>
+              </Row>
             </div>
 
-            <div>
-              <label htmlFor="" style={{ marginLeft: "1rem", display: "grid" }}>
-              Zipper Amount
-              </label>
-              <input
-                type="number"
-                placeholder="Enter Average amount of Zippers"
-                onChange={(e) => {
-                  setZipperAmount(e.target.value);
-                }}
-              />
+            <div className="formBox">
+              <Row>
+                <p  style={{ color: "red"}}>Insert image with both front and back view.</p>
+                <Col xs={2}>
+                  {" "}
+                  <label htmlFor="imageUpload" style={{ marginLeft: "0.1rem" }}>
+                    Model Image
+                  </label>
+                </Col>
+                <Col >
+                  <input type="file" onChange={handleChange} 
+                  // placeholder="Insert image with both front and back view."
+                  />
+                  <img src={file} style={{ width: "50%", height: "70%"}} />
+                </Col>
+              </Row>
             </div>
-            <div>
-              <label htmlFor="" style={{ marginLeft: "1rem", display: "grid" }}>
-              Elastic Amount
-              </label>
-              <input
-                type="number"
-                placeholder="Enter Average amount of elastic in meters"
-                onChange={(e) => {
-                  setElasticAmount(e.target.value);
-                }}
-              />
+
+            <div className="formBox">
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label
+                    htmlFor=""
+                    style={{ marginLeft: "0.1rem", display: "grid" }}
+                  >
+                    Cloth Material with Colour
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="text"
+                    placeholder="Enter cloth material with colour"
+                    onChange={(e) => {
+                      setClothMaterial(e.target.value);
+                    }}
+                  />
+                </Col>
+              </Row>
+            </div>
+
+            <div className="formBox">
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label
+                    htmlFor=""
+                    style={{ marginLeft: "0.1rem", display: "grid" }}
+                  >
+                    Cloth Amount
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="number"
+                    placeholder="Enter Average amount of cloth in meters per one"
+                    onChange={(e) => {
+                      setClothAmount(e.target.value);
+                    }}
+                  />
+                </Col>
+              </Row>
+            </div>
+
+            <div className="formBox">
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                    Button Amount
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="number"
+                    placeholder="Enter Average amount of Buttons per one"
+                    onChange={(e) => {
+                      setButtonAmount(e.target.value);
+                    }}
+                  />
+                </Col>
+              </Row>
+            </div>
+
+            <div className="formBox">
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label
+                    htmlFor=""
+                    style={{ marginLeft: "0.1rem", display: "grid" }}
+                  >
+                    Zipper Amount
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="number"
+                    placeholder="Enter Average amount of Zippers per one"
+                    onChange={(e) => {
+                      setZipperAmount(e.target.value);
+                    }}
+                  />
+                </Col>
+              </Row>
+            </div>
+            <div className="formBox">
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label
+                    htmlFor=""
+                    style={{ marginLeft: "0.1rem", display: "grid" }}
+                  >
+                    Elastic Amount
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="number"
+                    placeholder="Enter Average amount of elastic in meters per one"
+                    onChange={(e) => {
+                      setElasticAmount(e.target.value);
+                    }}
+                  />
+                </Col>
+              </Row>
             </div>
           </form>
           {/* Form action buttons */}

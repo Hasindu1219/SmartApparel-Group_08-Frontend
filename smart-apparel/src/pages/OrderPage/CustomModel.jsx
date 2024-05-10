@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 export default function CustomModel({
   mainText = "main text",
   Image = "image",
-  })
-
-  {
+  onRegisterOrder,
+}) {
   const navigate = useNavigate();
 
   const handleRegisterOrderBtn = () => {
-    navigate("/orderregister");
+    // navigate("/orderregister");
+    onRegisterOrder(mainText);
   };
 
   return (

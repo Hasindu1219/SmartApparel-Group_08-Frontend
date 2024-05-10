@@ -25,9 +25,31 @@ export default function OrderDetails() {
 
   const [error, setError] = useState("none");
 
+  // const [data, setData] = useState([]);
+
+
+
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/smart-apperal/api/orders/orders');
+      setTableData(response.data); // Assuming response.data is an array of objects
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+
+
+
+
   useEffect(() => {
     axios
-      .get('http://localhost:8080/smart-apperal/api/order/order')
+      .get('http://localhost:8080/smart-apperal/api/orders/orders')
       .then((res) => {
         setTableData(res.data);
       })
@@ -38,7 +60,7 @@ export default function OrderDetails() {
 
   // Function to handle delete button click
   const handleDeleteBtn = async (orderId) => {
-    await axios.delete(`http://localhost:8080/smart-apperal/api/order/deleteOrder/${orderId}`)
+    await axios.delete(`http://localhost:8080/smart-apperal/api/orders/deleteOrder/${orderId}`)
       .then((res) => {
         setDeleteOrder(true);
         alert("Delete Successfully");
@@ -50,7 +72,7 @@ export default function OrderDetails() {
 
   // Function to handle edit button click
   const handleEditBtn = async (orderId) => {
-    await axios.get(`http://localhost:8080/smart-apperal/api/order/order/${orderId}`)
+    await axios.get(`http://localhost:8080/smart-apperal/api/orders/orders/${orderId}`)
       .then((res) => {
         setOrderId(res.data.orderID);
         setOrderCustomerName(res.data.orderCustomerName);
@@ -78,7 +100,7 @@ export default function OrderDetails() {
       }, 2000);
     } else {
       const updateData = { orderId,orderCustomerName,orderAgreedPrice,smallSize,mediumSize,largeSize,clothMaterial,orderStatus };
-      await axios.put('http://localhost:8080/smart-apperal/api/order/updateorder', updateData)
+      await axios.put('http://localhost:8080/smart-apperal/api/orders/updateorder', updateData)
         .then((res) => {
           window.location.href = "/order/orderviewdelete";
         })
@@ -90,7 +112,7 @@ export default function OrderDetails() {
 
   // Function to handle close button click
   const handleCloseBtn = () => {
-    window.location.href = "/order/orderviewdelete";
+    window.location.href = "/orders/orderviewdelete";
   };
 
   return (
@@ -216,6 +238,14 @@ export default function OrderDetails() {
                         <Dropdown.Item>Delivered</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
+                    {/* <select>
+                    <option value="Pending">Pending</option>
+                    <option value="Started">Started</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Quality Certified">Quality Certified</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                  </select> */}
                     </td>
                     <td>
                       <div className="tableBtn">

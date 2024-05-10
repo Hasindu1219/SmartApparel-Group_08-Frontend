@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./OrderRegister.css";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
@@ -7,6 +7,7 @@ import Error from "../../components/Error1/Error1";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import CheckInventory from "./CheckInventory";
 
 export default function OrderRegister() {
   // State variables
@@ -24,6 +25,11 @@ export default function OrderRegister() {
 
   // Navigate between routes
   const navigate = useNavigate();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+   // Get model name from location state
+   const location = useLocation();
+   const modelName = location.state?.modelName || "";
 
   // Function to handle the Add button click
   const handleAddBtn = async () => {
@@ -31,6 +37,7 @@ export default function OrderRegister() {
       !orderId ||
       !orderCustomerName ||
       !orderAgreedPrice ||
+      !modelName ||
       !smallSize ||
       !mediumSize ||
       !largeSize ||
@@ -46,6 +53,7 @@ export default function OrderRegister() {
         orderId,
         orderCustomerName,
         orderAgreedPrice,
+        modelName,
         smallSize,
         mediumSize,
         largeSize,
@@ -67,7 +75,7 @@ export default function OrderRegister() {
 
   // Function to handle the Back button click
   const handleBackBtn = () => {
-    navigate("/orders");
+    navigate("/ordermodels");
   };
 
   // Function to handle the Clear button click
@@ -100,153 +108,190 @@ export default function OrderRegister() {
               <Row>
                 <Col xs={2}>
                   {" "}
-                  <label htmlFor="" style={{ marginRight: "0.1rem" }}>
-                    Order ID
+                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                    Order Id
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="number"
+                    placeholder="Enter Order Id"
+                    onChange={(e) => {
+                      setOrderId(e.target.value);
+                    }}
+                  />
+                </Col>
+              </Row>
+            </div>
+
+            <div className="formBox">
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                    Order Customer Name
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="text"
+                    placeholder="Enter Order Customer Name"
+                    onChange={(e) => {
+                      setOrderCustomerName(e.target.value);
+                    }}
+                  />
+                </Col>
+              </Row>
+            </div>
+
+            <div className="formBox">
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                    Order Agreed Price
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="number"
+                    placeholder="Enter Order Agreed Price"
+                    onChange={(e) => {
+                      setOrderAgreedPrice(e.target.value);
+                    }}
+                  />
+                </Col>
+              </Row>
+            </div>
+
+            <div className="formBox">
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                    Model Name
                   </label>
                 </Col>
                 <Col>
                 <input
-                type="number"
-                placeholder="Enter Order Id"
-                onChange={(e) => {
-                  setOrderId(e.target.value);
-                }}
-              /></Col>
+                    type="text"
+                    value={modelName} // Set the value to the modelName state
+                    disabled // Make the input field disabled to prevent user input
+                  />
+                </Col>
+              </Row>
+            </div>
+
+
+            <div className="formBox">
+              <Row>
+                {/* <Col xs={2}> */}{" "}
+                <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                  Order Size
+                </label>
+                {/* </Col> */}
               </Row>
             </div>
 
             <div className="formBox">
-                <Row>
+              <Row>
                 <Col xs={2}>
                   {" "}
-              <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
-                Order Customer Name
-              </label>
-              </Col>
-              <Col>
-              <input
-                type="text"
-                placeholder="Enter Order Customer Name"
-                onChange={(e) => {
-                  setOrderCustomerName(e.target.value);
-                }}
-              /></Col>
+                  <label
+                    htmlFor=""
+                    style={{ marginLeft: "1rem", display: "grid" }}
+                  >
+                    Small Size
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="number"
+                    placeholder="Enter Amount"
+                    onChange={(e) => {
+                      setSmallSize(e.target.value);
+                    }}
+                  />
+                </Col>
               </Row>
             </div>
 
             <div className="formBox">
-            <Row>
+              <Row>
                 <Col xs={2}>
                   {" "}
-              <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
-                Order Agreed Price
-              </label>
-              </Col>
-              <Col>
-              <input
-                type="number"
-                placeholder="Enter Order Agreed Price"
-                onChange={(e) => {
-                  setOrderAgreedPrice(e.target.value);
-                }}
-              /></Col>
+                  <label
+                    htmlFor=""
+                    style={{ marginLeft: "1rem", display: "grid" }}
+                  >
+                    Medium Size
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="number"
+                    placeholder="Enter Amount"
+                    onChange={(e) => {
+                      setMediumSize(e.target.value);
+                    }}
+                  />
+                </Col>
               </Row>
             </div>
 
             <div className="formBox">
-            <Row>
-                {/* <Col xs={2}> */}
-                  {" "}
-              <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
-                Order Size
-              </label>
-              {/* </Col> */}
-              </Row>
-            </div>
-
-            <div>
-            <Row>
+              <Row>
                 <Col xs={2}>
                   {" "}
-              <label htmlFor="" style={{ marginLeft: "1rem", display: "grid" }}>
-                Small Size
-              </label>
-              </Col>
-              <Col>
-              <input
-                type="number"
-                placeholder="Enter Amount"
-                onChange={(e) => {
-                  setSmallSize(e.target.value);
-                }}
-              /></Col>
-              </Row>
-            </div>
-
-            <div>
-            <Row>
-                <Col xs={2}>
-                  {" "}
-              <label htmlFor="" style={{ marginLeft: "1rem", display: "grid" }}>
-                Medium Size
-              </label>
-              </Col>
-              <Col>
-              <input
-                type="number"
-                placeholder="Enter Amount"
-                onChange={(e) => {
-                  setMediumSize(e.target.value);
-                }}
-              /></Col>
-              </Row>
-            </div>
-
-            <div>
-            <Row>
-                <Col xs={2}>
-                  {" "}
-              <label htmlFor="" style={{ marginLeft: "1rem", display: "grid" }}>
-                Large Size
-              </label>
-              </Col>
-              <Col>
-              <input
-                type="number"
-                placeholder="Enter Amount"
-                onChange={(e) => {
-                  setLargeSize(e.target.value);
-                }}
-              /></Col>
+                  <label
+                    htmlFor=""
+                    style={{ marginLeft: "1rem", display: "grid" }}
+                  >
+                    Large Size
+                  </label>
+                </Col>
+                <Col>
+                  <input
+                    type="number"
+                    placeholder="Enter Amount"
+                    onChange={(e) => {
+                      setLargeSize(e.target.value);
+                    }}
+                  />
+                </Col>
               </Row>
             </div>
 
             <div className="formBox">
-            <Row>
+              <Row>
                 <Col xs={2}>
                   {" "}
-              <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
-                Cloth Material
-              </label>
-              </Col>
-              <Col>
-              <select id="cloth-material" onChange={(e) => {
-            setClothMaterial(e.target.value);
-          }}>
-            <option value="Cotton-Red">Cotton-Red</option>
-            <option value="Cotton-Green">Cotton-Green</option>
-            <option value="Cotton-Purple">Cotton-Purple</option>
-            <option value="Cotton-Blue">Cotton-Blue</option>
-            <option value="Linen-Red">Linen-Red</option>
-            <option value="Linen-Green">Linen-Green</option>
-            <option value="Linen-Purple">Linen-Purple</option>
-            <option value="Linen-Blue">Linen-Blue</option>
-            <option value="Lace-Red">Lace-Red</option>
-            <option value="Lace-Green">Lace-Green</option>
-            <option value="Lace-Purple">Lace-Purple</option>
-            <option value="Lace-Blue">Lace-Blue</option>
-          </select></Col>
-          </Row>
+                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                    Cloth Material
+                  </label>
+                </Col>
+                <Col>
+                  <select
+                    id="cloth-material"
+                    onChange={(e) => {
+                      setClothMaterial(e.target.value);
+                    }}
+                  >
+                    <option value="Cotton-Red">Cotton-Red</option>
+                    <option value="Cotton-Green">Cotton-Green</option>
+                    <option value="Cotton-Purple">Cotton-Purple</option>
+                    <option value="Cotton-Blue">Cotton-Blue</option>
+                    <option value="Linen-Red">Linen-Red</option>
+                    <option value="Linen-Green">Linen-Green</option>
+                    <option value="Linen-Purple">Linen-Purple</option>
+                    <option value="Linen-Blue">Linen-Blue</option>
+                    <option value="Lace-Red">Lace-Red</option>
+                    <option value="Lace-Green">Lace-Green</option>
+                    <option value="Lace-Purple">Lace-Purple</option>
+                    <option value="Lace-Blue">Lace-Blue</option>
+                  </select>
+                </Col>
+              </Row>
             </div>
           </form>
           {/* Form action buttons */}
@@ -257,7 +302,8 @@ export default function OrderRegister() {
             <button id="clearBtn" onClick={handleClearBtn}>
               Clear
             </button>
-            <button id="addBtn" onClick={handleAddBtn}>
+            <CheckInventory/>
+            <button id="addBtn" onClick={handleAddBtn} disabled={isButtonDisabled}>
               Register
             </button>
           </div>
