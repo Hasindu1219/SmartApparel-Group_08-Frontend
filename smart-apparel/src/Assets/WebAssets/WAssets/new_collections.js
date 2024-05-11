@@ -27,7 +27,7 @@ let new_collections = [
   {
     id: 3,
     name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    image: B1.jpg,
+    image: B1,
     description:"Lorem ipsum dolor sit, amet consectetur adipisicing.",
     new_price: 85.0,
     old_price: 120.5,
@@ -35,7 +35,7 @@ let new_collections = [
   {
     id: 4,
     name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    image: B2.jpg,
+    image: B2,
     description:"Lorem ipsum dolor sit, amet consectetur adipisicing.",
     new_price: 85.0,
     old_price: 120.5,
@@ -43,7 +43,7 @@ let new_collections = [
   {
     id: 5,
     name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    image: F1.jpg,
+    image: F1,
     description:"Lorem ipsum dolor sit, amet consectetur adipisicing.",
     new_price: 85.0,
     old_price: 120.5,
@@ -51,7 +51,7 @@ let new_collections = [
   {
     id: 6,
     name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    image: F2.jpg,
+    image: F2,
     description:"Lorem ipsum dolor sit, amet consectetur adipisicing.",
     new_price: 85.0,
     old_price: 120.5,
@@ -59,7 +59,7 @@ let new_collections = [
   {
     id: 7,
     name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    image: T1.jpg,
+    image: T1,
     description:"Lorem ipsum dolor sit, amet consectetur adipisicing.",
     new_price: 85.0,
     old_price: 120.5,
@@ -67,7 +67,7 @@ let new_collections = [
   {
     id: 8,
     name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    image: T2.jpg,
+    image: T2,
     description:"Lorem ipsum dolor sit, amet consectetur adipisicing.",
     new_price: 85.0,
     old_price: 120.5,

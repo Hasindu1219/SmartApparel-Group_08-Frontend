@@ -37,8 +37,8 @@ import AttendanceAddPage from './pages/Attendance/AttendanceAddPage';
 import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
 
 //Web Imports
-import WHomepage from './pages/Website/Pages/WHomepage'
-
+import WHomepage from './pages/Website/Pages/WHomepage';
+// import Footer from './components/Website/Footer';
 
 function App() {
   return (
@@ -92,7 +92,10 @@ function App() {
         {/* <Route path="/overview" element={<App />}></Route> */}
         
         <Route path="/WHomepage" element={<WHomepage />}></Route>
+        {/* <Route path="/Froks" element={<Frocks />}></Route> */}
+        
       </Routes>
+      {/* <Footer/> */}
     </BrowserRouter>
   
   );
