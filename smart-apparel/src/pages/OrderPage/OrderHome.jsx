@@ -21,12 +21,12 @@ export default function OrderHome() {
                         <p className="Task1">Order Details</p>
                     </button>
                 </Link>
-                {/* Link to Check Inventory
-                <Link to={'/inventorycheck'}>
+                {/* Link to Order Shipment */}
+                <Link to={'/ordershipment'}>
                     <button className="btn1">
-                        <p className="Task1">Check Inventory</p>
+                        <p className="Task1">Order Shipment</p>
                     </button>
-                </Link> */}
+                </Link>
             </div>
             {/* Image Frame */}
             <div className="Frame">

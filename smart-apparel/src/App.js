@@ -24,11 +24,13 @@ import CustomerStatus from './pages/CustomerPage/CustomerStatus';
 
 import OrderRegister from './pages/OrderPage/OrderRegister';
 import OrderDetails from './pages/OrderPage/OrderDetails';
+import OrderHome from './pages/OrderPage/OrderHome';
 import CheckInventory from './pages/OrderPage/CheckInventory';
-import InventoryChecked from './pages/OrderPage/InventoryChecked';
+import MainModels from './pages/OrderPage/MainModels';
 import ModelsPage from './pages/OrderPage/ModelsPage';
 import CustomModel from './pages/OrderPage/CustomModel';
 import AddNewModel from './pages/OrderPage/AddNewModel';
+import OrderShipment from './pages/OrderPage/OrderShipment';
 
 // import Login from './pages/Login';
 import RevenueController from './pages/Accounting/RevenueController'
@@ -87,17 +89,21 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
         <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
 
+        {/* routings inside the customer section */}
         <Route path="/customerregister" element={<CustomerRegister/>} />
         <Route path="/customerdetails" element={<CustomerViewDelete />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
 
+        {/* routings inside the order section */}
         <Route path="/orderregister" element={<OrderRegister />} />
         <Route path="/orderdetails" element={<OrderDetails />} />
+        <Route path="/orderhome" element={<OrderHome />} />
         <Route path="/checkinventory" element={<CheckInventory />} />
-        <Route path="/inventorychecked" element={<InventoryChecked />} />
+        <Route path="/mainmodels" element={<MainModels />} />
         <Route path="/ordermodels" element={<ModelsPage />} />
         <Route path="/customizemodels" element={<CustomModel />} />
         <Route path="/addNewModel" element={<AddNewModel />} />
+        <Route path="/ordershipment" element={<OrderShipment />} />
 
         <Route path="/accounting/revenuecontroller" element={<RevenueController />}></Route>
         <Route path="/accounting/addrevenue" element={<RevenueAdd />}></Route>

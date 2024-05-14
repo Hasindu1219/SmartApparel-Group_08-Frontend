@@ -91,7 +91,7 @@ select{
     background-color: #fff;
     cursor: pointer;
 }
-#addBtn:hover{
+#addBtn:disabled{
     border: 2px solid #368f8b;
     color: #368f8b;
     background-color: #fff;

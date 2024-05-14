@@ -1,35 +1,35 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import "./OrderRegister.css";
-import Sidebar from "../../components/Sidebar";
-import Navbar from "../../components/Navbar/Navbar";
-import Error from "../../components/Error1/Error1";
-import axios from "axios";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import CheckInventory from "./CheckInventory";
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import './OrderRegister.css';
+import Sidebar from '../../components/Sidebar';
+import Navbar from '../../components/Navbar/Navbar';
+import Error from '../../components/Error1/Error1';
+import axios from 'axios';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import CheckInventory from './CheckInventory';
 
 export default function OrderRegister() {
   // State variables
-  const [orderId, setOrderId] = useState("");
-  const [orderCustomerName, setOrderCustomerName] = useState("");
-  const [orderAgreedPrice, setOrderAgreedPrice] = useState("");
-  const [smallSize, setSmallSize] = useState("");
-  const [mediumSize, setMediumSize] = useState("");
-  const [largeSize, setLargeSize] = useState("");
-  const [clothMaterial, setClothMaterial] = useState("");
+  const [orderId, setOrderId] = useState('');
+  const [orderCustomerName, setOrderCustomerName] = useState('');
+  const [orderAgreedPrice, setOrderAgreedPrice] = useState('');
+  const [smallSize, setSmallSize] = useState('');
+  const [mediumSize, setMediumSize] = useState('');
+  const [largeSize, setLargeSize] = useState('');
+  const [clothMaterial, setClothMaterial] = useState('');
 
-  const [error, setError] = useState("none");
-  const [errorType, setErrorType] = useState("none");
-  const errorMsg = ["All fields are required"];
+  const [error, setError] = useState('none');
+  const [errorType, setErrorType] = useState('none');
+  const errorMsg = ['All fields are required'];
 
   // Navigate between routes
   const navigate = useNavigate();
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Initially disabled
 
-   // Get model name from location state
-   const location = useLocation();
-   const modelName = location.state?.modelName || "";
+  // Get model name from location state
+  const location = useLocation();
+  const modelName = location.state?.modelName || '';
 
   // Function to handle the Add button click
   const handleAddBtn = async () => {
@@ -43,10 +43,10 @@ export default function OrderRegister() {
       !largeSize ||
       !clothMaterial
     ) {
-      setError("block");
+      setError('block');
       setErrorType(errorMsg[0]);
       setTimeout(() => {
-        setError("none");
+        setError('none');
       }, 2000);
     } else {
       const formData = {
@@ -61,11 +61,11 @@ export default function OrderRegister() {
       };
       await axios
         .post(
-          "http://localhost:8080/smart-apperal/api/order/orderregister",
+          'http://localhost:8080/smart-apperal/api/order/orderregister',
           formData
         )
         .then((res) => {
-          alert("Successfully Registered");
+          alert('Successfully Registered');
         })
         .catch((err) => {
           alert(err.message);
@@ -75,7 +75,7 @@ export default function OrderRegister() {
 
   // Function to handle the Back button click
   const handleBackBtn = () => {
-    navigate("/ordermodels");
+    navigate('/ordermodels');
   };
 
   // Function to handle the Clear button click
@@ -90,25 +90,25 @@ export default function OrderRegister() {
       </div>
       <div className="formBodyContainer">
         <Sidebar />
-        <div style={{ width: "100%", backgroundColor: "#d7e3fc" }}>
+        <div style={{ width: '100%', backgroundColor: '#d7e3fc' }}>
           <h1
             style={{
-              color: "black",
-              marginTop: "6rem",
-              marginLeft: "2rem",
-              fontWeight: "bold",
+              color: 'black',
+              marginTop: '6rem',
+              marginLeft: '2rem',
+              fontWeight: 'bold',
             }}
           >
             Order Register
           </h1>
-          <Error errorDisplay={error} />
+          <Error errorDisplay={error} errorMessage={errorType} />
           <form action="">
             {/* Form input fields */}
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
-                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                  {' '}
+                  <label htmlFor="" style={{ marginLeft: '0.1rem' }}>
                     Order Id
                   </label>
                 </Col>
@@ -127,8 +127,8 @@ export default function OrderRegister() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
-                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                  {' '}
+                  <label htmlFor="" style={{ marginLeft: '0.1rem' }}>
                     Order Customer Name
                   </label>
                 </Col>
@@ -147,8 +147,8 @@ export default function OrderRegister() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
-                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                  {' '}
+                  <label htmlFor="" style={{ marginLeft: '0.1rem' }}>
                     Order Agreed Price
                   </label>
                 </Col>
@@ -167,13 +167,13 @@ export default function OrderRegister() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
-                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                  {' '}
+                  <label htmlFor="" style={{ marginLeft: '0.1rem' }}>
                     Model Name
                   </label>
                 </Col>
                 <Col>
-                <input
+                  <input
                     type="text"
                     value={modelName} // Set the value to the modelName state
                     disabled // Make the input field disabled to prevent user input
@@ -182,24 +182,21 @@ export default function OrderRegister() {
               </Row>
             </div>
 
-
             <div className="formBox">
               <Row>
-                {/* <Col xs={2}> */}{" "}
-                <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                <label htmlFor="" style={{ marginLeft: '0.1rem' }}>
                   Order Size
                 </label>
-                {/* </Col> */}
               </Row>
             </div>
 
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
+                  {' '}
                   <label
                     htmlFor=""
-                    style={{ marginLeft: "1rem", display: "grid" }}
+                    style={{ marginLeft: '1rem', display: 'grid' }}
                   >
                     Small Size
                   </label>
@@ -219,10 +216,10 @@ export default function OrderRegister() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
+                  {' '}
                   <label
                     htmlFor=""
-                    style={{ marginLeft: "1rem", display: "grid" }}
+                    style={{ marginLeft: '1rem', display: 'grid' }}
                   >
                     Medium Size
                   </label>
@@ -242,10 +239,10 @@ export default function OrderRegister() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
+                  {' '}
                   <label
                     htmlFor=""
-                    style={{ marginLeft: "1rem", display: "grid" }}
+                    style={{ marginLeft: '1rem', display: 'grid' }}
                   >
                     Large Size
                   </label>
@@ -265,8 +262,8 @@ export default function OrderRegister() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
-                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                  {' '}
+                  <label htmlFor="" style={{ marginLeft: '0.1rem' }}>
                     Cloth Material
                   </label>
                 </Col>
@@ -302,7 +299,7 @@ export default function OrderRegister() {
             <button id="clearBtn" onClick={handleClearBtn}>
               Clear
             </button>
-            <CheckInventory/>
+            <CheckInventory setIsButtonDisabled={setIsButtonDisabled} />
             <button id="addBtn" onClick={handleAddBtn} disabled={isButtonDisabled}>
               Register
             </button>

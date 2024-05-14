@@ -1,45 +1,43 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Navbar from "../../components/Navbar/Navbar";
-import Sidebar from "../../components/Sidebar";
+import Error from "../../components/Error1/ErrorInventory";
 import "./CheckInventory.css";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
 
-function CheckInventory() {
-  const [allocationStatus, setAllocationStatus] = useState("");
-  const [orderId, setOrderId] = useState("");
-  const [modelName, setModelName] = useState("");
-  const [message, setMessage] = useState("");
+const CheckInventory = ({ setIsButtonDisabled }) => {
+  const [error, setError] = useState("none");
+  const [errorType, setErrorType] = useState("");
 
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
-  const handleCheckInventory = () => {
-    // Make API call to check inventory
-    axios.post(`/api/v1/order/handleInventoryCheck/${orderId}`, { modelName })
-      .then(response => {
-        // Handle successful response
-        if (response.data) {
-          setAllocationStatus('Materials allocated successfully.');
-          setIsButtonDisabled(false);
-        } else {
-          setAllocationStatus('Insufficient inventory.');
-          setIsButtonDisabled(true);
-        }
-      })
-      .catch(error => {
-        // Handle error
-        console.error('Error:', error);
-        setAllocationStatus('Error occurred while allocating materials.');
-      });
+  const handleCheckInventory = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/smart-apperal/api/order/checkinventory"
+      );
+      if (response.data.isInventorySufficient) {
+        setIsButtonDisabled(false); // Enable the register button
+        setError("block");
+        setErrorType("Inventory is sufficient");
+      } else {
+        setIsButtonDisabled(true); // Disable the register button
+        setError("block");
+        setErrorType("Inventory is insufficient");
+      }
+    } catch (error) {
+      setIsButtonDisabled(true); // Disable the register button on error
+      setError("block");
+      setErrorType("Error in checking inventory");
+    }
   };
 
   return (
-    <button id="checkBtn" onClick={handleCheckInventory}>
-      Check Inventory
-    </button>
+    <div>
+      <Error errorDisplay={error} errorMessage={errorType} />
+      <div>
+        <button id="checkBtn" onClick={handleCheckInventory}>
+          Check Inventory
+        </button>
+      </div>
+    </div>
   );
-}
+};
 
 export default CheckInventory;

@@ -99,7 +99,7 @@ export default function AddNewModel() {
           >
             Add New Model
           </h1>
-          <Error errorDisplay={error} />
+          <Error errorDisplay={error} errorMessage={errorType} />
           <form action="">
             {/* Form input fields */}
             <div className="formBox">

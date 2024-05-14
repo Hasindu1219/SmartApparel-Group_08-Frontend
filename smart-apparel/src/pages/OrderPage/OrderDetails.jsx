@@ -27,9 +27,11 @@ export default function OrderDetails() {
 
   // const [data, setData] = useState([]);
 
-
-
   
+
+
+
+  // View data
   useEffect(() => {
     fetchData();
   }, []);
@@ -47,6 +49,7 @@ export default function OrderDetails() {
 
 
 
+  // Delete data
   useEffect(() => {
     axios
       .get('http://localhost:8080/smart-apperal/api/orders/orders')

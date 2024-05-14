@@ -1,0 +1,52 @@
+.App {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  input {
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  #searchBtn {
+    margin-bottom:10px;
+    margin-top: 8px;
+    display: inline;
+
+    background-color: rgb(22, 88, 232);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    width: 12rem;
+    height: 2.7rem;
+    font-size: 16px;
+  }
+
+  #billBtn{
+    margin-bottom:10px;
+    display: inline;
+
+    background-color: #f0d53c;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    width: 12rem;
+    height: 3rem;
+    font-size: 16px;
+  }
+  #billBtn:disabled{
+    border: 2px solid #f0d53c;
+    color: #f0d53c;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  /* button:disabled {
+    background-color: #ccc;
+  } */
+  
