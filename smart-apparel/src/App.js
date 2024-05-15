@@ -31,6 +31,10 @@ import ModelsPage from './pages/OrderPage/ModelsPage';
 import CustomModel from './pages/OrderPage/CustomModel';
 import AddNewModel from './pages/OrderPage/AddNewModel';
 import OrderShipment from './pages/OrderPage/OrderShipment';
+import LineSupervisorOrderHome from './pages/OrderPage/LineSupervisorOrderHome';
+import LineSupervisorOrderDetails from './pages/OrderPage/LineSupervisorOrderDetails';
+import LineSupervisorOrderCoveredAmount from './pages/OrderPage/LineSupervisorOrderCoveredAmount';
+import LineSupervisorCoveredAmountForm from './pages/OrderPage/LineSupervisorCoveredAmountForm';
 
 // import Login from './pages/Login';
 import RevenueController from './pages/Accounting/RevenueController'
@@ -104,6 +108,10 @@ function App() {
         <Route path="/customizemodels" element={<CustomModel />} />
         <Route path="/addNewModel" element={<AddNewModel />} />
         <Route path="/ordershipment" element={<OrderShipment />} />
+        <Route path="/linesupervisororderhome" element={<LineSupervisorOrderHome />} />
+        <Route path="/linesupervisororderdetails" element={<LineSupervisorOrderDetails />} />
+        <Route path="/linesupervisorordercoveredamount" element={<LineSupervisorOrderCoveredAmount />} />
+        <Route path="/linesupervisorcoveredamountform" element={<LineSupervisorCoveredAmountForm />} />
 
         <Route path="/accounting/revenuecontroller" element={<RevenueController />}></Route>
         <Route path="/accounting/addrevenue" element={<RevenueAdd />}></Route>
