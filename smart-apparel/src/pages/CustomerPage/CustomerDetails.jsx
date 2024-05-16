@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Error1 from '../../components/Error1/Error1';
 import axios from 'axios';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 export default function CustomerDetails() {
   // State variables
@@ -21,6 +22,7 @@ export default function CustomerDetails() {
   const [customerReference, setCustomerReference] = useState("");
   const [customerPhoneNum, setCustomerPhoneNum] = useState("");
   const [customerPassword, setCustomerPassword] = useState("");
+  const [orderStatus, setOrderStatus] = useState("");
 
   const [error, setError] = useState("none");
 
@@ -59,6 +61,7 @@ export default function CustomerDetails() {
         setCustomerReference(res.data.customerReference);
         setCustomerPhoneNum(res.data.customerPhoneNum);
         setCustomerPassword(res.data.customerPassword);
+        setOrderStatus(res.data.orderStatus);
 
         setModelView("block");
         setTableView("none");
@@ -70,13 +73,13 @@ export default function CustomerDetails() {
 
   // Function to handle update button click
   const handleUpdateBtn = async () => {
-    if (!customerId || !customerName || !customerAddress || !customerEmail || !customerCompanyName || !customerReference || !customerPhoneNum || !customerPassword) {
+    if (!customerId || !customerName || !customerAddress || !customerEmail || !customerCompanyName || !customerReference || !customerPhoneNum || !customerPassword || !orderStatus) {
       setError("block");
       setTimeout(() => {
         setError("none");
       }, 2000);
     } else {
-      const updateData = {customerId,customerName,customerAddress,customerEmail,customerCompanyName,customerReference,customerPhoneNum,customerPassword};
+      const updateData = {customerId,customerName,customerAddress,customerEmail,customerCompanyName,customerReference,customerPhoneNum,customerPassword,orderStatus};
       await axios.put('http://localhost:8080/smart-apperal/api/customer/updatecustomer', updateData)
         .then((res) => {
           window.location.href = "/customer/customerviewdelete";
@@ -189,6 +192,7 @@ export default function CustomerDetails() {
                   <th>Customer Reference</th>
                   <th>Customer Phone Number</th>
                   <th>Customer Password</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -204,6 +208,30 @@ export default function CustomerDetails() {
                     <td>{data.customerReference}</td>
                     <td>{data.customerPhoneNum}</td>
                     <td>{data.customerPassword}</td>
+                    <td>{data.orderStatus}
+                    <Dropdown>
+                      {/* <Dropdown.Toggle onChange={(e) => {setClothMaterial(e.target.value);}}>
+                        Select Material
+                      </Dropdown.Toggle> */}
+
+                      <Dropdown.Menu onChange={(e) => {setOrderStatus(e.target.value);}}>
+                        <Dropdown.Item>Pending</Dropdown.Item>
+                        <Dropdown.Item>Started</Dropdown.Item>
+                        <Dropdown.Item>Processing</Dropdown.Item>
+                        <Dropdown.Item>Quality Certified</Dropdown.Item>
+                        <Dropdown.Item>Shipped</Dropdown.Item>
+                        <Dropdown.Item>Delivered</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    {/* <select>
+                    <option value="Pending">Pending</option>
+                    <option value="Started">Started</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Quality Certified">Quality Certified</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                  </select> */}
+                    </td>
                     <td>
                       <div className="tableBtn">
                         <button className="editBtn" onClick={() => handleEditBtn(data.customerID)}>Edit</button>
