@@ -8,21 +8,24 @@ import "./LineSupervisorOrderCoveredAmount.css";
 import { Link } from "react-router-dom";
 
 export default function LineSupervisorOrderCoveredAmount() {
+  // State variables
   const [orderId, setOrderId] = useState("");
   const [isOrderValid, setIsOrderValid] = useState(false);
   const [validOrderIds, setValidOrderIds] = useState([]);
 
+  // State variables for error
   const [error, setError] = useState("none");
   const [errorType, setErrorType] = useState("none");
   const errorMsg = ["Invalid Order ID"];
 
+  // Fetch valid order IDs on component mount
   useEffect(() => {
     const fetchValidOrderIds = async () => {
       try {
         const response = await axios.get(
           "http://localhost:8080/smart-apperal/api/orders/orderId"
         );
-        setValidOrderIds(response.data);
+        setValidOrderIds(response.data); // Store the fetched order IDs
       } catch (error) {
         console.error("Error fetching valid order IDs:", error);
       }
@@ -31,27 +34,29 @@ export default function LineSupervisorOrderCoveredAmount() {
     fetchValidOrderIds();
   }, []);
 
+  // Handle input change and update the orderId state
   const handleInputChange = (event) => {
     setOrderId(event.target.value);
   };
 
+  // Handle form submission to search for the order ID
   const handleSearch = async (event) => {
     event.preventDefault();
 
     try {
       const response = await axios.get(`/api/orders/${orderId}`);
       if (response.data.exists) {
-        setIsOrderValid(true);
-        setError("none");
+        setIsOrderValid(true); // Set order validity to true
+        setError("none"); // Hide error message
       } else {
-        setIsOrderValid(false);
-        setError("block");
+        setIsOrderValid(false); // Set order validity to false
+        setError("block"); // Show error message
         setErrorType(errorMsg[0]);
       }
     } catch (err) {
       console.error(err);
-      setIsOrderValid(false);
-      setError("block");
+      setIsOrderValid(false); // Set order validity to false
+      setError("block"); // Show error message
       setErrorType("Server error. Please try again later.");
     }
   };
@@ -76,7 +81,8 @@ export default function LineSupervisorOrderCoveredAmount() {
             Order Covered Amount
           </h1>
           <div>
-            <Error errorDisplay={error} errorMessage={errorType} />
+            <Error errorDisplay={error} errorMessage={errorType} />{" "}
+            {/* Error component */}
             <div className="App">
               <form onSubmit={handleSearch}>
                 <input
@@ -93,7 +99,7 @@ export default function LineSupervisorOrderCoveredAmount() {
               <Link to={`/linesupervisorcoveredamountform`}>
                 <button
                   id="updateBtn"
-                  disabled={!isOrderValid}
+                  disabled={!isOrderValid} // Disable button if order is not valid
                   onClick={() => alert("Go to update form")}
                 >
                   Update

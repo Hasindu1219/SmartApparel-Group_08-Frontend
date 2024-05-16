@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export default function AddNewModel() {
-  // State variables
+  // State variables for form inputs
   const [modelName, setModelName] = useState("");
   const [modelImage, setModelImage] = useState("");
   const [clothMaterial, setClothMaterial] = useState("");
@@ -18,6 +18,7 @@ export default function AddNewModel() {
   const [zipperAmount, setZipperAmount] = useState("");
   const [elasticAmount, setElasticAmount] = useState("");
 
+  // State variables for error handling
   const [error, setError] = useState("none");
   const [errorType, setErrorType] = useState("none");
   const errorMsg = ["All fields are required"];
@@ -28,6 +29,7 @@ export default function AddNewModel() {
 
   // Function to handle the Add button click
   const handleAddBtn = async () => {
+    // Check if all fields are filled
     if (
       !modelName ||
       !modelImage ||
@@ -37,12 +39,14 @@ export default function AddNewModel() {
       !zipperAmount ||
       !elasticAmount
     ) {
+      // Display error message if any field is empty
       setError("block");
       setErrorType(errorMsg[0]);
       setTimeout(() => {
         setError("none");
       }, 2000);
     } else {
+      // Prepare form data to be sent to the server
       const formData = {
         modelName,
         modelImage,
@@ -52,6 +56,8 @@ export default function AddNewModel() {
         zipperAmount,
         elasticAmount,
       };
+
+      // Send a POST request to add the new model
       await axios
         .post(
           "http://localhost:8080/smart-apperal/api/order/addNewModel",
@@ -76,6 +82,7 @@ export default function AddNewModel() {
     window.location.reload();
   };
 
+  // Function to handle file input change
   function handleChange(e) {
     console.log(e.target.files);
     setFile(URL.createObjectURL(e.target.files[0]));
@@ -99,13 +106,13 @@ export default function AddNewModel() {
           >
             Add New Model
           </h1>
+          {/* Error component for displaying error messages */}
           <Error errorDisplay={error} errorMessage={errorType} />
           <form action="">
             {/* Form input fields */}
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
                     Model Name
                   </label>
@@ -124,18 +131,20 @@ export default function AddNewModel() {
 
             <div className="formBox">
               <Row>
-                <p  style={{ color: "red"}}>Insert image with both front and back view.</p>
+                <p style={{ color: "red" }}>
+                  Insert image with both front and back view.
+                </p>
                 <Col xs={2}>
-                  {" "}
                   <label htmlFor="imageUpload" style={{ marginLeft: "0.1rem" }}>
                     Model Image
                   </label>
                 </Col>
-                <Col >
-                  <input type="file" onChange={handleChange} 
-                  // placeholder="Insert image with both front and back view."
+                <Col>
+                  <input
+                    type="file"
+                    onChange={handleChange}
                   />
-                  <img src={file} style={{ width: "50%", height: "70%"}} />
+                  <img src={file} style={{ width: "50%", height: "70%" }} />
                 </Col>
               </Row>
             </div>
@@ -143,7 +152,6 @@ export default function AddNewModel() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label
                     htmlFor=""
                     style={{ marginLeft: "0.1rem", display: "grid" }}
@@ -166,7 +174,6 @@ export default function AddNewModel() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label
                     htmlFor=""
                     style={{ marginLeft: "0.1rem", display: "grid" }}
@@ -189,7 +196,6 @@ export default function AddNewModel() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
                     Button Amount
                   </label>
@@ -209,7 +215,6 @@ export default function AddNewModel() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label
                     htmlFor=""
                     style={{ marginLeft: "0.1rem", display: "grid" }}
@@ -228,10 +233,10 @@ export default function AddNewModel() {
                 </Col>
               </Row>
             </div>
+
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label
                     htmlFor=""
                     style={{ marginLeft: "0.1rem", display: "grid" }}

@@ -1,22 +1,22 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function CustomModel({
-  mainText = "main text",
-  Image = "image",
-  onRegisterOrder,
+  mainText = "main text",  // Default text for the mainText prop
+  Image = "image",         // Default src for the Image prop
+  onRegisterOrder,         // Function to handle the register order action
 }) {
-  const navigate = useNavigate();
-
+  // Function to handle the Register Order button click
   const handleRegisterOrderBtn = () => {
-    // navigate("/orderregister");
-    onRegisterOrder(mainText);
+    onRegisterOrder(mainText);  // Calls the onRegisterOrder function with mainText as an argument
   };
 
   return (
     <div class="frame2">
+      {/* Displays the main text */}
       <h5 id="modelName">{mainText}</h5>
+      {/* Displays the image */}
       <img id="modelImage" src={Image} alt="Image" />
+      {/* Register Order button */}
       <button
         style={{
           backgroundColor: "#1658E8",
@@ -29,12 +29,12 @@ export default function CustomModel({
           height: "3rem",
           fontSize: "18px",
           display: "flex",
-          flexdirection: "row",
-          textalign: "center",
+          flexDirection: "row",
+          textAlign: "center",
           marginLeft: "auto",
           marginRight: "auto",
         }}
-        onClick={handleRegisterOrderBtn}
+        onClick={handleRegisterOrderBtn}  // Attach the click handler
       >
         Register Order
       </button>

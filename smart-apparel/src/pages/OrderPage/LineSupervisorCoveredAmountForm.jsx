@@ -10,8 +10,9 @@ import Col from "react-bootstrap/Col";
 
 export default function LineSupervisorCoveredAmountForm() {
   const location = useLocation();
-  const orderId = location.state?.orderId || "";
+  const orderId = location.state?.orderId || ""; // Get the orderId from the route state
 
+  // State variables to hold form data and error states
   const [orderCustomerName, setOrderCustomerName] = useState("");
   const [smallSize, setSmallSize] = useState("");
   const [mediumSize, setMediumSize] = useState("");
@@ -23,9 +24,10 @@ export default function LineSupervisorCoveredAmountForm() {
   const [errorType, setErrorType] = useState("none");
   const errorMsg = ["Error in updating."];
 
-  const navigate = useNavigate();
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const navigate = useNavigate(); // Hook for navigation
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // State to manage button disabled status
 
+  // Fetch order details when the component mounts
   useEffect(() => {
     if (orderId) {
       axios
@@ -38,7 +40,7 @@ export default function LineSupervisorCoveredAmountForm() {
           setLargeSize(orderData.largeSize);
           setClothMaterial(orderData.clothMaterial);
           setCoveredAmount(orderData.coveredAmount);
-          setIsButtonDisabled(false);
+          setIsButtonDisabled(false); // Enable the update button
         })
         .catch((err) => {
           setError("block");
@@ -50,45 +52,7 @@ export default function LineSupervisorCoveredAmountForm() {
     }
   }, [orderId]);
 
-  // const handleUpdateBtn = async () => {
-  //   if (
-  //     // !orderId ||
-  //     // !orderCustomerName ||
-  //     // !smallSize ||
-  //     // !mediumSize ||
-  //     // !largeSize ||
-  //     // !clothMaterial ||
-  //     !coveredAmount
-  //   ) {
-  //     setError("block");
-  //     setErrorType(errorMsg[0]);
-  //     setTimeout(() => {
-  //       setError("none");
-  //     }, 2000);
-  //   } else {
-  //     const formData = {
-  //       // orderId,
-  //       // orderCustomerName,
-  //       // smallSize,
-  //       // mediumSize,
-  //       // largeSize,
-  //       // clothMaterial,
-  //       coveredAmount,
-  //     };
-  //     await axios
-  //       .post(
-  //         "http://localhost:8080/smart-apperal/api/order/linesupervisorcoveredamountform",
-  //         formData
-  //       )
-  //       .then((res) => {
-  //         alert("Successfully Updated");
-  //       })
-  //       .catch((err) => {
-  //         alert(err.message);
-  //       });
-  //   }
-  // };
-
+  // Handle the update button click
   const handleUpdateBtn = async () => {
     if (!coveredAmount) {
       setError("block");
@@ -114,15 +78,17 @@ export default function LineSupervisorCoveredAmountForm() {
     }
   };
 
+  // Handle the back button click
   const handleBackBtn = () => {
     navigate("/linesupervisorordercoveredamount");
   };
 
+  // Handle the edit button click (not used in the current form)
   const handleEditBtn = async (orderId) => {
     await axios
       .get(`http://localhost:8080/smart-apperal/api/orders/orders/${orderId}`)
       .then((res) => {
-        setCoveredAmount(res.data.orderStatus);
+        setCoveredAmount(res.data.coveredAmount);
       })
       .catch((err) => {
         alert(err.message);
@@ -132,10 +98,10 @@ export default function LineSupervisorCoveredAmountForm() {
   return (
     <div className="addItemContainer">
       <div>
-        <Navbar />
+        <Navbar /> {/* Navbar component */}
       </div>
       <div className="formBodyContainer">
-        <Sidebar />
+        <Sidebar /> {/* Sidebar component */}
         <div style={{ width: "100%", backgroundColor: "#d7e3fc" }}>
           <h1
             style={{
@@ -147,18 +113,19 @@ export default function LineSupervisorCoveredAmountForm() {
           >
             Update Covered Order Amount
           </h1>
-          <Error errorDisplay={error} errorMessage={errorType} />
+          <Error errorDisplay={error} errorMessage={errorType} />{" "}
+          {/* Error component */}
           <form action="">
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
                     Order Id
                   </label>
                 </Col>
                 <Col>
-                  <input value={orderId} disabled />
+                  <input value={orderId} disabled />{" "}
+                  {/* Disabled input for orderId */}
                 </Col>
               </Row>
             </div>
@@ -166,13 +133,13 @@ export default function LineSupervisorCoveredAmountForm() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
                     Order Customer Name
                   </label>
                 </Col>
                 <Col>
-                  <input value={orderCustomerName} disabled />
+                  <input value={orderCustomerName} disabled />{" "}
+                  {/* Disabled input for orderCustomerName */}
                 </Col>
               </Row>
             </div>
@@ -188,7 +155,6 @@ export default function LineSupervisorCoveredAmountForm() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label
                     htmlFor=""
                     style={{ marginLeft: "1rem", display: "grid" }}
@@ -197,7 +163,8 @@ export default function LineSupervisorCoveredAmountForm() {
                   </label>
                 </Col>
                 <Col>
-                  <input value={smallSize} disabled />
+                  <input value={smallSize} disabled />{" "}
+                  {/* Disabled input for smallSize */}
                 </Col>
               </Row>
             </div>
@@ -205,7 +172,6 @@ export default function LineSupervisorCoveredAmountForm() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label
                     htmlFor=""
                     style={{ marginLeft: "1rem", display: "grid" }}
@@ -214,7 +180,8 @@ export default function LineSupervisorCoveredAmountForm() {
                   </label>
                 </Col>
                 <Col>
-                  <input value={mediumSize} disabled />
+                  <input value={mediumSize} disabled />{" "}
+                  {/* Disabled input for mediumSize */}
                 </Col>
               </Row>
             </div>
@@ -222,7 +189,6 @@ export default function LineSupervisorCoveredAmountForm() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label
                     htmlFor=""
                     style={{ marginLeft: "1rem", display: "grid" }}
@@ -231,7 +197,8 @@ export default function LineSupervisorCoveredAmountForm() {
                   </label>
                 </Col>
                 <Col>
-                  <input value={largeSize} disabled />
+                  <input value={largeSize} disabled />{" "}
+                  {/* Disabled input for largeSize */}
                 </Col>
               </Row>
             </div>
@@ -239,13 +206,13 @@ export default function LineSupervisorCoveredAmountForm() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
                     Cloth Material
                   </label>
                 </Col>
                 <Col>
-                  <input value={clothMaterial} disabled />
+                  <input value={clothMaterial} disabled />{" "}
+                  {/* Disabled input for clothMaterial */}
                 </Col>
               </Row>
             </div>
@@ -253,7 +220,6 @@ export default function LineSupervisorCoveredAmountForm() {
             <div className="formBox">
               <Row>
                 <Col xs={2}>
-                  {" "}
                   <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
                     Covered Amount
                   </label>
@@ -264,32 +230,13 @@ export default function LineSupervisorCoveredAmountForm() {
                     placeholder="Enter Amount"
                     value={coveredAmount}
                     onChange={(e) => {
-                      setCoveredAmount(e.target.value);
+                      setCoveredAmount(e.target.value); // Update the coveredAmount state
                     }}
                   />
                 </Col>
               </Row>
             </div>
-
-            {/* <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                  {' '}
-                  <label htmlFor="" style={{ marginLeft: '0.1rem' }}>
-                    Model Name
-                  </label>
-                </Col>
-                <Col>
-                  <input
-                    type="text"
-                    value={modelName} // Set the value to the modelName state
-                    disabled // Make the input field disabled to prevent user input
-                  />
-                </Col>
-              </Row>
-            </div> */}
           </form>
-
           <div className="formButtonSection">
             <button id="backBtn" onClick={handleBackBtn}>
               Back
@@ -300,7 +247,7 @@ export default function LineSupervisorCoveredAmountForm() {
             <button
               id="addBtn"
               onClick={handleUpdateBtn}
-              disabled={isButtonDisabled}
+              disabled={isButtonDisabled} // Conditionally disable the button
             >
               Update
             </button>

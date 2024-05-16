@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./OrderDetails.css";
 import OrderDetails from "./OrderDetails";
 
 export default function LineSupervisorOrderDetails() {
   return (
     <div>
-      <OrderDetails />
+      <OrderDetails /> {/* Render the OrderDetails component */}
     </div>
   );
 }

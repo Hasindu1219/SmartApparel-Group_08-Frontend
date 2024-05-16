@@ -91,7 +91,8 @@ function OrderShipment() {
                 disabled={!isOrderValid}
                 onClick={() => alert("Bill Generated")}
               >
-                Generate Bill
+                Generate Bill       
+                {/* When click this download the relevant bill */}
               </button>
             </div>
           </div>

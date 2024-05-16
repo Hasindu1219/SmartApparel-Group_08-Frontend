@@ -18,6 +18,7 @@ import Inventory from './pages/Inventory';
 import Add_Material from './pages/InventoryPage/AddMaterial';
 import ViewMaterials from './pages/InventoryPage/ViewMaterials';
 
+import CustomerHome from './pages/CustomerPage/CustomerHome';
 import CustomerRegister from './pages/CustomerPage/CustomerRegister';
 import CustomerViewDelete from './pages/CustomerPage/CustomerDetails';
 import CustomerStatus from './pages/CustomerPage/CustomerStatus';
@@ -94,6 +95,7 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
 
         {/* routings inside the customer section */}
+        <Route path="/customerhome" element={<CustomerHome/>} />
         <Route path="/customerregister" element={<CustomerRegister/>} />
         <Route path="/customerdetails" element={<CustomerViewDelete />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
