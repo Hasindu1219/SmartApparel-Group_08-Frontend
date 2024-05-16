@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./CustomerStatus.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import Error from "../../components/Error1/ErrorId";
+import "./OrderShipment.css";
 
-export default function CustomerStatus() {
+function OrderShipment() {
   const [orderId, setOrderId] = useState("");
-  const [orderStatus, setOrderStatus] = useState(null);
+  const [isOrderValid, setIsOrderValid] = useState(false);
   const [validOrderIds, setValidOrderIds] = useState([]);
 
   const [error, setError] = useState("none");
@@ -35,20 +35,22 @@ export default function CustomerStatus() {
 
   const handleSearch = async (event) => {
     event.preventDefault();
+    
     try {
       const response = await axios.get(`/api/orders/${orderId}`);
-      if (response.data && response.data.status) {
-        setOrderStatus(response.data.status);
-        setError(null);
+      if (response.data.exists) {
+        setIsOrderValid(true);
+        setError("none");
       } else {
-        setOrderStatus(null);
-        setError("Invalid Order ID");
+        setIsOrderValid(false);
+        setError("block");
         setErrorType(errorMsg[0]);
       }
     } catch (err) {
-      setOrderStatus(null);
-      setError("Invalid Order ID");
-      setErrorType(errorMsg[0]);
+      console.error(err);
+      setIsOrderValid(false);
+      setError("block");
+      setErrorType("Server error. Please try again later.");
     }
   };
 
@@ -70,10 +72,10 @@ export default function CustomerStatus() {
               fontWeight: "bold",
             }}
           >
-            Customer Status
+            Order Shipment
           </h1>
           <div>
-            <Error errorDisplay={error} errorMsg={errorType} />
+            <Error errorDisplay={error} errorMessage={errorType} />
             <div className="App">
               <form onSubmit={handleSearch}>
                 <input
@@ -82,14 +84,16 @@ export default function CustomerStatus() {
                   onChange={handleInputChange}
                   placeholder="Enter Order ID"
                 />
-                <button id="searchBtn" type="submit">
-                  Search
-                </button>
+                <button id="searchBtn" type="submit">Search</button>
               </form>
-              <div id="statusBox">
-                Order Status: {orderStatus}
-                {error}
-              </div>
+              <button
+                id="billBtn"
+                disabled={!isOrderValid}
+                onClick={() => alert("Bill Generated")}
+              >
+                Generate Bill       
+                {/* When click this download the relevant bill */}
+              </button>
             </div>
           </div>
         </div>
@@ -97,3 +101,6 @@ export default function CustomerStatus() {
     </div>
   );
 }
+
+export default OrderShipment;
+

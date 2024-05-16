@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import './CustomerPage/CustomerDetails.css';
-import Navbar from '../../components/Navbar/Navbar';
-import Sidebar from '../../components/Sidebar';
-import Error1 from '../../components/Error1/Error1';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import "./OrderDetails.css";
+import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../../components/Sidebar";
+import Error1 from "../../components/Error1/Error1";
+import axios from "axios";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export default function OrderDetails() {
   // State variables
@@ -14,16 +15,38 @@ export default function OrderDetails() {
   const [tableView, setTableView] = useState("block");
 
   const [orderId, setOrderId] = useState("");
-  const [ordercustomerName, setOrderCustomerName] = useState("");
-  const [orderAddress, setOrderAddress] = useState("");
-  const [orderEmail, setOrderEmail] = useState("");
-  const [orderPhoneNum, setOrderPhoneNum] = useState("");
+  const [orderCustomerName, setOrderCustomerName] = useState("");
+  const [orderAgreedPrice, setOrderAgreedPrice] = useState("");
+  const [smallSize, setSmallSize] = useState("");
+  const [mediumSize, setMediumSize] = useState("");
+  const [largeSize, setLargeSize] = useState("");
+  const [clothMaterial, setClothMaterial] = useState("");
+  const [orderStatus, setOrderStatus] = useState("");
 
   const [error, setError] = useState("none");
 
+  // const [data, setData] = useState([]);
+
+  // View data
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/smart-apperal/api/orders/orders"
+      );
+      setTableData(response.data); // Assuming response.data is an array of objects
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Delete data
   useEffect(() => {
     axios
-      .get('http://localhost:8080/smart-apperal/api/order/order')
+      .get("http://localhost:8080/smart-apperal/api/orders/orders")
       .then((res) => {
         setTableData(res.data);
       })
@@ -34,7 +57,10 @@ export default function OrderDetails() {
 
   // Function to handle delete button click
   const handleDeleteBtn = async (orderId) => {
-    await axios.delete(`http://localhost:8080/smart-apperal/api/order/deleteOrder/${orderId}`)
+    await axios
+      .delete(
+        `http://localhost:8080/smart-apperal/api/orders/deleteOrder/${orderId}`
+      )
       .then((res) => {
         setDeleteOrder(true);
         alert("Delete Successfully");
@@ -45,14 +71,18 @@ export default function OrderDetails() {
   };
 
   // Function to handle edit button click
-  const handleEditBtn = async (customerId) => {
-    await axios.get(`http://localhost:8080/smart-apperal/api/order/order/${orderId}`)
+  const handleEditBtn = async (orderId) => {
+    await axios
+      .get(`http://localhost:8080/smart-apperal/api/orders/orders/${orderId}`)
       .then((res) => {
         setOrderId(res.data.orderID);
         setOrderCustomerName(res.data.orderCustomerName);
-        setOrderAddress(res.data.orderAddress);
-        setOrderEmail(res.data.orderEmail);
-        setOrderPhoneNum(res.data.orderPhoneNum);
+        setOrderAgreedPrice(res.data.orderAgreedPrice);
+        setSmallSize(res.data.smallSize);
+        setMediumSize(res.data.mediumSize);
+        setLargeSize(res.data.largeSize);
+        setClothMaterial(res.data.clothMaterial);
+        setOrderStatus(res.data.orderStatus);
 
         setModelView("block");
         setTableView("none");
@@ -64,14 +94,36 @@ export default function OrderDetails() {
 
   // Function to handle update button click
   const handleUpdateBtn = async () => {
-    if (!orderId || !ordercustomerName || !orderAddress || !orderEmail || !orderPhoneNum) {
+    if (
+      !orderId ||
+      !orderCustomerName ||
+      !orderAgreedPrice ||
+      !smallSize ||
+      !mediumSize ||
+      !largeSize ||
+      !clothMaterial ||
+      !orderStatus
+    ) {
       setError("block");
       setTimeout(() => {
         setError("none");
       }, 2000);
     } else {
-      const updateData = { orderId, ordercustomerName, orderAddress, orderEmail, orderPhoneNum };
-      await axios.put('http://localhost:8080/smart-apperal/api/order/updateorder', updateData)
+      const updateData = {
+        orderId,
+        orderCustomerName,
+        orderAgreedPrice,
+        smallSize,
+        mediumSize,
+        largeSize,
+        clothMaterial,
+        orderStatus,
+      };
+      await axios
+        .put(
+          "http://localhost:8080/smart-apperal/api/orders/updateorder",
+          updateData
+        )
         .then((res) => {
           window.location.href = "/order/orderviewdelete";
         })
@@ -83,7 +135,7 @@ export default function OrderDetails() {
 
   // Function to handle close button click
   const handleCloseBtn = () => {
-    window.location.href = "/order/orderviewdelete";
+    window.location.href = "/orders/orderviewdelete";
   };
 
   return (
@@ -93,7 +145,9 @@ export default function OrderDetails() {
       </div>
       <div className="formBodyContainer">
         <Sidebar />
-        <div style={{ width: "100%", backgroundColor: "#d7e3fc", height: "100vh" }}>
+        <div
+          style={{ width: "100%", backgroundColor: "#d7e3fc", height: "100vh" }}
+        >
           <h1
             style={{
               color: "black",
@@ -105,46 +159,121 @@ export default function OrderDetails() {
             Order Details
           </h1>
           <Error1 errorDisplay={error} />
-          <div className='updateConatiner' style={{ display: modelView }}>
+          <div className="updateConatiner" style={{ display: modelView }}>
             <form action="">
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "5.5rem" }}>Order Id: </label>
-                <input type="text" placeholder="Enter Order ID" disabled value={orderId} onChange={(e) => {
-                  setOrderId(e.target.value);
-                }} />
+                <label htmlFor="" style={{ marginRight: "5.5rem" }}>
+                  Order Id:{" "}
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Order ID"
+                  disabled
+                  value={orderId}
+                  onChange={(e) => {
+                    setOrderId(e.target.value);
+                  }}
+                />
               </div>
 
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "3.5rem" }}>Order Customer Name: </label>
-                <input type="text" placeholder="Enter Order Customer Name" value={ordercustomerName} onChange={(e) => {
-                  setOrderCustomerName(e.target.value);
-                }} />
+                <label htmlFor="" style={{ marginRight: "3.5rem" }}>
+                  Order Customer Name:{" "}
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Order Customer Name"
+                  value={orderCustomerName}
+                  onChange={(e) => {
+                    setOrderCustomerName(e.target.value);
+                  }}
+                />
               </div>
 
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "4rem" }}>Order Address: </label>
-                <input type="text" placeholder="Enter Order Address" value={orderAddress} onChange={(e) => {
-                  setOrderAddress(e.target.value);
-                }} />
+                <label htmlFor="" style={{ marginRight: "4rem" }}>
+                  Order Agreed Price:{" "}
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Order Agreed Price"
+                  value={orderAgreedPrice}
+                  onChange={(e) => {
+                    setOrderAgreedPrice(e.target.value);
+                  }}
+                />
               </div>
 
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Order Email: </label>
-                <input type="text" placeholder="Enter Order Email" value={orderEmail} onChange={(e) => {
-                  setOrderEmail(e.target.value);
-                }} />
+                <label htmlFor="" style={{ marginLeft: "4.1rem" }}>
+                  Order Size
+                </label>
               </div>
 
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>Order Phone Number: </label>
-                <input type="text" placeholder="Enter Order Phone Number" value={orderPhoneNum} onChange={(e) => {
-                  setOrderPhoneNum(e.target.value);
-                }} />
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
+                  Small Size:{" "}
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Small Size"
+                  value={smallSize}
+                  onChange={(e) => {
+                    setSmallSize(e.target.value);
+                  }}
+                />
               </div>
+
+              <div className="formBox">
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
+                  Medium Size:{" "}
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Medium Size"
+                  value={mediumSize}
+                  onChange={(e) => {
+                    setMediumSize(e.target.value);
+                  }}
+                />
+              </div>
+
+              <div className="formBox">
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
+                  Large Size:{" "}
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Lerge Size"
+                  value={largeSize}
+                  onChange={(e) => {
+                    setLargeSize(e.target.value);
+                  }}
+                />
+              </div>
+
+              <div className="formBox">
+                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
+                  Cloth Material:{" "}
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Cloth Material"
+                  value={clothMaterial}
+                  onChange={(e) => {
+                    setClothMaterial(e.target.value);
+                  }}
+                />
+              </div>
+              {/* Cloth Material drop down */}
             </form>
             <div className="formButtonSection">
-              <button id="backBtn" onClick={handleCloseBtn}>Close</button>
-              <button id="addBtn" onClick={handleUpdateBtn}>Update</button>
+              <button id="backBtn" onClick={handleCloseBtn}>
+                Close
+              </button>
+              <button id="addBtn" onClick={handleUpdateBtn}>
+                Update
+              </button>
             </div>
           </div>
           {/* -------------------------------------------------------------------------------------------------- */}
@@ -155,9 +284,12 @@ export default function OrderDetails() {
                   <th>No</th>
                   <th>Order Id</th>
                   <th>Order Customer Name</th>
-                  <th>Order Address</th>
-                  <th>Order Email</th>
-                  <th>Order Phone Number</th>
+                  <th>Order Agreed Price</th>
+                  <th>Cloth Material</th>
+                  <th>Small Size</th>
+                  <th>Medium Size</th>
+                  <th>Large Size</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -167,13 +299,54 @@ export default function OrderDetails() {
                     <td>{index + 1}</td>
                     <td>{data.orderID}</td>
                     <td>{data.ordercustomerName}</td>
-                    <td>{data.orderAddress}</td>
-                    <td>{data.orderEmail}</td>
-                    <td>{data.orderPhoneNum}</td>
+                    <td>{data.orderAgreedPrice}</td>
+                    <td>{data.clothMaterial}</td>
+                    <td>{data.smallSize}</td>
+                    <td>{data.mediumSize}</td>
+                    <td>{data.largeSize}</td>
+                    <td>
+                      {data.orderStatus}
+                      <Dropdown>
+                        {/* <Dropdown.Toggle onChange={(e) => {setClothMaterial(e.target.value);}}>
+                        Select Material
+                      </Dropdown.Toggle> */}
+
+                        <Dropdown.Menu
+                          onChange={(e) => {
+                            setOrderStatus(e.target.value);
+                          }}
+                        >
+                          <Dropdown.Item>Pending</Dropdown.Item>
+                          <Dropdown.Item>Started</Dropdown.Item>
+                          <Dropdown.Item>Processing</Dropdown.Item>
+                          <Dropdown.Item>Quality Certified</Dropdown.Item>
+                          <Dropdown.Item>Shipped</Dropdown.Item>
+                          <Dropdown.Item>Delivered</Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                      {/* <select>
+                    <option value="Pending">Pending</option>
+                    <option value="Started">Started</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Quality Certified">Quality Certified</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                  </select> */}
+                    </td>
                     <td>
                       <div className="tableBtn">
-                        <button className="editBtn" onClick={() => handleEditBtn(data.orderID)}>Edit</button>
-                        <button className="deleteBtn" onClick={() => handleDeleteBtn(data.orderID)}>Delete</button>
+                        <button
+                          className="editBtn"
+                          onClick={() => handleEditBtn(data.orderID)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="deleteBtn"
+                          onClick={() => handleDeleteBtn(data.orderID)}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </td>
                   </tr>
