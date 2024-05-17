@@ -17,6 +17,7 @@ export default function OrderDetails() {
   const [orderId, setOrderId] = useState("");
   const [orderCustomerName, setOrderCustomerName] = useState("");
   const [orderAgreedPrice, setOrderAgreedPrice] = useState("");
+  const [modelName, setModelName] = useState("");
   const [smallSize, setSmallSize] = useState("");
   const [mediumSize, setMediumSize] = useState("");
   const [largeSize, setLargeSize] = useState("");
@@ -25,30 +26,14 @@ export default function OrderDetails() {
 
   const [error, setError] = useState("none");
 
-  // const [data, setData] = useState([]);
-
-  // View data
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8080/smart-apperal/api/orders/orders"
-      );
-      setTableData(response.data); // Assuming response.data is an array of objects
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  // Delete data
   useEffect(() => {
     axios
-      .get("http://localhost:8080/smart-apperal/api/orders/orders")
+      .get("http://localhost:8080/order/viewOrder")
       .then((res) => {
-        setTableData(res.data);
+        setTableData(res.data.content);
+        // const js = JSON.parse(res.data)
+        // console.log(js)
+        //console.log(res.data.content)
       })
       .catch((err) => {
         alert(err.message);
@@ -59,7 +44,7 @@ export default function OrderDetails() {
   const handleDeleteBtn = async (orderId) => {
     await axios
       .delete(
-        `http://localhost:8080/smart-apperal/api/orders/deleteOrder/${orderId}`
+        `http://localhost:8080/smart-apperal/api/order/deleteOrder/${orderId}`
       )
       .then((res) => {
         setDeleteOrder(true);
@@ -73,11 +58,14 @@ export default function OrderDetails() {
   // Function to handle edit button click
   const handleEditBtn = async (orderId) => {
     await axios
-      .get(`http://localhost:8080/smart-apperal/api/orders/orders/${orderId}`)
+      .get(
+        `http://localhost:8080/smart-apperal/api/order/updateOrder/${orderId}`
+      )
       .then((res) => {
         setOrderId(res.data.orderID);
         setOrderCustomerName(res.data.orderCustomerName);
         setOrderAgreedPrice(res.data.orderAgreedPrice);
+        setModelName(res.data.modelName);
         setSmallSize(res.data.smallSize);
         setMediumSize(res.data.mediumSize);
         setLargeSize(res.data.largeSize);
@@ -98,6 +86,7 @@ export default function OrderDetails() {
       !orderId ||
       !orderCustomerName ||
       !orderAgreedPrice ||
+      !modelName ||
       !smallSize ||
       !mediumSize ||
       !largeSize ||
@@ -113,6 +102,7 @@ export default function OrderDetails() {
         orderId,
         orderCustomerName,
         orderAgreedPrice,
+        modelName,
         smallSize,
         mediumSize,
         largeSize,
@@ -121,7 +111,7 @@ export default function OrderDetails() {
       };
       await axios
         .put(
-          "http://localhost:8080/smart-apperal/api/orders/updateorder",
+          "http://localhost:8080/smart-apperal/api/order/updateOrder",
           updateData
         )
         .then((res) => {
@@ -201,6 +191,21 @@ export default function OrderDetails() {
                   onChange={(e) => {
                     setOrderAgreedPrice(e.target.value);
                   }}
+                />
+              </div>
+
+              <div className="formBox">
+                <label htmlFor="" style={{ marginRight: "4rem" }}>
+                  Model Name:{" "}
+                </label>
+                <input
+                  type="text"
+                  //placeholder="Enter Mode lName"
+                  value={modelName}
+                  disabled
+                  // onChange={(e) => {
+                  //   setModelName(e.target.value);
+                  // }}
                 />
               </div>
 
@@ -285,10 +290,11 @@ export default function OrderDetails() {
                   <th>Order Id</th>
                   <th>Order Customer Name</th>
                   <th>Order Agreed Price</th>
-                  <th>Cloth Material</th>
+                  <th>Model Name</th>
                   <th>Small Size</th>
                   <th>Medium Size</th>
                   <th>Large Size</th>
+                  <th>Cloth Material</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -297,13 +303,14 @@ export default function OrderDetails() {
                 {tableData?.map((data, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{data.orderID}</td>
-                    <td>{data.ordercustomerName}</td>
+                    <td>{data.orderId}</td>
+                    <td>{data.orderCustomerName}</td>
                     <td>{data.orderAgreedPrice}</td>
-                    <td>{data.clothMaterial}</td>
+                    <td>{data.modelName}</td>
                     <td>{data.smallSize}</td>
                     <td>{data.mediumSize}</td>
                     <td>{data.largeSize}</td>
+                    <td>{data.clothMaterial}</td>
                     <td>
                       {data.orderStatus}
                       <Dropdown>

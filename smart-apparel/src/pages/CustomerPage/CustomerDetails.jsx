@@ -28,9 +28,12 @@ export default function CustomerDetails() {
   // Fetch customer data from the server on component mount and whenever deleteCustomer changes
   useEffect(() => {
     axios
-      .get("http://localhost:8080/customer/customer")
+      .get("http://localhost:8080/customer/viewCustomer")
       .then((res) => {
-        setTableData(res.data);
+        setTableData(res.data.content);
+        // const js = JSON.parse(res.data)
+        // console.log(js)
+        //console.log(res.data.content)
       })
       .catch((err) => {
         alert(err.message);
@@ -41,7 +44,8 @@ export default function CustomerDetails() {
   const handleDeleteBtn = async (customerId) => {
     await axios
       .delete(
-        `http://localhost:8080/smart-apperal/api/customer/deleteCustomer/${customerId}`
+        `http://localhost:8080/customer/deleteCustomer/{CustomerId}`
+        // `http://localhost:8080/smart-apperal/api/customer/deleteCustomer/${customerId}`  
       )
       .then((res) => {
         setDeleteCustomer(true);
@@ -56,7 +60,8 @@ export default function CustomerDetails() {
   const handleEditBtn = async (customerId) => {
     await axios
       .get(
-        `http://localhost:8080/smart-apperal/api/customer/customer/${customerId}`
+        `http://localhost:8080/customer/updateCustomer`
+        // `http://localhost:8080/smart-apperal/api/customer/customer/${customerId}`
       )
       .then((res) => {
         setCustomerId(res.data.customerID);
@@ -297,7 +302,7 @@ export default function CustomerDetails() {
                 {tableData?.map((data, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{data.customerID}</td>
+                    <td>{data.customerId}</td>
                     <td>{data.customerName}</td>
                     <td>{data.customerAddress}</td>
                     <td>{data.customerEmail}</td>

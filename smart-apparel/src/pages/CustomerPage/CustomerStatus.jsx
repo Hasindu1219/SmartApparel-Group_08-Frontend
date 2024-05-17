@@ -18,9 +18,10 @@ export default function CustomerStatus() {
     const fetchValidOrderIds = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/smart-apperal/api/orders/orderId"
+          // "http://localhost:8080/order/orderId"
+          "http://localhost:8080/order/${orderId}"
         );
-        setValidOrderIds(response.data);
+        setValidOrderIds(response.data.orderId);
       } catch (error) {
         console.error("Error fetching valid order IDs:", error);
       }
@@ -36,9 +37,10 @@ export default function CustomerStatus() {
   const handleSearch = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.get(`/api/orders/${orderId}`);
-      if (response.data && response.data.status) {
-        setOrderStatus(response.data.status);
+      const response = await axios.get(`http://localhost:8080/order/${orderId}`);
+      // const response = await axios.get('http://localhost:8080/order/${orderId}');
+      if (response.data.orderId && response.data.orderStatus) {
+        setOrderStatus(response.data.orderStatus);
         setError(null);
       } else {
         setOrderStatus(null);
@@ -47,7 +49,7 @@ export default function CustomerStatus() {
       }
     } catch (err) {
       setOrderStatus(null);
-      setError("Invalid Order ID");
+      setError("Invalid Order ID 2");
       setErrorType(errorMsg[0]);
     }
   };

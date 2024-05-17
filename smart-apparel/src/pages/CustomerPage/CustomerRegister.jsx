@@ -59,7 +59,7 @@ export default function CustomerRegister() {
       // Send a POST request to register the customer
       await axios
         .post(
-          "http://localhost:8080/smart-apperal/api/customer/customerregister",
+          "http://localhost:8080/customer/saveCustomer",
           formData
         )
         .then((res) => {
