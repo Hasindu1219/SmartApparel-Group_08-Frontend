@@ -37,18 +37,19 @@ export default function OrderRegister() {
   const [modelName, setModelName] = useState(initialModelName);
 
   // Function to handle the Add button click
-  const handleAddBtn = async () => {
+  const handleAddBtn = async (e) => {
+    e.preventDefault();
+    setError("none");
+    setErrorType("none");
     if (
       // Check if all required fields are filled
       !orderId ||
       !orderCustomerName ||
       !orderAgreedPrice ||
-      !modelName ||
       !smallSize ||
       !mediumSize ||
       !largeSize ||
-      !clothMaterial ||
-      !orderStatus
+      !clothMaterial 
     ) {
       setError("block");
       setErrorType(errorMsg[0]);
@@ -68,15 +69,36 @@ export default function OrderRegister() {
         clothMaterial,
         orderStatus,
       };
+
+      //console.log("Form Data ",formData)
       // Send POST request to register order
       await axios
         .post("http://localhost:8080/order/saveOrder", formData)
         .then((res) => {
-          alert("Successfully Registered");
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
+        //   alert("Successfully Registered");
+        // })
+        // .catch((err) => {
+        //   alert(err.message);
+        // });
+
+        if (res.data.code === "00") {
+          setError("block");
+          setErrorType("success");
+          setTimeout(() => {
+            navigate("/orderdetails");
+          }, 3000);
+        } else if (res.data.code === "06") {
+          setError("block");
+          setErrorType("warning");
+        } else {
+          setError("block");
+          setErrorType("danger");
+        }
+      })
+      .catch(() => {
+        setError("block");
+        setErrorType("danger");
+      });
     }
   };
 
@@ -124,6 +146,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="number"
+                    value = {orderId}
                     placeholder="Enter Order Id"
                     onChange={(e) => {
                       setOrderId(e.target.value);
@@ -144,6 +167,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="text"
+                    value = {orderCustomerName}
                     placeholder="Enter Order Customer Name"
                     onChange={(e) => {
                       setOrderCustomerName(e.target.value);
@@ -164,6 +188,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="number"
+                    value = {orderAgreedPrice}
                     placeholder="Enter Order Agreed Price"
                     onChange={(e) => {
                       setOrderAgreedPrice(e.target.value);
@@ -216,6 +241,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="number"
+                    value = {smallSize}
                     placeholder="Enter Amount"
                     onChange={(e) => {
                       setSmallSize(e.target.value);
@@ -239,6 +265,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="number"
+                    value = {mediumSize}
                     placeholder="Enter Amount"
                     onChange={(e) => {
                       setMediumSize(e.target.value);
@@ -262,6 +289,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="number"
+                    value = {largeSize}
                     placeholder="Enter Amount"
                     onChange={(e) => {
                       setLargeSize(e.target.value);
@@ -282,6 +310,7 @@ export default function OrderRegister() {
                 <Col>
                   <select
                     id="cloth-material"
+                    value = {clothMaterial}
                     onChange={(e) => {
                       setClothMaterial(e.target.value);
                     }}
@@ -315,9 +344,11 @@ export default function OrderRegister() {
                   <input
                     type="text"
                     value="Pending" // Set the value to Pending state
+                    //value = {orderStatus}
                     disabled // Make the input field disabled to prevent user input
                     onChange={(e) => {
-                      setOrderStatus(e.target.value);
+                      // setOrderStatus(e.target.value);
+                      setOrderStatus("Pending");
                     }}
                   />
                 </Col>
@@ -340,6 +371,14 @@ export default function OrderRegister() {
             >
               Register
             </button>
+            {error !== "none" && (
+                <Error
+                  msg={errorMsg}
+                  setErrorType={errorType}
+                  errorType={errorType}
+                  setError={setError}
+                />
+              )}
           </div>
         </div>
       </div>

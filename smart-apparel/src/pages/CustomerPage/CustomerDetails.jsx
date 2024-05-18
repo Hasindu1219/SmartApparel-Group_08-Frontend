@@ -4,6 +4,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import Error1 from "../../components/Error1/Error1";
 import axios from "axios";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 
 export default function CustomerDetails() {
@@ -44,8 +46,7 @@ export default function CustomerDetails() {
   const handleDeleteBtn = async (customerId) => {
     await axios
       .delete(
-        `http://localhost:8080/customer/deleteCustomer/{CustomerId}`
-        // `http://localhost:8080/smart-apperal/api/customer/deleteCustomer/${customerId}`  
+        `http://localhost:8080/customer/deleteCustomer/${customerId}`
       )
       .then((res) => {
         setDeleteCustomer(true);
@@ -59,19 +60,16 @@ export default function CustomerDetails() {
   // Function to handle edit button click
   const handleEditBtn = async (customerId) => {
     await axios
-      .get(
-        `http://localhost:8080/customer/updateCustomer`
-        // `http://localhost:8080/smart-apperal/api/customer/customer/${customerId}`
-      )
+      .get(`http://localhost:8080/customer/viewCustomer/${customerId}`)
       .then((res) => {
-        setCustomerId(res.data.customerID);
-        setCustomerName(res.data.customerName);
-        setCustomerAddress(res.data.customerAddress);
-        setCustomerEmail(res.data.customerEmail);
-        setCustomerCompanyName(res.data.customerCompanyName);
-        setCustomerReference(res.data.customerReference);
-        setCustomerPhoneNum(res.data.customerPhoneNum);
-        setCustomerPassword(res.data.customerPassword);
+        setCustomerId(res.data.content.customerId);
+        setCustomerName(res.data.content.customerName);
+        setCustomerAddress(res.data.content.customerAddress);
+        setCustomerEmail(res.data.content.customerEmail);
+        setCustomerCompanyName(res.data.content.customerCompanyName);
+        setCustomerReference(res.data.content.customerReference);
+        setCustomerPhoneNum(res.data.content.customerPhoneNum);
+        setCustomerPassword(res.data.content.customerPassword);
 
         // Switch view to the update form
         setModelView("block");
@@ -114,11 +112,11 @@ export default function CustomerDetails() {
       // Send update request to the server
       await axios
         .put(
-          "http://localhost:8080/smart-apperal/api/customer/updatecustomer",
+          "http://localhost:8080/customer/updateCustomer",
           updateData
         )
         .then((res) => {
-          window.location.href = "/customer/customerviewdelete";
+          window.location.href = "/customerdetails";
         })
         .catch((err) => {
           alert(err.message);
@@ -128,7 +126,7 @@ export default function CustomerDetails() {
 
   // Function to handle close button click
   const handleCloseBtn = () => {
-    window.location.href = "/customer/customerviewdelete";
+    window.location.href = "/customerdetails";
   };
 
   // Rendering
@@ -140,7 +138,7 @@ export default function CustomerDetails() {
       <div className="formBodyContainer">
         <Sidebar />
         <div
-          style={{ width: "100%", backgroundColor: "#d7e3fc", height: "100vh" }}
+          style={{ width: "100%", backgroundColor: "#d7e3fc", height: "auto" }}
         >
           <h1
             style={{
@@ -158,9 +156,13 @@ export default function CustomerDetails() {
             <form action="">
               {/* Form input fields */}
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "5.5rem" }}>
                   Customer Id:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Customer ID"
@@ -170,12 +172,18 @@ export default function CustomerDetails() {
                     setCustomerId(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "3.5rem" }}>
                   Customer Name:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Customer Name"
@@ -184,12 +192,18 @@ export default function CustomerDetails() {
                     setCustomerName(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "4rem" }}>
                   Customer Address:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Customer Address"
@@ -198,12 +212,18 @@ export default function CustomerDetails() {
                     setCustomerAddress(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "4.1rem" }}>
                   Customer Email:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Customer Email"
@@ -212,12 +232,18 @@ export default function CustomerDetails() {
                     setCustomerEmail(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "4rem" }}>
                   Customer Company Name:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Customer Company Name"
@@ -226,12 +252,18 @@ export default function CustomerDetails() {
                     setCustomerCompanyName(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "4.1rem" }}>
                   Customer Reference:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Customer Reference"
@@ -240,12 +272,18 @@ export default function CustomerDetails() {
                     setCustomerReference(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "4.1rem" }}>
                   Customer Phone Number:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Customer Phone Number"
@@ -254,12 +292,18 @@ export default function CustomerDetails() {
                     setCustomerPhoneNum(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "4rem" }}>
                   Customer Password:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Customer Password"
@@ -268,6 +312,8 @@ export default function CustomerDetails() {
                     setCustomerPassword(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
             </form>
 
@@ -315,13 +361,13 @@ export default function CustomerDetails() {
                       <div className="tableBtn">
                         <button
                           className="editBtn"
-                          onClick={() => handleEditBtn(data.customerID)}
+                          onClick={() => handleEditBtn(data.customerId)}
                         >
                           Edit
                         </button>
                         <button
                           className="deleteBtn"
-                          onClick={() => handleDeleteBtn(data.customerID)}
+                          onClick={() => handleDeleteBtn(data.customerId)}
                         >
                           Delete
                         </button>
