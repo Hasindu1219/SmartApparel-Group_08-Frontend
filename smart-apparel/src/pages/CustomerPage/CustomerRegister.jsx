@@ -58,10 +58,7 @@ export default function CustomerRegister() {
 
       // Send a POST request to register the customer
       await axios
-        .post(
-          "http://localhost:8080/smart-apperal/api/customer/customerregister",
-          formData
-        )
+        .post("http://localhost:8080/customer/saveCustomer", formData)
         .then((res) => {
           alert("Successfully Registered");
         })
@@ -102,7 +99,7 @@ export default function CustomerRegister() {
           <Error errorDisplay={error} />
           {/* Input Fields */}
           <form action="">
-            <div className="formBox">
+            {/* <div className="formBox">
               <label htmlFor="" style={{ marginRight: "3.5rem" }}>
                 Customer ID:{" "}
               </label>
@@ -113,7 +110,7 @@ export default function CustomerRegister() {
                   setCustomerId(e.target.value);
                 }}
               />
-            </div>
+            </div> */}
             <div className="formBox">
               <label htmlFor="" style={{ marginRight: "4rem" }}>
                 Customer Name:{" "}

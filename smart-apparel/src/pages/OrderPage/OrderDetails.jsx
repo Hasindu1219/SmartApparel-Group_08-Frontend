@@ -4,6 +4,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import Error1 from "../../components/Error1/Error1";
 import axios from "axios";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 
 export default function OrderDetails() {
@@ -17,6 +19,7 @@ export default function OrderDetails() {
   const [orderId, setOrderId] = useState("");
   const [orderCustomerName, setOrderCustomerName] = useState("");
   const [orderAgreedPrice, setOrderAgreedPrice] = useState("");
+  const [modelName, setModelName] = useState("");
   const [smallSize, setSmallSize] = useState("");
   const [mediumSize, setMediumSize] = useState("");
   const [largeSize, setLargeSize] = useState("");
@@ -25,30 +28,15 @@ export default function OrderDetails() {
 
   const [error, setError] = useState("none");
 
-  // const [data, setData] = useState([]);
-
-  // View data
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8080/smart-apperal/api/orders/orders"
-      );
-      setTableData(response.data); // Assuming response.data is an array of objects
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  // Delete data
+  // Fetch order data from the server on component mount and whenever deleteOrder changes
   useEffect(() => {
     axios
-      .get("http://localhost:8080/smart-apperal/api/orders/orders")
+      .get("http://localhost:8080/order/viewOrder")
       .then((res) => {
-        setTableData(res.data);
+        setTableData(res.data.content);
+        // const js = JSON.parse(res.data)
+        // console.log(js)
+        //console.log(res.data.content)
       })
       .catch((err) => {
         alert(err.message);
@@ -59,7 +47,7 @@ export default function OrderDetails() {
   const handleDeleteBtn = async (orderId) => {
     await axios
       .delete(
-        `http://localhost:8080/smart-apperal/api/orders/deleteOrder/${orderId}`
+        `http://localhost:8080/order/deleteOrder/${orderId}`
       )
       .then((res) => {
         setDeleteOrder(true);
@@ -73,17 +61,21 @@ export default function OrderDetails() {
   // Function to handle edit button click
   const handleEditBtn = async (orderId) => {
     await axios
-      .get(`http://localhost:8080/smart-apperal/api/orders/orders/${orderId}`)
+      .get(
+        `http://localhost:8080/order/viewOrder/${orderId}`
+      )
       .then((res) => {
-        setOrderId(res.data.orderID);
-        setOrderCustomerName(res.data.orderCustomerName);
-        setOrderAgreedPrice(res.data.orderAgreedPrice);
-        setSmallSize(res.data.smallSize);
-        setMediumSize(res.data.mediumSize);
-        setLargeSize(res.data.largeSize);
-        setClothMaterial(res.data.clothMaterial);
-        setOrderStatus(res.data.orderStatus);
+        setOrderId(res.data.content.orderId);
+        setOrderCustomerName(res.data.content.orderCustomerName);
+        setOrderAgreedPrice(res.data.content.orderAgreedPrice);
+        setModelName(res.data.content.modelName);
+        setSmallSize(res.data.content.smallSize);
+        setMediumSize(res.data.content.mediumSize);
+        setLargeSize(res.data.content.largeSize);
+        setClothMaterial(res.data.content.clothMaterial);
+        setOrderStatus(res.data.content.orderStatus);
 
+        // Switch view to the update form
         setModelView("block");
         setTableView("none");
       })
@@ -95,14 +87,14 @@ export default function OrderDetails() {
   // Function to handle update button click
   const handleUpdateBtn = async () => {
     if (
+      // Validate form input fields
       !orderId ||
       !orderCustomerName ||
       !orderAgreedPrice ||
       !smallSize ||
       !mediumSize ||
       !largeSize ||
-      !clothMaterial ||
-      !orderStatus
+      !clothMaterial 
     ) {
       setError("block");
       setTimeout(() => {
@@ -113,19 +105,21 @@ export default function OrderDetails() {
         orderId,
         orderCustomerName,
         orderAgreedPrice,
+        modelName,
         smallSize,
         mediumSize,
         largeSize,
         clothMaterial,
         orderStatus,
       };
+      // Send update request to the server
       await axios
         .put(
-          "http://localhost:8080/smart-apperal/api/orders/updateorder",
+          "http://localhost:8080/order/updateOrder",
           updateData
         )
         .then((res) => {
-          window.location.href = "/order/orderviewdelete";
+          window.location.href = "/orderdetails";
         })
         .catch((err) => {
           alert(err.message);
@@ -135,7 +129,7 @@ export default function OrderDetails() {
 
   // Function to handle close button click
   const handleCloseBtn = () => {
-    window.location.href = "/orders/orderviewdelete";
+    window.location.href = "/orderdetails";
   };
 
   return (
@@ -162,9 +156,13 @@ export default function OrderDetails() {
           <div className="updateConatiner" style={{ display: modelView }}>
             <form action="">
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "5.5rem" }}>
                   Order Id:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Order ID"
@@ -174,12 +172,18 @@ export default function OrderDetails() {
                     setOrderId(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "3.5rem" }}>
                   Order Customer Name:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Order Customer Name"
@@ -188,12 +192,18 @@ export default function OrderDetails() {
                     setOrderCustomerName(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "4rem" }}>
                   Order Agreed Price:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Order Agreed Price"
@@ -202,6 +212,29 @@ export default function OrderDetails() {
                     setOrderAgreedPrice(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
+              </div>
+
+              <div className="formBox">
+              <Row>
+                <Col xs={2}>
+                <label htmlFor="" style={{ marginRight: "4rem" }}>
+                  Model Name:{" "}
+                </label>
+                </Col>
+                <Col>
+                <input
+                  type="text"
+                  //placeholder="Enter Mode lName"
+                  value={modelName}
+                  disabled
+                  // onChange={(e) => {
+                  //   setModelName(e.target.value);
+                  // }}
+                />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
@@ -211,9 +244,13 @@ export default function OrderDetails() {
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "4.1rem" }}>
                   Small Size:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Small Size"
@@ -222,12 +259,18 @@ export default function OrderDetails() {
                     setSmallSize(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "4.1rem" }}>
                   Medium Size:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Medium Size"
@@ -236,12 +279,18 @@ export default function OrderDetails() {
                     setMediumSize(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
+              <Row>
+                <Col xs={2}>
                 <label htmlFor="" style={{ marginRight: "4.1rem" }}>
                   Large Size:{" "}
                 </label>
+                </Col>
+                <Col>
                 <input
                   type="text"
                   placeholder="Enter Lerge Size"
@@ -250,21 +299,69 @@ export default function OrderDetails() {
                     setLargeSize(e.target.value);
                   }}
                 />
+                </Col>
+                </Row>
               </div>
 
               <div className="formBox">
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
-                  Cloth Material:{" "}
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Cloth Material"
-                  value={clothMaterial}
-                  onChange={(e) => {
-                    setClothMaterial(e.target.value);
-                  }}
-                />
-              </div>
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                    Cloth Material
+                  </label>
+                </Col>
+                <Col>
+                  <select
+                    // id="cloth-material"
+                    value = {clothMaterial}
+                    onChange={(e) => {
+                      setClothMaterial(e.target.value);
+                    }}
+                  >
+                    <option value="Cotton-Red">Cotton-Red</option>
+                    <option value="Cotton-Green">Cotton-Green</option>
+                    <option value="Cotton-Purple">Cotton-Purple</option>
+                    <option value="Cotton-Blue">Cotton-Blue</option>
+                    <option value="Linen-Red">Linen-Red</option>
+                    <option value="Linen-Green">Linen-Green</option>
+                    <option value="Linen-Purple">Linen-Purple</option>
+                    <option value="Linen-Blue">Linen-Blue</option>
+                    <option value="Lace-Red">Lace-Red</option>
+                    <option value="Lace-Green">Lace-Green</option>
+                    <option value="Lace-Purple">Lace-Purple</option>
+                    <option value="Lace-Blue">Lace-Blue</option>
+                  </select>
+                </Col>
+              </Row>
+            </div>
+
+            <div className="formBox">
+              <Row>
+                <Col xs={2}>
+                  {" "}
+                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                    Order Status
+                  </label>
+                </Col>
+                <Col>
+                  <select
+                    // id="cloth-material"
+                    value = {orderStatus}
+                    onChange={(e) => {
+                      setOrderStatus(e.target.value);
+                    }}
+                  >
+                    <option value="Pending">Pending</option>
+                    <option value="Started">Started</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Quality Certified">Quality Certified</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                  </select>
+                </Col>
+              </Row>
+            </div>
               {/* Cloth Material drop down */}
             </form>
             <div className="formButtonSection">
@@ -285,10 +382,11 @@ export default function OrderDetails() {
                   <th>Order Id</th>
                   <th>Order Customer Name</th>
                   <th>Order Agreed Price</th>
-                  <th>Cloth Material</th>
+                  <th>Model Name</th>
                   <th>Small Size</th>
                   <th>Medium Size</th>
                   <th>Large Size</th>
+                  <th>Cloth Material</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -297,21 +395,22 @@ export default function OrderDetails() {
                 {tableData?.map((data, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{data.orderID}</td>
-                    <td>{data.ordercustomerName}</td>
+                    <td>{data.orderId}</td>
+                    <td>{data.orderCustomerName}</td>
                     <td>{data.orderAgreedPrice}</td>
-                    <td>{data.clothMaterial}</td>
+                    <td>{data.modelName}</td>
                     <td>{data.smallSize}</td>
                     <td>{data.mediumSize}</td>
                     <td>{data.largeSize}</td>
+                    <td>{data.clothMaterial}</td>
                     <td>
                       {data.orderStatus}
-                      <Dropdown>
+                      {/* <Dropdown> */}
                         {/* <Dropdown.Toggle onChange={(e) => {setClothMaterial(e.target.value);}}>
                         Select Material
                       </Dropdown.Toggle> */}
 
-                        <Dropdown.Menu
+                        {/* <Dropdown.Menu
                           onChange={(e) => {
                             setOrderStatus(e.target.value);
                           }}
@@ -323,7 +422,7 @@ export default function OrderDetails() {
                           <Dropdown.Item>Shipped</Dropdown.Item>
                           <Dropdown.Item>Delivered</Dropdown.Item>
                         </Dropdown.Menu>
-                      </Dropdown>
+                      </Dropdown> */}
                       {/* <select>
                     <option value="Pending">Pending</option>
                     <option value="Started">Started</option>
