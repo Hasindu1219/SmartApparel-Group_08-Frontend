@@ -28,6 +28,7 @@ export default function OrderDetails() {
 
   const [error, setError] = useState("none");
 
+  // Fetch order data from the server on component mount and whenever deleteOrder changes
   useEffect(() => {
     axios
       .get("http://localhost:8080/order/viewOrder")
@@ -64,7 +65,7 @@ export default function OrderDetails() {
         `http://localhost:8080/order/viewOrder/${orderId}`
       )
       .then((res) => {
-        setOrderId(res.data.orderID);
+        setOrderId(res.data.content.orderId);
         setOrderCustomerName(res.data.content.orderCustomerName);
         setOrderAgreedPrice(res.data.content.orderAgreedPrice);
         setModelName(res.data.content.modelName);

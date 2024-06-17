@@ -2,57 +2,123 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
-import Error from "../../components/Error1/ErrorId";
+import Error from "../../components/Error1/ErrorShipping";
 import "./OrderShipment.css";
 
 function OrderShipment() {
   const [orderId, setOrderId] = useState("");
-  const [isOrderValid, setIsOrderValid] = useState(false);
-  const [validOrderIds, setValidOrderIds] = useState([]);
+  const [orderStatus, setOrderStatus] = useState("");
+  const [isShipped, setIsShipped] = useState(false);
 
   const [error, setError] = useState("none");
   const [errorType, setErrorType] = useState("none");
   const errorMsg = ["Invalid Order ID"];
 
-  useEffect(() => { 
-    const fetchValidOrderIds = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8080/smart-apperal/api/orders/orderId"
-        );
-        setValidOrderIds(response.data);
-      } catch (error) {
-        console.error("Error fetching valid order IDs:", error);
-      }
-    };
-
-    fetchValidOrderIds();
-  }, []);
-
   const handleInputChange = (event) => {
     setOrderId(event.target.value);
   };
 
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    
+  const fetchOrderStatus = async () => {
     try {
-      const response = await axios.get(`/api/orders/${orderId}`);
-      if (response.data.exists) {
-        setIsOrderValid(true);
-        setError("none");
-      } else {
-        setIsOrderValid(false);
-        setError("block");
-        setErrorType(errorMsg[0]);
-      }
+        const res = await axios.get(`http://localhost:8080/order/checkShipped/${orderId}`);
+        // const orderStatus = response.data;
+        orderStatus = res.data;
+        setOrderStatus(orderStatus);
+        setError(null);
+        setIsShipped(orderStatus === 'Shipped');
     } catch (err) {
-      console.error(err);
-      setIsOrderValid(false);
-      setError("block");
-      setErrorType("Server error. Please try again later.");
+        setError('Order not found or not shipped');
+        setOrderStatus(null);
+        setIsShipped(false);
     }
-  };
+};
+
+const generateBill = async () => {
+    try {
+        const res = await axios.get(`http://localhost:8080/order/generateBill/${orderId}`, { resType: 'blob' });
+        const fileURL = URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
+        const link = document.createElement('a');
+        link.href = fileURL;
+        link.setAttribute('download', 'order_bill.pdf');
+        document.body.appendChild(link);
+        link.click();
+    } catch (err) {
+        setError('Failed to generate bill');
+    }
+};
+
+  // const handleInputChange = (event) => {
+  //   setOrderId(event.target.value);
+  // };
+
+  // const fetchOrderStatus = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const res = await axios.get(
+  //       `http://localhost:8080/order/viewOrder/${orderId}`
+  //     );
+  //     if (res.data.exists) {
+  //       setIsOrderValid(true);
+  //       setError("none");
+  //     } else {
+  //       setIsOrderValid(false);
+  //       setError("block");
+  //       setErrorType(errorMsg[0]);
+  //     }
+  //     // setOrderStatus(res.data.content.orderStatus);
+  //     // setError(null);
+  //    }
+  //   //  catch (error) {
+  //   //   setOrderStatus("Invalid Order ID");
+  //   //   setError("Invalid Order ID");
+  //   // }
+  //   catch (err) {
+  //     console.error(err);
+  //     setIsOrderValid(false);
+  //     setError("block");
+  //     setErrorType("Server error. Please try again later.");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const fetchValidOrderIds = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://localhost:8080/smart-apperal/api/orders/orderId"
+  //       );
+  //       setValidOrderIds(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching valid order IDs:", error);
+  //     }
+  //   };
+
+  //   fetchValidOrderIds();
+  // }, []);
+
+  // const handleInputChange = (event) => {
+  //   setOrderId(event.target.value);
+  // };
+
+  // const handleSearch = async (event) => {
+  //   event.preventDefault();
+
+  //   try {
+  //     const response = await axios.get(`/api/orders/${orderId}`);
+  //     if (response.data.exists) {
+  //       setIsOrderValid(true);
+  //       setError("none");
+  //     } else {
+  //       setIsOrderValid(false);
+  //       setError("block");
+  //       setErrorType(errorMsg[0]);
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //     setIsOrderValid(false);
+  //     setError("block");
+  //     setErrorType("Server error. Please try again later.");
+  //   }
+  // };
 
   return (
     <div>
@@ -77,21 +143,26 @@ function OrderShipment() {
           <div>
             <Error errorDisplay={error} errorMessage={errorType} />
             <div className="App">
-              <form onSubmit={handleSearch}>
+              {/* <form onSubmit={handleSearch}> */}
+              <form onSubmit={fetchOrderStatus}>
                 <input
                   type="text"
                   value={orderId}
                   onChange={handleInputChange}
                   placeholder="Enter Order ID"
                 />
-                <button id="searchBtn" type="submit">Search</button>
+                <button id="searchBtn" type="submit">
+                  Search
+                </button>
               </form>
               <button
                 id="billBtn"
-                disabled={!isOrderValid}
-                onClick={() => alert("Bill Generated")}
+                // disabled={!isOrderValid}
+                // onClick={() => alert("Bill Generated")}
+                onClick={generateBill}
+                disabled={!isShipped}
               >
-                Generate Bill       
+                Generate Bill
                 {/* When click this download the relevant bill */}
               </button>
             </div>
@@ -103,4 +174,3 @@ function OrderShipment() {
 }
 
 export default OrderShipment;
-

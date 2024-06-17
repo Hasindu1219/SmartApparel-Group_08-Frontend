@@ -371,14 +371,14 @@ export default function OrderRegister() {
             >
               Register
             </button>
-            {error !== "none" && (
+            {/* {error !== "none" && (
                 <Error
                   msg={errorMsg}
                   setErrorType={errorType}
                   errorType={errorType}
                   setError={setError}
                 />
-              )}
+              )} */}
           </div>
         </div>
       </div>
