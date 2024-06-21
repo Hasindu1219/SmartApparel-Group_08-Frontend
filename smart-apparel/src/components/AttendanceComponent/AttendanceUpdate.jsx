@@ -23,7 +23,7 @@ const AttendanceUpdate = ({Id}) => {
     const fetchAttendanceRecordData = async () => {
 
       try {
-        const response = await axios.get(`http://localhost:8080/attendance/search/${Id}`);
+        const response = await axios.get(`http://localhost:8080/attendance/searchbyid/${Id}`);
         const fetchedAttendanceRecordData = response.data.content;
 
         setAttendanceRecord(fetchedAttendanceRecordData);
@@ -84,7 +84,7 @@ const AttendanceUpdate = ({Id}) => {
 
       <Grid container spacing={2} sx={{backgroundColor:'#EEEEEE', margin:'auto', display:'block'}}>
         <Grid>
-          <Typography component={'h1'} sx={{ color: '#000000', fontSize: '30px', textAlign: 'center' }}>Update Employee</Typography>
+          <Typography component={'h1'} sx={{ color: '#000000', fontSize: '30px', textAlign: 'center' }}>Update Attendance</Typography>
         </Grid>
 
         {/* Render form fields */}

@@ -3,7 +3,6 @@ import { useState } from "react";
 import axios from "axios";
 
 const EmployeeAddPage = () => {
-
   // States for fields
   const [date, setDate] = useState('');
   const [inTime, setInTime] = useState('');
@@ -16,21 +15,12 @@ const EmployeeAddPage = () => {
   const [outTimeError, setOutTimeError] = useState('');
   const [employeeIdError, setEmployeeIdError] = useState('');
 
-  //entered values for new employee
-  const newAttendance = {
-    date: date,
-    inTime: inTime,
-    outTime: outTime,
-    empId: employeeId,
-  }
-
   // Validate date
   const validateDate = () => {
     if (!date.trim()) {
       setDateError('Date is required');
       return false;
     }
-    
     setDateError('');
     return true;
   };
@@ -41,7 +31,10 @@ const EmployeeAddPage = () => {
       setInTimeError('In Time is required');
       return false;
     }
-    
+    if (outTime.trim() && inTime >= outTime) {
+      setInTimeError('In Time should be earlier than Out Time');
+      return false;
+    }
     setInTimeError('');
     return true;
   };
@@ -52,7 +45,10 @@ const EmployeeAddPage = () => {
       setOutTimeError('Out Time is required');
       return false;
     }
-    
+    if (inTime.trim() && outTime <= inTime) {
+      setOutTimeError('Out Time should be later than In Time');
+      return false;
+    }
     setOutTimeError('');
     return true;
   };
@@ -63,11 +59,9 @@ const EmployeeAddPage = () => {
       setEmployeeIdError('Employee ID is required');
       return false;
     }
-
     setEmployeeIdError('');
     return true;
   };
-
 
   const handleSubmit = async () => {
     // Resetting all error messages before validations
@@ -76,8 +70,15 @@ const EmployeeAddPage = () => {
     setOutTimeError('');
     setEmployeeIdError('');
 
-    if(validateDate() && validateInTime() && validateOutTime() && validateEmployeeId()){
+    if (validateDate() && validateInTime() && validateOutTime() && validateEmployeeId()) {
       try {
+        const newAttendance = {
+          date: date,
+          inTime: inTime,
+          outTime: outTime,
+          empId: employeeId,
+        };
+
         console.log(newAttendance);
         const response = await axios.post("http://localhost:8080/attendance/add", newAttendance);
 
@@ -95,8 +96,7 @@ const EmployeeAddPage = () => {
         alert("Error occurred while adding attendance.");
       }
     }
-    
-  }
+  };
 
   const handleReset = () => {
     // Resetting all state variables to empty strings
@@ -110,17 +110,16 @@ const EmployeeAddPage = () => {
     setInTimeError('');
     setOutTimeError('');
     setEmployeeIdError('');
-  }
+  };
 
   return (
     <>
       <Grid container spacing={2} sx={{ backgroundColor: '#EEEEEE', margin: 'auto', display: 'block' }}>
-
         <Grid item sx={{ display: 'flex' }}>
           <Typography component={'label'} htmlFor="date" sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '150px', display: 'block' }}>
             Date:
           </Typography>
-          <Input type="date" name="date" id="date" sx={{ width: '400px' }} value={date} onChange={e => { setDate(e.target.value) }} onBlur={validateDate}/>
+          <Input type="date" name="date" id="date" sx={{ width: '400px' }} value={date} onChange={e => setDate(e.target.value)} onBlur={validateDate} />
           <Typography sx={{ color: 'red' }}>{dateError && dateError}</Typography>
         </Grid>
 
@@ -128,7 +127,7 @@ const EmployeeAddPage = () => {
           <Typography component={'label'} htmlFor="inTime" sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '150px', display: 'block' }}>
             IN Time:
           </Typography>
-          <Input type="text" name="inTime" id="inTime" sx={{ width: '400px' }} value={inTime} onChange={e => { setInTime(e.target.value) }} onBlur={validateInTime}/>
+          <Input type="time" name="inTime" id="inTime" sx={{ width: '400px' }} value={inTime} onChange={e => setInTime(e.target.value)} onBlur={validateInTime} />
           <Typography sx={{ color: 'red' }}>{inTimeError && inTimeError}</Typography>
         </Grid>
 
@@ -136,7 +135,7 @@ const EmployeeAddPage = () => {
           <Typography component={'label'} htmlFor="outTime" sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '150px', display: 'block' }}>
             OUT Time:
           </Typography>
-          <Input type="text" name="outTime" id="outTime" sx={{ width: '400px' }} value={outTime} onChange={e => { setOutTime(e.target.value) }} onBlur={validateOutTime}/>
+          <Input type="time" name="outTime" id="outTime" sx={{ width: '400px' }} value={outTime} onChange={e => setOutTime(e.target.value)} onBlur={validateOutTime} />
           <Typography sx={{ color: 'red' }}>{outTimeError && outTimeError}</Typography>
         </Grid>
 
@@ -144,7 +143,7 @@ const EmployeeAddPage = () => {
           <Typography component={'label'} htmlFor="employeeId" sx={{ color: '#000000', marginLeft: '20px', fontSize: '16px', width: '150px', display: 'block' }}>
             Employee ID:
           </Typography>
-          <Input type="text" name="employeeId" id="employeeId" sx={{ width: '400px' }} value={employeeId} onChange={e => { setEmployeeId(e.target.value) }} onBlur={validateEmployeeId}/>
+          <Input type="text" name="employeeId" id="employeeId" sx={{ width: '400px' }} value={employeeId} onChange={e => setEmployeeId(e.target.value)} onBlur={validateEmployeeId} />
           <Typography sx={{ color: 'red' }}>{employeeIdError && employeeIdError}</Typography>
         </Grid>
 
@@ -160,12 +159,8 @@ const EmployeeAddPage = () => {
             CLEAR
           </Button>
         </Grid>
-
       </Grid>
-
-
     </>
-
   );
 }
 

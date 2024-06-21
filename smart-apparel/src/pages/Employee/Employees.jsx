@@ -3,15 +3,8 @@ import Box from "@mui/material/Box";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import EmployeeTable4 from "../../components/EmployeeComponent/EmployeeTable4";
-import CardModel from "../../components/Card";
-
-const gradientStyle = {
-  background: "linear-gradient(to right, #2980B9, #6DD5FA)", // Gradient colors
-};
+import EmployeeCard from "../../components/EmployeeComponent/EmployeeCard";
 
 export default function Employees() {
 
@@ -27,38 +20,10 @@ export default function Employees() {
 
           {/* Cards */}
           <Grid container spacing={2}>
-            <Grid item xs="auto">
-              <Card sx={{ minWidth: 350 }} style={gradientStyle}>
-                <CardContent style={{ textAlign: "center" }}>
-                  <Typography variant="h5" component="div">
-                    Total Employees
-                  </Typography>
-                  <Typography variant="h5">5</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs="auto">
-              <Card sx={{ minWidth: 350 }} style={gradientStyle}>
-                <CardContent style={{ textAlign: "center" }}>
-                  <Typography variant="h5" component="div">
-                    Today Working
-                  </Typography>
-                  <Typography variant="h5">5</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs="auto">
-              <Card sx={{ minWidth: 350 }} style={gradientStyle}>
-                <CardContent style={{ textAlign: "center" }}>
-                  <Typography variant="h5" component="div">
-                    Total Employees
-                  </Typography>
-                  <Typography variant="h5">0</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <EmployeeCard title="Total Employees" value={0} />
+            <EmployeeCard title="Present Employees" value={0} />
+            <EmployeeCard title="Absant Employees" value={0} />
+            <EmployeeCard title="Resigned Employees" value={0} />
           </Grid>
 
           <Box height={30} />

@@ -25,7 +25,7 @@ const SalaryTable = () => {
                 }
             })
             .catch((error) => {
-                console.error('Error fetching Attendance:', error);
+                console.error('Error fetching Salaries:', error);
             });
     }, []);
 
@@ -103,7 +103,7 @@ const SalaryTable = () => {
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan={6} align="center">
+                                <TableCell colSpan="9" align="center">
                                     No Data
                                 </TableCell>
                             </TableRow>
