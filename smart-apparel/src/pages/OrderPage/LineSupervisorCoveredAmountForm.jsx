@@ -10,7 +10,8 @@ import Col from "react-bootstrap/Col";
 
 export default function LineSupervisorCoveredAmountForm() {
   const location = useLocation();
-  const orderId = location.state?.orderId || ""; // Get the orderId from the route state
+  const initialorderId = location.state?.orderId || ""; // Get the orderId from the route state
+  const [orderId, setOrderId] = useState(initialorderId);
 
   // State variables to hold form data and error states
   const [orderCustomerName, setOrderCustomerName] = useState("");
@@ -31,15 +32,15 @@ export default function LineSupervisorCoveredAmountForm() {
   useEffect(() => {
     if (orderId) {
       axios
-        .get(`http://localhost:8080/smart-apperal/api/orders/orders/${orderId}`)
+        .get(`http://localhost:8080/order/viewOrder/${orderId}`)
         .then((res) => {
           const orderData = res.data;
-          setOrderCustomerName(orderData.orderCustomerName);
-          setSmallSize(orderData.smallSize);
-          setMediumSize(orderData.mediumSize);
-          setLargeSize(orderData.largeSize);
-          setClothMaterial(orderData.clothMaterial);
-          setCoveredAmount(orderData.coveredAmount);
+          setOrderCustomerName(orderData.content.orderCustomerName);
+          setSmallSize(orderData.content.smallSize);
+          setMediumSize(orderData.content.mediumSize);
+          setLargeSize(orderData.content.largeSize);
+          setClothMaterial(orderData.content.clothMaterial);
+          setCoveredAmount(orderData.content.coveredAmount);
           setIsButtonDisabled(false); // Enable the update button
         })
         .catch((err) => {
@@ -51,6 +52,29 @@ export default function LineSupervisorCoveredAmountForm() {
         });
     }
   }, [orderId]);
+
+  // // Handle the update button click
+  // const handleUpdateBtn = async () => {
+  //   if (!coveredAmount) {
+  //     setError("block");
+  //     setErrorType(errorMsg[0]);
+  //     setTimeout(() => {
+  //       setError("none");
+  //     }, 2000);
+  //   } else {
+  //     const formData = {
+  //       coveredAmount,
+  //     };
+  //     await axios
+  //       .put("http://localhost:8080/order/updateOrder/{orderId}", formData)
+  //       .then((res) => {
+  //         alert("Successfully Updated");
+  //       })
+  //       .catch((err) => {
+  //         alert(err.message);
+  //       });
+  //   }
+  // };
 
   // Handle the update button click
   const handleUpdateBtn = async () => {
@@ -65,10 +89,8 @@ export default function LineSupervisorCoveredAmountForm() {
         coveredAmount,
       };
       await axios
-        .post(
-          "http://localhost:8080/smart-apperal/api/order/linesupervisorcoveredamountform",
-          formData
-        )
+        .get(`http://localhost:8080/order/viewOrder/${orderId}`,formData)
+        // .get(`http://localhost:8080/order/viewOrder`,formData)
         .then((res) => {
           alert("Successfully Updated");
         })
@@ -81,18 +103,6 @@ export default function LineSupervisorCoveredAmountForm() {
   // Handle the back button click
   const handleBackBtn = () => {
     navigate("/linesupervisorordercoveredamount");
-  };
-
-  // Handle the edit button click (not used in the current form)
-  const handleEditBtn = async (orderId) => {
-    await axios
-      .get(`http://localhost:8080/smart-apperal/api/orders/orders/${orderId}`)
-      .then((res) => {
-        setCoveredAmount(res.data.coveredAmount);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
   };
 
   return (
@@ -113,7 +123,7 @@ export default function LineSupervisorCoveredAmountForm() {
           >
             Update Covered Order Amount
           </h1>
-          <Error errorDisplay={error} errorMessage={errorType} />{" "}
+          <Error errorDisplay={error} errorMessage={errorType} />
           {/* Error component */}
           <form action="">
             <div className="formBox">
@@ -124,8 +134,14 @@ export default function LineSupervisorCoveredAmountForm() {
                   </label>
                 </Col>
                 <Col>
-                  <input value={orderId} disabled />{" "}
                   {/* Disabled input for orderId */}
+                  <input
+                    value={orderId}
+                    disabled
+                    onChange={(e) => {
+                      setOrderId(e.target.value);
+                    }}
+                  />
                 </Col>
               </Row>
             </div>
@@ -138,8 +154,14 @@ export default function LineSupervisorCoveredAmountForm() {
                   </label>
                 </Col>
                 <Col>
-                  <input value={orderCustomerName} disabled />{" "}
                   {/* Disabled input for orderCustomerName */}
+                  <input
+                    value={orderCustomerName}
+                    disabled
+                    onChange={(e) => {
+                      setOrderCustomerName(e.target.value);
+                    }}
+                  />
                 </Col>
               </Row>
             </div>
@@ -163,8 +185,14 @@ export default function LineSupervisorCoveredAmountForm() {
                   </label>
                 </Col>
                 <Col>
-                  <input value={smallSize} disabled />{" "}
                   {/* Disabled input for smallSize */}
+                  <input
+                    value={smallSize}
+                    disabled
+                    onChange={(e) => {
+                      setSmallSize(e.target.value);
+                    }}
+                  />
                 </Col>
               </Row>
             </div>
@@ -180,8 +208,15 @@ export default function LineSupervisorCoveredAmountForm() {
                   </label>
                 </Col>
                 <Col>
-                  <input value={mediumSize} disabled />{" "}
                   {/* Disabled input for mediumSize */}
+
+                  <input
+                    value={mediumSize}
+                    disabled
+                    onChange={(e) => {
+                      setMediumSize(e.target.value);
+                    }}
+                  />
                 </Col>
               </Row>
             </div>
@@ -197,8 +232,15 @@ export default function LineSupervisorCoveredAmountForm() {
                   </label>
                 </Col>
                 <Col>
-                  <input value={largeSize} disabled />{" "}
                   {/* Disabled input for largeSize */}
+
+                  <input
+                    value={largeSize}
+                    disabled
+                    onChange={(e) => {
+                      setLargeSize(e.target.value);
+                    }}
+                  />
                 </Col>
               </Row>
             </div>
@@ -211,8 +253,15 @@ export default function LineSupervisorCoveredAmountForm() {
                   </label>
                 </Col>
                 <Col>
-                  <input value={clothMaterial} disabled />{" "}
                   {/* Disabled input for clothMaterial */}
+
+                  <input
+                    value={clothMaterial}
+                    disabled
+                    onChange={(e) => {
+                      setClothMaterial(e.target.value);
+                    }}
+                  />
                 </Col>
               </Row>
             </div>
@@ -241,9 +290,7 @@ export default function LineSupervisorCoveredAmountForm() {
             <button id="backBtn" onClick={handleBackBtn}>
               Back
             </button>
-            <button id="editBtn" onClick={handleEditBtn}>
-              Edit
-            </button>
+
             <button
               id="addBtn"
               onClick={handleUpdateBtn}

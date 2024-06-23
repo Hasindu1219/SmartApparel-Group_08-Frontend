@@ -6,7 +6,6 @@ import Error1 from "../../components/Error1/Error1";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Dropdown from "react-bootstrap/Dropdown";
 
 export default function CustomerDetails() {
   // State variables
@@ -23,7 +22,6 @@ export default function CustomerDetails() {
   const [customerCompanyName, setCustomerCompanyName] = useState("");
   const [customerReference, setCustomerReference] = useState("");
   const [customerPhoneNum, setCustomerPhoneNum] = useState("");
-  const [customerPassword, setCustomerPassword] = useState("");
 
   const [error, setError] = useState("none");
 
@@ -33,9 +31,6 @@ export default function CustomerDetails() {
       .get("http://localhost:8080/customer/viewCustomer")
       .then((res) => {
         setTableData(res.data.content);
-        // const js = JSON.parse(res.data)
-        // console.log(js)
-        //console.log(res.data.content)
       })
       .catch((err) => {
         alert(err.message);
@@ -45,9 +40,7 @@ export default function CustomerDetails() {
   // Function to handle delete button click
   const handleDeleteBtn = async (customerId) => {
     await axios
-      .delete(
-        `http://localhost:8080/customer/deleteCustomer/${customerId}`
-      )
+      .delete(`http://localhost:8080/customer/deleteCustomer/${customerId}`)
       .then((res) => {
         setDeleteCustomer(true);
         alert("Delete Successfully");
@@ -69,7 +62,6 @@ export default function CustomerDetails() {
         setCustomerCompanyName(res.data.content.customerCompanyName);
         setCustomerReference(res.data.content.customerReference);
         setCustomerPhoneNum(res.data.content.customerPhoneNum);
-        setCustomerPassword(res.data.content.customerPassword);
 
         // Switch view to the update form
         setModelView("block");
@@ -90,8 +82,7 @@ export default function CustomerDetails() {
       !customerEmail ||
       !customerCompanyName ||
       !customerReference ||
-      !customerPhoneNum ||
-      !customerPassword
+      !customerPhoneNum
     ) {
       setError("block");
       setTimeout(() => {
@@ -107,14 +98,10 @@ export default function CustomerDetails() {
         customerCompanyName,
         customerReference,
         customerPhoneNum,
-        customerPassword,
       };
       // Send update request to the server
       await axios
-        .put(
-          "http://localhost:8080/customer/updateCustomer",
-          updateData
-        )
+        .put("http://localhost:8080/customer/updateCustomer", updateData)
         .then((res) => {
           window.location.href = "/customerdetails";
         })
@@ -156,163 +143,143 @@ export default function CustomerDetails() {
             <form action="">
               {/* Form input fields */}
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "5.5rem" }}>
-                  Customer Id:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Customer ID"
-                  disabled
-                  value={customerId}
-                  onChange={(e) => {
-                    setCustomerId(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "5.5rem" }}>
+                      Customer Id:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Customer ID"
+                      disabled
+                      value={customerId}
+                      onChange={(e) => {
+                        setCustomerId(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "3.5rem" }}>
-                  Customer Name:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Customer Name"
-                  value={customerName}
-                  onChange={(e) => {
-                    setCustomerName(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "3.5rem" }}>
+                      Customer Name:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Customer Name"
+                      value={customerName}
+                      onChange={(e) => {
+                        setCustomerName(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4rem" }}>
-                  Customer Address:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Customer Address"
-                  value={customerAddress}
-                  onChange={(e) => {
-                    setCustomerAddress(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "4rem" }}>
+                      Customer Address:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Customer Address"
+                      value={customerAddress}
+                      onChange={(e) => {
+                        setCustomerAddress(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
-                  Customer Email:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Customer Email"
-                  value={customerEmail}
-                  onChange={(e) => {
-                    setCustomerEmail(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "4.1rem" }}>
+                      Customer Email:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Customer Email"
+                      value={customerEmail}
+                      onChange={(e) => {
+                        setCustomerEmail(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4rem" }}>
-                  Customer Company Name:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Customer Company Name"
-                  value={customerCompanyName}
-                  onChange={(e) => {
-                    setCustomerCompanyName(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "4rem" }}>
+                      Customer Company Name:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Customer Company Name"
+                      value={customerCompanyName}
+                      onChange={(e) => {
+                        setCustomerCompanyName(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
-                  Customer Reference:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Customer Reference"
-                  value={customerReference}
-                  onChange={(e) => {
-                    setCustomerReference(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "4.1rem" }}>
+                      Customer Reference:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Customer Reference"
+                      value={customerReference}
+                      onChange={(e) => {
+                        setCustomerReference(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
-                  Customer Phone Number:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Customer Phone Number"
-                  value={customerPhoneNum}
-                  onChange={(e) => {
-                    setCustomerPhoneNum(e.target.value);
-                  }}
-                />
-                </Col>
-                </Row>
-              </div>
-
-              <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4rem" }}>
-                  Customer Password:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Customer Password"
-                  value={customerPassword}
-                  onChange={(e) => {
-                    setCustomerPassword(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "4.1rem" }}>
+                      Customer Phone Number:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Customer Phone Number"
+                      value={customerPhoneNum}
+                      onChange={(e) => {
+                        setCustomerPhoneNum(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
             </form>
@@ -339,7 +306,6 @@ export default function CustomerDetails() {
                   <th>Customer Company Name</th>
                   <th>Customer Reference</th>
                   <th>Customer Phone Number</th>
-                  <th>Customer Password</th>
 
                   <th>Action</th>
                 </tr>
@@ -355,7 +321,6 @@ export default function CustomerDetails() {
                     <td>{data.customerCompanyName}</td>
                     <td>{data.customerReference}</td>
                     <td>{data.customerPhoneNum}</td>
-                    <td>{data.customerPassword}</td>
 
                     <td>
                       <div className="tableBtn">

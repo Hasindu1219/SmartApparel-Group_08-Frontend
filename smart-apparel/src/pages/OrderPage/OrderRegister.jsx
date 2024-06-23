@@ -30,8 +30,6 @@ export default function OrderRegister() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Initially disabled
 
   // Get model name from location state
-  // const location = useLocation();
-  // const modelName = location.state?.modelName || "";
   const location = useLocation();
   const initialModelName = location.state?.modelName || "";
   const [modelName, setModelName] = useState(initialModelName);
@@ -49,7 +47,7 @@ export default function OrderRegister() {
       !smallSize ||
       !mediumSize ||
       !largeSize ||
-      !clothMaterial 
+      !clothMaterial
     ) {
       setError("block");
       setErrorType(errorMsg[0]);
@@ -70,35 +68,28 @@ export default function OrderRegister() {
         orderStatus,
       };
 
-      //console.log("Form Data ",formData)
       // Send POST request to register order
       await axios
         .post("http://localhost:8080/order/saveOrder", formData)
         .then((res) => {
-        //   alert("Successfully Registered");
-        // })
-        // .catch((err) => {
-        //   alert(err.message);
-        // });
-
-        if (res.data.code === "00") {
-          setError("block");
-          setErrorType("success");
-          setTimeout(() => {
-            navigate("/orderdetails");
-          }, 3000);
-        } else if (res.data.code === "06") {
-          setError("block");
-          setErrorType("warning");
-        } else {
+          if (res.data.code === "00") {
+            setError("block");
+            setErrorType("success");
+            setTimeout(() => {
+              navigate("/orderdetails");
+            }, 3000);
+          } else if (res.data.code === "06") {
+            setError("block");
+            setErrorType("warning");
+          } else {
+            setError("block");
+            setErrorType("danger");
+          }
+        })
+        .catch(() => {
           setError("block");
           setErrorType("danger");
-        }
-      })
-      .catch(() => {
-        setError("block");
-        setErrorType("danger");
-      });
+        });
     }
   };
 
@@ -146,7 +137,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="number"
-                    value = {orderId}
+                    value={orderId}
                     placeholder="Enter Order Id"
                     onChange={(e) => {
                       setOrderId(e.target.value);
@@ -167,7 +158,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="text"
-                    value = {orderCustomerName}
+                    value={orderCustomerName}
                     placeholder="Enter Order Customer Name"
                     onChange={(e) => {
                       setOrderCustomerName(e.target.value);
@@ -188,7 +179,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="number"
-                    value = {orderAgreedPrice}
+                    value={orderAgreedPrice}
                     placeholder="Enter Order Agreed Price"
                     onChange={(e) => {
                       setOrderAgreedPrice(e.target.value);
@@ -241,7 +232,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="number"
-                    value = {smallSize}
+                    value={smallSize}
                     placeholder="Enter Amount"
                     onChange={(e) => {
                       setSmallSize(e.target.value);
@@ -265,7 +256,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="number"
-                    value = {mediumSize}
+                    value={mediumSize}
                     placeholder="Enter Amount"
                     onChange={(e) => {
                       setMediumSize(e.target.value);
@@ -289,7 +280,7 @@ export default function OrderRegister() {
                 <Col>
                   <input
                     type="number"
-                    value = {largeSize}
+                    value={largeSize}
                     placeholder="Enter Amount"
                     onChange={(e) => {
                       setLargeSize(e.target.value);
@@ -310,7 +301,7 @@ export default function OrderRegister() {
                 <Col>
                   <select
                     id="cloth-material"
-                    value = {clothMaterial}
+                    value={clothMaterial}
                     onChange={(e) => {
                       setClothMaterial(e.target.value);
                     }}
@@ -344,10 +335,8 @@ export default function OrderRegister() {
                   <input
                     type="text"
                     value="Pending" // Set the value to Pending state
-                    //value = {orderStatus}
                     disabled // Make the input field disabled to prevent user input
                     onChange={(e) => {
-                      // setOrderStatus(e.target.value);
                       setOrderStatus("Pending");
                     }}
                   />
