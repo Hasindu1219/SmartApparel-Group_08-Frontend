@@ -1,64 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Sidebar from "../../components/Sidebar.js";
 import Box from "@mui/material/Box";
 import Navbar from "../../components/Navbar/Navbar";
 import Error from "../../components/Error1/ErrorId";
 import "./LineSupervisorOrderCoveredAmount.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LineSupervisorOrderCoveredAmount() {
   // State variables
   const [orderId, setOrderId] = useState("");
   const [isOrderValid, setIsOrderValid] = useState(false);
-  const [validOrderIds, setValidOrderIds] = useState([]);
+  const navigate = useNavigate();
 
   // State variables for error
-  const [error, setError] = useState("none");
-  const [errorType, setErrorType] = useState("none");
+  const [error, setError] = useState(null);
   const errorMsg = ["Invalid Order ID"];
 
-  // Fetch valid order IDs on component mount
-  useEffect(() => {
-    const fetchValidOrderIds = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8080/smart-apperal/api/orders/orderId"
-        );
-        setValidOrderIds(response.data); // Store the fetched order IDs
-      } catch (error) {
-        console.error("Error fetching valid order IDs:", error);
-      }
-    };
-
-    fetchValidOrderIds();
-  }, []);
-
   // Handle input change and update the orderId state
-  const handleInputChange = (event) => {
+  const handleSearchBtn = (event) => {
     setOrderId(event.target.value);
   };
 
-  // Handle form submission to search for the order ID
-  const handleSearch = async (event) => {
+  const fetchOrderId = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await axios.get(`/api/orders/${orderId}`);
-      if (response.data.exists) {
-        setIsOrderValid(true); // Set order validity to true
-        setError("none"); // Hide error message
+      const res = await axios.get(
+        `http://localhost:8080/order/viewOrder/${orderId}`
+      );
+      // Assuming the response indicates a valid order ID
+      if (res.data && res.data.content) {
+        setIsOrderValid(true);
+        setError(null);
       } else {
-        setIsOrderValid(false); // Set order validity to false
-        setError("block"); // Show error message
-        setErrorType(errorMsg[0]);
+        setIsOrderValid(false);
+        setError("Invalid Order ID");
       }
-    } catch (err) {
-      console.error(err);
-      setIsOrderValid(false); // Set order validity to false
-      setError("block"); // Show error message
-      setErrorType("Server error. Please try again later.");
+    } catch (error) {
+      setIsOrderValid(false);
+      setError("Invalid Order ID");
     }
+  };
+
+  const handleUpdateBtn = () => {
+    navigate("/linesupervisorcoveredamountform", { state: { orderId } });
   };
 
   return (
@@ -81,14 +66,14 @@ export default function LineSupervisorOrderCoveredAmount() {
             Order Covered Amount
           </h1>
           <div>
-            <Error errorDisplay={error} errorMessage={errorType} />{" "}
+            {error && <Error errorDisplay="block" errorMessage={error} />}
             {/* Error component */}
             <div className="App">
-              <form onSubmit={handleSearch}>
+              <form onSubmit={fetchOrderId}>
                 <input
                   type="text"
                   value={orderId}
-                  onChange={handleInputChange}
+                  onChange={handleSearchBtn}
                   placeholder="Enter Order ID"
                 />
                 <button id="searchBtn" type="submit">
@@ -96,15 +81,13 @@ export default function LineSupervisorOrderCoveredAmount() {
                 </button>
               </form>
 
-              <Link to={`/linesupervisorcoveredamountform`}>
-                <button
-                  id="updateBtn"
-                  disabled={!isOrderValid} // Disable button if order is not valid
-                  onClick={() => alert("Go to update form")}
-                >
-                  Update
-                </button>
-              </Link>
+              <button
+                id="updateBtn"
+                disabled={!isOrderValid} // Disable button if order is not valid
+                onClick={handleUpdateBtn}
+              >
+                Update
+              </button>
             </div>
           </div>
         </div>

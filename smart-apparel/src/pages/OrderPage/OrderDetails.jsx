@@ -34,9 +34,6 @@ export default function OrderDetails() {
       .get("http://localhost:8080/order/viewOrder")
       .then((res) => {
         setTableData(res.data.content);
-        // const js = JSON.parse(res.data)
-        // console.log(js)
-        //console.log(res.data.content)
       })
       .catch((err) => {
         alert(err.message);

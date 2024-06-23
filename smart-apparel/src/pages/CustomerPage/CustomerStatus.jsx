@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./CustomerStatus.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
+import Error from "../../components/Error1/ErrorId";
 
 export default function CustomerStatus() {
   const [orderId, setOrderId] = useState("");
   const [orderStatus, setOrderStatus] = useState(null);
 
-  const [error, setError] = useState("none");
+  const [error, setError] = useState(null);
+  const [errorType, setErrorType] = useState("none");
+  const errorMsg = ["Invalid Order ID"];
 
   const handleInputChange = (event) => {
     setOrderId(event.target.value);
@@ -23,8 +26,8 @@ export default function CustomerStatus() {
       setOrderStatus(res.data.content.orderStatus);
       setError(null);
     } catch (error) {
-      setOrderStatus("Invalid Order ID");
-      setError("Invalid Order ID");
+      setOrderStatus(errorMsg);
+      setError(errorMsg);
     }
   };
 
@@ -49,6 +52,7 @@ export default function CustomerStatus() {
             Customer Status
           </h1>
           <div>
+          {error && <Error errorDisplay="block" errorMessage={error} />}
             <div className="App">
               <form onSubmit={fetchOrderStatus}>
                 <input
