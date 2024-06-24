@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
-import Error from "../../components/Error1/ErrorShipping";
+import Error1 from "../../components/Error1/ErrorShipping";
+import Error2 from "../../components/Error1/ErrorBill";
 import "./OrderShipment.css";
 
 function OrderShipment() {
   const [orderId, setOrderId] = useState("");
   const [isShipped, setIsShipped] = useState(false);
-  const [error, setError] = useState(null);
+  const [error1, setError1] = useState(null);
+  const [error2, setError2] = useState(null);
 
-  const errorMsg = "Order is not yet shipped or Invalid OrderId";
+  const errorMsg1 = "Order is not yet shipped or Invalid OrderId";
+  const errorMsg2 = "Bill is not yet available for this order";
 
   const fetchOrderStatus = async (event) => {
     event.preventDefault();
@@ -18,14 +21,14 @@ function OrderShipment() {
       const response = await axios.get(`http://localhost:8080/order/checkShipped/${orderId}`);
       if (response.data === true) {
         setIsShipped(true);
-        setError(null); 
+        setError1(null); 
       } else {
         setIsShipped(false);
-        setError(errorMsg); 
+        setError1(errorMsg1); 
       }
     } catch (error) {
       setIsShipped(false);
-      setError(errorMsg); 
+      setError1(errorMsg1); 
     }
   };
 
@@ -42,7 +45,7 @@ function OrderShipment() {
       link.click();
       link.parentNode.removeChild(link);
     } catch (error) {
-      setError("Error downloading the bill"); 
+      setError2(errorMsg2); 
     }
   };
 
@@ -67,7 +70,8 @@ function OrderShipment() {
             Order Shipment
           </h1>
           <div>
-            {error && <Error errorDisplay="block" errorMessage={error} />} {/* Display error message if it exists */}
+            {error1 && <Error1 errorDisplay="block" errorMessage={error1} />}
+            {error2 && <Error2 errorDisplay="block" errorMessage={error2} />}
             <div className="App">
               <form onSubmit={fetchOrderStatus}>
                 <input
