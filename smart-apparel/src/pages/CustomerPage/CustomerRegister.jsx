@@ -62,7 +62,7 @@ export default function CustomerRegister() {
                         Customer Register
                     </h1>
                     <Error errorDisplay={error} />
-                    <form action="">
+                    <form action="" className='customer-register-form'>
 
 
                         {/* Form input fields */}

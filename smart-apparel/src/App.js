@@ -4,10 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Overview from './pages/Overview';
 import Accounting from './pages/Accounting/Accounting';
 
-import Employees from './pages/Employee/Employees';
+import EmployeesHome from './pages/Employee/EmployeesHome';
 import EmployeeAdd from './pages/Employee/EmployeeAdd';
 import EmployeeUpdate from './pages/Employee/EmployeeUpdate';
-import EmployeeDelete from './pages/Employee/EmployeeDelete';
 
 // import Sidebar from './components/Sidebar';
 import Sales from './pages/Sales';
@@ -15,7 +14,6 @@ import Customers from './pages/Customers';
 import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
-import Add_Material from './pages/InventoryPage/AddMaterial';
 import ViewMaterials from './pages/InventoryPage/ViewMaterials';
 
 import CustomerRegister from './pages/CustomerPage/CustomerRegister';
@@ -38,6 +36,7 @@ import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
 import SalaryParamAddPage from './pages/Salary/SalaryParamAddPage';
 import SalaryAddPage from './pages/Salary/SalaryAddPage';
 import SalaryUpdatePage from './pages/Salary/SalaryUpdatePage';
+import AddMaterial from './pages/InventoryPage/AddMaterial';
 
 
 function App() {
@@ -50,18 +49,19 @@ function App() {
         <Route path="/sales" element={<Sales />}></Route>
         <Route path="/customers" element={<Customers />}></Route>
         <Route path="/orders" element={<Orders />}></Route>
-        <Route path="/employees" element={<Employees />}></Route>
-        <Route path="/salary" element={<SalaryHomePage/>}></Route>
-        <Route path='/attendance' element={<AttendanceHomePage/>}></Route>
 
         {/* routings inside the employee section */}
+        <Route path="/employees" element={<EmployeesHome />}></Route>
         <Route path="/employee/addemployee" element={<EmployeeAdd/>}> </Route>
         <Route path="/employee/updateemployee/:Id" element={<EmployeeUpdate/>}> </Route>
-        <Route path="/employee/deleteemployee" element={<EmployeeDelete/>}> </Route>
+
         {/* routings inside the attendance section */}
+        <Route path='/attendance' element={<AttendanceHomePage/>}></Route>
         <Route path='/attendance/addattendance' element={<AttendanceAddPage/>}> </Route>
         <Route path='/attendance/updateattendance/:Id' element={<AttendanceUpdatePage/>}> </Route>
+
         {/* routings inside Salary section */}
+        <Route path="/salary" element={<SalaryHomePage/>}></Route>
         <Route path='/salary-param/addsalaryparam' element={<SalaryParamAddPage/>}></Route>
         <Route path='/salary/addsalary' element={<SalaryAddPage/>}></Route>
         <Route path='/salary/updatesalary/:Id' element={<SalaryUpdatePage/>}></Route>
@@ -71,7 +71,7 @@ function App() {
 
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
-        <Route path="/inventory/addInventory" element={<Add_Material />}></Route>
+        <Route path="/inventory/addInventory" element={<AddMaterial />}></Route>
         <Route path="/inventory/viewInventory" element={<ViewMaterials />}></Route>
 
         <Route path="/login" element={<Login />}></Route>
