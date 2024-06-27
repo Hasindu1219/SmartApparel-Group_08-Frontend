@@ -47,8 +47,25 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
     });
 
     const [showPassword, setShowPassword] = useState(false);
+    const [salaryParams, setSalaryParams] = useState([]);
 
     useEffect(() => {
+        axios.get('http://localhost:8080/salary-params/view')
+            .then((response) => {
+                if (response.data.code === "00") {
+                    //Successfully fetched all Salary Parameters
+                    console.log(response.data);
+                    setSalaryParams(response.data.content)
+                } else if (response.data.code === "01") {
+                    //No records of Salary Parameters
+                    alert("No added positions for employees");
+                    navigate("/employees");
+                }
+            }).catch((error) => {
+                console.error("Error Fetching data:", error);
+                alert("Error Fetching data: " + error.message);
+                navigate("/employees");
+            });
         if (defaultFieldValues) {
             setFormValues(defaultFieldValues);
         }
@@ -201,14 +218,15 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                 // alert(response.data.message);
                 if (response.status === 202) {
                     alert("New employee added successfully");
-                } else if (response.status === 400) {
-                    alert("Employee already exists or invalid request.");
-                } else {
-                    alert("Error occurred while saving employee: " + response.data.message);
                 }
             } catch (error) {
-                console.error("Error submitting form", error);
-                alert("Error occurred while saving employee.");
+                if (error.status === 409 || error.status === 500) {
+                    alert("Error: " + error.response.data.message);
+                    // console.log(error);
+                } else {
+                    console.error("Error submitting form", error);
+                    alert("Error submitting form: " + error.message);
+                }
             }
         }
         else if (valid && apiMethod === "put") {
@@ -221,12 +239,15 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                     if (response.status === 202) {
                         alert("Employee updated successfully.");
                         navigate("/employees");
-                    } else {
-                        alert("Error occurred while updating employee.");
                     }
                 } catch (error) {
-                    alert("An error occurred while updating employee.");
-                    console.error("Employee update error:", error);
+                    if (error.status === 409 || error.status === 400) {
+                        alert("Error: " + error.response.data.message);
+                        // console.log(error);
+                    } else {
+                        console.error("Error submitting form", error);
+                        alert("Error submitting form: " + error.message);
+                    }
                 }
             }
         }
@@ -249,25 +270,10 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                 branchName: '',
                 bankName: ''
             });
-            setFormErrors({
-                empId: '',
-                name: '',
-                address: '',
-                nic: '',
-                position: '',
-                email: '',
-                password: '',
-                phoneNumber: '',
-                dateOfBirth: '',
-                accountNumber: '',
-                holderName: '',
-                branchName: '',
-                bankName: ''
-            });
-        }
-        else if (apiMethod === "put") {
             setFormErrors({});
+        } else {
             setFormValues(defaultFieldValues);
+            setFormErrors({});
         }
     };
 
@@ -286,7 +292,7 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
         { name: 'nic', label: 'NIC', required: true },
         {
             name: 'position', label: 'Position', required: true,
-            options: ["CEO", "Director", "Production Manager", "HR Manager", "Accounting Manager", "Supervisor", "Helper"]
+            options: ["Director", "Production Manager", "HR Manager", "Accounting Manager", "Supervisor", "Helper"]
         },
         { name: 'email', label: 'Email', required: true },
         { name: 'password', label: 'Password', required: true },
@@ -318,9 +324,9 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                         <MenuItem value="--Select the Position--">
                             --Select the Position--
                         </MenuItem>
-                        {field.options.map((option) => (
-                            <MenuItem key={option} value={option}>
-                                {option}
+                        {salaryParams.map((param) => (
+                            <MenuItem key={param.position} value={param.position}>
+                                {param.position}
                             </MenuItem>
                         ))}
                     </TextField>

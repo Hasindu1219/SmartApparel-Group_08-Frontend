@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar/Navbar'
 import { Box, Button } from '@mui/material'
 import Sidebar from '../../components/Sidebar'
 import { useNavigate } from 'react-router-dom'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 function EmployeeAdd() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function EmployeeAdd() {
 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Box style={{fontSize:"2em",fontWeight:"Bold",margin:"10px"}}>
-          <Button variant='outlined' onClick={()=>{navigate('/employees')}}>Back</Button>
+          <Button onClick={()=>{navigate('/employees')}}><ArrowBackIosNewIcon/></Button>
             Add Employee
           </Box>
 
