@@ -1,29 +1,12 @@
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { ExpandMore } from "@mui/icons-material";
+import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SalaryParamTable() {
+export default function SalaryParamTable({salaryParameters}) {
     const navigate = useNavigate();
-    const [salaryParamList, setSalaryParamList] = useState([]);
 
     const bgColor = { backgroundColor: '#f7f7f7', textAlign: "center" }
-
-    useEffect(() => {
-        axios.get('http://localhost:8080/salary-params/view')
-            .then((response) => {
-                const { data } = response;
-                if (data && data.content) {
-                    setSalaryParamList(data.content);
-                    // console.log("Response:",response);
-                } else {
-                    console.error('Invalid response format:', data);
-                }
-            })
-            .catch((error) => {
-                console.error('Error fetching Salary Parameters:', error);
-            });
-    }, []);
 
     const handleDelete = (salaryParamId) => {
         if (window.confirm("Are you sure you want to delete this parameter?")) {
@@ -43,65 +26,65 @@ export default function SalaryParamTable() {
     }
 
     const handleEdit = (spId) => {
-        navigate(`/salary/param/update-salary-param/${spId}`);
+        navigate(`/salary/update-salary-param/${spId}`);
     }
 
     return (
         <>
-            {/* <Accordion style={{marginBottom: "50px",backgroundColor:"#f7f7f7"}}>
-                <AccordionSummary expandIcon={<ExpandMore />}> */}
-            {/* </AccordionSummary>
+            <Accordion style={{ marginBottom: "50px", backgroundColor: "#f7f7f7" }}>
+                <AccordionSummary expandIcon={<ExpandMore />} style={{fontWeight:"bold"}}>
+                    Salary Parameters
+                </AccordionSummary>
 
-                <AccordionDetails> */}
-            <Button variant="contained" onClick={() => { navigate('/salary/param/addsalaryparam') }}>Add New</Button>
-            <TableContainer >
-                <Table >
-                    <TableHead>
-                        <TableRow >
-                            {/* <TableCell sx={{fontWeight:"bold"}}>Salary Parameter ID</TableCell> */}
-                            <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Position</TableCell>
-                            <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Basic Salary</TableCell>
-                            <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>EPF by Employee</TableCell>
-                            <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>EPF by Company</TableCell>
-                            <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>ETF</TableCell>
-                            <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-
-                    <TableBody>
-                        {
-                            salaryParamList.length > 0 ? (
-                                salaryParamList.map((salaryParam) => (
-                                    <TableRow key={salaryParam.salaryParameterId} >
-                                        {/* <TableCell sx={bgColor}>{salaryParam.salaryParameterId}</TableCell> */}
-                                        <TableCell sx={bgColor}>{salaryParam.position}</TableCell>
-                                        <TableCell sx={bgColor}>Rs. {salaryParam.basicSalary}</TableCell>
-                                        <TableCell sx={bgColor}>{salaryParam.epfByEmployee}%</TableCell>
-                                        <TableCell sx={bgColor}>{salaryParam.epfByCompany}%</TableCell>
-                                        <TableCell sx={bgColor}>{salaryParam.etf}%</TableCell>
-                                        <TableCell sx={bgColor}>
-                                            <Button sx={{ marginLeft: "10px", marginRight: "10px" }} variant="outlined" onClick={() => handleEdit(salaryParam.salaryParameterId)}>Edit</Button>
-                                            <Button sx={{ marginLeft: "10px", marginRight: "10px" }} variant="outlined" onClick={() => handleDelete(salaryParam.salaryParameterId)}>Delete</Button>
-                                        </TableCell>
-                                    </TableRow>
-                                ))
-                            ) : (
-                                <TableRow>
-                                    <TableCell colSpan="6" align="center">
-                                        No Data
-                                    </TableCell>
+                <AccordionDetails>
+                    <TableContainer >
+                        <Table >
+                            <TableHead>
+                                <TableRow >
+                                    {/* <TableCell sx={{fontWeight:"bold"}}>Salary Parameter ID</TableCell> */}
+                                    <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Position</TableCell>
+                                    <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Basic Salary</TableCell>
+                                    <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>EPF by Employee</TableCell>
+                                    <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>EPF by Company</TableCell>
+                                    <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>ETF</TableCell>
+                                    <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Action</TableCell>
                                 </TableRow>
-                            )
-                        }
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            {/* </AccordionDetails>
-                <AccordionActions> */}
+                            </TableHead>
 
-            {/* </AccordionActions>
+                            <TableBody>
+                                {
+                                    salaryParameters.length > 0 ? (
+                                        salaryParameters.map((salaryParam) => (
+                                            <TableRow key={salaryParam.salaryParameterId} >
+                                                {/* <TableCell sx={bgColor}>{salaryParam.salaryParameterId}</TableCell> */}
+                                                <TableCell sx={bgColor}>{salaryParam.position}</TableCell>
+                                                <TableCell sx={bgColor}>Rs. {salaryParam.basicSalary}</TableCell>
+                                                <TableCell sx={bgColor}>{salaryParam.epfByEmployee}%</TableCell>
+                                                <TableCell sx={bgColor}>{salaryParam.epfByCompany}%</TableCell>
+                                                <TableCell sx={bgColor}>{salaryParam.etf}%</TableCell>
+                                                <TableCell sx={bgColor}>
+                                                    <Button sx={{ marginLeft: "10px", marginRight: "10px" }} variant="outlined" onClick={() => handleEdit(salaryParam.salaryParameterId)}>Edit</Button>
+                                                    <Button sx={{ marginLeft: "10px", marginRight: "10px" }} variant="outlined" onClick={() => handleDelete(salaryParam.salaryParameterId)}>Delete</Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))
+                                    ) : (
+                                        <TableRow>
+                                            <TableCell colSpan="6" align="center">
+                                                No Data
+                                            </TableCell>
+                                        </TableRow>
+                                    )
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </AccordionDetails>
+                <AccordionActions>
+                    <Button variant="contained" onClick={() => { navigate('/salary/add-salary-param') }}>Add New</Button>
+                </AccordionActions>
 
-            </Accordion> */}
+            </Accordion>
         </>
     );
 }

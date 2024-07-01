@@ -38,8 +38,6 @@ import SalaryHome from './pages/Salary/SalaryHome';
 import SalaryUpdate from './pages/Salary/SalaryUpdate';
 import SalaryParamUpdate from './pages/Salary/SalaryParamUpdate';
 import SalaryAdd from './pages/Salary/SalaryAdd';
-import SalaryParaHome from './pages/Salary/SalaryParaHome';
-
 
 function App() {
   return (
@@ -66,9 +64,8 @@ function App() {
         <Route path="/salary" element={<SalaryHome />}></Route>
         <Route path='/salary/addsalary' element={<SalaryAdd />}></Route>
         <Route path='/salary/updatesalary/:Id' element={<SalaryUpdate />}></Route>
-        <Route path='/salary/param' element={<SalaryParaHome />} />
-        <Route path='/salary/param/addsalaryparam' element={<SalaryParamAdd />}></Route>
-        <Route path='/salary/param/update-salary-param/:spId' element={<SalaryParamUpdate />}></Route>
+        <Route path='/salary/add-salary-param' element={<SalaryParamAdd />}></Route>
+        <Route path='/salary/update-salary-param/:spId' element={<SalaryParamUpdate />}></Route>
 
         <Route path="/suppliers" element={<Suppliers />}></Route>
 

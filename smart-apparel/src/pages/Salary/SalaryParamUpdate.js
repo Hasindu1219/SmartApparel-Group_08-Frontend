@@ -39,7 +39,7 @@ function SalaryParamUpdate() {
 
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <Box style={{ fontSize: "2em", fontWeight: "Bold", margin: "10px" }}>
-                        <Button onClick={() => { navigate('/salary/param') }}><ArrowBackIosNewIcon /></Button>
+                        <Button onClick={() => { navigate('/salary') }}><ArrowBackIosNewIcon /></Button>
                         Update Salary Parameter
                     </Box>
                     <SalaryParamForm apiMethod="put" submitBtnName="update" resetBtnName="reset" defaultFieldValues={salaryParamData} />

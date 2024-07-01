@@ -20,7 +20,7 @@ const SalaryAddPage = () => {
 
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <Box style={{ fontSize: "2em", fontWeight: "Bold", margin: "10px" }}>
-                        <Button onClick={() => { navigate('/salary/param') }}><ArrowBackIosNewIcon /></Button>
+                        <Button onClick={() => { navigate('/salary') }}><ArrowBackIosNewIcon /></Button>
                         Add New Salary Parameter
                     </Box>
                     <SalaryParamForm apiMethod="post" submitBtnName="Add" resetBtnName="Clear" />

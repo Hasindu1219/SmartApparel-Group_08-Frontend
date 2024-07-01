@@ -1,12 +1,43 @@
-import React from "react";
-import { Box, Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import SalaryTable from "../../components/SalaryComponent/SalaryTable";
-import { useNavigate } from "react-router-dom";
+import SalaryParamTable from "../../components/SalaryComponent/SalaryParamTable";
+import axios from "axios";
 
-export default function SalaryHome() {
-    const navigate= useNavigate();
+function SalaryHome() {
+    const [salaryParamList, setSalaryParamList] = useState([]);
+    const [salaryList, setSalaryList] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/salary-params/view')
+            .then((response) => {
+                const { data } = response;
+                if (data && data.content) {
+                    setSalaryParamList(data.content);
+                    // console.log("Response:",response);
+                } else {
+                    console.error('Invalid response format:', data);
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching Salary Parameters:', error);
+            });
+
+            axios.get('http://localhost:8080/salary/view')
+            .then((response) => {
+                const { data } = response;
+                if (data && data.content) {
+                    setSalaryList(data.content); // Set the state with the fetched data
+                } else {
+                    console.error('Invalid response format:', data);
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching Salaries:', error);
+            });
+    }, []);
 
     return (
         <>
@@ -16,11 +47,11 @@ export default function SalaryHome() {
                 <Sidebar />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <h1>Salary</h1>
-                    <SalaryTable />
-                    <Button variant="contained" onClick={()=>{navigate("/salary/param")}}>Salary Parameters {">"} </Button>
-                    
+                    <SalaryParamTable salaryParameters={salaryParamList}/>
+                    <SalaryTable salaryList={salaryList}/>
                 </Box>
             </Box>
         </>
     );
 }
+export default SalaryHome;

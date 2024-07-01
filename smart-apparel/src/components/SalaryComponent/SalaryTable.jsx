@@ -1,28 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function SalaryTable(){
+function SalaryTable({salaryList}){
     const navigate = useNavigate();
-    const [salaryList, setSalaryList] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-
-    // Fetch data from the server when the component mounts
-    useEffect(() => {
-        axios.get('http://localhost:8080/salary/view')
-            .then((response) => {
-                const { data } = response;
-                if (data && data.content) {
-                    setSalaryList(data.content); // Set the state with the fetched data
-                } else {
-                    console.error('Invalid response format:', data);
-                }
-            })
-            .catch((error) => {
-                console.error('Error fetching Salaries:', error);
-            });
-    }, []);
 
     // Handle the change in the search input
     const handleSearchChange = (event) => {
@@ -97,11 +80,11 @@ function SalaryTable(){
                                     <TableCell>{salary.empId}</TableCell>
                                     <TableCell>{salary.status}</TableCell>
                                     <TableCell>{salary.yearNMonth}</TableCell>
-                                    <TableCell>{salary.basic}</TableCell>
-                                    <TableCell>{salary.epfByEmployee}</TableCell>
-                                    <TableCell>{salary.epfByCompany}</TableCell>
-                                    <TableCell>{salary.etfPayment}</TableCell>
-                                    <TableCell>{salary.netSalary}</TableCell>
+                                    <TableCell>Rs.{salary.basic}</TableCell>
+                                    <TableCell>Rs.{salary.epfByEmployee}</TableCell>
+                                    <TableCell>Rs.{salary.epfByCompany}</TableCell>
+                                    <TableCell>Rs.{salary.etfPayment}</TableCell>
+                                    <TableCell>Rs.{salary.netSalary}</TableCell>
                                     <TableCell>
                                         <Button variant="contained" color="primary" onClick={() => updateSalary(salary.salaryId)}>
                                             Update
