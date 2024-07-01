@@ -32,7 +32,6 @@ import ModelsPage from './pages/OrderPage/ModelsPage';
 import CustomModel from './pages/OrderPage/CustomModel';
 import AddNewModel from './pages/OrderPage/AddNewModel';
 import OrderShipment from './pages/OrderPage/OrderShipment';       
-import ShippedDetails from './pages/OrderPage/ShippedDetails';  
 import LineSupervisorOrderHome from './pages/OrderPage/LineSupervisorOrderHome';
 import LineSupervisorOrderDetails from './pages/OrderPage/LineSupervisorOrderDetails';
 import LineSupervisorOrderCoveredAmount from './pages/OrderPage/LineSupervisorOrderCoveredAmount';
@@ -111,7 +110,6 @@ function App() {
         <Route path="/customizemodels" element={<CustomModel />} />
         <Route path="/addNewModel" element={<AddNewModel />} />
         <Route path="/ordershipment" element={<OrderShipment />} />  
-        <Route path="/shippeddetails" element={<ShippedDetails />} /> 
         <Route path="/linesupervisororderhome" element={<LineSupervisorOrderHome />} />
         <Route path="/linesupervisororderdetails" element={<LineSupervisorOrderDetails />} />
         <Route path="/linesupervisorordercoveredamount" element={<LineSupervisorOrderCoveredAmount />} />
