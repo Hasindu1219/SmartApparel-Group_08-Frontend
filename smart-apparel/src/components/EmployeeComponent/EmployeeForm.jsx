@@ -48,7 +48,7 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
 
     const [showPassword, setShowPassword] = useState(false);
     const [salaryParams, setSalaryParams] = useState([]);
-    const [submitBtnActiveState,setSubmitBtnActiveState] = useState(false);
+    const [submitBtnActiveState, setSubmitBtnActiveState] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost:8080/salary-params/view')
@@ -76,72 +76,58 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
 
     const validateField = (name, value) => {
         let error = '';
-        if (name === 'empId') {
-            if (!value.trim()) {
-                error = 'Employee ID is required';
-            } else if (!/^emp\d+$/.test(value)) {
-                error = 'Enter Correct Employee ID (empXXX)';
-            }
-        } else if (name === 'name') {
-            if (!value.trim()) {
-                error = 'Name is required';
-            } else if (!/^[a-zA-Z\s.]+$/.test(value)) {
-                error = 'Only letters, dots, and spaces between letters are allowed';
-            } else if (value.trim() !== value) {
-                error = 'Begin and end with white spaces are not allowed';
-            }
-        } else if (name === 'address') {
-            if (!value.trim()) {
-                error = 'Address is required';
-            } else if (!/^[a-zA-Z0-9\s,.-]+$/.test(value)) {
-                error = 'Address can contain only letters, numbers, spaces, commas, dots, and hyphens';
-            } else if (value.trim() !== value) {
-                error = 'Begin and end with white spaces are not allowed';
-            }
-        } else if (name === 'nic') {
-            const nicRegex = /^(([5,6,7,8,9]{1})([0-9]{1})([0,1,2,3,5,6,7,8]{1})([0-9]{6})([vVxX]))|(([1,2]{1})([0,9]{1})([0-9]{2})([0,1,2,3,5,6,7,8]{1})([0-9]{7}))$/;
-            if (!nicRegex.test(value)) {
-                error = 'Invalid NIC number';
-            }
-        } else if (name === 'position') {
-            if (value === '--Select the Position--') {
-                error = 'Position is required';
-            }
-        } else if (name === 'email') {
-            if (!value.trim()) {
-                error = 'Email is required';
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                error = 'Invalid email address';
-            }
-        } else if (name === 'password') {
-            if (!value.trim()) {
-                error = 'Password is required';
-            } else if (value.length < 8) {
-                error = 'Password must be at least 8 characters long';
-            } else if (!/[A-Z]/.test(value)) {
-                error = 'Password must contain at least one uppercase letter';
-            } else if (!/[a-z]/.test(value)) {
-                error = 'Password must contain at least one lowercase letter';
-            } else if (!/[0-9]/.test(value)) {
-                error = 'Password must contain at least one number';
-            } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
-                error = 'Password must contain at least one special character';
-            }
-        } else if (name === 'phoneNumber') {
-            if (!value.trim()) {
-                error = 'Phone number is required';
-            } else if (!/^[0]{1}[0-9]{9}$/.test(value)) {
-                error = 'Invalid, Format: 0 followed by 9 digits';
-            }
-        } else if (name === 'dateOfBirth') {
-            if (!value.trim()) {
-                error = 'Date of Birth is required';
-            } else {
+
+        if (!value.trim()) {
+            error = 'Field is required';
+        } else if (value.trim() !== value) {
+            error = 'Begin and end with white spaces are not allowed';
+        } else {
+            if (name === 'empId') {
+                if (!/^emp\d+$/.test(value)) {
+                    error = 'Enter Correct Employee ID (empXXX)';
+                }
+            } else if (name === 'name') {
+                if (!/^[a-zA-Z\s.]+$/.test(value)) {
+                    error = 'Only letters, dots, and spaces between letters are allowed';
+                }
+            } else if (name === 'address') {
+                if (!/^[a-zA-Z0-9\s,.-]+$/.test(value)) {
+                    error = 'Address can contain only letters, numbers, spaces, commas, dots, and hyphens';
+                }
+            } else if (name === 'nic') {
+                const nicRegex = /^(([5,6,7,8,9]{1})([0-9]{1})([0,1,2,3,5,6,7,8]{1})([0-9]{6})([vVxX]))|(([1,2]{1})([0,9]{1})([0-9]{2})([0,1,2,3,5,6,7,8]{1})([0-9]{7}))$/;
+                if (!nicRegex.test(value)) {
+                    error = 'Invalid NIC number';
+                }
+            } else if (name === 'position') {
+                if (value === '--Select the Position--') {
+                    error = 'Position is required';
+                }
+            } else if (name === 'email') {
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                    error = 'Invalid email address';
+                }
+            } else if (name === 'password') {
+                if (value.length < 8) {
+                    error = 'Password must be at least 8 characters long';
+                } else if (!/[A-Z]/.test(value)) {
+                    error = 'Password must contain at least one uppercase letter';
+                } else if (!/[a-z]/.test(value)) {
+                    error = 'Password must contain at least one lowercase letter';
+                } else if (!/[0-9]/.test(value)) {
+                    error = 'Password must contain at least one number';
+                } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+                    error = 'Password must contain at least one special character';
+                }
+            } else if (name === 'phoneNumber') {
+                if (!/^[0]{1}[0-9]{9}$/.test(value)) {
+                    error = 'Invalid, Format: 0 followed by 9 digits';
+                }
+            } else if (name === 'dateOfBirth') {
                 const today = new Date();
                 const dateOfBirth = new Date(value);
                 const age = today.getFullYear() - dateOfBirth.getFullYear();
                 const month = today.getMonth() - dateOfBirth.getMonth();
-
                 if (isNaN(dateOfBirth.getTime())) {
                     error = 'Invalid date format';
                 } else if (dateOfBirth > today) {
@@ -149,38 +135,24 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                 } else if (age < 18 || (age === 18 && month < 0)) {
                     error = 'You must be at least 18 years old';
                 }
-            }
-        } else if (name === 'accountNumber') {
-            if (!value.trim()) {
-                error = 'Account number is required';
-            } else if (!/^\d+$/.test(value)) {
-                error = 'Account number must contain only digits';
-            } else if (value.length < 10 || value.length > 12) {
-                error = 'Account number must be between 10 and 12 digits long';
-            }
-        } else if (name === 'holderName') {
-            if (!value.trim()) {
-                error = 'Holder name is required';
-            } else if (!/^[a-zA-Z\s]+$/.test(value)) {
-                error = 'Holder name can contain only letters and spaces';
-            } else if (value.trim() !== value) {
-                error = 'Begin and end with white spaces are not allowed';
-            }
-        } else if (name === 'branchName') {
-            if (!value.trim()) {
-                error = 'Branch name is required';
-            } else if (!/^[a-zA-Z0-9\s,.-]+$/.test(value)) {
-                error = 'Branch name can contain only letters, numbers, spaces, commas, dots, and hyphens';
-            } else if (value.trim() !== value) {
-                error = 'Begin and end with white spaces are not allowed';
-            }
-        } else if (name === 'bankName') {
-            if (!value.trim()) {
-                error = 'Bank name is required';
-            } else if (!/^[a-zA-Z\s]+$/.test(value)) {
-                error = 'Bank name can contain only letters and spaces';
-            } else if (value.trim() !== value) {
-                error = 'Begin and end with white spaces are not allowed';
+            } else if (name === 'accountNumber') {
+                if (!/^\d+$/.test(value)) {
+                    error = 'Account number must contain only digits';
+                } else if (value.length < 10 || value.length > 12) {
+                    error = 'Account number must be between 10 and 12 digits long';
+                }
+            } else if (name === 'holderName') {
+                if (!/^[a-zA-Z\s]+$/.test(value)) {
+                    error = 'Holder name can contain only letters and spaces';
+                }
+            } else if (name === 'branchName') {
+                if (!/^[a-zA-Z0-9\s,.-]+$/.test(value)) {
+                    error = 'Branch name can contain only letters, numbers, spaces, commas, dots, and hyphens';
+                }
+            } else if (name === 'bankName') {
+                if (!/^[a-zA-Z\s]+$/.test(value)) {
+                    error = 'Bank name can contain only letters and spaces';
+                }
             }
         }
         return error;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -44,15 +44,20 @@ function SalaryTable({salaryList}){
     };
 
     return (
-        <div>
+        <div style={{borderRadius:"10px",padding:"5px",boxShadow:"0px 0px 10px gray"}}>
             <Grid container justifyContent="space-between" alignItems="center" style={{ marginBottom: '1rem' }}>
-                <Button onClick={() => { navigate('/salary/addsalary') }}>Add New Salary Record</Button>
+                <Button variant="outlined" onClick={() => { navigate('/salary/addsalary') }}>Add New Salary Record</Button>
                 <TextField
                     label="Search by Employee ID"
                     variant="outlined"
                     value={searchQuery}
                     onChange={handleSearchChange}
                 />
+
+                <Box>
+                    <TextField label="Enter Year-Month for auto calculate salary for ALL"></TextField>
+                </Box>
+
             </Grid>
 
             <TableContainer component={Paper} style={{ marginBottom: '1rem' }}>

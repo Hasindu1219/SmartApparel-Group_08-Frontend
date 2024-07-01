@@ -31,7 +31,7 @@ export default function SalaryParamTable({salaryParameters}) {
 
     return (
         <>
-            <Accordion style={{ marginBottom: "50px", backgroundColor: "#f7f7f7" }}>
+            <Accordion style={{ marginBottom: "50px", backgroundColor: "#f7f7f7",borderRadius:"10px",padding:"5px",boxShadow:"0px 0px 10px gray"}}>
                 <AccordionSummary expandIcon={<ExpandMore />} style={{fontWeight:"bold"}}>
                     Salary Parameters
                 </AccordionSummary>

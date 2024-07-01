@@ -9,35 +9,38 @@ import axios from "axios";
 function SalaryHome() {
     const [salaryParamList, setSalaryParamList] = useState([]);
     const [salaryList, setSalaryList] = useState([]);
+    const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
-        axios.get('http://localhost:8080/salary-params/view')
-            .then((response) => {
-                const { data } = response;
-                if (data && data.content) {
-                    setSalaryParamList(data.content);
-                    // console.log("Response:",response);
-                } else {
-                    console.error('Invalid response format:', data);
-                }
-            })
-            .catch((error) => {
-                console.error('Error fetching Salary Parameters:', error);
-            });
+        const fetchData = async () => {
+            try {
+                const salaryParamsResponse = await axios.get('http://localhost:8080/salary-params/view');
+                const salaryResponse = await axios.get('http://localhost:8080/salary/view');
 
-            axios.get('http://localhost:8080/salary/view')
-            .then((response) => {
-                const { data } = response;
-                if (data && data.content) {
-                    setSalaryList(data.content); // Set the state with the fetched data
+                if (salaryParamsResponse.data && salaryParamsResponse.data.content) {
+                    setSalaryParamList(salaryParamsResponse.data.content);
                 } else {
-                    console.error('Invalid response format:', data);
+                    console.error('Invalid salary parameters response format:', salaryParamsResponse.data);
                 }
-            })
-            .catch((error) => {
-                console.error('Error fetching Salaries:', error);
-            });
+
+                if (salaryResponse.data && salaryResponse.data.content) {
+                    setSalaryList(salaryResponse.data.content);
+                } else {
+                    console.error('Invalid salary response format:', salaryResponse.data);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false); // Set loading to false after data is fetched
+            }
+        };
+
+        fetchData();
     }, []);
+
+    // if (loading) {
+    //     return <div>Loading...</div>; // Display a loading message or spinner
+    // }
 
     return (
         <>
@@ -47,8 +50,8 @@ function SalaryHome() {
                 <Sidebar />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <h1>Salary</h1>
-                    <SalaryParamTable salaryParameters={salaryParamList}/>
-                    <SalaryTable salaryList={salaryList}/>
+                    <SalaryParamTable salaryParameters={salaryParamList} />
+                    <SalaryTable salaryList={salaryList} />
                 </Box>
             </Box>
         </>

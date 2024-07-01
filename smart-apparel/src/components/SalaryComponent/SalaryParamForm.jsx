@@ -43,25 +43,23 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
         let error = "";
         const stringValue = String(value);
 
-        if (name === "position") {
-            if (!stringValue.trim()) {
-                error = 'Position is required';
-            } else if (!/^[a-zA-Z\s]+$/.test(stringValue)) {
-                error = 'Position can contain only letters and spaces';
-            } else if (stringValue.trim() !== stringValue) {
-                error = 'Begin and end with white spaces are not allowed';
-            }
-        } else if (name === "basicSalary") {
-            if (!stringValue.trim()) {
-                error = 'Basic Salary is required';
-            } else if (!/^\d+(\.\d{1,2})?$/.test(stringValue)) {
-                error = 'Invalid, must be a valid currency value with up to two decimal places';
-            }
-        } else if (name === "epfByEmployee" || name === "epfByCompany" || name === "etf") {
-            if (!stringValue.trim()) {
-                error = 'Field is required';
-            } else if (!/^(\d{1,2}(\.\d{1,2})?|100(\.00?)?)$/.test(stringValue)) {
-                error = 'Invalid, only numbers between 0.00 and 100.00 are allowed';
+        if (!stringValue.trim()) {
+            error = 'Field is required';
+        } else if (stringValue.trim() !== value) {
+            error = 'Begin and end with white spaces are not allowed';
+        }else {
+            if (name === "position") {
+                if (!/^[a-zA-Z\s]+$/.test(stringValue)) {
+                    error = 'Position can contain only letters and spaces';
+                }
+            } else if (name === "basicSalary") {
+                if (!/^\d{1,6}(\.\d{1,2})?$/.test(stringValue)) {
+                    error = 'Invalid, must be a valid currency value with up to 6 digits and 2 decimal places';
+                }
+            } else if (name === "epfByEmployee" || name === "epfByCompany" || name === "etf") {
+                if (!/^(\d{1,2}(\.\d{1,2})?|100(\.00?)?)$/.test(stringValue)) {
+                    error = 'Invalid, only numbers between 0.00 and 100.00 are allowed';
+                }
             }
         }
 

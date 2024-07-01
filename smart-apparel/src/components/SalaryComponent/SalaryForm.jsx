@@ -1,7 +1,14 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, FormControl, FormHelperText, TextField } from "@mui/material";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
 
 function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues }) {
     const navigate = useNavigate();
@@ -45,30 +52,50 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
         });
     };
 
+    const handleDateChange = (date) => {
+        const formattedDate = date ? dayjs(date).format('YYYY-MM') : '';
+        setFormValues({
+            ...formValues,
+            yearNMonth: formattedDate,
+        });
+        setFormErrors({
+            ...formErrors,
+            yearNMonth: validateField('yearNMonth', formattedDate),
+        });
+        console.log("Date picked from date picker:" + date)
+        console.log("Formatted date:" + formattedDate + " value of:" + formattedDate.typeof);
+        console.log("Date error:" + formErrors.yearNMonth)
+    };
+
     const validateField = (name, value) => {
         let error = "";
         const stringValue = String(value);
 
-        if (name === "empId") {
-            if (!stringValue.trim()) {
-                error = 'Employee ID is required';
-            }
-        } else if (name === "status") {
-            if (!stringValue.trim()) {
-                error = 'Status is required';
-            }
-        } else if (name === "yearNMonth") {
-            if (!stringValue.trim()) {
-                error = 'Year and month are required';
-            }
-        } else if (name === "basic" || name === "epfByEmployee" || name === "epfByCompany" || name === "etfPayment" || name === "netSalary") {
-            if (!stringValue.trim()) {
-                error = 'Field is required';
-            } else if (!/^\d+(\.\d{1,2})?$/.test(stringValue)) {
-                error = 'Invalid, must be a valid currency value with up to two decimal places';
+        if (!stringValue.trim()) {
+            error = 'Field is required';
+        } else if (stringValue.trim() !== stringValue) {
+            error = 'Begin and end with white spaces are not allowed';
+        }else {
+            if (name === "empId") {
+                if (!/^emp\d+$/.test(stringValue)) {
+                    error = 'Enter Correct Employee ID (empXXX)';
+                }
+            } else if (name === "status") {
+                if (stringValue.length > 50) {
+                    error = 'Status must be less than or equal to 100 characters';
+                }
+            } else if (name === "yearNMonth") {
+                const selectedDate = dayjs(value, 'YYYY-MM');
+                const currentDate = dayjs().startOf('month');
+                if (selectedDate.isAfter(currentDate)) {
+                    error = 'Future year and month are not allowed';
+                }
+            } else if (name === "basic" || name === "epfByEmployee" || name === "epfByCompany" || name === "etfPayment" || name === "netSalary") {
+                if (!/^\d{1,6}(\.\d{1,2})?$/.test(stringValue)) {
+                    error = 'Invalid, must be a valid currency value with up to 6 digits and 2 decimal places';
+                }
             }
         }
-
         return error;
     };
 
@@ -182,18 +209,34 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
     return (
         <form onSubmit={handleSubmit}>
             {fields.map((field) => (
-                <TextField
-                    required
-                    key={field.name}
-                    error={!!formErrors[field.name]}
-                    name={field.name}
-                    label={field.label}
-                    value={formValues[field.name]}
-                    helperText={formErrors[field.name]}
-                    onChange={handleChange}
-                    margin="dense"
-                    style={{ width: "48%", marginLeft: "2%" }}
-                />
+                field.name === "yearNMonth" ? (
+                    <FormControl margin="dense" sx={{ width: "48%", marginLeft: "2%" }} error={!!formErrors[field.name]}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs} key={field.name}>
+                            <DatePicker
+                                disableFuture
+                                name={field.name}
+                                label="Month & Year"
+                                views={['month', 'year']}
+                                value={formValues.yearNMonth ? dayjs(formValues.yearNMonth, 'YYYY-MM') : null}
+                                onChange={handleDateChange}
+                            />
+                        </LocalizationProvider>
+                        <FormHelperText>{formErrors[field.name]}</FormHelperText>
+                    </FormControl>
+                ) : (
+                    <TextField
+                        required
+                        key={field.name}
+                        error={!!formErrors[field.name]}
+                        name={field.name}
+                        label={field.label}
+                        value={formValues[field.name]}
+                        helperText={formErrors[field.name]}
+                        onChange={handleChange}
+                        margin="dense"
+                        style={{ width: "48%", marginLeft: "2%" }}
+                    />
+                )
             ))}
             <Box style={{ textAlign: "center", display: "block", marginTop: "20px" }}>
                 <Button type="reset" variant='outlined' style={{ margin: "0 20px" }} onClick={handleClear}>
