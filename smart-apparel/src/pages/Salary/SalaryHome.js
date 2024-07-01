@@ -1,24 +1,24 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import SalaryTable from "../../components/SalaryComponent/SalaryTable";
-import SalaryParamAccordionTable from "../../components/SalaryComponent/SalaryParamAccordionTable";
+import { useNavigate } from "react-router-dom";
 
-export default function SalaryHomePage(){
-
+export default function SalaryHome() {
+    const navigate= useNavigate();
 
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <Box height={60} />
             <Box sx={{ display: "flex" }}>
-                <Sidebar/>
+                <Sidebar />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <h1>Salary</h1>
-                    <Box height={30} />
-                    <SalaryParamAccordionTable/>
-                    <SalaryTable/>
+                    <SalaryTable />
+                    <Button variant="contained" onClick={()=>{navigate("/salary/param")}}>Salary Parameters {">"} </Button>
+                    
                 </Box>
             </Box>
         </>

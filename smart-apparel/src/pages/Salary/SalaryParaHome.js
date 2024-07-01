@@ -1,32 +1,31 @@
 import React from 'react'
-import EmployeeForm from '../../components/EmployeeComponent/EmployeeForm'
+import SalaryParamTable from '../../components/SalaryComponent/SalaryParamTable'
 import Navbar from '../../components/Navbar/Navbar'
 import { Box, Button } from '@mui/material'
 import Sidebar from '../../components/Sidebar'
-import { useNavigate } from 'react-router-dom'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { useNavigate } from 'react-router-dom'
 
-function EmployeeAdd() {
+function SalaryParaHome() {
   const navigate = useNavigate();
   return (
     <>
       <Navbar />
       <Box height={60} />
+
       <Box sx={{ display: "flex" }}>
         <Sidebar />
-
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Box style={{ fontSize: "2em", fontWeight: "Bold", margin: "10px" }}>
-            <Button onClick={() => { navigate('/employees') }}><ArrowBackIosNewIcon /></Button>
-            Add Employee
+            <Button onClick={() => { navigate('/salary') }}><ArrowBackIosNewIcon /></Button>
+            Salary Parameter
           </Box>
 
-          <EmployeeForm submitBtnName="Add" resetBtnName="Clear" apiMethod="post" />
-
+          <SalaryParamTable />
         </Box>
       </Box>
     </>
   )
 }
 
-export default EmployeeAdd
+export default SalaryParaHome

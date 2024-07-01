@@ -22,13 +22,13 @@ function EmployeeTable({ employees }) {
       axios.delete(`http://localhost:8080/employee/delete/${empId}`)
         .then((response) => {
           if (response.status === 202) {
-            alert("Removed successfully.");
+            alert("Deleted successfully.");
           } else {
-            throw new Error("Failed to remove Employee.");
+            throw new Error("Failed to Delete Employee.");
           }
         })
         .catch((error) => {
-          console.error("Error removing Employee", error.message);
+          console.error("Error Deleting Employee", error.message);
         });
       window.location.reload();
     }

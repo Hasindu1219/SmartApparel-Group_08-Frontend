@@ -48,23 +48,26 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
 
     const [showPassword, setShowPassword] = useState(false);
     const [salaryParams, setSalaryParams] = useState([]);
+    const [submitBtnActiveState,setSubmitBtnActiveState] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost:8080/salary-params/view')
             .then((response) => {
                 if (response.data.code === "00") {
                     //Successfully fetched all Salary Parameters
-                    console.log(response.data);
+                    // console.log(response.data);
                     setSalaryParams(response.data.content)
                 } else if (response.data.code === "01") {
                     //No records of Salary Parameters
                     alert("No added positions for employees");
-                    navigate("/employees");
+                    // navigate("/employees");
+                    setSubmitBtnActiveState(true);
                 }
             }).catch((error) => {
                 console.error("Error Fetching data:", error);
                 alert("Error Fetching data: " + error.message);
-                navigate("/employees");
+                // navigate("/employees");
+                setSubmitBtnActiveState(true);
             });
         if (defaultFieldValues) {
             setFormValues(defaultFieldValues);
@@ -211,26 +214,27 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
         setFormErrors(newErrors);
 
         if (valid && apiMethod === "post") {
-            console.log("Object is ready to send backend, no errors in fields");
+            // console.log("Object is ready to send backend, no errors in fields");
             try {
                 const response = await axios.post("http://localhost:8080/employee/add", formValues);
                 console.log("Response: ", response);
                 // alert(response.data.message);
                 if (response.status === 202) {
                     alert("New employee added successfully");
+                    window.location.reload();
                 }
             } catch (error) {
-                if (error.status === 409 || error.status === 500) {
+                if (error.response.status === 409 || error.response.status === 500) {
                     alert("Error: " + error.response.data.message);
                     // console.log(error);
                 } else {
-                    console.error("Error submitting form", error);
+                    console.error("Error submitting form:", error);
                     alert("Error submitting form: " + error.message);
                 }
             }
         }
         else if (valid && apiMethod === "put") {
-            if (defaultFieldValues === formValues) {
+            if (JSON.stringify(defaultFieldValues) === JSON.stringify(formValues)) {
                 alert("There is no change to update!")
             } else {
                 try {
@@ -241,11 +245,11 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                         navigate("/employees");
                     }
                 } catch (error) {
-                    if (error.status === 409 || error.status === 400) {
+                    if (error.response.status === 400 || error.response.status === 500) {
                         alert("Error: " + error.response.data.message);
                         // console.log(error);
                     } else {
-                        console.error("Error submitting form", error);
+                        console.error("Error submitting form:", error);
                         alert("Error submitting form: " + error.message);
                     }
                 }
@@ -396,7 +400,7 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                 <Button type="reset" variant='outlined' style={{ margin: "0 20px" }} onClick={handleClear}>
                     {resetBtnName}
                 </Button>
-                <Button type="submit" variant="contained" style={{ margin: "0 20px" }}>
+                <Button disabled={submitBtnActiveState} type="submit" variant="contained" style={{ margin: "0 20px" }}>
                     {submitBtnName}
                 </Button>
             </Box>

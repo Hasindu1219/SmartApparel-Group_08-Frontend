@@ -29,14 +29,16 @@ import ForgotPassword from './pages/Login/ForgotPassword';
 import ExpenseController from './pages/Accounting/ExpenseController';
 import RevenueAdd from './pages/Accounting/AddRevenue';
 import UpdateRevenue from './pages/Accounting/UpdateRevenue';
-import SalaryHomePage from './pages/Salary/SalaryHomePage';
 import AttendanceHomePage from './pages/Attendance/AttendanceHomePage';
 import AttendanceAddPage from './pages/Attendance/AttendanceAddPage';
 import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
-import SalaryParamAddPage from './pages/Salary/SalaryParamAddPage';
-import SalaryAddPage from './pages/Salary/SalaryAddPage';
-import SalaryUpdatePage from './pages/Salary/SalaryUpdatePage';
+import SalaryParamAdd from './pages/Salary/SalaryParamAdd';
 import AddMaterial from './pages/InventoryPage/AddMaterial';
+import SalaryHome from './pages/Salary/SalaryHome';
+import SalaryUpdate from './pages/Salary/SalaryUpdate';
+import SalaryParamUpdate from './pages/Salary/SalaryParamUpdate';
+import SalaryAdd from './pages/Salary/SalaryAdd';
+import SalaryParaHome from './pages/Salary/SalaryParaHome';
 
 
 function App() {
@@ -52,20 +54,21 @@ function App() {
 
         {/* routings inside the employee section */}
         <Route path="/employees" element={<EmployeesHome />}></Route>
-        <Route path="/employee/addemployee" element={<EmployeeAdd/>}> </Route>
-        <Route path="/employee/updateemployee/:Id" element={<EmployeeUpdate/>}> </Route>
+        <Route path="/employee/addemployee" element={<EmployeeAdd />}> </Route>
+        <Route path="/employee/updateemployee/:Id" element={<EmployeeUpdate />}> </Route>
 
         {/* routings inside the attendance section */}
-        <Route path='/attendance' element={<AttendanceHomePage/>}></Route>
-        <Route path='/attendance/addattendance' element={<AttendanceAddPage/>}> </Route>
-        <Route path='/attendance/updateattendance/:Id' element={<AttendanceUpdatePage/>}> </Route>
+        <Route path='/attendance' element={<AttendanceHomePage />}></Route>
+        <Route path='/attendance/addattendance' element={<AttendanceAddPage />}> </Route>
+        <Route path='/attendance/updateattendance/:Id' element={<AttendanceUpdatePage />}> </Route>
 
         {/* routings inside Salary section */}
-        <Route path="/salary" element={<SalaryHomePage/>}></Route>
-        <Route path='/salary-param/addsalaryparam' element={<SalaryParamAddPage/>}></Route>
-        <Route path='/salary/addsalary' element={<SalaryAddPage/>}></Route>
-        <Route path='/salary/updatesalary/:Id' element={<SalaryUpdatePage/>}></Route>
-
+        <Route path="/salary" element={<SalaryHome />}></Route>
+        <Route path='/salary/addsalary' element={<SalaryAdd />}></Route>
+        <Route path='/salary/updatesalary/:Id' element={<SalaryUpdate />}></Route>
+        <Route path='/salary/param' element={<SalaryParaHome />} />
+        <Route path='/salary/param/addsalaryparam' element={<SalaryParamAdd />}></Route>
+        <Route path='/salary/param/update-salary-param/:spId' element={<SalaryParamUpdate />}></Route>
 
         <Route path="/suppliers" element={<Suppliers />}></Route>
 
@@ -76,9 +79,9 @@ function App() {
 
         <Route path="/login" element={<Login />}></Route>
         <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
-        
 
-        <Route path="/customers/customerregister" element={<CustomerRegister/>} />
+
+        <Route path="/customers/customerregister" element={<CustomerRegister />} />
         <Route path="/customerdetails" element={<CustomerViewDelete />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
 
@@ -94,7 +97,7 @@ function App() {
         {/* <Route path="/overview" element={<App />}></Route> */}
       </Routes>
     </BrowserRouter>
-  
+
   );
 }
 

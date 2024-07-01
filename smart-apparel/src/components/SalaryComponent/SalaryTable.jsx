@@ -3,23 +3,18 @@ import { Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, Table
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const SalaryTable = () => {
+function SalaryTable(){
     const navigate = useNavigate();
-    const [searchQuery, setSearchQuery] = useState('');
     const [salaryList, setSalaryList] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
-    const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value);
-    };
-
-    const filteredSalaryList = salaryList.filter(salary => salary.salaryId.toString().includes(searchQuery));
-
+    // Fetch data from the server when the component mounts
     useEffect(() => {
         axios.get('http://localhost:8080/salary/view')
             .then((response) => {
                 const { data } = response;
                 if (data && data.content) {
-                    setSalaryList(data.content);
+                    setSalaryList(data.content); // Set the state with the fetched data
                 } else {
                     console.error('Invalid response format:', data);
                 }
@@ -29,24 +24,38 @@ const SalaryTable = () => {
             });
     }, []);
 
-    const updateSalary = (id) => {
-        navigate(`/attendance/updateattendance/${id}`);
+    // Handle the change in the search input
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value); // Update the search query state
     };
 
+    // Filter the salary list based on the search query
+    const filteredSalaryList = salaryList.filter(salary => {
+        // Ensure salary.salaryId is a string before calling includes
+        const salaryIdStr = salary.empId ? salary.empId.toString() : '';
+        return salaryIdStr.includes(searchQuery);
+    });
+
+    // Navigate to the update page with the selected salary ID
+    const updateSalary = (id) => {
+        navigate(`/salary/updatesalary/${id}`);
+    };
+
+    // Handle the deletion of a salary record
     const handleDelete = (id) => {
         if (window.confirm("Are you sure you want to delete this Record?")) {
             axios.delete(`http://localhost:8080/salary/delete/${id}`)
                 .then((response) => {
                     if (response.status === 202) {
-                        alert("Removed successfully.");
+                        alert("Salary Record successfully Deleted");
                         // Reload data after successful deletion
-                        setSalaryList(salaryList.filter(item => item.salaryId !== id));
+                        window.location.reload();
                     } else {
-                        throw new Error("Failed to remove Record.");
+                        throw new Error("Failed to delete Record.");
                     }
                 })
                 .catch((error) => {
-                    console.error("Error removing Salary", error.message);
+                    console.error("Error deleting Salary", error.message);
                 });
         }
     };
@@ -54,16 +63,16 @@ const SalaryTable = () => {
     return (
         <div>
             <Grid container justifyContent="space-between" alignItems="center" style={{ marginBottom: '1rem' }}>
-                <Button onClick={() => { navigate('/salary/addsalary') }}>Add new Record</Button>
+                <Button onClick={() => { navigate('/salary/addsalary') }}>Add New Salary Record</Button>
                 <TextField
-                    label="Search by ID"
+                    label="Search by Employee ID"
                     variant="outlined"
                     value={searchQuery}
                     onChange={handleSearchChange}
                 />
             </Grid>
 
-            <TableContainer component={Paper} container alignItems="center" justifyContent="space-between" style={{ marginBottom: '1rem' }}>
+            <TableContainer component={Paper} style={{ marginBottom: '1rem' }}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -73,9 +82,10 @@ const SalaryTable = () => {
                             <TableCell>Year & Month</TableCell>
                             <TableCell>Basic</TableCell>
                             <TableCell>EPF by Employee</TableCell>
-                            <TableCell>EPF by Employee</TableCell>
-                            <TableCell>EPF by Employee</TableCell>
+                            <TableCell>EPF by Company</TableCell>
+                            <TableCell>ETF Payment</TableCell>
                             <TableCell>Net Salary</TableCell>
+                            <TableCell>Actions</TableCell>
                         </TableRow>
                     </TableHead>
 
@@ -83,6 +93,7 @@ const SalaryTable = () => {
                         {filteredSalaryList.length > 0 ? (
                             filteredSalaryList.map((salary) => (
                                 <TableRow key={salary.salaryId}>
+                                    <TableCell>{salary.salaryId}</TableCell>
                                     <TableCell>{salary.empId}</TableCell>
                                     <TableCell>{salary.status}</TableCell>
                                     <TableCell>{salary.yearNMonth}</TableCell>
@@ -95,7 +106,7 @@ const SalaryTable = () => {
                                         <Button variant="contained" color="primary" onClick={() => updateSalary(salary.salaryId)}>
                                             Update
                                         </Button>
-                                        <Button variant="contained" color="error" onClick={() => handleDelete(salary.salaryId)} style={{ marginLeft: '10px' }}>
+                                        <Button variant="contained" color="error" onClick={() => handleDelete(salary.salaryId)}>
                                             Delete
                                         </Button>
                                     </TableCell>
@@ -103,7 +114,7 @@ const SalaryTable = () => {
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan="9" align="center">
+                                <TableCell colSpan="10" align="center">
                                     No Data
                                 </TableCell>
                             </TableRow>

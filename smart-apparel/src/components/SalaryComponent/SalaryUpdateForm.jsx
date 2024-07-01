@@ -3,7 +3,7 @@ import { Button, Grid, Input, Typography } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const SalaryUpdate = ({Id}) => {
+const SalaryUpdateForm = ({Id}) => {
   const navigate = useNavigate();
 
   // State for Salary record data 
@@ -132,4 +132,4 @@ const SalaryUpdate = ({Id}) => {
   );
 };
 
-export default SalaryUpdate;
+export default SalaryUpdateForm;
