@@ -2,7 +2,7 @@ import { Button, Grid, Input, Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 
-const EmployeeAddPage = () => {
+function AttendanceForm(){
   // States for fields
   const [date, setDate] = useState('');
   const [inTime, setInTime] = useState('');
@@ -164,4 +164,4 @@ const EmployeeAddPage = () => {
   );
 }
 
-export default EmployeeAddPage;
+export default AttendanceForm;

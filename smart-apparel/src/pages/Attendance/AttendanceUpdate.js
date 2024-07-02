@@ -1,10 +1,10 @@
+import AttendanceForm from "../../components/AttendanceComponent/AttendanceForm";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
-import { Box, Button, Grid, Typography } from "@mui/material";
-import AttendanceUpdate from "../../components/AttendanceComponent/AttendanceUpdate";
+import { Box} from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
-const AttendanceUpdatePage =()=>{
+const AttendanceUpdate =()=>{
     const { Id } = useParams();
     const navigate = useNavigate();
     
@@ -23,7 +23,6 @@ const AttendanceUpdatePage =()=>{
                     </Grid> */}
 
                     <Box height={30} />
-                    <AttendanceUpdate Id={Id}/>
                 </Box>
             </Box>
 
@@ -31,4 +30,4 @@ const AttendanceUpdatePage =()=>{
     );
 }
 
-export default AttendanceUpdatePage;
+export default AttendanceUpdate;
