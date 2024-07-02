@@ -182,10 +182,10 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
                 />
             ))}
             <Box style={{ textAlign: "center", display: "block", marginTop: "20px" }}>
-                <Button type="reset" variant='outlined' style={{ margin: "0 20px" }} onClick={handleClear}>
+                <Button type="reset" variant='outlined' style={{ margin: "0 20px",fontWeight:"bold"}} onClick={handleClear}>
                     {resetBtnName}
                 </Button>
-                <Button type="submit" variant="contained" style={{ margin: "0 20px" }}>
+                <Button type="submit" variant="contained" color="success" style={{ margin: "0 20px",fontWeight:"bold"}}>
                     {submitBtnName}
                 </Button>
             </Box>

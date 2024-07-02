@@ -32,7 +32,7 @@ export default function SalaryParamTable({salaryParameters}) {
     return (
         <>
             <Accordion style={{ marginBottom: "50px", backgroundColor: "#f7f7f7",borderRadius:"10px",padding:"5px",boxShadow:"0px 0px 10px gray"}}>
-                <AccordionSummary expandIcon={<ExpandMore />} style={{fontWeight:"bold"}}>
+                <AccordionSummary expandIcon={<ExpandMore />} style={{fontWeight:"bold",fontSize:"20px"}}>
                     Salary Parameters
                 </AccordionSummary>
 
@@ -63,8 +63,8 @@ export default function SalaryParamTable({salaryParameters}) {
                                                 <TableCell sx={bgColor}>{salaryParam.epfByCompany}%</TableCell>
                                                 <TableCell sx={bgColor}>{salaryParam.etf}%</TableCell>
                                                 <TableCell sx={bgColor}>
-                                                    <Button sx={{ marginLeft: "10px", marginRight: "10px" }} variant="outlined" onClick={() => handleEdit(salaryParam.salaryParameterId)}>Edit</Button>
-                                                    <Button sx={{ marginLeft: "10px", marginRight: "10px" }} variant="outlined" onClick={() => handleDelete(salaryParam.salaryParameterId)}>Delete</Button>
+                                                    <Button sx={{ marginLeft: "10px", marginRight: "10px",fontWeight:"bold"}} color="primary" size="small" variant="outlined" onClick={() => handleEdit(salaryParam.salaryParameterId)}>Edit</Button>
+                                                    <Button sx={{ marginLeft: "10px", marginRight: "10px",fontWeight:"bold"}} color="error" size="small" variant="outlined" onClick={() => handleDelete(salaryParam.salaryParameterId)}>Delete</Button>
                                                 </TableCell>
                                             </TableRow>
                                         ))
@@ -81,7 +81,7 @@ export default function SalaryParamTable({salaryParameters}) {
                     </TableContainer>
                 </AccordionDetails>
                 <AccordionActions>
-                    <Button variant="contained" onClick={() => { navigate('/salary/add-salary-param') }}>Add New</Button>
+                    <Button variant="contained" style={{fontWeight:"bold"}} onClick={() => { navigate('/salary/add-salary-param') }}>Add New</Button>
                 </AccordionActions>
 
             </Accordion>

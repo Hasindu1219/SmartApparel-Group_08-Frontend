@@ -44,7 +44,7 @@ function EmployeeTable({ employees }) {
     <div>
 
       <Grid container justifyContent="space-between" alignItems="center" style={{ marginBottom: '1rem' }}>
-        <Button onClick={() => { navigate('/employee/addemployee') }} >Add new Employee</Button>
+        <Button variant="contained" style={{fontWeight:"bold"}} onClick={() => { navigate('/employee/addemployee') }} >Add new Employee</Button>
 
         <TextField
           label="Search by Employee ID"
@@ -93,10 +93,10 @@ function EmployeeTable({ employees }) {
                   <TableCell>{employee.branchName}</TableCell>
                   <TableCell>{employee.bankName}</TableCell>
                   <TableCell>
-                    <Button sx={{ margin: '0px 10px' }} onClick={() => updateEmployee(employee.empId)}>
+                    <Button size='small' color="primary" variant='outlined' sx={{fontWeight:"bold"}} onClick={() => updateEmployee(employee.empId)}>
                       Update
                     </Button>
-                    <Button sx={{ margin: '0px 10px' }} onClick={() => handleDelete(employee.empId)}>
+                    <Button size='small' color="error" variant='outlined' sx={{fontWeight:"bold"}} onClick={() => handleDelete(employee.empId)}>
                       Delete
                     </Button>
                   </TableCell>

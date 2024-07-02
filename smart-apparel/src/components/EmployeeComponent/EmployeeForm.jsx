@@ -369,10 +369,10 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                 )
             ))}
             <Box style={{ textAlign: "center", display: "block", marginTop: "20px" }}>
-                <Button type="reset" variant='outlined' style={{ margin: "0 20px" }} onClick={handleClear}>
+                <Button type="reset" variant='outlined' style={{ margin: "0 20px",fontWeight:"bold",}} onClick={handleClear}>
                     {resetBtnName}
                 </Button>
-                <Button disabled={submitBtnActiveState} type="submit" variant="contained" style={{ margin: "0 20px" }}>
+                <Button disabled={submitBtnActiveState} type="submit" variant="contained" color='success' style={{ margin: "0 20px",fontWeight:"bold"}}>
                     {submitBtnName}
                 </Button>
             </Box>
