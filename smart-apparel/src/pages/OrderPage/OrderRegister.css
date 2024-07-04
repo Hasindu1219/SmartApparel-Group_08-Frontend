@@ -4,8 +4,7 @@ form{
     margin: 1.5rem auto 2rem auto;
     width: 65%;
     border-radius: 20px;
-    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.3);
-    /* text-align: left; */
+    box-shadow: 10px 10px 10px 10px rgba(74, 89, 228, 0.3);
 }
 .formBodyContainer{
     display: flex;
@@ -20,9 +19,7 @@ form{
 label{
     font-weight: bold;
     font-size: 16px;
-    color: #fff;
-
-    position: relative;
+    color: rgb(255, 255, 255);
 }
 input{
     padding: 10px;
@@ -32,10 +29,6 @@ input{
     outline-color: blue;
     color: black;
     font-weight: bold;
-
-    /* position: absolute;
-  left: 720px;
-  text-align: left; */
 }
 select{
     padding: 10px;
@@ -98,7 +91,7 @@ select{
     background-color: #fff;
     cursor: pointer;
 }
-#addBtn:hover{
+#addBtn:disabled{
     border: 2px solid #368f8b;
     color: #368f8b;
     background-color: #fff;

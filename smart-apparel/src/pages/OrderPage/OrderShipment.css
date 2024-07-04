@@ -1,6 +1,6 @@
-  .formBodyContainer {
-    display: flex;
-    width: 100%;
+.App {
+    text-align: center;
+    margin-top: 50px;
   }
   
   input {
@@ -9,10 +9,11 @@
     margin-right: 10px;
   }
   
-  #searchbtn {
+  #searchBtn {
     margin-bottom:10px;
     margin-top: 8px;
     display: inline;
+
     background-color: rgb(22, 88, 232);
     padding: 10px;
     border: none;
@@ -23,13 +24,8 @@
     height: 2.7rem;
     font-size: 16px;
   }
- 
-  .App {
-    text-align: center;
-    margin-top: 50px;
-  }
 
-  #statusBox{
+  #billBtn{
     margin-bottom:10px;
     display: inline;
 
@@ -43,3 +39,10 @@
     height: 3rem;
     font-size: 16px;
   }
+  #billBtn:disabled{
+    border: 2px solid #f0d53c;
+    color: #f0d53c;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  

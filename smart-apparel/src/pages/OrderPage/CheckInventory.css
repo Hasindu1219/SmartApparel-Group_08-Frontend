@@ -1,0 +1,17 @@
+#checkBtn{
+  background-color: #f0d53c;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  width: 12rem;
+  height: 3rem;
+  font-size: 16px;
+}
+#checkBtn:hover{
+  border: 2px solid #f0d53c;
+  color: #f0d53c;
+  background-color: #fff;
+  cursor: pointer;
+}
