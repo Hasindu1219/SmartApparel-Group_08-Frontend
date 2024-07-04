@@ -10,15 +10,15 @@ export default function HomePage() {
       
       <div className="Inventory_Page">
         
-        <div className="Bottons" float="left">
+        <div className="Buttons" float="left">
           
-          <div className="Bottons">
+          <div className="Buttons">
             <Link to="/accounting/revenuecontroller" className="btns">
               <p className="Task">Manage Revenue</p>
             </Link>
           </div>
 
-          <div className="Bottons">
+          <div className="Buttons">
             <Link to="/accounting/expensecontroller" className="btns">
               <p className="Task">Manage Expenses</p>
             </Link>

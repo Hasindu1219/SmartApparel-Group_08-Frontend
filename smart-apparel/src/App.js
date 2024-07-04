@@ -53,7 +53,7 @@ import AttendanceAddPage from './pages/Attendance/AttendanceAddPage';
 import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
 
 import ReportController from './pages/Report/ReportController';
-import ReportStructure from './pages/Report/ReportStructure';
+import ReportStructure from './components/Report/ReportStructure';
 import ProfitandLossReport from './pages/Report/ProfitandLossReport';
 
 

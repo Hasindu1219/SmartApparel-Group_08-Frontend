@@ -78,7 +78,7 @@ const ExpenseController = () => {
                     <th>Category</th>
                     <th>Date</th>
                     <th>Description</th>
-                    <th>Amount</th>
+                    <th>Amount(Rs.)</th>
                     <th>Action</th>
                   </tr>
                 </thead>

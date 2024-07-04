@@ -6,7 +6,7 @@ import BasicGrid from "../../components/Accounting/AccountingTilesGrid";
 import HomePage from "../../components/Accounting/HomePage/HomePage";
 
 
-
+//Accounting operations controller class
 export default function Accounting() {
   return (
     <>

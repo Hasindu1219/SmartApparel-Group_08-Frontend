@@ -18,34 +18,7 @@ export default function ReportController() {
           sx={{ flexGrow: 1, p: 3, backgroundColor: "#d7e3fc" }}
         >
           <h1>Reports</h1>
-
-          {/* <Box height={30} /> */}
-
-          {/* <div className="firstPageContainer">
-            <div className="Inventory_Page">
-              <div className="Bottons" float="left">
-                <div className="Bottons">
-                  <Link to="/report/reportStructure" className="btns">
-                    <p className="Task">Profit & Loss</p>
-                  </Link>
-                </div>
-
-                <div className="Bottons">
-                  <Link to="" className="btns">
-                    <p className="Task"></p>
-                  </Link>
-                </div>
-
-                <div className="Bottons">
-                  <Link to="" className="btns">
-                    <p className="Task"></p>
-                  </Link>
-                </div>
-              </div>
-              {/* <LineChart /> */}
-          {/* </div>
-          </div>  */}
-
+          
           <div class="container">
             <div class="row">
               <div class="d-flex justify-content-between">

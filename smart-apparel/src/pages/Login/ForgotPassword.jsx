@@ -13,6 +13,7 @@ function ForgotPassword() {
   const [otp, setOtp] = useState("");
   const [isValiedPerson, setIsValiedPerson] = useState(false);
 
+  //method for check email validations
   const validateEmail = () => {
     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     setIsValidEmail(isValid);
@@ -21,24 +22,36 @@ function ForgotPassword() {
     }
   };
 
+  //method for generate random 6 digit OTP
   const generateOTP = () => {
     const randomOTP = Math.floor(100000 + Math.random() * 900000);
     setOtp(randomOTP.toString());
     return randomOTP;
   };
 
-  const ValiedPerson = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/employee/view");
-      const data = await response.json();
-      const employee = data.content.find(
-        (employee) => employee.email === email
-      );
-      setIsValiedPerson(!!employee); // Check if user exists
-    } catch (error) {
-      console.error("Error fetching or parsing data:", error);
+
+// Method for checking if the user is valid or not
+const ValiedPerson = async () => {
+  try {
+    const response = await fetch("http://localhost:8080/employee/view");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
     }
-  };
+    const data = await response.json();
+    const employee = data.content.find((employee) => employee.email === email);
+
+    if (employee) {
+      setIsValiedPerson(true); // Set the state to true if the user exists
+    } else {
+      setIsValiedPerson(false); // Set the state to false if the user does not exist
+      alert("The user is not a valid person.");
+    }
+  } catch (error) {
+    console.error("Error fetching or parsing data:", error);
+    alert("An error occurred while fetching or parsing data.");
+  }
+};
+
 
   const sendOTP = () => {
     if (!isValidEmail) {
@@ -105,10 +118,10 @@ function ForgotPassword() {
               Send Code
             </Components.Anchor>
             {otpSent && (
-              <Components.Input type="password" placeholder="OTP" value={otp} />
+              <Components.Input type="password" placeholder="OTP"  />
             )}
             {otpSent && (
-              <Link to="/overview">
+              <Link>
                 <Components.Button>Submit</Components.Button>
               </Link>
             )}
