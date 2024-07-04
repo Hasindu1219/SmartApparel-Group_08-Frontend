@@ -1,8 +1,8 @@
 import React from 'react';
 import { Grid, CardContent, Typography, CircularProgress } from '@mui/material';
 import MuiCard from '@mui/material/Card';
-import { CenterFocusStrong, CenterFocusStrongRounded } from '@mui/icons-material';
 
+//Card component
 const CardModel = ({ totalvalue,cardname,style, loading }) => {
   
   return (

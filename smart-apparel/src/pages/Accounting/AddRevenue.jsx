@@ -178,7 +178,7 @@ const RevenueAdd = () => {
 
                         <div className="col-lg-12">
                           <div className="form-group">
-                            <label>Currency</label>
+                            <label>Amount(Rs.)</label>
                             <input
                               type="text"
                               required

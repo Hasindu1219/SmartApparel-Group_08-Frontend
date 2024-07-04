@@ -148,7 +148,7 @@ const UpdateExpense = () => {
                         </div>
                         <div className="col-lg-12">
                           <div className="form-group">
-                            <label>Amount (Currency)</label>
+                            <label>Amount(Rs.)</label>
                             <input
                               type="number"
                               step="0.01"

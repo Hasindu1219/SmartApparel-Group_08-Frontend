@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import './ProfitLossReport.css'; // Import CSS for styling
+import './ProfitLossReport.css';
 
+//function to generate the profit and loss report
 const ReportStructure = () => {
   const [revenuedata, setRevenueData] = useState([]);
   const [expensedata, setExpenseData] = useState([]);
@@ -23,6 +24,7 @@ const ReportStructure = () => {
     });
   };
 
+  //for fetching revenue and expense data
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/v1/revenue/viewRevenue")

@@ -30,33 +30,23 @@ function Login() {
         console.log("Login successful!");
         setPosition(employee.position); // Save user's position
         setLoggedIn(true); // Set isLoggedIn state to true
-        // Navigate to '/overview' route after setting state
-        if(Position === "sales associate")
-        {
-          navigate('/overview');
-        }
-        
       } else {
         // Display error if login credentials are invalid
-        setError("Invalid email or password. Please try again.");
+        alert("Invalid email or password. Please try again.");
       }
     } catch (error) {
       console.error("Error fetching or parsing data:", error);
-      setError("Error occurred while logging in. Please try again later.");
+      alert("Error occurred while logging in. Please try again later.");
     }
   };
 
-  // Use useEffect to log the updated Position state after it's been set
+  // Use useEffect to log the updated Position state and navigate accordingly
   useEffect(() => {
     console.log("Updated Position:", Position);
-  }, [Position]);
-
-
-//function added for empty login when developing the system
-  function demologin()
-  {
-    navigate('/overview');
-  }
+    if (Position === "admin") {
+      navigate('/overview');
+    }
+  }, [Position, navigate]);
 
   return (
     <div className="login">
@@ -79,13 +69,10 @@ function Login() {
             <Components.Anchor href="/forgotpassword">
               Forgot your password?
             </Components.Anchor>
-            
-            <Components.Button type="submit" onClick={demologin}>Sign In</Components.Button>
-            
+            <Components.Button type="submit">Sign In</Components.Button>
             {error && <p className="error-message">{error}</p>}
           </Components.Form>
         </Components.SignInContainer>
-
         <Components.RightOverlayPanel signinIn={true}>
           <Components.Title>Apparel Management System</Components.Title>
           <img src={logo} alt="Apparel Management System Logo" width={500} />
