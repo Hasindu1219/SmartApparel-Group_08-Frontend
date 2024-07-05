@@ -48,14 +48,14 @@ function SalaryTable({ salaryList }) {
         const error = validateField('yearNMonth', autoCalYM);
         setAutoCalYMError(error);
 
-        console.log("autoCalYM: "+autoCalYM)
-        console.log("autoCalYMEror:"+autoCalYMError)
-        console.log("Error:"+error)
+        console.log("autoCalYM: " + autoCalYM)
+        console.log("autoCalYMEror:" + autoCalYMError)
+        console.log("Error:" + error)
 
         if (error === "") {
             try {
                 const response = await axios.get(`http://localhost:8080/salary/calculate-all/${autoCalYM}`);
-                console.log("Response: ",response)
+                console.log("Response: ", response)
                 if (response.status === 202) {
                     alert("Auto Calculation for " + autoCalYM + " is Done");
                     window.location.reload();
@@ -97,7 +97,7 @@ function SalaryTable({ salaryList }) {
     return (
         <div style={{ borderRadius: "10px", padding: "5px", boxShadow: "0px 0px 10px gray" }}>
             <Grid container justifyContent="space-between" alignItems="center">
-                <Button variant="contained" size="medium" onClick={() => { navigate('/salary/addsalary') }} style={{fontWeight:"bold"}}>
+                <Button variant="contained" size="medium" onClick={() => { navigate('/salary/addsalary') }} style={{ fontWeight: "bold" }}>
                     Add New Salary Record
                 </Button>
                 <TextField
@@ -107,8 +107,8 @@ function SalaryTable({ salaryList }) {
                     value={searchQuery}
                     onChange={handleSearchChange}
                 />
-                <Box>
-                    <form onSubmit={handleSubmit}>
+
+                <form onSubmit={handleSubmit}>
                         <FormControl size="small" error={!!autoCalYMError}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
@@ -118,13 +118,14 @@ function SalaryTable({ salaryList }) {
                                     views={['month', 'year']}
                                     value={autoCalYM ? dayjs(autoCalYM, 'YYYY-MM') : null}
                                     onChange={handleDateChange}
+                                    slotProps={{ textField: { size: "small" } }}
                                 />
                             </LocalizationProvider>
                             <FormHelperText>{autoCalYMError}</FormHelperText>
                         </FormControl>
-                        <Button type="submit" variant="outlined" size="small" style={{ margin: "11px 4px",fontWeight:"bold"}}>Auto Calculate</Button>
-                    </form>
-                </Box>
+                        <Button type="submit" variant="outlined" size="medium" sx={{m:"1px",fontWeight:"bold"}}>Auto Calculate</Button>
+                </form>
+
             </Grid>
             <TableContainer component={Paper} style={{ marginBottom: '1rem' }}>
                 <Table>
@@ -147,19 +148,19 @@ function SalaryTable({ salaryList }) {
                             filteredSalaryList.map((salary) => (
                                 <TableRow key={salary.salaryId}>
                                     {/* <TableCell>{salary.salaryId}</TableCell> */}
-                                    <TableCell sx={{textAlign: "center"}}>{salary.empId}</TableCell>
-                                    <TableCell sx={{textAlign: "center"}}>{salary.status}</TableCell>
-                                    <TableCell sx={{textAlign: "center"}}>{salary.yearNMonth}</TableCell>
-                                    <TableCell sx={{textAlign: "center"}}>Rs.{salary.basic}</TableCell>
-                                    <TableCell sx={{textAlign: "center"}}>Rs.{salary.epfByEmployee}</TableCell>
-                                    <TableCell sx={{textAlign: "center"}}>Rs.{salary.epfByCompany}</TableCell>
-                                    <TableCell sx={{textAlign: "center"}}>Rs.{salary.etfPayment}</TableCell>
-                                    <TableCell sx={{textAlign: "center"}}>Rs.{salary.netSalary}</TableCell>
-                                    <TableCell sx={{textAlign: "center"}}>
-                                        <Button variant="outlined" color="primary" style={{fontWeight:"bold",margin:"0px 5px"}} size="small" onClick={() => updateSalary(salary.salaryId)}>
+                                    <TableCell sx={{ textAlign: "center" }}>{salary.empId}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>{salary.status}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>{salary.yearNMonth}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>Rs.{salary.basic}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>Rs.{salary.epfByEmployee}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>Rs.{salary.epfByCompany}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>Rs.{salary.etfPayment}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>Rs.{salary.netSalary}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>
+                                        <Button variant="outlined" color="primary" style={{ fontWeight: "bold", margin: "0px 5px" }} size="small" onClick={() => updateSalary(salary.salaryId)}>
                                             Update
                                         </Button>
-                                        <Button variant="outlined" color="error" style={{fontWeight:"bold",margin:"0px 5px"}} size="small" onClick={() => handleDelete(salary.salaryId)}>
+                                        <Button variant="outlined" color="error" style={{ fontWeight: "bold", margin: "0px 5px" }} size="small" onClick={() => handleDelete(salary.salaryId)}>
                                             Delete
                                         </Button>
                                     </TableCell>

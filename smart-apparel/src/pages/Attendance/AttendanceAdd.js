@@ -21,7 +21,7 @@ function AttendanceAdd(){
                         <Button onClick={() => { navigate('/attendance') }}> <ArrowBackIosNewIcon/> </Button>
                         Add new Attendance Record
                     </Box>
-                    <AttendanceForm/>
+                    <AttendanceForm submitBtnName="add" resetBtnName="clear" apiMethod="post"/>
                 </Box>
             </Box>
         </>
