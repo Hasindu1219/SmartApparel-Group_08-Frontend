@@ -39,9 +39,9 @@ export default function EmployeesHome() {
           {/* Cards */}
           <Grid container spacing={2}>
             <EmployeeCard title="Total Employees" value={employees.length} />
-            <EmployeeCard title="Present Employees" value={0} />
+            {/* <EmployeeCard title="Present Employees" value={0} />
             <EmployeeCard title="Absant Employees" value={0} />
-            <EmployeeCard title="Resigned Employees" value={0} />
+            <EmployeeCard title="Resigned Employees" value={0} /> */}
           </Grid>
 
           <Box height={30} />

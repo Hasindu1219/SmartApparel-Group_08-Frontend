@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, FormControl, FormHelperText, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Button, FormControl, FormHelperText, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -100,14 +100,7 @@ function SalaryTable({ salaryList }) {
                 <Button variant="contained" size="medium" onClick={() => { navigate('/salary/addsalary') }} style={{ fontWeight: "bold" }}>
                     Add New Salary Record
                 </Button>
-                <TextField
-                    size="small"
-                    label="Search by Employee ID"
-                    variant="outlined"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                />
-
+                
                 <form onSubmit={handleSubmit}>
                         <FormControl size="small" error={!!autoCalYMError}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -125,7 +118,14 @@ function SalaryTable({ salaryList }) {
                         </FormControl>
                         <Button type="submit" variant="outlined" size="medium" sx={{m:"1px",fontWeight:"bold"}}>Auto Calculate</Button>
                 </form>
-
+                
+                <TextField
+                    size="small"
+                    label="Search by Employee ID"
+                    variant="outlined"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                />
             </Grid>
             <TableContainer component={Paper} style={{ marginBottom: '1rem' }}>
                 <Table>

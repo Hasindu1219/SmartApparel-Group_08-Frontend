@@ -57,9 +57,9 @@ function AttendanceForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
     };
 
     const handleTimeChange = (name, time) => {
-        console.log("Unformatted time:", time);
+        // console.log("Unformatted time:", time);
         const formattedTime = time ? dayjs(time).format('HH:mm:ss') : null;
-        console.log("Formatted time:", formattedTime);
+        // console.log("Formatted time:", formattedTime);
 
         setFormValues({
             ...formValues,
@@ -74,9 +74,8 @@ function AttendanceForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
     const validateField = (name, value) => {
         let error = "";
 
-        // Required field validation
-        if (name === "inTime" && !value) { // Check for null, undefined, or empty value
-            console.log("inTime error is set");
+        if (name === "inTime" && !value) {
+            // console.log("inTime error is set");
             error = 'Field is required';
         } else if (!value && name !== "outTime") {
             error = 'Field is required';
@@ -85,7 +84,6 @@ function AttendanceForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
             if (stringValue !== String(value)) {
                 error = 'Begin and end with white spaces are not allowed';
             } else {
-                // Field-specific validations
                 if (name === "empId") {
                     if (!/^emp\d+$/.test(stringValue)) {
                         error = 'Enter Correct Employee ID (empXXX)';
@@ -150,8 +148,8 @@ function AttendanceForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
 
         setFormErrors(newErrors);
 
-        console.log("FormValues:", formValues)
-        console.log("FormErrors:", formErrors)
+        // console.log("FormValues:", formValues)
+        // console.log("FormErrors:", formErrors)
 
         if (valid && apiMethod === "post") {
             try {
@@ -181,7 +179,7 @@ function AttendanceForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
     };
 
     const handleAPIError = (error) => {
-        if (error.response && (error.response.status === 400 || error.response.status === 500)) {
+        if (error.response && (error.response.status === 409 || error.response.status === 500)) {
             alert("Error: " + error.response.data.message);
         } else {
             console.error("Error submitting form", error);
