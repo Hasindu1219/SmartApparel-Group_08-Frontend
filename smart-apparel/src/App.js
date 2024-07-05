@@ -16,9 +16,25 @@ import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
 import ViewMaterials from './pages/InventoryPage/ViewMaterials';
 
+import CustomerHome from './pages/CustomerPage/CustomerHome';
 import CustomerRegister from './pages/CustomerPage/CustomerRegister';
 import CustomerViewDelete from './pages/CustomerPage/CustomerDetails';
 import CustomerStatus from './pages/CustomerPage/CustomerStatus';
+
+import OrderRegister from './pages/OrderPage/OrderRegister';
+import OrderDetails from './pages/OrderPage/OrderDetails';
+import OrderHome from './pages/OrderPage/OrderHome';
+import CheckInventory from './pages/OrderPage/CheckInventory';
+import MainModels from './pages/OrderPage/MainModels';
+import ModelsPage from './pages/OrderPage/ModelsPage';
+import CustomModel from './pages/OrderPage/CustomModel';
+import AddNewModel from './pages/OrderPage/AddNewModel';
+import OrderShipment from './pages/OrderPage/OrderShipment';
+import LineSupervisorOrderHome from './pages/OrderPage/LineSupervisorOrderHome';
+import LineSupervisorOrderDetails from './pages/OrderPage/LineSupervisorOrderDetails';
+import LineSupervisorOrderCoveredAmount from './pages/OrderPage/LineSupervisorOrderCoveredAmount';
+import LineSupervisorCoveredAmountForm from './pages/OrderPage/LineSupervisorCoveredAmountForm';
+
 // import Login from './pages/Login';
 import RevenueController from './pages/Accounting/RevenueController'
 import AddExpense from './pages/Accounting/AddExpense';
@@ -38,6 +54,10 @@ import SalaryParamUpdate from './pages/Salary/SalaryParamUpdate';
 import SalaryAdd from './pages/Salary/SalaryAdd';
 import AttendanceAdd from './pages/Attendance/AttendanceAdd';
 import AttendanceHome from './pages/Attendance/AttendanceHome';
+
+import ReportController from './pages/Report/ReportController';
+import ReportStructure from './components/Report/ReportStructure';
+import ProfitandLossReport from './pages/Report/ProfitandLossReport';
 
 function App() {
   return (
@@ -76,16 +96,38 @@ function App() {
         <Route path="/inventory/viewInventory" element={<ViewMaterials />}></Route>
 
         <Route path="/login" element={<Login />}></Route>
+
+        <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
         <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
 
-
-        <Route path="/customers/customerregister" element={<CustomerRegister />} />
+        {/* routings inside the customer section */}
+        <Route path="/customerhome" element={<CustomerHome/>} />
+        <Route path="/customerregister" element={<CustomerRegister/>} />
         <Route path="/customerdetails" element={<CustomerViewDelete />} />
         <Route path="/customerstatus" element={<CustomerStatus />} />
+
+        {/* routings inside the order section */}
+        <Route path="/orderregister" element={<OrderRegister />} />
+        <Route path="/orderdetails" element={<OrderDetails />} />
+        <Route path="/orderhome" element={<OrderHome />} />
+        <Route path="/checkinventory" element={<CheckInventory />} />
+        <Route path="/mainmodels" element={<MainModels />} />
+        <Route path="/ordermodels" element={<ModelsPage />} />
+        <Route path="/customizemodels" element={<CustomModel />} />
+        <Route path="/addNewModel" element={<AddNewModel />} />
+        <Route path="/ordershipment" element={<OrderShipment />} />
+        <Route path="/linesupervisororderhome" element={<LineSupervisorOrderHome />} />
+        <Route path="/linesupervisororderdetails" element={<LineSupervisorOrderDetails />} />
+        <Route path="/linesupervisorordercoveredamount" element={<LineSupervisorOrderCoveredAmount />} />
+        <Route path="/linesupervisorcoveredamountform" element={<LineSupervisorCoveredAmountForm />} />
 
         <Route path="/accounting/revenuecontroller" element={<RevenueController />}></Route>
         <Route path="/accounting/addrevenue" element={<RevenueAdd />}></Route>
         <Route path="/accounting/updaterevenue/:id" element={<UpdateRevenue />}></Route>
+
+        <Route path="/report" element={<ReportController />}></Route>
+        <Route path="/report/reportStructure" element={<ReportStructure />}></Route>
+        <Route path="/report/ProfitandLoss" element={<ProfitandLossReport />}></Route>
 
 
         {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}

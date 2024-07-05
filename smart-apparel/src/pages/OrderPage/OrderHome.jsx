@@ -9,10 +9,10 @@ export default function OrderHome() {
         {/* Order Home Page */}
         <div className="CustomeHomePage">
             <div className="Botton">
-                {/* Link to Order Registration */}
-                <Link to={`/orders/orderregister`}>
+                {/* Link to Order Models */}
+                <Link to={`/ordermodels`}>
                     <button className="btn1">
-                        <p className="Task1">Register Order</p>
+                        <p className="Task1">Order Models</p>
                     </button>
                 </Link>
                 {/* Link to Order Details */}
@@ -21,16 +21,10 @@ export default function OrderHome() {
                         <p className="Task1">Order Details</p>
                     </button>
                 </Link>
-                {/* Link to Order Status */}
-                <Link to={'/orderstatus'}>
+                {/* Link to Order Shipment */}
+                <Link to={'/ordershipment'}>
                     <button className="btn1">
-                        <p className="Task1">Order Status</p>
-                    </button>
-                </Link>
-                {/* Link to Check Inventory*/}
-                <Link to={'/checkinventory'}>
-                    <button className="btn1">
-                        <p className="Task1">Check Inventory</p>
+                        <p className="Task1">Order Shipment</p>
                     </button>
                 </Link>
             </div>

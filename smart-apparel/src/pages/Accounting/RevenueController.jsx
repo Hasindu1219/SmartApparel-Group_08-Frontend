@@ -75,20 +75,24 @@ const RevenueController = () => {
                 <thead className="bg-dark text-white">
                   <tr>
                     <th>Revenue ID</th>
-                    <th>Category</th>
+                    <th>Order ID</th>
+                    <th>Cheque ID</th>
                     <th>Date</th>
                     <th>Description</th>
-                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Amount(Rs.)</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {revenuedata.map((item) => (
                     <tr key={item.revenue_ID}>
-                      <td>{item.revenue_ID}</td>
-                      <td>{item.category}</td>
+                      <td>{item.revenue_ID}</td>  
+                      <td>{item.order_Id}</td>
+                      <td>{item.cheque_Id}</td>
                       <td>{item.date}</td>
                       <td>{item.description}</td>
+                      <td>{item.status}</td>
                       <td>{item.amount}</td>
                       <td>
                         <button

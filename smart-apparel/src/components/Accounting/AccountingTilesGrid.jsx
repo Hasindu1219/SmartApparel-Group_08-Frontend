@@ -61,7 +61,7 @@ export default function AccountingTiles() {
             </Typography>
             {/* Conditional rendering based on totalSales */}
             {totalSales !== undefined ? (
-              <Typography variant="h5">{`${totalSales / 1000000} Mn`}</Typography>
+              <Typography variant="h5">{`Rs.  ${totalSales / 1000000} Mn`}</Typography>
             ) : (
               <CircularProgress /> // Display loading indicator while totalSales is undefined
             )}
@@ -77,7 +77,7 @@ export default function AccountingTiles() {
             </Typography>
             {/* Conditional rendering based on totalExpense */}
             {totalExpense !== undefined ? (
-              <Typography variant="h5">{`${totalExpense / 1000000} Mn`}</Typography>
+              <Typography variant="h5">{`Rs.  ${totalExpense / 1000000} Mn`}</Typography>
             ) : (
               <CircularProgress /> // Display loading indicator while totalExpense is undefined
             )}
@@ -93,7 +93,7 @@ export default function AccountingTiles() {
             </Typography>
             {/* Conditional rendering based on totalRevenue */}
             {totalRevenue !== undefined ? (
-              <Typography variant="h5">{`${totalRevenue / 1000000} Mn`}</Typography>
+              <Typography variant="h5">{`Rs.  ${totalRevenue / 1000000} Mn`}</Typography>
             ) : (
               <CircularProgress /> // Display loading indicator while totalRevenue is undefined
             )}

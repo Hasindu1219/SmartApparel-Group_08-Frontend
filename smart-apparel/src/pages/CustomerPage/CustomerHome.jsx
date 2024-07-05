@@ -10,7 +10,7 @@ export default function CustomerHome() {
         <div className="CustomeHomePage">
             <div className="Botton">
                 {/* Link to Customer Registration */}
-                <Link to={`/customers/customerregister`}>
+                <Link to={`/customerregister`}>
                     <button className="btn1">
                         <p className="Task1">Register Customer</p>
                     </button>

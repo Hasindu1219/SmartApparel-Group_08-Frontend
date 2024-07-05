@@ -21,6 +21,7 @@ import EngineeringIcon from '@mui/icons-material/Engineering';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import StoreIcon from '@mui/icons-material/Store';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../appStore';
 
@@ -138,6 +139,27 @@ export default function Sidebar() {
                     <AccountBalanceIcon />
                   </ListItemIcon>
                   <ListItemText primary="Accounting" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/report")}}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <AssessmentIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Reports" sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
               </ListItem>
 

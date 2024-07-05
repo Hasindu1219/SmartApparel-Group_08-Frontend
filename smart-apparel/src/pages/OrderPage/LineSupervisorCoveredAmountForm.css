@@ -1,0 +1,98 @@
+form{
+    background: linear-gradient(95deg, #003554, #004e89, #1a659e);
+    padding: 70px;
+    margin: 1.5rem auto 2rem auto;
+    width: 65%;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px 10px rgba(74, 89, 228, 0.3);
+}
+.formBodyContainer{
+    display: flex;
+    align-items: center;
+}
+.formBox{
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+label{
+    font-weight: bold;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+}
+input{
+    padding: 10px;
+    border: 1px solid darkgoldenrod;
+    border-radius: 5px;
+    width: 30rem;
+    outline-color: blue;
+    color: black;
+    font-weight: bold;
+}
+select{
+    padding: 10px;
+    border: 1px solid darkgoldenrod;
+    border-radius: 5px;
+    width: 30rem;
+    font-weight: bold;
+    color: black;
+    
+}
+.formButtonSection{
+    margin: 5px auto 15px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.5rem;
+}
+#backBtn{
+    background-color: #d80032;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    width: 10rem;
+    height: 3rem;
+    font-size: 18px;
+}
+#editBtn{
+    background-color: #f0d53c;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    width: 10rem;
+    height: 3rem;
+    font-size: 18px;
+}
+#addBtn{
+    background-color: #368f8b;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    width: 10rem;
+    height: 3rem;
+    font-size: 18px;
+}
+#backBtn:hover{
+    border: 2px solid #d80032;
+    color: #d80032;
+    background-color: #fff;
+    cursor: pointer;
+}
+#editBtn:hover{
+    border: 2px solid #f0d53c;
+    color: #f0d53c;
+    background-color: #fff;
+    cursor: pointer;
+}
+#addBtn:disabled{
+    border: 2px solid #368f8b;
+    color: #368f8b;
+    background-color: #fff;
+    cursor: pointer;
+}
