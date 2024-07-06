@@ -42,12 +42,13 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
     const validateField = (name, value) => {
         let error = "";
         const stringValue = String(value);
-
+        
         if (!stringValue.trim()) {
             error = 'Field is required';
-        } else if (stringValue.trim() !== value) {
+        } else if (stringValue.trim() !== stringValue) {
+
             error = 'Begin and end with white spaces are not allowed';
-        }else {
+        } else {
             if (name === "position") {
                 if (!/^[a-zA-Z\s]+$/.test(stringValue)) {
                     error = 'Position can contain only letters and spaces';
@@ -62,7 +63,6 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
                 }
             }
         }
-
         return error;
     };
 
@@ -182,10 +182,10 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
                 />
             ))}
             <Box style={{ textAlign: "center", display: "block", marginTop: "20px" }}>
-                <Button type="reset" variant='outlined' style={{ margin: "0 20px",fontWeight:"bold"}} onClick={handleClear}>
+                <Button type="reset" variant='outlined' style={{ margin: "0 20px", fontWeight: "bold" }} onClick={handleClear}>
                     {resetBtnName}
                 </Button>
-                <Button type="submit" variant="contained" color="success" style={{ margin: "0 20px",fontWeight:"bold"}}>
+                <Button type="submit" variant="contained" color="success" style={{ margin: "0 20px", fontWeight: "bold" }}>
                     {submitBtnName}
                 </Button>
             </Box>
