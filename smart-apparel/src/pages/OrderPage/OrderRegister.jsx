@@ -124,7 +124,7 @@ export default function OrderRegister() {
           </h1>
           {/* Error component */}
           <Error errorDisplay={error} errorMessage={errorType} />
-          <form action="">
+          <form action="" className="form-class">
             {/* Form input fields */}
             <div className="formBox">
               <Row>
