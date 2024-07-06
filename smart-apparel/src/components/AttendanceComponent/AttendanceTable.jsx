@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
 
 const AttendanceTable = () => {
     const navigate = useNavigate();
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchEmpID, setSearchEmpID] = useState('');
+    const [searchDate, setSearchDate] = useState(null);
     const [attendanceList, setAttendanceList] = useState([]);
 
-    const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value);
-    };
-
-    const filteredAttendanceList = attendanceList.filter(attendance => attendance.attendanceId.toString().includes(searchQuery));
+    const filteredAttendanceList = attendanceList.filter(attendance => {
+        const empIdMatch = searchEmpID === '' || attendance.empId.toString().includes(searchEmpID);
+        const dateMatch = !searchDate || dayjs(attendance.date).isSame(searchDate, 'day');
+        return empIdMatch && dateMatch;
+    });
 
     useEffect(() => {
         axios.get('http://localhost:8080/attendance/view')
@@ -54,42 +58,51 @@ const AttendanceTable = () => {
     return (
         <div>
             <Grid container justifyContent="space-between" alignItems="center" style={{ marginBottom: '1rem' }}>
-                <Button onClick={() => { navigate('/attendance/addattendance') }}>Add new Record</Button>
-                <TextField
-                    label="Search by ID"
-                    variant="outlined"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                />
+                <Button onClick={() => { navigate('/attendance/addattendance') }} variant="contained">Add new Record</Button>
+                <Grid container justifyContent="space-between" xs={5}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                            label="Search by Date"
+                            value={searchDate}
+                            onChange={date => setSearchDate(date)}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
+                    <TextField
+                        label="Search by Employee ID"
+                        variant="outlined"
+                        value={searchEmpID}
+                        onChange={e => setSearchEmpID(e.target.value)}
+                    />
+                </Grid>
             </Grid>
 
-            <TableContainer component={Paper} sx={{ maxWidth: 1200 }}>
+            <TableContainer component={Paper} style={{ marginBottom: '1rem' }}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Attendance ID</TableCell>
-                            <TableCell>Date</TableCell>
-                            <TableCell>IN Time</TableCell>
-                            <TableCell>OUT Time</TableCell>
-                            <TableCell>Employee ID</TableCell>
-                            <TableCell>Action</TableCell>
+                            <TableCell sx={{textAlign:"center",fontWeight:"bold"}}>Attendance ID</TableCell>
+                            <TableCell sx={{textAlign:"center",fontWeight:"bold"}}>Date</TableCell>
+                            <TableCell sx={{textAlign:"center",fontWeight:"bold"}}>IN Time</TableCell>
+                            <TableCell sx={{textAlign:"center",fontWeight:"bold"}}>OUT Time</TableCell>
+                            <TableCell sx={{textAlign:"center",fontWeight:"bold"}}>Employee ID</TableCell>
+                            <TableCell sx={{textAlign:"center",fontWeight:"bold"}}>Action</TableCell>
                         </TableRow>
                     </TableHead>
-
                     <TableBody>
                         {filteredAttendanceList.length > 0 ? (
                             filteredAttendanceList.map((attendance) => (
                                 <TableRow key={attendance.attendanceId}>
-                                    <TableCell>{attendance.attendanceId}</TableCell>
-                                    <TableCell>{attendance.date}</TableCell>
-                                    <TableCell>{attendance.inTime}</TableCell>
-                                    <TableCell>{attendance.outTime}</TableCell>
-                                    <TableCell>{attendance.empId}</TableCell>
-                                    <TableCell>
-                                        <Button variant="contained" color="primary" onClick={() => updateAttendance(attendance.attendanceId)}>
+                                    <TableCell sx={{textAlign:"center"}}>{attendance.attendanceId}</TableCell>
+                                    <TableCell sx={{textAlign:"center"}}>{dayjs(attendance.date).format('YYYY-MM-DD')}</TableCell>
+                                    <TableCell sx={{textAlign:"center"}}>{attendance.inTime}</TableCell>
+                                    <TableCell sx={{textAlign:"center"}}>{attendance.outTime}</TableCell>
+                                    <TableCell sx={{textAlign:"center"}}>{attendance.empId}</TableCell>
+                                    <TableCell sx={{textAlign:"center"}}>
+                                        <Button variant="outlined" size="small" color="primary" onClick={() => updateAttendance(attendance.attendanceId)}>
                                             Update
                                         </Button>
-                                        <Button variant="contained" color="error" onClick={() => handleDelete(attendance.attendanceId)} style={{ marginLeft: '10px' }}>
+                                        <Button variant="outlined" size="small" color="error" onClick={() => handleDelete(attendance.attendanceId)} style={{ marginLeft: '10px' }}>
                                             Delete
                                         </Button>
                                     </TableCell>

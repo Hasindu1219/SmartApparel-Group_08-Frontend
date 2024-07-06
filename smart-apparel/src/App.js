@@ -4,10 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Overview from './pages/Overview';
 import Accounting from './pages/Accounting/Accounting';
 
-import Employees from './pages/Employee/Employees';
+import EmployeesHome from './pages/Employee/EmployeesHome';
 import EmployeeAdd from './pages/Employee/EmployeeAdd';
 import EmployeeUpdate from './pages/Employee/EmployeeUpdate';
-import EmployeeDelete from './pages/Employee/EmployeeDelete';
 
 // import Sidebar from './components/Sidebar';
 import Sales from './pages/Sales';
@@ -15,7 +14,6 @@ import Customers from './pages/Customers';
 import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
-import Add_Material from './pages/InventoryPage/AddMaterial';
 import ViewMaterials from './pages/InventoryPage/ViewMaterials';
 
 import CustomerHome from './pages/CustomerPage/CustomerHome';
@@ -47,15 +45,19 @@ import ForgotPassword from './pages/Login/ForgotPassword';
 import ExpenseController from './pages/Accounting/ExpenseController';
 import RevenueAdd from './pages/Accounting/AddRevenue';
 import UpdateRevenue from './pages/Accounting/UpdateRevenue';
-import SalaryHomePage from './pages/Salary/SalaryHomePage';
-import AttendanceHomePage from './pages/Attendance/AttendanceHomePage';
-import AttendanceAddPage from './pages/Attendance/AttendanceAddPage';
-import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
+import AttendanceUpdate from './pages/Attendance/AttendanceUpdate';
+import SalaryParamAdd from './pages/Salary/SalaryParamAdd';
+import AddMaterial from './pages/InventoryPage/AddMaterial';
+import SalaryHome from './pages/Salary/SalaryHome';
+import SalaryUpdate from './pages/Salary/SalaryUpdate';
+import SalaryParamUpdate from './pages/Salary/SalaryParamUpdate';
+import SalaryAdd from './pages/Salary/SalaryAdd';
+import AttendanceAdd from './pages/Attendance/AttendanceAdd';
+import AttendanceHome from './pages/Attendance/AttendanceHome';
 
 import ReportController from './pages/Report/ReportController';
 import ReportStructure from './components/Report/ReportStructure';
 import ProfitandLossReport from './pages/Report/ProfitandLossReport';
-
 
 function App() {
   return (
@@ -67,26 +69,30 @@ function App() {
         <Route path="/sales" element={<Sales />}></Route>
         <Route path="/customers" element={<Customers />}></Route>
         <Route path="/orders" element={<Orders />}></Route>
-        <Route path="/employees" element={<Employees />}></Route>
-        <Route path="/salary" element={<SalaryHomePage/>}></Route>
-        <Route path='/attendance' element={<AttendanceHomePage/>}></Route>
 
-        {/* routings inside the employee section */}
-        <Route path="/employee/addemployee" element={<EmployeeAdd/>}> </Route>
-        <Route path="/employee/updateemployee/:Id" element={<EmployeeUpdate/>}> </Route>
-        <Route path="/employee/deleteemployee" element={<EmployeeDelete/>}> </Route>
+        {/*EMPLOYEE*/}
+        <Route path="/employees" element={<EmployeesHome />}></Route>
+        <Route path="/employee/addemployee" element={<EmployeeAdd />}> </Route>
+        <Route path="/employee/updateemployee/:Id" element={<EmployeeUpdate />}> </Route>
 
-        {/* routings inside the attendance section */}
-        <Route path='/attendance/addattendance' element={<AttendanceAddPage/>}> </Route>
-        <Route path='/attendance/updateattendance/:Id' element={<AttendanceUpdatePage/>}> </Route>
-        {/* routings inside Salary section */}
+        {/*SALARY*/}
+        <Route path="/salary" element={<SalaryHome />}></Route>
+        <Route path='/salary/addsalary' element={<SalaryAdd />}></Route>
+        <Route path='/salary/updatesalary/:Id' element={<SalaryUpdate />}></Route>
+        <Route path='/salary/add-salary-param' element={<SalaryParamAdd />}></Route>
+        <Route path='/salary/update-salary-param/:spId' element={<SalaryParamUpdate />}></Route>
 
-
+        {/*ATTENDANCE*/}
+        <Route path='/attendance' element={<AttendanceHome/>}></Route>
+        <Route path='/attendance/addattendance' element={<AttendanceAdd/>}> </Route>
+        <Route path='/attendance/updateattendance/:Id' element={<AttendanceUpdate />}> </Route>
+        
+        
         <Route path="/suppliers" element={<Suppliers />}></Route>
 
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
-        <Route path="/inventory/addInventory" element={<Add_Material />}></Route>
+        <Route path="/inventory/addInventory" element={<AddMaterial />}></Route>
         <Route path="/inventory/viewInventory" element={<ViewMaterials />}></Route>
 
         <Route path="/login" element={<Login />}></Route>
@@ -131,7 +137,7 @@ function App() {
         {/* <Route path="/overview" element={<App />}></Route> */}
       </Routes>
     </BrowserRouter>
-  
+
   );
 }
 
