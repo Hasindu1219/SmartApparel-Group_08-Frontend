@@ -108,7 +108,7 @@ export default function AddNewModel() {
           </h1>
           {/* Error component for displaying error messages */}
           <Error errorDisplay={error} errorMessage={errorType} />
-          <form action="">
+          <form action="" className="form-class">
             {/* Form input fields */}
             <div className="formBox">
               <Row>

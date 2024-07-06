@@ -125,7 +125,7 @@ export default function LineSupervisorCoveredAmountForm() {
           </h1>
           <Error errorDisplay={error} errorMessage={errorType} />
           {/* Error component */}
-          <form action="">
+          <form action="" className="form-class">
             <div className="formBox">
               <Row>
                 <Col xs={2}>
