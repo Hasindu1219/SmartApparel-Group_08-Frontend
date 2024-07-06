@@ -9,7 +9,7 @@ import axios from "axios";
 function SalaryHome() {
     const [salaryParamList, setSalaryParamList] = useState([]);
     const [salaryList, setSalaryList] = useState([]);
-    const [loading, setLoading] = useState(true); // Add loading state
+    // const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,9 +30,10 @@ function SalaryHome() {
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
-            } finally {
-                setLoading(false); // Set loading to false after data is fetched
             }
+            // } finally {
+            //     setLoading(false); // Set loading to false after data is fetched
+            // }
         };
 
         fetchData();
