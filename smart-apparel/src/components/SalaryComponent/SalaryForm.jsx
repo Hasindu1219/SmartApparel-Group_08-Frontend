@@ -219,6 +219,7 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
                                 views={['month', 'year']}
                                 value={formValues.yearNMonth ? dayjs(formValues.yearNMonth, 'YYYY-MM') : null}
                                 onChange={handleDateChange}
+                                slotProps={{field: { clearable: true}}}
                             />
                         </LocalizationProvider>
                         <FormHelperText>{formErrors[field.name]}</FormHelperText>

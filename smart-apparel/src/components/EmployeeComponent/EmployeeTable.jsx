@@ -51,6 +51,7 @@ function EmployeeTable({ employees }) {
           variant="outlined"
           value={searchQuery}
           onChange={handleSearchChange}
+          size='small'
         />
       </Grid>
 

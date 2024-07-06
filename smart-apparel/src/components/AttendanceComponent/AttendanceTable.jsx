@@ -66,6 +66,7 @@ const AttendanceTable = () => {
                             value={searchDate}
                             onChange={date => setSearchDate(date)}
                             renderInput={(params) => <TextField {...params} />}
+                            slotProps={{textField:{size:"small"},field: { clearable: true}}}
                         />
                     </LocalizationProvider>
                     <TextField
@@ -73,6 +74,7 @@ const AttendanceTable = () => {
                         variant="outlined"
                         value={searchEmpID}
                         onChange={e => setSearchEmpID(e.target.value)}
+                        size="small"
                     />
                 </Grid>
             </Grid>
