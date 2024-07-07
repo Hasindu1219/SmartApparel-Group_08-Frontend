@@ -206,7 +206,7 @@ function AttendanceForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
                                 label={field.label}
                                 value={formValues.date ? dayjs(formValues.date, 'YYYY-MM-DD') : null}
                                 onChange={handleDateChange}
-                                slotProps={{ textField: { required: true } }}
+                                slotProps={{ textField: { required: true },field: { clearable: true} }}
                             />
                         </LocalizationProvider>
                         <FormHelperText>{formErrors[field.name]}</FormHelperText>
@@ -224,7 +224,8 @@ function AttendanceForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
                                     error: !!formErrors[field.name],
                                     margin: "dense",
                                     style: { width: "48%", marginLeft: "2%" }
-                                }
+                                },
+                                field: { clearable: true}
                             }}
                         />
                     </LocalizationProvider>
