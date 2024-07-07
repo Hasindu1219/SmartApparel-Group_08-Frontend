@@ -47,6 +47,8 @@ export default function SalaryParamTable({salaryParameters}) {
                                     <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>EPF by Employee</TableCell>
                                     <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>EPF by Company</TableCell>
                                     <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>ETF</TableCell>
+                                    <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Allowance 1</TableCell>
+                                    <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Allowance 2</TableCell>
                                     <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Action</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -62,6 +64,8 @@ export default function SalaryParamTable({salaryParameters}) {
                                                 <TableCell sx={bgColor}>{salaryParam.epfByEmployee}%</TableCell>
                                                 <TableCell sx={bgColor}>{salaryParam.epfByCompany}%</TableCell>
                                                 <TableCell sx={bgColor}>{salaryParam.etf}%</TableCell>
+                                                <TableCell sx={bgColor}>Rs. {salaryParam.allowance1}</TableCell>
+                                                <TableCell sx={bgColor}>Rs. {salaryParam.allowance2}</TableCell>
                                                 <TableCell sx={bgColor}>
                                                     <Button sx={{ marginLeft: "10px", marginRight: "10px",fontWeight:"bold"}} color="primary" size="small" variant="outlined" onClick={() => handleEdit(salaryParam.salaryParameterId)}>Edit</Button>
                                                     <Button sx={{ marginLeft: "10px", marginRight: "10px",fontWeight:"bold"}} color="error" size="small" variant="outlined" onClick={() => handleDelete(salaryParam.salaryParameterId)}>Delete</Button>
@@ -70,7 +74,7 @@ export default function SalaryParamTable({salaryParameters}) {
                                         ))
                                     ) : (
                                         <TableRow>
-                                            <TableCell colSpan="6" align="center">
+                                            <TableCell colSpan="8" align="center">
                                                 No Data
                                             </TableCell>
                                         </TableRow>

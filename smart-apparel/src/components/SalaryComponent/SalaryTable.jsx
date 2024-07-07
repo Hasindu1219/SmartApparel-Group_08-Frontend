@@ -13,21 +13,21 @@ function SalaryTable({ salaryList }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [autoCalYM, setAutoCalYM] = useState("");
     const [autoCalYMError, setAutoCalYMError] = useState("");
-    const [cleared,setCleared]=useState(false);
+    const [cleared, setCleared] = useState(false);
 
     useEffect(() => {
         // if (cleared) {
         //   const timeout = setTimeout(() => {
         //     setCleared(false);
         //   }, 1500);
-    
+
         //   return () => clearTimeout(timeout);
         // }
         // return () => {};
-if (cleared) {
- setAutoCalYMError("")   
-}
-      }, [cleared]);
+        if (cleared) {
+            setAutoCalYMError("")
+        }
+    }, [cleared]);
 
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
@@ -131,7 +131,7 @@ if (cleared) {
                                 sx={{ width: 290 }}
                                 slotProps={{
                                     textField: { size: "small" },
-                                    field:{clearable:true,onClear: () => setCleared(true)}
+                                    field: { clearable: true, onClear: () => setCleared(true) }
                                 }} /*InputLabelProps:{shrink:true}},*/
                             />
                         </LocalizationProvider>
@@ -159,9 +159,12 @@ if (cleared) {
                             <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Status</TableCell>
                             <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Year & Month</TableCell>
                             <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Basic</TableCell>
+                            <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>OT</TableCell>
                             <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>EPF by Employee</TableCell>
                             <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>EPF by Company</TableCell>
                             <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>ETF Payment</TableCell>
+                            <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Allowance 1</TableCell>
+                            <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Allowance 2</TableCell>
                             <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Net Salary</TableCell>
                             <TableCell sx={{ fontWeight: "bold", textAlign: "center" }}>Actions</TableCell>
                         </TableRow>
@@ -175,9 +178,12 @@ if (cleared) {
                                     <TableCell sx={{ textAlign: "center" }}>{salary.status}</TableCell>
                                     <TableCell sx={{ textAlign: "center" }}>{salary.yearNMonth}</TableCell>
                                     <TableCell sx={{ textAlign: "center" }}>Rs.{salary.basic}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>Rs.{salary.overTime}</TableCell>
                                     <TableCell sx={{ textAlign: "center" }}>Rs.{salary.epfByEmployee}</TableCell>
                                     <TableCell sx={{ textAlign: "center" }}>Rs.{salary.epfByCompany}</TableCell>
                                     <TableCell sx={{ textAlign: "center" }}>Rs.{salary.etfPayment}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>Rs.{salary.allowance1}</TableCell>
+                                    <TableCell sx={{ textAlign: "center" }}>Rs.{salary.allowance2}</TableCell>
                                     <TableCell sx={{ textAlign: "center" }}>Rs.{salary.netSalary}</TableCell>
                                     <TableCell sx={{ textAlign: "center" }}>
                                         <Button variant="outlined" color="primary" style={{ fontWeight: "bold", margin: "0px 5px" }} size="small" onClick={() => updateSalary(salary.salaryId)}>
@@ -191,7 +197,7 @@ if (cleared) {
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan="10" align="center">
+                                <TableCell colSpan="13" align="center">
                                     No Data
                                 </TableCell>
                             </TableRow>
