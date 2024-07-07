@@ -53,26 +53,9 @@ const Qtatn_Con = () => {
     e.preventDefault();
     console.log(formData);
 
-    // Here you can handle the form submission, e.g., send the data to a server
+    // Handle form submission here
 
     setIsSubmitted(true);
-
-    // Clear the form
-    setFormData({
-      name: '',
-      email: '',
-      contactNumber: '',
-      clothingType: 'skirts',
-      frontImage: null,
-      backImage: null,
-      sideImage: null,
-      quantities: {
-        skirts: { small: 0, medium: 0, large: 0, xl: 0 },
-        blouses: { small: 0, medium: 0, large: 0, xl: 0 },
-        frocks: { small: 0, medium: 0, large: 0, xl: 0 },
-        tshirts: { small: 0, medium: 0, large: 0, xl: 0 },
-      },
-    });
   };
 
   const handleClear = () => {
@@ -101,145 +84,119 @@ const Qtatn_Con = () => {
         <h1>Quotation Generation Form</h1>
         <p>Add your details to generate your quotation</p>
         <hr />
-        {isSubmitted && <p className="success-message">Successfully submitted!</p>}
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="contactNumber">Contact Number:</label>
-            <input
-              type="tel"
-              id="contactNumber"
-              name="contactNumber"
-              value={formData.contactNumber}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="clothingType">Clothing Type:</label>
-            <select
-              id="clothingType"
-              name="clothingType"
-              value={formData.clothingType}
-              onChange={handleChange}
-            >
-              <option value="skirts">Skirts</option>
-              <option value="blouses">Blouses</option>
-              <option value="frocks">Frocks</option>
-              <option value="tshirts">T-Shirts</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="frontImage">Front View Image:</label>
-            <input
-              type="file"
-              id="frontImage"
-              name="frontImage"
-              accept="image/*"
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="backImage">Back View Image:</label>
-            <input
-              type="file"
-              id="backImage"
-              name="backImage"
-              accept="image/*"
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="sideImage">Side View Image:</label>
-            <input
-              type="file"
-              id="sideImage"
-              name="sideImage"
-              accept="image/*"
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="quantities">
-            <label>Quantities:</label>
-            {['skirts', 'blouses', 'frocks', 'tshirts'].map((category) => (
-              <div key={category}>
-                <h3>{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
-                <div>
-                  <label htmlFor={`${category}-small`}>Small:</label>
-                  <input
-                    type="number"
-                    id={`${category}-small`}
-                    name={`${category}-small`}
-                    value={formData.quantities[category].small}
-                    onChange={handleChange}
-                    min="0"
-                  />
+        {isSubmitted ? (
+          <p className="success-message">Successfully submitted!</p>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="contactNumber">Contact Number:</label>
+              <input
+                type="tel"
+                id="contactNumber"
+                name="contactNumber"
+                value={formData.contactNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="clothingType">Clothing Type:</label>
+              <select
+                id="clothingType"
+                name="clothingType"
+                value={formData.clothingType}
+                onChange={handleChange}
+              >
+                <option value="skirts">Skirts</option>
+                <option value="blouses">Blouses</option>
+                <option value="frocks">Frocks</option>
+                <option value="tshirts">T-Shirts</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="frontImage">Front View Image:</label>
+              <input
+                type="file"
+                id="frontImage"
+                name="frontImage"
+                accept="image/*"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="backImage">Back View Image:</label>
+              <input
+                type="file"
+                id="backImage"
+                name="backImage"
+                accept="image/*"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="sideImage">Side View Image:</label>
+              <input
+                type="file"
+                id="sideImage"
+                name="sideImage"
+                accept="image/*"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="quantities">
+              <label>Quantities:</label>
+              {['skirts', 'blouses', 'frocks', 'tshirts'].map((category) => (
+                <div key={category} className="category-quantities">
+                  <h3>{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
+                  {['small', 'medium', 'large', 'xl'].map((size) => (
+                    <div key={`${category}-${size}`}>
+                      <label htmlFor={`${category}-${size}`}>
+                        {size.charAt(0).toUpperCase() + size.slice(1)}:
+                      </label>
+                      <input
+                        type="number"
+                        id={`${category}-${size}`}
+                        name={`${category}-${size}`}
+                        value={formData.quantities[category][size]}
+                        onChange={handleChange}
+                        min="0"
+                      />
+                    </div>
+                  ))}
                 </div>
-                <div>
-                  <label htmlFor={`${category}-medium`}>Medium:</label>
-                  <input
-                    type="number"
-                    id={`${category}-medium`}
-                    name={`${category}-medium`}
-                    value={formData.quantities[category].medium}
-                    onChange={handleChange}
-                    min="0"
-                  />
-                </div>
-                <div>
-                  <label htmlFor={`${category}-large`}>Large:</label>
-                  <input
-                    type="number"
-                    id={`${category}-large`}
-                    name={`${category}-large`}
-                    value={formData.quantities[category].large}
-                    onChange={handleChange}
-                    min="0"
-                  />
-                </div>
-                <div>
-                  <label htmlFor={`${category}-xl`}>XL:</label>
-                  <input
-                    type="number"
-                    id={`${category}-xl`}
-                    name={`${category}-xl`}
-                    value={formData.quantities[category].xl}
-                    onChange={handleChange}
-                    min="0"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="button-group">
-            <button type="submit">Submit</button>
-            <button type="button" onClick={handleClear}>Clear</button>
-          </div>
-        </form>
+              ))}
+            </div>
+            <div className="button-group">
+              <button type="submit">Submit</button>
+              <button type="button" onClick={handleClear}>Clear</button>
+            </div>
+          </form>
+        )}
         <Footer />
       </div>
     </div>

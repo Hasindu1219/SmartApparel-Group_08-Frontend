@@ -40,21 +40,23 @@
   .quantities {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
   }
   
-  .quantities > div {
-    margin-bottom: 1rem;
-  }
-  
-  .quantities label {
-    margin: 0.5rem 0 0.25rem 0;
-  }
-  
-  .quantities div {
+  .category-quantities {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 1rem;
+  }
+  
+  .category-quantities > div {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .category-quantities label {
+    width: 120px;
   }
   
   /* Styling for the button group */
@@ -101,127 +103,8 @@
   
   /* Styling for the success message */
   .success-message {
+    font-size: 1.5rem;
     color: green;
-    font-weight: bold;
+    text-align: center;
   }
   
-  /* Responsive adjustments */
-  @media (max-width: 600px) {
-    .container {
-      padding: 1rem;
-    }
-  }
-/* General styling for the container */
-.container {
-    width: 90%;
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Styling for the form */
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  /* Styling for form labels and inputs */
-  label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    display: inline-block;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  select,
-  input[type="file"],
-  input[type="number"] {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  /* Styling for quantities section */
-  .quantities {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .quantities > div {
-    margin-bottom: 1rem;
-  }
-  
-  .quantities label {
-    margin: 0.5rem 0 0.25rem 0;
-  }
-  
-  .quantities div {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  /* Styling for the button group */
-  .button-group {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  /* Styling for the submit and clear buttons */
-  button[type="submit"],
-  button[type="button"] {
-    padding: 0.75rem 1.5rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button[type="button"] {
-    background-color: #6c757d;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  button[type="button"]:hover {
-    background-color: #5a6268;
-  }
-  
-  /* Styling for the page title and description */
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  p {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  /* Styling for the success message */
-  .success-message {
-    color: green;
-    font-weight: bold;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 600px) {
-    .container {
-      padding: 1rem;
-    }
-  }
-    
