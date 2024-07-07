@@ -1,17 +1,20 @@
-import React, { useContext } from 'react'
-import './CSS/FrockCategory.css'
-import { FrocksContext } from '../Context/FrocksContext'
+import React from 'react';
+import Frock from '../Context/Frock'
 
-
-const FrockCategory = (props) => {
-    const {all_product} = useContext(FrocksContext)
+const FrockCategory = () => {
   return (
-    <div>
-      <div className="frock-category">
-
+    <div style={{ display: 'flex', flexDirection: 'column',margin:'10px auto',width:'90%' }}>
+      <div style={{ flex: '1' }}>
+        {/* <h1>Frocks</h1>
+        <p>Welcome to the Frocks category page.</p> */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
+          <Frock />
+        </div>
+        
       </div>
+      
     </div>
-  )
+  );
 }
 
-export default FrockCategory
+export default FrockCategory;

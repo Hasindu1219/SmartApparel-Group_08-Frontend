@@ -37,8 +37,16 @@ import AttendanceAddPage from './pages/Attendance/AttendanceAddPage';
 import AttendanceUpdatePage from './pages/Attendance/AttendanceUpdatePage';
 
 //Web Imports
+
 import WHomepage from './pages/Website/Pages/WHomepage';
-// import Footer from './components/Website/Footer';
+
+import FrockCategory from './pages/Website/Pages/FrockCategory';
+import BlouseCategory from './pages/Website/Pages/BlouseCategory';
+import TShirtCategory from './pages/Website/Pages/TShirtCategory';
+import SkirtCategory from './pages/Website/Pages/SkirtCategory';
+
+
+//import Footer from './components/Website/Footer';
 
 function App() {
   return (
@@ -91,9 +99,14 @@ function App() {
         <Route path="/accounting/updateexpense/:id" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}
         
+        {/* website */}
         <Route path="/WHomepage" element={<WHomepage />}></Route>
-        {/* <Route path="/Froks" element={<Frocks />}></Route> */}
+        <Route path="/Frocks" element={<FrockCategory/>}></Route> 
+        <Route path="/Blouses" element={<BlouseCategory />}></Route>
+        <Route path="/T-Shirts" element={<TShirtCategory />}></Route>
+        <Route path="/Skirts" element={<SkirtCategory />}></Route>
         
+      
       </Routes>
       {/* <Footer/> */}
     </BrowserRouter>

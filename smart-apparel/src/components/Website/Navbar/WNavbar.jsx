@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import './WNavbar.css'
 import logo from '../../../Assets/WebAssets/WAssets/logo.png'
+import { Link } from 'react-router-dom';
 
 export default function WNavbar() {
 
-    const [menu,setMenu] = useState("Frocks")
+    const [menu,setMenu] = useState("Home")
 
   return (
     <div className = 'navbar'>
@@ -12,18 +13,17 @@ export default function WNavbar() {
         <img src={logo} alt=""/>
         <p>SMART APPAREL </p>
       </div>
+      <nav>
       <ul className='nav-menu'>
-      {/* shop */}
-        <li onClick={()=>{setMenu("Home")}}>Home{menu==="Home"?<hr/>:<></>}</li>  
-      {/* men   */}
-        <li onClick={()=>{setMenu("Frock")}}>Frocks{menu==="Frock"?<hr/>:<></>}</li> 
-      {/* women */}
-        <li onClick={()=>{setMenu("Blouse")}}>Blouses{menu==="Blouse"?<hr/>:<></>}</li> 
-      {/* kids  */}
-        <li onClick={()=>{setMenu("T-Shirt")}}>T-Shirts{menu==="T-Shirt"?<hr/>:<></>}</li> 
-        <li onClick={()=>{setMenu("Skirt")}}>Skirts{menu==="Skirt"?<hr/>:<></>}</li>
-      </ul>
       
+        <li><Link to="/Home">Home</Link></li>
+        <li><Link to="/Frocks">Frocks</Link></li>
+        <li><Link to="/Skirts">Skirts</Link></li>
+        <li><Link to="/Blouses">Blouses</Link></li>
+        <li><Link to="/T-Shirts">T-Shirts</Link></li>
+
+      </ul>
+    </nav>  
       
     </div>
   )
