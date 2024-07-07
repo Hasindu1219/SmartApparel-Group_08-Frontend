@@ -44,6 +44,7 @@ import FrockCategory from './pages/Website/Pages/FrockCategory';
 import BlouseCategory from './pages/Website/Pages/BlouseCategory';
 import TShirtCategory from './pages/Website/Pages/TShirtCategory';
 import SkirtCategory from './pages/Website/Pages/SkirtCategory';
+import Quotations from './pages/Website/Pages/Quotations';
 
 
 //import Footer from './components/Website/Footer';
@@ -105,7 +106,7 @@ function App() {
         <Route path="/Blouses" element={<BlouseCategory />}></Route>
         <Route path="/T-Shirts" element={<TShirtCategory />}></Route>
         <Route path="/Skirts" element={<SkirtCategory />}></Route>
-        
+        <Route path="/Quotations" element={<Quotations />}></Route>
       
       </Routes>
       {/* <Footer/> */}

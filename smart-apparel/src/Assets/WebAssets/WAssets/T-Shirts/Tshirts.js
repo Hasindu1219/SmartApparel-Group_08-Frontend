@@ -1,7 +1,7 @@
 import T1 from './T1.png';
 import T2 from './T2.png';
 import T3 from './T3.png';
-import T4 from './T4.png';
+import T4 from './T4.jpg';
 
 import T5 from './T5.jpg';
 import T6 from './T6.jpg';
