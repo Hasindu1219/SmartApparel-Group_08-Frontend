@@ -9,17 +9,17 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-export default function Add_Material() {
+export default function AddMaterial() {
     const[itemCategory,setItemCategory] = useState("");
     const[itemName,setItemName] = useState("");
     const[stockQty,setStockQty] = useState(0);
     const[unit,setUnit] = useState("");
     const[purchasePrice,setPurchasePrice] = useState(0);
-    const[purchaseDate,setPurchaseDate] = useState(new Date);
+    const[purchaseDate,setPurchaseDate] = useState(new Date());
 
     const[error, setError] = useState("none");
     // const[errorType, setErrorType] = useState("none");
-    const errorMsg = ["All fields are requierd"];
+    // const errorMsg = ["All fields are requierd"];
 
     const navigate = useNavigate();
 
@@ -63,7 +63,7 @@ export default function Add_Material() {
         
           <h1 style={{color:"black", marginTop:"6rem", marginLeft:"2rem", fontWeight:"bold"}}>Inventory / Add Inventory</h1>
           <Error errorDisplay={error}/>
-          <form action="">
+          <form action="" className="add-material-form">
           <div className="formBox">
             <label htmlFor="" style={{marginRight:"2rem"}}>Item Category: </label>
             <select onChange={(e)=>{

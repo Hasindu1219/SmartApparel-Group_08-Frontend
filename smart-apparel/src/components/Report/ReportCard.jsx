@@ -9,6 +9,8 @@ import {
   MDBRipple,
 } from "mdb-react-ui-kit";
 
+
+//Structure for Report Cards
 export default function ReportCard(props) {
 
   return (

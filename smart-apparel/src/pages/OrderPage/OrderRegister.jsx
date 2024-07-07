@@ -18,6 +18,7 @@ export default function OrderRegister() {
   const [largeSize, setLargeSize] = useState("");
   const [clothMaterial, setClothMaterial] = useState("");
   const [orderStatus, setOrderStatus] = useState("Pending");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const [error, setError] = useState("none");
   const [errorType, setErrorType] = useState("none");
@@ -56,7 +57,7 @@ export default function OrderRegister() {
         mediumSize,
         largeSize,
         clothMaterial,
-        orderStatus // Ensure orderStatus is included
+        orderStatus,
       };
 
       await axios
@@ -82,62 +83,6 @@ export default function OrderRegister() {
         });
     }
   };
-
-//   const handleAddBtn = async (e) => {
-//     e.preventDefault();
-//     setError("none");
-//     setErrorType("none");
-
-//     if (
-//         orderId === "" ||
-//         orderCustomerName.trim() === "" ||
-//         orderAgreedPrice === "" ||
-//         smallSize === "" ||
-//         mediumSize === "" ||
-//         largeSize === "" ||
-//         clothMaterial === ""
-//     ) {
-//         setError("block");
-//         setErrorType(errorMsg[0]);
-//         setTimeout(() => {
-//             setError("none");
-//         }, 2000);
-//     } else {
-//         const formData = {
-//             orderId: parseInt(orderId),
-//             orderCustomerName: orderCustomerName.trim(),
-//             orderAgreedPrice: parseFloat(orderAgreedPrice),
-//             modelName,
-//             smallSize: parseInt(smallSize),
-//             mediumSize: parseInt(mediumSize),
-//             largeSize: parseInt(largeSize),
-//             clothMaterial,
-//             orderStatus,
-//         };
-
-//         await axios
-//             .post("http://localhost:8080/order/saveOrder", formData)
-//             .then((res) => {
-//                 if (res.data.code === "00") {
-//                     setError("block");
-//                     setErrorType("success");
-//                     setTimeout(() => {
-//                         navigate("/orderdetails");
-//                     }, 3000);
-//                 } else if (res.data.code === "06") {
-//                     setError("block");
-//                     setErrorType("warning");
-//                 } else {
-//                     setError("block");
-//                     setErrorType("danger");
-//                 }
-//             })
-//             .catch(() => {
-//                 setError("block");
-//                 setErrorType("danger");
-//             });
-//     }
-// };
 
   const handleBackBtn = () => {
     navigate("/ordermodels");
@@ -332,11 +277,18 @@ export default function OrderRegister() {
           <div className="formButtonSection">
             <button id="backBtn" onClick={handleBackBtn}>Back</button>
             <button id="clearBtn" onClick={handleClearBtn}>Clear</button>
-            <button id="addBtn" onClick={handleAddBtn}>Register</button>
+            <CheckInventory
+              smallSize={smallSize}
+              mediumSize={mediumSize}
+              largeSize={largeSize}
+              clothMaterial={clothMaterial}
+              modelName={modelName}
+              setIsButtonDisabled={setIsButtonDisabled}
+            />
+            <button id="addBtn" onClick={handleAddBtn} disabled={isButtonDisabled}>Register</button>
           </div>
         </div>
       </div>
     </div>
   );
 }
-

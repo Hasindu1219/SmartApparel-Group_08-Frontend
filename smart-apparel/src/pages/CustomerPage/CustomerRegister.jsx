@@ -98,7 +98,7 @@ export default function CustomerRegister() {
           </h1>
           <Error errorDisplay={error} />
           {/* Input Fields */}
-          <form action="">
+          <form action="" className='customer-register-form'>
             {/* <div className="formBox">
               <label htmlFor="" style={{ marginRight: "3.5rem" }}>
                 Customer ID:{" "}

@@ -80,7 +80,7 @@ const RevenueController = () => {
                     <th>Date</th>
                     <th>Description</th>
                     <th>Status</th>
-                    <th>Amount</th>
+                    <th>Amount(Rs.)</th>
                     <th>Action</th>
                   </tr>
                 </thead>
