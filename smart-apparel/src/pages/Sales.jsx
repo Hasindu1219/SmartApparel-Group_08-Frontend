@@ -2,7 +2,6 @@ import React from 'react'
 import Box from "@mui/material/Box";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar/Navbar";
-import GeneralArrivalFormAdd from "../components/EmployeeComponent/Form";
 
 export default function Sales() {
   return (
