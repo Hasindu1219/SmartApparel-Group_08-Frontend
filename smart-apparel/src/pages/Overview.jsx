@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Navbar from "../components/Navbar/Navbar";
 import Grid from "@mui/material/Grid";
 import CardModel from "../components/Card";
-import OrderDetails from "./OrderPage/OrderDetails";
+
 
 //function for set values to the cards
 export default function Overview() {
@@ -36,8 +36,6 @@ export default function Overview() {
       //const supplierResponse = await fetch("");   //API for get summation of suppliers
       const totalOrderResponse = await fetch("http://localhost:8080/order/viewOrder");   //API for get summation of orders
       const totalCompletedOrderResponse = await fetch("http://localhost:8080/order/completedOrderId");   //API for get summation of completed orders
-
-
 
 
       if (!expenseResponse.ok) {
