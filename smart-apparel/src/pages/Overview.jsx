@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Navbar from "../components/Navbar/Navbar";
 import Grid from "@mui/material/Grid";
 import CardModel from "../components/Card";
+import OrderDetails from "./OrderPage/OrderDetails";
 
 //function for set values to the cards
 export default function Overview() {
@@ -15,6 +16,9 @@ export default function Overview() {
   const [totalEmployees, setTotalEmployees] = useState(undefined);
   const [totalCustomers, setTotalCustomers] = useState(undefined);
   const [totalSuppliers, setTotalSuppliers] = useState(undefined);
+  const [totalOrders, setTotalOrders] = useState(undefined);
+  const [totalCompletedOrders, setTotalCompletedOrders] = useState(undefined);
+
 
   useEffect(() => {
     fetchData();
@@ -30,6 +34,9 @@ export default function Overview() {
       const employeeResponse = await fetch("http://localhost:8080/employee/view");   //API for get summation of employees
       const customerResponse = await fetch("http://localhost:8080/customer/viewCustomer");   //API for get summation of customers
       //const supplierResponse = await fetch("");   //API for get summation of suppliers
+      const totalOrderResponse = await fetch("http://localhost:8080/order/viewOrder");   //API for get summation of orders
+      const totalCompletedOrderResponse = await fetch("http://localhost:8080/order/completedOrderId");   //API for get summation of completed orders
+
 
 
 
@@ -52,6 +59,12 @@ export default function Overview() {
       // if (!supplierResponse.ok) {
       //   throw new Error("Failed to fetch total suppliers");
       // }
+      if (!totalOrderResponse.ok) {
+        throw new Error("Failed to fetch total customers");
+      }
+      if (!totalCompletedOrderResponse.ok) {
+        throw new Error("Failed to fetch total customers");
+      }
      
     
       const expenseData = await expenseResponse.json();
@@ -60,6 +73,9 @@ export default function Overview() {
       const employeeData = await employeeResponse.json();
       const customerData = await customerResponse.json();
      // const supplierData = await employeeResponse.json();
+     const orderData = await totalOrderResponse.json();
+     const completedOrderData = await totalCompletedOrderResponse.json();
+
 
 
       setTotalExpense(expenseData.content);
@@ -68,7 +84,8 @@ export default function Overview() {
       setTotalEmployees(employeeData.content.length);
       setTotalCustomers(customerData.content.length);
       //setTotalSuppliers(supplierData.content.length);
-
+      setTotalOrders(orderData.content.length);
+      setTotalCompletedOrders(completedOrderData.content.length);
 
       console.log(totalExpense);
       console.log(totalRevenue);
@@ -108,7 +125,7 @@ export default function Overview() {
             <CardModel totalvalue={totalEmployees} cardname={"Total Employees"} style={gradientStyle2}  />
             <CardModel totalvalue={totalCustomers} cardname={"Total Customers"} style={gradientStyle2} />
             <CardModel totalvalue={17} cardname={"Total Suppliers"} style={gradientStyle2} />
-            <CardModel totalvalue={22+"/"+25} cardname={"Order Completion"} style={gradientStyle3}  />
+            <CardModel totalvalue={totalCompletedOrders+"/"+totalOrders} cardname={"Order Completion"} style={gradientStyle3}  />
           </Grid>
         </Box>
       </Box>
