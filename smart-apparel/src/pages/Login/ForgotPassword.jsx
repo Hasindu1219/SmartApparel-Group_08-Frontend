@@ -96,7 +96,7 @@ const ValiedPerson = async () => {
   return (
     <div className="login">
       <Components.Container>
-        <Components.SignInContainer>
+        <Components.ForgotPasswordContainer>
           <Components.Form>
             <Components.Title1>Forgot Password</Components.Title1>
             <Components.Input
@@ -125,9 +125,11 @@ const ValiedPerson = async () => {
                 <Components.Button>Submit</Components.Button>
               </Link>
             )}
-            <Components.Anchor href="/login">Back to Login</Components.Anchor>
+            <Components.Paragraph>
+              <Components.Anchor href="/login">Back to Login</Components.Anchor>
+            </Components.Paragraph>
           </Components.Form>
-        </Components.SignInContainer>
+        </Components.ForgotPasswordContainer>
 
         <Components.LeftOverlayPanel>
           <Components.Title>Apparel Management System</Components.Title>
