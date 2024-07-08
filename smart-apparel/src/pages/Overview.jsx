@@ -12,10 +12,10 @@ export default function Overview() {
   // State variables to hold total values
   const [totalExpense, setTotalExpense] = useState(undefined);
   const [totalRevenue, setTotalRevenue] = useState(undefined);
-  const [totalSales, setTotalSales] = useState(undefined);
+  // const [totalSales, setTotalSales] = useState(undefined);
   const [totalEmployees, setTotalEmployees] = useState(undefined);
   const [totalCustomers, setTotalCustomers] = useState(undefined);
-  const [totalSuppliers, setTotalSuppliers] = useState(undefined);
+  // const [totalSuppliers, setTotalSuppliers] = useState(undefined);
   const [totalOrders, setTotalOrders] = useState(undefined);
   const [totalCompletedOrders, setTotalCompletedOrders] = useState(undefined);
 
@@ -115,9 +115,9 @@ export default function Overview() {
         <Box component="main" sx={{ flexGrow: 1, p: 3 ,backgroundColor: "#d7e3fc"}} >
           <h1>Home</h1>
           <Grid container spacing={7}>
-            <CardModel totalvalue={"Rs.  "+(totalExpense/1000)+"Mn"} cardname={"Total Expenses"} style={gradientStyle}  />
-            <CardModel totalvalue={"Rs.  "+(totalRevenue/1000)+"Mn"} cardname={"Total Revenue"} style={gradientStyle} />
-            <CardModel totalvalue={"Rs.  "+789456/1000+"Mn"} cardname={"Total Receivables"} style={gradientStyle} />
+            <CardModel totalvalue={"Rs.  "+(totalExpense/1000000)+"Mn"} cardname={"Total Expenses"} style={gradientStyle}  />
+            <CardModel totalvalue={"Rs.  "+(totalRevenue/1000000)+"Mn"} cardname={"Total Revenue"} style={gradientStyle} />
+            <CardModel totalvalue={"Rs.  "+789456/1000000+"Mn"} cardname={"Total Receivables"} style={gradientStyle} />
             <CardModel totalvalue={totalEmployees} cardname={"Total Employees"} style={gradientStyle2}  />
             <CardModel totalvalue={totalCustomers} cardname={"Total Customers"} style={gradientStyle2} />
             <CardModel totalvalue={17} cardname={"Total Suppliers"} style={gradientStyle2} />
