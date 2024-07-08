@@ -59,10 +59,10 @@ const SalaryReport = () => {
                     <th>Salary ID</th>
                     <th>Employee ID</th>
                     <th>Period</th>
-                    <th>Basic Salary</th>
-                    <th>EPF Amount</th>
-                    <th>ETF Amount</th>
-                    <th>Net Salary</th>
+                    <th>Basic Salary (Rs.)</th>
+                    <th>EPF Amount (Rs.)</th>
+                    <th>ETF Amount (Rs.)</th>
+                    <th>Net Salary (Rs.)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -82,6 +82,9 @@ const SalaryReport = () => {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="report-section">
       </section>
      
       <section className="report-section">
