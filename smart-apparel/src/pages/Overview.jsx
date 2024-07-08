@@ -31,11 +31,11 @@ export default function Overview() {
       const expenseResponse = await fetch("http://localhost:8080/api/v1/expense/totalSumofExpense");   //API for get summation of expenses
       const revenueResponse = await fetch("http://localhost:8080/api/v1/revenue/totalSumofRevenue");   //API for get summation of revenue
       //const salesResponse = await fetch("http://localhost:8080/api/v1/sales/totalSumofSales");       //API for get summation of sales
-      const employeeResponse = await fetch("http://localhost:8080/employee/view");   //API for get summation of employees
-      const customerResponse = await fetch("http://localhost:8080/customer/viewCustomer");   //API for get summation of customers
+      const employeeResponse = await fetch("http://localhost:8080/employee/view");                     //API for get summation of employees
+      const customerResponse = await fetch("http://localhost:8080/customer/viewCustomer");             //API for get summation of customers
       //const supplierResponse = await fetch("");   //API for get summation of suppliers
-      const totalOrderResponse = await fetch("http://localhost:8080/order/viewOrder");   //API for get summation of orders
-      const totalCompletedOrderResponse = await fetch("http://localhost:8080/order/completedOrderId");   //API for get summation of completed orders
+      const totalOrderResponse = await fetch("http://localhost:8080/order/viewOrder");                 //API for get summation of orders
+      const totalCompletedOrderResponse = await fetch("http://localhost:8080/order/completedOrderId"); //API for get summation of completed orders
 
 
       if (!expenseResponse.ok) {
