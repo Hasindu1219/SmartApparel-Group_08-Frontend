@@ -60,6 +60,7 @@ import ReportController from './pages/Report/ReportController';
 import ReportStructure from './components/Report/ReportStructure';
 import ProfitandLossReport from './pages/Report/ProfitandLossReport';
 import DetailedSalaryReport from './pages/Report/DetailedSalaryReport';
+import SalaryReport from './pages/Report/SalaryReport';
 
 function App() {
   return (
@@ -133,7 +134,7 @@ function App() {
         <Route path="/report/reportStructure" element={<ReportStructure />}></Route>
         <Route path="/report/ProfitandLoss" element={<ProfitandLossReport />}></Route>
         <Route path="/report/DetailedSalaryReport" element={<DetailedSalaryReport />}></Route>
-
+        <Route path="/report/SalaryReport" element={<SalaryReport />}></Route>
 
 
         {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}

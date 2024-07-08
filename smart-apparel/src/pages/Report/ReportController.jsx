@@ -33,12 +33,12 @@ export default function ReportController() {
                         <ReportCard image={ReportImage} 
                         title="Salary Report" 
                         content="" 
-                        url=""/>
+                        url="/report/SalaryReport"/>
                     </div>
                     <div style={{ margin: '40px' }}>
                         <ReportCard image={ReportImage} 
                         title="Detailed Salary Report" 
-                        content="" 
+                        content="The Detailed Salary Report provides a comprehensive overview of the salary payments made to employees." 
                         url="/report/DetailedSalaryReport"/>
                     </div>
               </div>

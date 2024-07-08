@@ -2,82 +2,55 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import './ProfitLossReport.css';
 
-//function to generate the profit and loss report
 const DetailedSalaryReport = () => {
-  const [revenuedata, setRevenueData] = useState([]);
-  const [expensedata, setExpenseData] = useState([]);
-  const [totalRevenueAmount, setTotalRevenueAmount] = useState(0);
-  const [totalExpenseAmount, setTotalExpenseAmount] = useState(0);
+  const [salarydata, setSalaryData] = useState([]);
+  const [netSalary, setnetSalary] = useState([]);
 
   const handlePrint = () => {
-    // Hide other sections before printing
     document.querySelectorAll('.hide-on-print').forEach(section => {
       section.style.display = 'none';
     });
-
-    // Trigger print
     window.print();
-
-    // Restore display styles after printing
     document.querySelectorAll('.hide-on-print').forEach(section => {
       section.style.display = 'block';
     });
   };
 
-  //for fetching revenue and expense data
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/revenue/viewRevenue")
+      .get("http://localhost:8080/salary/view")
       .then((response) => {
         if (response.data && response.data.content) {
-          setRevenueData(response.data.content);
-
-          // Calculate total revenue amount
-          const totalRevenue = response.data.content.reduce(
-            (sum, item) => sum + item.amount,
-            0
-          );
-          setTotalRevenueAmount(totalRevenue);
+          setSalaryData(response.data.content);
+          console.log("Salary data fetched:", response.data.content);
         }
       })
       .catch((error) => {
-        console.error("Error fetching revenue data:", error);
-      });
-
-    axios
-      .get("http://localhost:8080/api/v1/expense/viewExpense")
-      .then((response) => {
-        if (response.data && response.data.content) {
-          setExpenseData(response.data.content);
-
-          // Calculate total expense amount
-          const totalExpense = response.data.content.reduce(
-            (sum, item) => sum + item.amount,
-            0
-          );
-          setTotalExpenseAmount(totalExpense);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching expense data:", error);
+        console.error("Error fetching salary data:", error);
       });
   }, []);
 
   return (
     <div className="report-container">
       <header className="report-header">
-        <h1>Profit and Loss Report</h1>
+        <h1>Detailed Salary Report</h1>
         <h2>Smart Apparel International (PVT) LTD.</h2>
-        <h3>Thudawa, Mathara. </h3>
+        <h3>Thudawa, Mathara.</h3>
         <p>Date: {new Date().toLocaleDateString()}</p>
       </header>
 
       <section className="report-section">
         <h2>Overview</h2>
-        <p>This section provides an overview of the Revenue and Expenses.</p>
+        {salarydata.length > 0 && (
+          <div>
+            <p>Salary ID: {salarydata[0].salaryId}</p>
+            <p>Employee ID: {salarydata[0].empId}</p>
+            <p>Period: {salarydata[0].yearNMonth}</p>
+          </div>
+        )}
       </section>
 
-      <h2>Financial Summary</h2>
+      <h2>Summary</h2>
 
       <section className="printable-section">
         <div className="container">
@@ -86,17 +59,44 @@ const DetailedSalaryReport = () => {
               <table className="table borderless">
                 <thead className="bg-dark text-white">
                   <tr>
-                    <th colSpan={3}><h5>Revenue</h5></th>
+                    <th>Description</th>
+                    <th>Amount(Rs.)</th>
                   </tr>
                 </thead>
+                {/* Render salary details */}
                 <tbody>
-                  {revenuedata.map((item) => (
-                    <tr key={item.revenue_ID}>
-                      <td>{item.date}</td>
-                      <td>{item.description}</td>
-                      <td>{item.amount}</td>
+                  {salarydata.map((item, index) => (
+                    <tr key={index}>
+                      <td>Basic Salary</td>
+                      <td>{item.basic}</td>
                     </tr>
                   ))}
+                    <tr>
+                      <td>Transportation Allowance</td>
+                      <td>800.00</td>
+                    </tr>
+                    <tr>
+                      <td>Other Allowance</td>
+                      <td>600.00</td>
+                    </tr>
+                    <tr>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th colSpan={2}>Deductions</th>
+                    </tr>
+                    {salarydata.map((item, index) => (
+                      <tr key={index}>
+                        <td>EPF by Employee</td>
+                        <td>{item.epfByEmployee}</td>
+                      </tr>
+                    ))}
+                    {salarydata.map((item, index) => (
+                      <tr key={index}>
+                        <td>ETF by Employee</td>
+                        <td>{item.etfPayment}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
@@ -104,15 +104,15 @@ const DetailedSalaryReport = () => {
         </div>
       </section>
 
-      
+      <section className="report-section">
+      {salarydata.map((item, index) => (
+        <p key={index} style={{ textAlign: "right", fontSize: 25 }}>Net Salary: <b>Rs. {(salarydata[0].netSalary + 1400).toFixed(2)}</b></p>
+      ))}
+      </section>
 
       <section className="report-section">
-        <p style={{ textAlign: "right", fontSize: 25 }}>Net Profit: <b>Rs.{totalRevenueAmount - totalExpenseAmount}</b></p>
-      </section>
-     
-      <section className="report-section">
         <h2>Key Metrics</h2>
-        <p>The Profit and Loss (P & L) account, also known as the income statement, summarizes a company's financial performance over a specific period, usually a fiscal year. It presents the revenues generated from sales and other sources against the expenses incurred to generate those revenues.</p>
+        <p>The Detailed Salary Report provides a comprehensive overview of the salary payments made to employees of Smart Apparel International (PVT) LTD.</p>
       </section>
 
       <footer className="report-footer">
@@ -120,7 +120,6 @@ const DetailedSalaryReport = () => {
         <p>Date Generated: {new Date().toLocaleDateString()}</p>
       </footer>
 
-      {/* Print button */}
       <button className="print-button hide-on-print" id="printBtn" onClick={handlePrint}>
         Print Report
       </button>
