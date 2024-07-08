@@ -41,6 +41,7 @@ import AddExpense from './pages/Accounting/AddExpense';
 import UpdateExpense from './pages/Accounting/UpdateExpense';
 import Login from './pages/Login/Login';
 import ForgotPassword from './pages/Login/ForgotPassword';
+import ChangePassword from './pages/Login/changePassword';
 
 import ExpenseController from './pages/Accounting/ExpenseController';
 import RevenueAdd from './pages/Accounting/AddRevenue';
@@ -58,6 +59,8 @@ import AttendanceHome from './pages/Attendance/AttendanceHome';
 import ReportController from './pages/Report/ReportController';
 import ReportStructure from './components/Report/ReportStructure';
 import ProfitandLossReport from './pages/Report/ProfitandLossReport';
+import DetailedSalaryReport from './pages/Report/DetailedSalaryReport';
+import SalaryReport from './pages/Report/SalaryReport';
 
 function App() {
   return (
@@ -95,10 +98,10 @@ function App() {
         <Route path="/inventory/addInventory" element={<AddMaterial />}></Route>
         <Route path="/inventory/viewInventory" element={<ViewMaterials />}></Route>
 
+        {/* routings inside the login section */}
         <Route path="/login" element={<Login />}></Route>
-
         <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
-        <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
+        <Route path="/changepassword" element={<ChangePassword />}></Route>
 
         {/* routings inside the customer section */}
         <Route path="/customerhome" element={<CustomerHome/>} />
@@ -121,13 +124,17 @@ function App() {
         <Route path="/linesupervisorordercoveredamount" element={<LineSupervisorOrderCoveredAmount />} />
         <Route path="/linesupervisorcoveredamountform" element={<LineSupervisorCoveredAmountForm />} />
 
+        {/* routings inside the accounting section */}
         <Route path="/accounting/revenuecontroller" element={<RevenueController />}></Route>
         <Route path="/accounting/addrevenue" element={<RevenueAdd />}></Route>
         <Route path="/accounting/updaterevenue/:id" element={<UpdateRevenue />}></Route>
 
+        {/* routings inside the report section */}
         <Route path="/report" element={<ReportController />}></Route>
         <Route path="/report/reportStructure" element={<ReportStructure />}></Route>
         <Route path="/report/ProfitandLoss" element={<ProfitandLossReport />}></Route>
+        <Route path="/report/DetailedSalaryReport" element={<DetailedSalaryReport />}></Route>
+        <Route path="/report/SalaryReport" element={<SalaryReport />}></Route>
 
 
         {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}
