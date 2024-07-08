@@ -10,7 +10,9 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
         basicSalary: "",
         epfByEmployee: "",
         epfByCompany: "",
-        etf: ""
+        etf: "",
+        allowance1: "",
+        allowance2: ""
     });
 
     const [formErrors, setFormErrors] = useState({
@@ -18,7 +20,9 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
         basicSalary: "",
         epfByEmployee: "",
         epfByCompany: "",
-        etf: ""
+        etf: "",
+        allowance1: "",
+        allowance2: ""
     });
 
     useEffect(() => {
@@ -45,14 +49,14 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
 
         if (!stringValue.trim()) {
             error = 'Field is required';
-        } else if (stringValue.trim() !== value) {
+        } else if (stringValue.trim() !== stringValue) {
             error = 'Begin and end with white spaces are not allowed';
-        }else {
+        } else {
             if (name === "position") {
                 if (!/^[a-zA-Z\s]+$/.test(stringValue)) {
                     error = 'Position can contain only letters and spaces';
                 }
-            } else if (name === "basicSalary") {
+            } else if (name === "basicSalary" || name === "allowance1" || name === "allowance2") {
                 if (!/^\d{1,6}(\.\d{1,2})?$/.test(stringValue)) {
                     error = 'Invalid, must be a valid currency value with up to 6 digits and 2 decimal places';
                 }
@@ -62,7 +66,6 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
                 }
             }
         }
-
         return error;
     };
 
@@ -73,14 +76,18 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
                 basicSalary: "",
                 epfByEmployee: "",
                 epfByCompany: "",
-                etf: ""
+                etf: "",
+                allowance1: "",
+                allowance2: ""
             });
             setFormErrors({
                 position: "",
                 basicSalary: "",
                 epfByEmployee: "",
                 epfByCompany: "",
-                etf: ""
+                etf: "",
+                allowance1: "",
+                allowance2: ""
             });
         } else {
             setFormErrors({
@@ -88,7 +95,9 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
                 basicSalary: "",
                 epfByEmployee: "",
                 epfByCompany: "",
-                etf: ""
+                etf: "",
+                allowance1: "",
+                allowance2: ""
             });
             setFormValues(defaultFieldValues);
         }
@@ -159,7 +168,9 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
         { name: "basicSalary", label: "Basic Salary (Rs.)" },
         { name: "epfByEmployee", label: "EPF Percentage By Employee" },
         { name: "epfByCompany", label: "EPF Percentage By Company" },
-        { name: "etf", label: "ETF Percentage" }
+        { name: "etf", label: "ETF Percentage" },
+        { name: "allowance1", label: "Allowance 1 (Rs.)" },
+        { name: "allowance2", label: "Allowance 2 (Rs.)" },
     ];
 
     return (
@@ -182,10 +193,10 @@ function SalaryParamForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldV
                 />
             ))}
             <Box style={{ textAlign: "center", display: "block", marginTop: "20px" }}>
-                <Button type="reset" variant='outlined' style={{ margin: "0 20px",fontWeight:"bold"}} onClick={handleClear}>
+                <Button type="reset" variant='outlined' style={{ margin: "0 20px", fontWeight: "bold" }} onClick={handleClear}>
                     {resetBtnName}
                 </Button>
-                <Button type="submit" variant="contained" color="success" style={{ margin: "0 20px",fontWeight:"bold"}}>
+                <Button type="submit" variant="contained" color="success" style={{ margin: "0 20px", fontWeight: "bold" }}>
                     {submitBtnName}
                 </Button>
             </Box>

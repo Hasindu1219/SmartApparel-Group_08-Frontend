@@ -17,9 +17,12 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
         status: "Pending",
         yearNMonth: "",
         basic: "",
+        overTime: "",
         epfByEmployee: "",
         epfByCompany: "",
         etfPayment: "",
+        allowance1: "",
+        allowance2: "",
         netSalary: ""
     });
 
@@ -28,9 +31,12 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
         status: "",
         yearNMonth: "",
         basic: "",
+        overTime: "",
         epfByEmployee: "",
         epfByCompany: "",
         etfPayment: "",
+        allowance1: "",
+        allowance2: "",
         netSalary: ""
     });
 
@@ -62,9 +68,9 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
             ...formErrors,
             yearNMonth: validateField('yearNMonth', formattedDate),
         });
-        console.log("Date picked from date picker:" + date)
-        console.log("Formatted date:" + formattedDate + " value of:" + formattedDate.typeof);
-        console.log("Date error:" + formErrors.yearNMonth)
+        // console.log("Date picked from date picker:" + date)
+        // console.log("Formatted date:" + formattedDate + " value of:" + formattedDate.typeof);
+        // console.log("Date error:" + formErrors.yearNMonth)
     };
 
     const validateField = (name, value) => {
@@ -75,7 +81,7 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
             error = 'Field is required';
         } else if (stringValue.trim() !== stringValue) {
             error = 'Begin and end with white spaces are not allowed';
-        }else {
+        } else {
             if (name === "empId") {
                 if (!/^emp\d+$/.test(stringValue)) {
                     error = 'Enter Correct Employee ID (empXXX)';
@@ -90,7 +96,7 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
                 if (selectedDate.isAfter(currentDate)) {
                     error = 'Future year and month are not allowed';
                 }
-            } else if (name === "basic" || name === "epfByEmployee" || name === "epfByCompany" || name === "etfPayment" || name === "netSalary") {
+            } else if (name === "basic" || name === "epfByEmployee" || name === "epfByCompany" || name === "etfPayment" || name === "netSalary" || name === "oT" || name === "allowance1" || name === "allowance2") {
                 if (!/^\d{1,6}(\.\d{1,2})?$/.test(stringValue)) {
                     error = 'Invalid, must be a valid currency value with up to 6 digits and 2 decimal places';
                 }
@@ -106,9 +112,12 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
                 status: "Pending",
                 yearNMonth: "",
                 basic: "",
+                overTime: "",
                 epfByEmployee: "",
                 epfByCompany: "",
                 etfPayment: "",
+                allowance1: "",
+                allowance2: "",
                 netSalary: ""
             });
             setFormErrors({
@@ -116,9 +125,12 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
                 status: "",
                 yearNMonth: "",
                 basic: "",
+                overTime: "",
                 epfByEmployee: "",
                 epfByCompany: "",
                 etfPayment: "",
+                allowance1: "",
+                allowance2: "",
                 netSalary: ""
             });
         } else {
@@ -127,9 +139,12 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
                 status: "",
                 yearNMonth: "",
                 basic: "",
+                overTime: "",
                 epfByEmployee: "",
                 epfByCompany: "",
                 etfPayment: "",
+                allowance1: "",
+                allowance2: "",
                 netSalary: ""
             });
             setFormValues(defaultFieldValues);
@@ -199,11 +214,14 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
         { name: "empId", label: "Employee ID" },
         { name: "status", label: "Payment Status" },
         { name: "yearNMonth", label: "Year and Month" },
-        { name: "basic", label: "Basic Salary for Month" },
-        { name: "epfByEmployee", label: "EPF Payment by Employee" },
-        { name: "epfByCompany", label: "EPF Payment by Company" },
-        { name: "etfPayment", label: "ETF Payment" },
-        { name: "netSalary", label: "Net Salary" }
+        { name: "basic", label: "Basic Salary payment for Month (Rs.)" },
+        { name: "overTime", label: "OT payment for Month (Rs.)" },
+        { name: "epfByEmployee", label: "EPF Payment by Employee (Rs.)" },
+        { name: "epfByCompany", label: "EPF Payment by Company (Rs.)" },
+        { name: "etfPayment", label: "ETF Payment (Rs.)" },
+        { name: "allowance1", label: "Allowance 1 (Rs.)" },
+        { name: "allowance2", label: "Allowance 2 (Rs.)" },
+        { name: "netSalary", label: "Net Salary (Rs.)" }
     ];
 
     return (
@@ -219,6 +237,7 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
                                 views={['month', 'year']}
                                 value={formValues.yearNMonth ? dayjs(formValues.yearNMonth, 'YYYY-MM') : null}
                                 onChange={handleDateChange}
+                                slotProps={{ field: { clearable: true } }}
                             />
                         </LocalizationProvider>
                         <FormHelperText>{formErrors[field.name]}</FormHelperText>
@@ -239,10 +258,10 @@ function SalaryForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues
                 )
             ))}
             <Box style={{ textAlign: "center", display: "block", marginTop: "20px" }}>
-                <Button type="reset" variant='outlined' style={{ margin: "0 20px",fontWeight:"bold"}} onClick={handleClear}>
+                <Button type="reset" variant='outlined' style={{ margin: "0 20px", fontWeight: "bold" }} onClick={handleClear}>
                     {resetBtnName}
                 </Button>
-                <Button type="submit" variant="contained" color="success" style={{ margin: "0 20px",fontWeight:"bold"}}>
+                <Button type="submit" variant="contained" color="success" style={{ margin: "0 20px", fontWeight: "bold" }}>
                     {submitBtnName}
                 </Button>
             </Box>
