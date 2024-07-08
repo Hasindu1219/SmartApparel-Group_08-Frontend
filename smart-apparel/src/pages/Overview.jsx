@@ -72,11 +72,9 @@ export default function Overview() {
       //const salesData = await salesResponse.json();
       const employeeData = await employeeResponse.json();
       const customerData = await customerResponse.json();
-     // const supplierData = await employeeResponse.json();
-     const orderData = await totalOrderResponse.json();
-     const completedOrderData = await totalCompletedOrderResponse.json();
-
-
+      // const supplierData = await employeeResponse.json();
+      const orderData = await totalOrderResponse.json();
+      const completedOrderData = await totalCompletedOrderResponse.json();
 
       setTotalExpense(expenseData.content);
       setTotalRevenue(revenueData.content);
