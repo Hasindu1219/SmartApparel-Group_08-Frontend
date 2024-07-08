@@ -86,7 +86,7 @@ const SalaryReport = () => {
      
       <section className="report-section">
         <h2>Key Metrics</h2>
-        <p>The Profit and Loss (P & L) account, also known as the income statement, summarizes a company's financial performance over a specific period, usually a fiscal year. It presents the revenues generated from sales and other sources against the expenses incurred to generate those revenues.</p>
+        <p>This report provides a detailed overview of the salary disbursements for the employees of Smart Apparel International (PVT) LTD.It includes essential salary components such as basic salary, EPF (Employee Provident Fund) contributions, ETF (Employee Trust Fund) contributions, and net salary.</p>
       </section>
 
       <footer className="report-footer">
