@@ -39,7 +39,7 @@ export default function ReportController() {
                         <ReportCard image={ReportImage} 
                         title="Detailed Salary Report" 
                         content="" 
-                        url=""/>
+                        url="/report/DetailedSalaryReport"/>
                     </div>
               </div>
             </div>

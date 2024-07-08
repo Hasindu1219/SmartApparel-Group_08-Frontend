@@ -192,7 +192,7 @@ export default function Sidebar() {
               </ListItem>
           </List>
 
-          <Divider />
+          <Divider sx={{ backgroundColor: 'darkgrey' }} />
 
           <List>
             <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/login")}}>
