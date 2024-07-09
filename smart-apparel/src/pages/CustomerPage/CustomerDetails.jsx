@@ -145,7 +145,7 @@ export default function CustomerDetails() {
           {/* Error component */}
           <Error1 errorDisplay={error} />
           <div className="updateConatiner" style={{ display: modelView }}>
-            <form action="">
+            <form action="" className="form-class" >
               {/* Form input fields */}
               <div className="formBox">
                 <Row>
