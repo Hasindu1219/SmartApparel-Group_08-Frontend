@@ -32,14 +32,14 @@ export default function ReportController() {
                     <div style={{ margin: '40px' }}>
                         <ReportCard image={ReportImage} 
                         title="Salary Report" 
-                        content="" 
-                        url=""/>
+                        content="This report provides a detailed overview of the salary disbursements for the employees of Smart Apparel International (PVT) LTD." 
+                        url="/report/SalaryReport"/>
                     </div>
                     <div style={{ margin: '40px' }}>
                         <ReportCard image={ReportImage} 
                         title="Detailed Salary Report" 
-                        content="" 
-                        url=""/>
+                        content="The Detailed Salary Report provides a comprehensive overview of the salary payments made to employees." 
+                        url="/report/DetailedSalaryReport"/>
                     </div>
               </div>
             </div>
