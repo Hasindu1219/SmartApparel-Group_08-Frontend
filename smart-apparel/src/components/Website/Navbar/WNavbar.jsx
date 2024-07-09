@@ -2,7 +2,7 @@ import React from 'react'
 import './WNavbar.css'
 import logo from '../../../Assets/WebAssets/WAssets/logo.png'
 import { Link } from 'react-router-dom';
-import { Button } from 'bootstrap';
+// import { Button } from 'bootstrap';
 
 export default function WNavbar() {
 
