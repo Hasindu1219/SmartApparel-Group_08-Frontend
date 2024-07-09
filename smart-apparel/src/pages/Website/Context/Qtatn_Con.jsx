@@ -73,13 +73,27 @@ const Qtatn_Con = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
 
-    // Handle form submission here
+    try {
+      const response = await fetch('/api/quotations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setIsSubmitted(true);
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        console.error('Failed to submit the form');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   const handleClear = () => {
@@ -114,7 +128,7 @@ const Qtatn_Con = () => {
       <WNavbar />
       <div className="container">
         <h1>Quotation Generation Form</h1>
-        <p>Add your details to generate your quotation</p>
+        <p>Add here your details to generate your quotation</p>
         <hr />
         {isSubmitted ? (
           <p className="success-message">Successfully submitted!</p>
