@@ -7,6 +7,8 @@ import Error from "../../components/Error1/Error1";
 import Button from "@mui/material/Button";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import axios from "axios";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function CustomerRegister() {
   // State variables for form inputs
@@ -111,9 +113,13 @@ export default function CustomerRegister() {
           {/* Input Fields */}
           <form action="" className="customer-register-form">
             <div className="formBox">
+            <Row>
+                  <Col xs={2}>
               <label htmlFor="" style={{ marginRight: "4rem" }}>
                 Customer Name:{" "}
               </label>
+              </Col>
+              <Col>
               <input
                 type="text"
                 placeholder="Enter Customer Name"
@@ -121,11 +127,17 @@ export default function CustomerRegister() {
                   setCustomerName(e.target.value);
                 }}
               />
+              </Col>
+              </Row>
             </div>
             <div className="formBox">
+            <Row>
+                  <Col xs={2}>
               <label htmlFor="" style={{ marginRight: "4rem" }}>
                 Customer Address:{" "}
               </label>
+              </Col>
+              <Col>
               <input
                 type="text"
                 placeholder="Enter Customer Address"
@@ -133,11 +145,17 @@ export default function CustomerRegister() {
                   setCustomerAddress(e.target.value);
                 }}
               />
+              </Col>
+              </Row>
             </div>
             <div className="formBox">
+            <Row>
+                  <Col xs={2}>
               <label htmlFor="" style={{ marginRight: "4.1rem" }}>
                 Customer Email:{" "}
               </label>
+              </Col>
+              <Col>
               <input
                 type="text"
                 placeholder="Enter Customer Email"
@@ -145,11 +163,17 @@ export default function CustomerRegister() {
                   setCustomerEmail(e.target.value);
                 }}
               />
+              </Col>
+              </Row>
             </div>
             <div className="formBox">
+            <Row>
+                  <Col xs={2}>
               <label htmlFor="" style={{ marginRight: "4rem" }}>
                 Customer Company Name:{" "}
               </label>
+              </Col>
+              <Col>
               <input
                 type="text"
                 placeholder="Enter Customer Company Name"
@@ -157,11 +181,17 @@ export default function CustomerRegister() {
                   setCustomerCompanyName(e.target.value);
                 }}
               />
+              </Col>
+              </Row>
             </div>
             <div className="formBox">
+            <Row>
+                  <Col xs={2}>
               <label htmlFor="" style={{ marginRight: "4.1rem" }}>
                 Customer Reference:{" "}
               </label>
+              </Col>
+              <Col>
               <input
                 type="text"
                 placeholder="Enter Customer Reference"
@@ -169,11 +199,17 @@ export default function CustomerRegister() {
                   setCustomerReference(e.target.value);
                 }}
               />
+              </Col>
+              </Row>
             </div>
             <div className="formBox">
+            <Row>
+                  <Col xs={2}>
               <label htmlFor="" style={{ marginRight: "6.6rem" }}>
                 Customer Phone Number:{" "}
               </label>
+              </Col>
+              <Col>
               <input
                 type="number"
                 placeholder="Enter Customer Phone Number"
@@ -181,11 +217,17 @@ export default function CustomerRegister() {
                   setCustomerPhoneNum(e.target.value);
                 }}
               />
+              </Col>
+              </Row>
             </div>
             <div className="formBox">
+            <Row>
+                  <Col xs={2}>
               <label htmlFor="" style={{ marginRight: "4rem" }}>
                 Customer Password:{" "}
               </label>
+              </Col>
+              <Col>
               <input
                 type="text"
                 placeholder="Enter Customer Password"
@@ -193,6 +235,8 @@ export default function CustomerRegister() {
                   setCustomerPassword(e.target.value);
                 }}
               />
+              </Col>
+              </Row>
             </div>
           </form>
           {/* Action buttons */}
