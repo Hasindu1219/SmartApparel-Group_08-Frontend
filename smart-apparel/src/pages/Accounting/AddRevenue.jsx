@@ -109,7 +109,7 @@ const RevenueAdd = () => {
               >
                 <ArrowBackIcon />
               </button>
-              <h2 style={{ marginLeft: "40px" }}>Revenue Adding Form</h2>
+              <h2 style={{ marginLeft: "40px" }}>Sales Adding Form</h2>
             </div>
             <div className="row">
               <div className="offset-lg-2 col-lg-8">

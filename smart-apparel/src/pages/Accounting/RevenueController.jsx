@@ -61,7 +61,7 @@ const RevenueController = () => {
               <button id="backBtnExpense" onClick={() => navigate("/accounting")}>
                 <ArrowBackIcon /> 
               </button>
-              <h2 style={{ marginLeft: "40px" }}>Revenue Listing</h2>
+              <h2 style={{ marginLeft: "40px" }}>Sales Listing</h2>
             </div>
             <div className="card-body">
               <div className="divbtn">
@@ -74,7 +74,7 @@ const RevenueController = () => {
               <table className="table table-bordered">
                 <thead className="bg-dark text-white">
                   <tr>
-                    <th>Revenue ID</th>
+                    <th>ID</th>
                     <th>Order ID</th>
                     <th>Cheque ID</th>
                     <th>Date</th>

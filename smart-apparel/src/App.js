@@ -12,7 +12,6 @@ import EmployeeUpdate from './pages/Employee/EmployeeUpdate';
 import Sales from './pages/Sales';
 import Customers from './pages/Customers';
 import Orders from './pages/Orders';
-import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
 import ViewMaterials from './pages/InventoryPage/ViewMaterials';
 
@@ -68,7 +67,6 @@ import Quotations from './pages/Website/Pages/Quotations';
 
 
 import ReportController from './pages/Report/ReportController';
-import ReportStructure from './components/Report/ReportStructure';
 import ProfitandLossReport from './pages/Report/ProfitandLossReport';
 import DetailedSalaryReport from './pages/Report/DetailedSalaryReport';
 import SalaryReport from './pages/Report/SalaryReport';
@@ -102,8 +100,6 @@ function App() {
         <Route path='/attendance/addattendance' element={<AttendanceAdd/>}> </Route>
         <Route path='/attendance/updateattendance/:Id' element={<AttendanceUpdate />}> </Route>
         
-        
-        <Route path="/suppliers" element={<Suppliers />}></Route>
 
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
@@ -143,7 +139,6 @@ function App() {
 
         {/* routings inside the report section */}
         <Route path="/report" element={<ReportController />}></Route>
-        <Route path="/report/reportStructure" element={<ReportStructure />}></Route>
         <Route path="/report/ProfitandLoss" element={<ProfitandLossReport />}></Route>
         <Route path="/report/DetailedSalaryReport" element={<DetailedSalaryReport />}></Route>
         <Route path="/report/SalaryReport" element={<SalaryReport />}></Route>

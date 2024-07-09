@@ -227,7 +227,7 @@ const UpdateRevenue = () => {
                         <div className="col-lg-12">
                           <div className="form-group" style={{ textAlign: "center" }}>
                             <button id="updateBtnExpense" type="submit">
-                              Update Revenue
+                              Update
                             </button>
                           </div>
                         </div>

@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ReportStructure from "../../components/Report/ReportStructure";
+import ProfitLossReport from "../../components/Report/ProfitLossReport";
 import "./styles.css";
 
 export default function ProfitandLossReport() {
@@ -41,7 +41,7 @@ export default function ProfitandLossReport() {
               </button>
             </div>
           </div>
-          <ReportStructure />
+          <ProfitLossReport />
         </div>
       </Box>
     </>

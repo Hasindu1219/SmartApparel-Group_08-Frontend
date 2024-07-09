@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import './ProfitLossReport.css';
+import "./ProfitLossReport.css";
 
-//function to generate the profit and loss report
-const ReportStructure = () => {
+// Function to generate the profit and loss report
+const ProfitLossReport = () => {
   const [revenuedata, setRevenueData] = useState([]);
   const [expensedata, setExpenseData] = useState([]);
   const [totalRevenueAmount, setTotalRevenueAmount] = useState(0);
@@ -11,56 +11,54 @@ const ReportStructure = () => {
 
   const handlePrint = () => {
     // Hide other sections before printing
-    document.querySelectorAll('.hide-on-print').forEach(section => {
-      section.style.display = 'none';
+    document.querySelectorAll(".hide-on-print").forEach((section) => {
+      section.style.display = "none";
     });
 
     // Trigger print
     window.print();
 
     // Restore display styles after printing
-    document.querySelectorAll('.hide-on-print').forEach(section => {
-      section.style.display = 'block';
+    document.querySelectorAll(".hide-on-print").forEach((section) => {
+      section.style.display = "block";
     });
   };
 
-  //for fetching revenue and expense data
+  // For fetching revenue and expense data
+  const fetchData = async () => {
+    try {
+      const [revenueResponse, expenseResponse] = await Promise.all([
+        axios.get("http://localhost:8080/api/v1/revenue/viewRevenue"),
+        axios.get("http://localhost:8080/api/v1/expense/viewExpense"),
+      ]);
+
+      console.log('Revenue Response:', revenueResponse.data);
+      console.log('Expense Response:', expenseResponse.data);
+
+      if (revenueResponse.data && revenueResponse.data.content) {
+        setRevenueData(revenueResponse.data.content);
+        const totalRevenue = revenueResponse.data.content.reduce(
+          (sum, item) => sum + item.amount,
+          0
+        );
+        setTotalRevenueAmount(totalRevenue);
+      }
+
+      if (expenseResponse.data && expenseResponse.data.content) {
+        setExpenseData(expenseResponse.data.content);
+        const totalExpense = expenseResponse.data.content.reduce(
+          (sum, item) => sum + item.amount,
+          0
+        );
+        setTotalExpenseAmount(totalExpense);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/v1/revenue/viewRevenue")
-      .then((response) => {
-        if (response.data && response.data.content) {
-          setRevenueData(response.data.content);
-
-          // Calculate total revenue amount
-          const totalRevenue = response.data.content.reduce(
-            (sum, item) => sum + item.amount,
-            0
-          );
-          setTotalRevenueAmount(totalRevenue);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching revenue data:", error);
-      });
-
-    axios
-      .get("http://localhost:8080/api/v1/expense/viewExpense")
-      .then((response) => {
-        if (response.data && response.data.content) {
-          setExpenseData(response.data.content);
-
-          // Calculate total expense amount
-          const totalExpense = response.data.content.reduce(
-            (sum, item) => sum + item.amount,
-            0
-          );
-          setTotalExpenseAmount(totalExpense);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching expense data:", error);
-      });
+    fetchData();
   }, []);
 
   return (
@@ -68,7 +66,7 @@ const ReportStructure = () => {
       <header className="report-header">
         <h1>Profit and Loss Report</h1>
         <h2>Smart Apparel International (PVT) LTD.</h2>
-        <h3>Thudawa, Mathara. </h3>
+        <h3>Thudawa, Mathara.</h3>
         <p>Date: {new Date().toLocaleDateString()}</p>
       </header>
 
@@ -86,7 +84,9 @@ const ReportStructure = () => {
               <table className="table borderless">
                 <thead className="bg-dark text-white">
                   <tr>
-                    <th colSpan={3}><h5>Revenue</h5></th>
+                    <th colSpan={3}>
+                      <h5>Revenue</h5>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -111,7 +111,9 @@ const ReportStructure = () => {
               <table className="table borderless">
                 <thead className="bg-dark text-white">
                   <tr>
-                    <th colSpan={3}><h5>Expense</h5></th>    
+                    <th colSpan={3}>
+                      <h5>Expense</h5>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -130,12 +132,20 @@ const ReportStructure = () => {
       </section>
 
       <section className="report-section">
-        <p style={{ textAlign: "right", fontSize: 25 }}>Net Profit: <b>Rs.{totalRevenueAmount - totalExpenseAmount}</b></p>
+        <p style={{ textAlign: "right", fontSize: 25 }}>
+          Net Profit: <b>Rs. {totalRevenueAmount - totalExpenseAmount}</b>
+        </p>
       </section>
-     
+
       <section className="report-section">
         <h2>Key Metrics</h2>
-        <p>The Profit and Loss (P & L) account, also known as the income statement, summarizes a company's financial performance over a specific period, usually a fiscal year. It presents the revenues generated from sales and other sources against the expenses incurred to generate those revenues.</p>
+        <p>
+          The Profit and Loss (P & L) account, also known as the income
+          statement, summarizes a company's financial performance over a
+          specific period, usually a fiscal year. It presents the revenues
+          generated from sales and other sources against the expenses incurred
+          to generate those revenues.
+        </p>
       </section>
 
       <footer className="report-footer">
@@ -144,11 +154,15 @@ const ReportStructure = () => {
       </footer>
 
       {/* Print button */}
-      <button className="print-button hide-on-print" id="printBtn" onClick={handlePrint}>
+      <button
+        className="print-button hide-on-print"
+        id="printBtn"
+        onClick={handlePrint}
+      >
         Print Report
       </button>
     </div>
   );
 };
 
-export default ReportStructure;
+export default ProfitLossReport;
