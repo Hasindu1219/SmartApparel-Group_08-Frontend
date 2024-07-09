@@ -4,11 +4,15 @@ import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import Error1 from "../../components/Error1/Error1";
 import axios from "axios";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export default function CustomerDetails() {
   // State variables
+  const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const [deleteCustomer, setDeleteCustomer] = useState(false);
 
@@ -136,6 +140,7 @@ export default function CustomerDetails() {
             }}
           >
             Customer Details
+            <Button onClick={() => { navigate('/customers') }}> <ArrowBackIosNewIcon/> </Button>
           </h1>
           {/* Error component */}
           <Error1 errorDisplay={error} />
