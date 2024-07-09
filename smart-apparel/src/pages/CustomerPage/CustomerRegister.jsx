@@ -4,6 +4,8 @@ import "./CustomerRegister.css";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import Error from "../../components/Error1/Error1";
+import Button from "@mui/material/Button";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import axios from "axios";
 
 export default function CustomerRegister() {
@@ -95,6 +97,7 @@ export default function CustomerRegister() {
             }}
           >
             Customer Register
+            <Button onClick={() => { navigate('/customers') }}> <ArrowBackIosNewIcon/> </Button>
           </h1>
           <Error errorDisplay={error} />
           {/* Input Fields */}

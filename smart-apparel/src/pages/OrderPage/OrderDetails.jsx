@@ -3,12 +3,16 @@ import "./OrderDetails.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import Error1 from "../../components/Error1/Error1";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export default function OrderDetails() {
   // State variables
+  const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const [deleteOrder, setDeleteOrder] = useState(false);
 
@@ -141,6 +145,7 @@ export default function OrderDetails() {
             }}
           >
             Order Details
+            <Button onClick={() => { navigate('/orders') }}> <ArrowBackIosNewIcon/> </Button>
           </h1>
           <Error1 errorDisplay={error} />
           <div className="updateConatiner" style={{ display: modelView }}>

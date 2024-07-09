@@ -1,10 +1,13 @@
 import React from "react";
 import Sidebar from "../../components/Sidebar.js";
-import Box from "@mui/material/Box";
+import { Box, Button} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar.jsx";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import MainModels from "../OrderPage/MainModels";
 
 export default function ModelsPage() {
+  const navigate = useNavigate();
   // Render Model component
   return (
     <>
@@ -24,6 +27,8 @@ export default function ModelsPage() {
             }}
           >
             Order Models
+            <Button onClick={() => { navigate('/orders') }}> <ArrowBackIosNewIcon/> </Button>
+
           </h1>
           <MainModels />
         </div>
