@@ -10,17 +10,22 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 export default function CustomerStatus() {
   const navigate = useNavigate();
+  
+  // State variables for order ID and status
   const [orderId, setOrderId] = useState("");
   const [orderStatus, setOrderStatus] = useState(null);
 
+  // State variables for error handling
   const [error, setError] = useState(null);
   const [errorType, setErrorType] = useState("none");
   const errorMsg = ["Invalid Order ID"];
 
+  // Function to handle input change for order ID
   const handleInputChange = (event) => {
     setOrderId(event.target.value);
   };
 
+  // Function to fetch order status from the server
   const fetchOrderStatus = async (event) => {
     event.preventDefault();
     try {
@@ -57,7 +62,7 @@ export default function CustomerStatus() {
             <Button onClick={() => { navigate('/customers') }}> <ArrowBackIosNewIcon/> </Button>
           </h1>
           <div>
-          {error && <Error errorDisplay="block" errorMessage={error} />}
+            {error && <Error errorDisplay="block" errorMessage={error} />}
             <div className="App">
               <form onSubmit={fetchOrderStatus}>
                 <input

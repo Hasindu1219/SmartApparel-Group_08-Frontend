@@ -17,18 +17,18 @@ const CheckInventory = ({ setIsButtonDisabled }) => {
       );
       if (response.data.isInventorySufficient) {
         // If inventory is sufficient, enable the register button and display success message
-        setIsButtonDisabled(false); // Enable the register button
+        setIsButtonDisabled(false); 
         setError("block");
         setErrorType("Inventory is sufficient");
       } else {
         // If inventory is insufficient, disable the register button and display error message
-        setIsButtonDisabled(true); // Disable the register button
+        setIsButtonDisabled(true); 
         setError("block");
         setErrorType("Inventory is insufficient");
       }
     } catch (error) {
       // If there is an error in the request, disable the register button and display error message
-      setIsButtonDisabled(true); // Disable the register button on error
+      setIsButtonDisabled(true); 
       setError("block");
       setErrorType("Error in checking inventory");
     }

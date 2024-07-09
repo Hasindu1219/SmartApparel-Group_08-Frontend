@@ -10,12 +10,9 @@ export default function LineSupervisorOrderHome() {
   return (
     <>
       <Navbar />
-
       <Box height={60} />
-
       <Box sx={{ display: "flex" }}>
         <Sidebar />
-
         <div
           style={{ width: "100%", backgroundColor: "#d7e3fc", height: "100vh" }}
         >
