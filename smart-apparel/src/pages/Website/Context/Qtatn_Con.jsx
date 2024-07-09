@@ -134,7 +134,7 @@ const Qtatn_Con = () => {
         {isSubmitted ? (
           <p className="success-message">Successfully submitted!</p>
         ) : (
-          <form onSubmit={handleSubmit} className="container">
+          <form onSubmit={handleSubmit} className="Qtatn-container form-Qtatn-con">
             <div>
               <label htmlFor="name">Name:</label>
               <input
@@ -242,8 +242,8 @@ const Qtatn_Con = () => {
                 )
             )}
             <div className="button-group">
-              <button type="submit">Submit</button>
-              <button type="button" className="clearbutton" onClick={handleClear}>Clear</button>
+              <button className="bttn sbmit-bttn" type="submit">Submit</button>
+              <button className="bttn clearbutton" type="button" onClick={handleClear}>Clear</button>
             </div>
           </form>
         )}

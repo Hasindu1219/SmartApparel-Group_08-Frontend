@@ -1,5 +1,5 @@
 /* General styling for the container */
-.container {
+.Qtatn-container {
   width: 90%;
   max-width: 800px;
   margin: 2rem auto;
@@ -16,7 +16,7 @@
 
 
 /* Styling for the form */
-form {
+.form-Qtatn-con {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -77,7 +77,7 @@ input[type="number"] {
   gap: 1rem;
 }
 
-button {
+.bttn {
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 4px;
@@ -85,7 +85,7 @@ button {
   cursor: pointer;
 }
 
-button[type="submit"] {
+.sbmit-bttn{
   background-color: #4caf50;
   color: white;
 }
