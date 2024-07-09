@@ -57,7 +57,6 @@ import AttendanceAdd from './pages/Attendance/AttendanceAdd';
 import AttendanceHome from './pages/Attendance/AttendanceHome';
 
 import ReportController from './pages/Report/ReportController';
-import ReportStructure from './components/Report/ReportStructure';
 import ProfitandLossReport from './pages/Report/ProfitandLossReport';
 import DetailedSalaryReport from './pages/Report/DetailedSalaryReport';
 import SalaryReport from './pages/Report/SalaryReport';
@@ -131,7 +130,6 @@ function App() {
 
         {/* routings inside the report section */}
         <Route path="/report" element={<ReportController />}></Route>
-        <Route path="/report/reportStructure" element={<ReportStructure />}></Route>
         <Route path="/report/ProfitandLoss" element={<ProfitandLossReport />}></Route>
         <Route path="/report/DetailedSalaryReport" element={<DetailedSalaryReport />}></Route>
         <Route path="/report/SalaryReport" element={<SalaryReport />}></Route>

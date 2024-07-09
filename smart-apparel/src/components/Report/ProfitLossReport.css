@@ -64,6 +64,9 @@
   cursor: pointer;
 }
 
+
+
+
 /* Styling for the filter container */
 .filters {
   margin: 20px 0;
@@ -85,16 +88,6 @@
   background-color: #f9f9f9;
   appearance: none;
   outline: none;
-  transition: border-color 0.3s;
-}
-
-.filters select:focus {
-  border-color: #007bff;
-}
-
-/* Additional styles for a better visual */
-.filters select:hover {
-  border-color: #0056b3;
 }
 
 .filters select:disabled {

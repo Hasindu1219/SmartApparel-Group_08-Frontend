@@ -11,11 +11,9 @@ export default function Overview() {
 
   // State variables to hold total values
   const [totalExpense, setTotalExpense] = useState(undefined);
-  const [totalRevenue, setTotalRevenue] = useState(undefined);
-  // const [totalSales, setTotalSales] = useState(undefined);
+  const [totalSales, setTotalSales] = useState(undefined);
   const [totalEmployees, setTotalEmployees] = useState(undefined);
   const [totalCustomers, setTotalCustomers] = useState(undefined);
-  // const [totalSuppliers, setTotalSuppliers] = useState(undefined);
   const [totalOrders, setTotalOrders] = useState(undefined);
   const [totalCompletedOrders, setTotalCompletedOrders] = useState(undefined);
 
@@ -29,11 +27,9 @@ export default function Overview() {
   const fetchData = async () => {
     try {
       const expenseResponse = await fetch("http://localhost:8080/api/v1/expense/totalSumofExpense");   //API for get summation of expenses
-      const revenueResponse = await fetch("http://localhost:8080/api/v1/revenue/totalSumofRevenue");   //API for get summation of revenue
-      //const salesResponse = await fetch("http://localhost:8080/api/v1/sales/totalSumofSales");       //API for get summation of sales
+      const salesResponse = await fetch("http://localhost:8080/api/v1/revenue/totalSumofRevenue");   //API for get summation of sales
       const employeeResponse = await fetch("http://localhost:8080/employee/view");                     //API for get summation of employees
       const customerResponse = await fetch("http://localhost:8080/customer/viewCustomer");             //API for get summation of customers
-      //const supplierResponse = await fetch("");   //API for get summation of suppliers
       const totalOrderResponse = await fetch("http://localhost:8080/order/viewOrder");                 //API for get summation of orders
       const totalCompletedOrderResponse = await fetch("http://localhost:8080/order/completedOrderId"); //API for get summation of completed orders
 
@@ -41,22 +37,15 @@ export default function Overview() {
       if (!expenseResponse.ok) {
         throw new Error("Failed to fetch total expense");
       }
-      if (!revenueResponse.ok) {
+      if (!salesResponse.ok) {
         throw new Error("Failed to fetch total revenue");
       }
-      /*
-      if (!salesResponse.ok) {
-        throw new Error("Failed to fetch total sales");
-      }*/
       if (!employeeResponse.ok) {
         throw new Error("Failed to fetch total employees");
       }
       if (!customerResponse.ok) {
         throw new Error("Failed to fetch total customers");
       }
-      // if (!supplierResponse.ok) {
-      //   throw new Error("Failed to fetch total suppliers");
-      // }
       if (!totalOrderResponse.ok) {
         throw new Error("Failed to fetch total customers");
       }
@@ -66,25 +55,19 @@ export default function Overview() {
      
     
       const expenseData = await expenseResponse.json();
-      const revenueData = await revenueResponse.json();
-      //const salesData = await salesResponse.json();
+      const salesData = await salesResponse.json();
       const employeeData = await employeeResponse.json();
       const customerData = await customerResponse.json();
-      // const supplierData = await employeeResponse.json();
       const orderData = await totalOrderResponse.json();
       const completedOrderData = await totalCompletedOrderResponse.json();
 
       setTotalExpense(expenseData.content);
-      setTotalRevenue(revenueData.content);
-      //setTotalSales(salesData.content);
+      setTotalSales(salesData.content);
       setTotalEmployees(employeeData.content.length);
       setTotalCustomers(customerData.content.length);
-      //setTotalSuppliers(supplierData.content.length);
       setTotalOrders(orderData.content.length);
       setTotalCompletedOrders(completedOrderData.content.length);
 
-      console.log(totalExpense);
-      console.log(totalRevenue);
 
     } catch (error) {
       console.error("Error fetching data:", error);   //Error in fetching 
@@ -116,11 +99,11 @@ export default function Overview() {
           <h1>Home</h1>
           <Grid container spacing={7}>
             <CardModel totalvalue={"Rs.  "+(totalExpense/1000000)+"Mn"} cardname={"Total Expenses"} style={gradientStyle}  />
-            <CardModel totalvalue={"Rs.  "+(totalRevenue/1000000)+"Mn"} cardname={"Total Revenue"} style={gradientStyle} />
-            <CardModel totalvalue={"Rs.  "+789456/1000000+"Mn"} cardname={"Total Receivables"} style={gradientStyle} />
+            <CardModel totalvalue={"Rs.  "+(totalSales/1000000)+"Mn"} cardname={"Total Revenue"} style={gradientStyle} />
+            <CardModel totalvalue={"Rs.  "+(totalSales-totalExpense)/1000000+"Mn"} cardname={"Total Profit"} style={gradientStyle} />
             <CardModel totalvalue={totalEmployees} cardname={"Total Employees"} style={gradientStyle2}  />
             <CardModel totalvalue={totalCustomers} cardname={"Total Customers"} style={gradientStyle2} />
-            <CardModel totalvalue={17} cardname={"Total Suppliers"} style={gradientStyle2} />
+            <CardModel totalvalue={totalOrders} cardname={"Total Orders"} style={gradientStyle2} />
             <CardModel totalvalue={totalCompletedOrders+"/"+totalOrders} cardname={"Order Completion"} style={gradientStyle3}  />
           </Grid>
         </Box>
