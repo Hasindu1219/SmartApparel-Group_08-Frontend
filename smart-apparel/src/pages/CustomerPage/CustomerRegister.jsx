@@ -5,12 +5,12 @@ import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import Error from "../../components/Error1/Error1";
 import Button from "@mui/material/Button";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import axios from "axios";
 
 export default function CustomerRegister() {
   // State variables for form inputs
-  const [customerId, setCustomerId] = useState("");
+
   const [customerName, setCustomerName] = useState("");
   const [customerAddress, setCustomerAddress] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
@@ -30,7 +30,6 @@ export default function CustomerRegister() {
   const handleAddBtn = async () => {
     // Check if all fields are filled
     if (
-      !customerId ||
       !customerName ||
       !customerAddress ||
       !customerEmail ||
@@ -48,7 +47,6 @@ export default function CustomerRegister() {
     } else {
       // Prepare form data to be sent to the server
       const formData = {
-        customerId,
         customerName,
         customerAddress,
         customerEmail,
@@ -62,7 +60,12 @@ export default function CustomerRegister() {
       await axios
         .post("http://localhost:8080/customer/saveCustomer", formData)
         .then((res) => {
-          alert("Successfully Registered");
+          setError("block");
+          setErrorType("success");
+          setTimeout(() => {
+            navigate("/customerdetails");
+          }, 3000);
+          // alert("Successfully Registered");
         })
         .catch((err) => {
           alert(err.message);
@@ -97,23 +100,18 @@ export default function CustomerRegister() {
             }}
           >
             Customer Register
-            <Button onClick={() => { navigate('/customers') }}> <ArrowBackIosNewIcon/> </Button>
+            <Button
+              onClick={() => {
+                navigate("/customers");
+              }}
+            >
+              {" "}
+              <ArrowBackIosNewIcon />{" "}
+            </Button>
           </h1>
           <Error errorDisplay={error} />
           {/* Input Fields */}
-          <form action="" className='customer-register-form'>
-            {/* <div className="formBox">
-              <label htmlFor="" style={{ marginRight: "3.5rem" }}>
-                Customer ID:{" "}
-              </label>
-              <input
-                type="number"
-                placeholder="Enter Customer Id"
-                onChange={(e) => {
-                  setCustomerId(e.target.value);
-                }}
-              />
-            </div> */}
+          <form action="" className="customer-register-form">
             <div className="formBox">
               <label htmlFor="" style={{ marginRight: "4rem" }}>
                 Customer Name:{" "}
