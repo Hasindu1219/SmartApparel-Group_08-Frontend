@@ -87,7 +87,7 @@ export default function OrderDetails() {
       !smallSize ||
       !mediumSize ||
       !largeSize ||
-      !clothMaterial 
+      !clothMaterial
     ) {
       setError("block");
       setTimeout(() => {
@@ -107,10 +107,7 @@ export default function OrderDetails() {
       };
       // Send update request to the server
       await axios
-        .put(
-          "http://localhost:8080/order/updateOrder",
-          updateData
-        )
+        .put("http://localhost:8080/order/updateOrder", updateData)
         .then((res) => {
           window.location.href = "/orderdetails";
         })
@@ -119,7 +116,6 @@ export default function OrderDetails() {
         });
     }
   };
-  
 
   // Function to handle close button click
   const handleCloseBtn = () => {
@@ -148,7 +144,7 @@ export default function OrderDetails() {
           </h1>
           <Error1 errorDisplay={error} />
           <div className="updateConatiner" style={{ display: modelView }}>
-            <form action="">
+            <form action="" className="form-class">
               <div className="formBox">
                 <Row>
                   <Col xs={2}>
@@ -218,11 +214,7 @@ export default function OrderDetails() {
                     </label>
                   </Col>
                   <Col>
-                    <input
-                      type="text"
-                      value={modelName}
-                      disabled
-                    />
+                    <input type="text" value={modelName} disabled />
                   </Col>
                 </Row>
               </div>
@@ -310,21 +302,17 @@ export default function OrderDetails() {
                     >
                       <option value="Cotton-Red">Cotton-Red</option>
                       <option value="Cotton-Green">Cotton-Green</option>
-                      <option value="Cotton-Purple">Cotton-Purple</option>
                       <option value="Cotton-Blue">Cotton-Blue</option>
-                      <option value="Linen-Red">Linen-Red</option>
-                      <option value="Linen-Green">Linen-Green</option>
-                      <option value="Linen-Purple">Linen-Purple</option>
-                      <option value="Linen-Blue">Linen-Blue</option>
-                      <option value="Lace-Red">Lace-Red</option>
-                      <option value="Lace-Green">Lace-Green</option>
-                      <option value="Lace-Purple">Lace-Purple</option>
-                      <option value="Lace-Blue">Lace-Blue</option>
+                      <option value="Silk-Red">Silk-Red</option>
+                      <option value="Silk-Green">Silk-Green</option>
+                      <option value="Silk-Blue">Silk-Blue</option>
+                      <option value="Velvet-Red">Velvet-Red</option>
+                      <option value="Velvet-Green">Velvet-Green</option>
+                      <option value="Velvet-Blue">Velvet-Blue</option>
                     </select>
                   </Col>
                 </Row>
               </div>
-
               <div className="formBox">
                 <Row>
                   <Col xs={2}>
@@ -340,75 +328,81 @@ export default function OrderDetails() {
                         setOrderStatus(e.target.value);
                       }}
                     >
-                      <option value="Pending">Pending</option>
-                      <option value="Started">Started</option>
-                      <option value="Processing">Processing</option>
-                      <option value="Quality Certified">Quality Certified</option>
-                      <option value="Shipped">Shipped</option>
-                      <option value="Delivered">Delivered</option>
+                      <option value="PENDING">PENDING</option>
+                      <option value="PROCESSING">PROCESSING</option>
+                      <option value="PROCESSED">PROCESSED</option>
                     </select>
                   </Col>
                 </Row>
               </div>
+
+              <div className="formButtonSection">
+                <button id="addBtn" onClick={handleUpdateBtn}>
+                  Update
+                </button>
+                <button id="backBtn" onClick={handleCloseBtn}>
+                  Close
+                </button>
+              </div>
             </form>
-            <div className="formButtonSection">
-              <button id="backBtn" onClick={handleCloseBtn}>
-                Close
-              </button>
-              <button id="addBtn" onClick={handleUpdateBtn}>
-                Update
-              </button>
-            </div>
           </div>
 
-          <div className="table-container" style={{ display: tableView }}>
-            <table className="custome-table">
-              <thead>
+          <div
+            style={{
+              marginTop: "5rem",
+              marginLeft: "2rem",
+              marginRight: "2rem",
+              display: tableView,
+            }}
+          >
+            <table className="table table-bordered">
+              <thead className="thead-dark">
                 <tr>
-                  <th>No</th>
-                  <th>Order Id</th>
-                  <th>Order Customer Name</th>
-                  <th>Order Agreed Price</th>
-                  <th>Model Name</th>
-                  <th>Small Size</th>
-                  <th>Medium Size</th>
-                  <th>Large Size</th>
-                  <th>Cloth Material</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th scope="col">Order Id</th>
+                  <th scope="col">Order Customer Name</th>
+                  <th scope="col">Order Agreed Price</th>
+                  <th scope="col">Model Name</th>
+                  <th scope="col">Small Size</th>
+                  <th scope="col">Medium Size</th>
+                  <th scope="col">Large Size</th>
+                  <th scope="col">Cloth Material</th>
+                  <th scope="col">Order Status</th>
+                  <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {tableData?.map((data, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{data.orderId}</td>
-                    <td>{data.orderCustomerName}</td>
-                    <td>{data.orderAgreedPrice}</td>
-                    <td>{data.modelName}</td>
-                    <td>{data.smallSize}</td>
-                    <td>{data.mediumSize}</td>
-                    <td>{data.largeSize}</td>
-                    <td>{data.clothMaterial}</td>
-                    <td>{data.orderStatus}</td>
-                    <td>
-                      <div className="tableBtn">
-                        <button
-                          className="editBtn"
-                          onClick={() => handleEditBtn(data.orderId)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="deleteBtn"
-                          onClick={() => handleDeleteBtn(data.orderId)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {tableData.map(
+                  (item) =>
+                    item && (
+                      <tr key={item.orderId}>
+                        <td>{item.orderId}</td>
+                        <td>{item.orderCustomerName}</td>
+                        <td>{item.orderAgreedPrice}</td>
+                        <td>{item.modelName}</td>
+                        <td>{item.smallSize}</td>
+                        <td>{item.mediumSize}</td>
+                        <td>{item.largeSize}</td>
+                        <td>{item.clothMaterial}</td>
+                        <td>{item.orderStatus}</td>
+                        <td>
+                          <div className="tableBtn">
+                            <button
+                              className="editBtn"
+                              onClick={() => handleEditBtn(item.orderId)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="deleteBtn"
+                              onClick={() => handleDeleteBtn(item.orderId)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                )}
               </tbody>
             </table>
           </div>
