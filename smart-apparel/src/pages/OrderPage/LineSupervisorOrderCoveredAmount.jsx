@@ -4,14 +4,16 @@ import Sidebar from "../../components/Sidebar.js";
 import Box from "@mui/material/Box";
 import Navbar from "../../components/Navbar/Navbar";
 import Error from "../../components/Error1/ErrorId";
-import "./LineSupervisorOrderCoveredAmount.css";
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import "./LineSupervisorOrderCoveredAmount.css";
 
 export default function LineSupervisorOrderCoveredAmount() {
   // State variables
+  const navigate = useNavigate();
   const [orderId, setOrderId] = useState("");
   const [isOrderValid, setIsOrderValid] = useState(false);
-  const navigate = useNavigate();
 
   // State variables for error
   const [error, setError] = useState(null);
@@ -64,6 +66,7 @@ export default function LineSupervisorOrderCoveredAmount() {
             }}
           >
             Order Covered Amount
+            <Button onClick={() => { navigate('/linesupervisororderhome') }}> <ArrowBackIosNewIcon/> </Button>
           </h1>
           <div>
             {error && <Error errorDisplay="block" errorMessage={error} />}

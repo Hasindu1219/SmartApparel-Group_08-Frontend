@@ -4,8 +4,12 @@ import "./CustomerStatus.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import Error from "../../components/Error1/ErrorId";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 export default function CustomerStatus() {
+  const navigate = useNavigate();
   const [orderId, setOrderId] = useState("");
   const [orderStatus, setOrderStatus] = useState(null);
 
@@ -50,6 +54,7 @@ export default function CustomerStatus() {
             }}
           >
             Customer Status
+            <Button onClick={() => { navigate('/customers') }}> <ArrowBackIosNewIcon/> </Button>
           </h1>
           <div>
           {error && <Error errorDisplay="block" errorMessage={error} />}

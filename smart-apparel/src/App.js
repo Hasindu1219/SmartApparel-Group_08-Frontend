@@ -28,7 +28,7 @@ import MainModels from './pages/OrderPage/MainModels';
 import ModelsPage from './pages/OrderPage/ModelsPage';
 import CustomModel from './pages/OrderPage/CustomModel';
 import AddNewModel from './pages/OrderPage/AddNewModel';
-import OrderShipment from './pages/OrderPage/OrderShipment';
+import OrderShipment from './pages/OrderPage/OrderShipment';       
 import LineSupervisorOrderHome from './pages/OrderPage/LineSupervisorOrderHome';
 import LineSupervisorOrderDetails from './pages/OrderPage/LineSupervisorOrderDetails';
 import LineSupervisorOrderCoveredAmount from './pages/OrderPage/LineSupervisorOrderCoveredAmount';
@@ -54,6 +54,17 @@ import SalaryParamUpdate from './pages/Salary/SalaryParamUpdate';
 import SalaryAdd from './pages/Salary/SalaryAdd';
 import AttendanceAdd from './pages/Attendance/AttendanceAdd';
 import AttendanceHome from './pages/Attendance/AttendanceHome';
+
+//Web Imports
+
+import WHomepage from './pages/Website/Pages/WHomepage';
+
+import FrockCategory from './pages/Website/Pages/FrockCategory';
+import BlouseCategory from './pages/Website/Pages/BlouseCategory';
+import TShirtCategory from './pages/Website/Pages/TShirtCategory';
+import SkirtCategory from './pages/Website/Pages/SkirtCategory';
+import Quotations from './pages/Website/Pages/Quotations';
+
 
 import ReportController from './pages/Report/ReportController';
 import ProfitandLossReport from './pages/Report/ProfitandLossReport';
@@ -115,7 +126,7 @@ function App() {
         <Route path="/ordermodels" element={<ModelsPage />} />
         <Route path="/customizemodels" element={<CustomModel />} />
         <Route path="/addNewModel" element={<AddNewModel />} />
-        <Route path="/ordershipment" element={<OrderShipment />} />
+        <Route path="/ordershipment" element={<OrderShipment />} />  
         <Route path="/linesupervisororderhome" element={<LineSupervisorOrderHome />} />
         <Route path="/linesupervisororderdetails" element={<LineSupervisorOrderDetails />} />
         <Route path="/linesupervisorordercoveredamount" element={<LineSupervisorOrderCoveredAmount />} />
@@ -138,8 +149,17 @@ function App() {
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
         <Route path="/accounting/updateexpense/:id" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}
-
+        
+        {/* website */}
+        <Route path="/WHomepage" element={<WHomepage />}></Route>
+        <Route path="/Frocks" element={<FrockCategory/>}></Route> 
+        <Route path="/Blouses" element={<BlouseCategory />}></Route>
+        <Route path="/T-Shirts" element={<TShirtCategory />}></Route>
+        <Route path="/Skirts" element={<SkirtCategory />}></Route>
+        <Route path="/Quotations" element={<Quotations />}></Route>
+      
       </Routes>
+      {/* <Footer/> */}
     </BrowserRouter>
 
   );

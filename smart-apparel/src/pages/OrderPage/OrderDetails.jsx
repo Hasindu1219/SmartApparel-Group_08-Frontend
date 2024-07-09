@@ -3,13 +3,16 @@ import "./OrderDetails.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import Error1 from "../../components/Error1/Error1";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Dropdown from "react-bootstrap/Dropdown";
 
 export default function OrderDetails() {
   // State variables
+  const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const [deleteOrder, setDeleteOrder] = useState(false);
 
@@ -43,9 +46,7 @@ export default function OrderDetails() {
   // Function to handle delete button click
   const handleDeleteBtn = async (orderId) => {
     await axios
-      .delete(
-        `http://localhost:8080/order/deleteOrder/${orderId}`
-      )
+      .delete(`http://localhost:8080/order/deleteOrder/${orderId}`)
       .then((res) => {
         setDeleteOrder(true);
         alert("Delete Successfully");
@@ -58,19 +59,18 @@ export default function OrderDetails() {
   // Function to handle edit button click
   const handleEditBtn = async (orderId) => {
     await axios
-      .get(
-        `http://localhost:8080/order/viewOrder/${orderId}`
-      )
+      .get(`http://localhost:8080/order/viewOrder/${orderId}`)
       .then((res) => {
-        setOrderId(res.data.content.orderId);
-        setOrderCustomerName(res.data.content.orderCustomerName);
-        setOrderAgreedPrice(res.data.content.orderAgreedPrice);
-        setModelName(res.data.content.modelName);
-        setSmallSize(res.data.content.smallSize);
-        setMediumSize(res.data.content.mediumSize);
-        setLargeSize(res.data.content.largeSize);
-        setClothMaterial(res.data.content.clothMaterial);
-        setOrderStatus(res.data.content.orderStatus);
+        const data = res.data.content;
+        setOrderId(data.orderId);
+        setOrderCustomerName(data.orderCustomerName);
+        setOrderAgreedPrice(data.orderAgreedPrice);
+        setModelName(data.modelName);
+        setSmallSize(data.smallSize);
+        setMediumSize(data.mediumSize);
+        setLargeSize(data.largeSize);
+        setClothMaterial(data.clothMaterial);
+        setOrderStatus(data.orderStatus);
 
         // Switch view to the update form
         setModelView("block");
@@ -91,7 +91,7 @@ export default function OrderDetails() {
       !smallSize ||
       !mediumSize ||
       !largeSize ||
-      !clothMaterial 
+      !clothMaterial
     ) {
       setError("block");
       setTimeout(() => {
@@ -111,10 +111,7 @@ export default function OrderDetails() {
       };
       // Send update request to the server
       await axios
-        .put(
-          "http://localhost:8080/order/updateOrder",
-          updateData
-        )
+        .put("http://localhost:8080/order/updateOrder", updateData)
         .then((res) => {
           window.location.href = "/orderdetails";
         })
@@ -148,89 +145,82 @@ export default function OrderDetails() {
             }}
           >
             Order Details
+            <Button onClick={() => { navigate('/orders') }}> <ArrowBackIosNewIcon/> </Button>
           </h1>
           <Error1 errorDisplay={error} />
           <div className="updateConatiner" style={{ display: modelView }}>
-            <form action="">
+            <form action="" className="form-class">
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "5.5rem" }}>
-                  Order Id:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Order ID"
-                  disabled
-                  value={orderId}
-                  onChange={(e) => {
-                    setOrderId(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "5.5rem" }}>
+                      Order Id:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Order ID"
+                      disabled
+                      value={orderId}
+                      onChange={(e) => {
+                        setOrderId(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "3.5rem" }}>
-                  Order Customer Name:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Order Customer Name"
-                  value={orderCustomerName}
-                  onChange={(e) => {
-                    setOrderCustomerName(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "3.5rem" }}>
+                      Order Customer Name:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Order Customer Name"
+                      value={orderCustomerName}
+                      onChange={(e) => {
+                        setOrderCustomerName(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4rem" }}>
-                  Order Agreed Price:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Order Agreed Price"
-                  value={orderAgreedPrice}
-                  onChange={(e) => {
-                    setOrderAgreedPrice(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "4rem" }}>
+                      Order Agreed Price:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Order Agreed Price"
+                      value={orderAgreedPrice}
+                      onChange={(e) => {
+                        setOrderAgreedPrice(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4rem" }}>
-                  Model Name:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  //placeholder="Enter Mode lName"
-                  value={modelName}
-                  disabled
-                  // onChange={(e) => {
-                  //   setModelName(e.target.value);
-                  // }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "4rem" }}>
+                      Model Name:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input type="text" value={modelName} disabled />
+                  </Col>
                 </Row>
               </div>
 
@@ -241,212 +231,186 @@ export default function OrderDetails() {
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
-                  Small Size:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Small Size"
-                  value={smallSize}
-                  onChange={(e) => {
-                    setSmallSize(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "4.1rem" }}>
+                      Small Size:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Small Size"
+                      value={smallSize}
+                      onChange={(e) => {
+                        setSmallSize(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
-                  Medium Size:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Medium Size"
-                  value={mediumSize}
-                  onChange={(e) => {
-                    setMediumSize(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "4.1rem" }}>
+                      Medium Size:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Medium Size"
+                      value={mediumSize}
+                      onChange={(e) => {
+                        setMediumSize(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                <label htmlFor="" style={{ marginRight: "4.1rem" }}>
-                  Large Size:{" "}
-                </label>
-                </Col>
-                <Col>
-                <input
-                  type="text"
-                  placeholder="Enter Lerge Size"
-                  value={largeSize}
-                  onChange={(e) => {
-                    setLargeSize(e.target.value);
-                  }}
-                />
-                </Col>
+                <Row>
+                  <Col xs={2}>
+                    <label htmlFor="" style={{ marginRight: "4.1rem" }}>
+                      Large Size:{" "}
+                    </label>
+                  </Col>
+                  <Col>
+                    <input
+                      type="text"
+                      placeholder="Enter Large Size"
+                      value={largeSize}
+                      onChange={(e) => {
+                        setLargeSize(e.target.value);
+                      }}
+                    />
+                  </Col>
                 </Row>
               </div>
 
               <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                  {" "}
-                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
-                    Cloth Material
-                  </label>
-                </Col>
-                <Col>
-                  <select
-                    // id="cloth-material"
-                    value = {clothMaterial}
-                    onChange={(e) => {
-                      setClothMaterial(e.target.value);
-                    }}
-                  >
-                    <option value="Cotton-Red">Cotton-Red</option>
-                    <option value="Cotton-Green">Cotton-Green</option>
-                    <option value="Cotton-Purple">Cotton-Purple</option>
-                    <option value="Cotton-Blue">Cotton-Blue</option>
-                    <option value="Linen-Red">Linen-Red</option>
-                    <option value="Linen-Green">Linen-Green</option>
-                    <option value="Linen-Purple">Linen-Purple</option>
-                    <option value="Linen-Blue">Linen-Blue</option>
-                    <option value="Lace-Red">Lace-Red</option>
-                    <option value="Lace-Green">Lace-Green</option>
-                    <option value="Lace-Purple">Lace-Purple</option>
-                    <option value="Lace-Blue">Lace-Blue</option>
-                  </select>
-                </Col>
-              </Row>
-            </div>
+                <Row>
+                  <Col xs={2}>
+                    {" "}
+                    <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                      Cloth Material
+                    </label>
+                  </Col>
+                  <Col>
+                    <select
+                      value={clothMaterial}
+                      onChange={(e) => {
+                        setClothMaterial(e.target.value);
+                      }}
+                    >
+                      <option value="Cotton-Red">Cotton-Red</option>
+                      <option value="Cotton-Green">Cotton-Green</option>
+                      <option value="Cotton-Blue">Cotton-Blue</option>
+                      <option value="Silk-Red">Silk-Red</option>
+                      <option value="Silk-Green">Silk-Green</option>
+                      <option value="Silk-Blue">Silk-Blue</option>
+                      <option value="Velvet-Red">Velvet-Red</option>
+                      <option value="Velvet-Green">Velvet-Green</option>
+                      <option value="Velvet-Blue">Velvet-Blue</option>
+                    </select>
+                  </Col>
+                </Row>
+              </div>
+              <div className="formBox">
+                <Row>
+                  <Col xs={2}>
+                    {" "}
+                    <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
+                      Order Status
+                    </label>
+                  </Col>
+                  <Col>
+                    <select
+                      value={orderStatus}
+                      onChange={(e) => {
+                        setOrderStatus(e.target.value);
+                      }}
+                    >
+                      <option value="Pending">Pending</option>
+                      <option value="Started">Started</option>
+                      <option value="Processing">Processing</option>
+                      <option value="Quality Certified">Quality Certified</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Delivered">Delivered</option>
+                    </select>
+                  </Col>
+                </Row>
+              </div>
 
-            <div className="formBox">
-              <Row>
-                <Col xs={2}>
-                  {" "}
-                  <label htmlFor="" style={{ marginLeft: "0.1rem" }}>
-                    Order Status
-                  </label>
-                </Col>
-                <Col>
-                  <select
-                    // id="cloth-material"
-                    value = {orderStatus}
-                    onChange={(e) => {
-                      setOrderStatus(e.target.value);
-                    }}
-                  >
-                    <option value="Pending">Pending</option>
-                    <option value="Started">Started</option>
-                    <option value="Processing">Processing</option>
-                    <option value="Quality Certified">Quality Certified</option>
-                    <option value="Shipped">Shipped</option>
-                    <option value="Delivered">Delivered</option>
-                  </select>
-                </Col>
-              </Row>
-            </div>
-              {/* Cloth Material drop down */}
+              <div className="formButtonSection">
+                <button id="addBtn" onClick={handleUpdateBtn}>
+                  Update
+                </button>
+                <button id="backBtn" onClick={handleCloseBtn}>
+                  Close
+                </button>
+              </div>
             </form>
-            <div className="formButtonSection">
-              <button id="backBtn" onClick={handleCloseBtn}>
-                Close
-              </button>
-              <button id="addBtn" onClick={handleUpdateBtn}>
-                Update
-              </button>
-            </div>
           </div>
-          {/* -------------------------------------------------------------------------------------------------- */}
-          <div className="table-container" style={{ display: tableView }}>
-            <table className="custome-table">
-              <thead>
+
+          <div
+            style={{
+              marginTop: "5rem",
+              marginLeft: "2rem",
+              marginRight: "2rem",
+              display: tableView,
+            }}
+          >
+            <table className="table table-bordered">
+              <thead className="thead-dark">
                 <tr>
-                  <th>No</th>
-                  <th>Order Id</th>
-                  <th>Order Customer Name</th>
-                  <th>Order Agreed Price</th>
-                  <th>Model Name</th>
-                  <th>Small Size</th>
-                  <th>Medium Size</th>
-                  <th>Large Size</th>
-                  <th>Cloth Material</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th scope="col">Order Id</th>
+                  <th scope="col">Order Customer Name</th>
+                  <th scope="col">Order Agreed Price</th>
+                  <th scope="col">Model Name</th>
+                  <th scope="col">Small Size</th>
+                  <th scope="col">Medium Size</th>
+                  <th scope="col">Large Size</th>
+                  <th scope="col">Cloth Material</th>
+                  <th scope="col">Order Status</th>
+                  <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {tableData?.map((data, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{data.orderId}</td>
-                    <td>{data.orderCustomerName}</td>
-                    <td>{data.orderAgreedPrice}</td>
-                    <td>{data.modelName}</td>
-                    <td>{data.smallSize}</td>
-                    <td>{data.mediumSize}</td>
-                    <td>{data.largeSize}</td>
-                    <td>{data.clothMaterial}</td>
-                    <td>
-                      {data.orderStatus}
-                      {/* <Dropdown> */}
-                        {/* <Dropdown.Toggle onChange={(e) => {setClothMaterial(e.target.value);}}>
-                        Select Material
-                      </Dropdown.Toggle> */}
-
-                        {/* <Dropdown.Menu
-                          onChange={(e) => {
-                            setOrderStatus(e.target.value);
-                          }}
-                        >
-                          <Dropdown.Item>Pending</Dropdown.Item>
-                          <Dropdown.Item>Started</Dropdown.Item>
-                          <Dropdown.Item>Processing</Dropdown.Item>
-                          <Dropdown.Item>Quality Certified</Dropdown.Item>
-                          <Dropdown.Item>Shipped</Dropdown.Item>
-                          <Dropdown.Item>Delivered</Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown> */}
-                      {/* <select>
-                    <option value="Pending">Pending</option>
-                    <option value="Started">Started</option>
-                    <option value="Processing">Processing</option>
-                    <option value="Quality Certified">Quality Certified</option>
-                    <option value="Shipped">Shipped</option>
-                    <option value="Delivered">Delivered</option>
-                  </select> */}
-                    </td>
-                    <td>
-                      <div className="tableBtn">
-                        <button
-                          className="editBtn"
-                          onClick={() => handleEditBtn(data.orderID)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="deleteBtn"
-                          onClick={() => handleDeleteBtn(data.orderID)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {tableData.map(
+                  (item) =>
+                    item && (
+                      <tr key={item.orderId}>
+                        <td>{item.orderId}</td>
+                        <td>{item.orderCustomerName}</td>
+                        <td>{item.orderAgreedPrice}</td>
+                        <td>{item.modelName}</td>
+                        <td>{item.smallSize}</td>
+                        <td>{item.mediumSize}</td>
+                        <td>{item.largeSize}</td>
+                        <td>{item.clothMaterial}</td>
+                        <td>{item.orderStatus}</td>
+                        <td>
+                          <div className="tableBtn">
+                            <button
+                              className="editBtn"
+                              onClick={() => handleEditBtn(item.orderId)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="deleteBtn"
+                              onClick={() => handleDeleteBtn(item.orderId)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                )}
               </tbody>
             </table>
           </div>
