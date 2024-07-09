@@ -56,11 +56,23 @@ import SalaryAdd from './pages/Salary/SalaryAdd';
 import AttendanceAdd from './pages/Attendance/AttendanceAdd';
 import AttendanceHome from './pages/Attendance/AttendanceHome';
 
+//Web Imports
+
+import WHomepage from './pages/Website/Pages/WHomepage';
+
+import FrockCategory from './pages/Website/Pages/FrockCategory';
+import BlouseCategory from './pages/Website/Pages/BlouseCategory';
+import TShirtCategory from './pages/Website/Pages/TShirtCategory';
+import SkirtCategory from './pages/Website/Pages/SkirtCategory';
+import Quotations from './pages/Website/Pages/Quotations';
+
+
 import ReportController from './pages/Report/ReportController';
 import ReportStructure from './components/Report/ReportStructure';
 import ProfitandLossReport from './pages/Report/ProfitandLossReport';
 import DetailedSalaryReport from './pages/Report/DetailedSalaryReport';
 import SalaryReport from './pages/Report/SalaryReport';
+
 
 function App() {
   return (
@@ -142,7 +154,17 @@ function App() {
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
         <Route path="/accounting/updateexpense/:id" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}
+        
+        {/* website */}
+        <Route path="/WHomepage" element={<WHomepage />}></Route>
+        <Route path="/Frocks" element={<FrockCategory/>}></Route> 
+        <Route path="/Blouses" element={<BlouseCategory />}></Route>
+        <Route path="/T-Shirts" element={<TShirtCategory />}></Route>
+        <Route path="/Skirts" element={<SkirtCategory />}></Route>
+        <Route path="/Quotations" element={<Quotations />}></Route>
+      
       </Routes>
+      {/* <Footer/> */}
     </BrowserRouter>
 
   );
