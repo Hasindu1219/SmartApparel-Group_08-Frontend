@@ -41,6 +41,7 @@ import AddExpense from './pages/Accounting/AddExpense';
 import UpdateExpense from './pages/Accounting/UpdateExpense';
 import Login from './pages/Login/Login';
 import ForgotPassword from './pages/Login/ForgotPassword';
+import ChangePassword from './pages/Login/changePassword';
 
 import ExpenseController from './pages/Accounting/ExpenseController';
 import RevenueAdd from './pages/Accounting/AddRevenue';
@@ -55,9 +56,23 @@ import SalaryAdd from './pages/Salary/SalaryAdd';
 import AttendanceAdd from './pages/Attendance/AttendanceAdd';
 import AttendanceHome from './pages/Attendance/AttendanceHome';
 
+//Web Imports
+
+import WHomepage from './pages/Website/Pages/WHomepage';
+
+import FrockCategory from './pages/Website/Pages/FrockCategory';
+import BlouseCategory from './pages/Website/Pages/BlouseCategory';
+import TShirtCategory from './pages/Website/Pages/TShirtCategory';
+import SkirtCategory from './pages/Website/Pages/SkirtCategory';
+import Quotations from './pages/Website/Pages/Quotations';
+
+
 import ReportController from './pages/Report/ReportController';
 import ReportStructure from './components/Report/ReportStructure';
 import ProfitandLossReport from './pages/Report/ProfitandLossReport';
+import DetailedSalaryReport from './pages/Report/DetailedSalaryReport';
+import SalaryReport from './pages/Report/SalaryReport';
+
 
 function App() {
   return (
@@ -95,10 +110,10 @@ function App() {
         <Route path="/inventory/addInventory" element={<AddMaterial />}></Route>
         <Route path="/inventory/viewInventory" element={<ViewMaterials />}></Route>
 
+        {/* routings inside the login section */}
         <Route path="/login" element={<Login />}></Route>
-
         <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
-        <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
+        <Route path="/changepassword" element={<ChangePassword />}></Route>
 
         {/* routings inside the customer section */}
         <Route path="/customerhome" element={<CustomerHome/>} />
@@ -121,13 +136,17 @@ function App() {
         <Route path="/linesupervisorordercoveredamount" element={<LineSupervisorOrderCoveredAmount />} />
         <Route path="/linesupervisorcoveredamountform" element={<LineSupervisorCoveredAmountForm />} />
 
+        {/* routings inside the accounting section */}
         <Route path="/accounting/revenuecontroller" element={<RevenueController />}></Route>
         <Route path="/accounting/addrevenue" element={<RevenueAdd />}></Route>
         <Route path="/accounting/updaterevenue/:id" element={<UpdateRevenue />}></Route>
 
+        {/* routings inside the report section */}
         <Route path="/report" element={<ReportController />}></Route>
         <Route path="/report/reportStructure" element={<ReportStructure />}></Route>
         <Route path="/report/ProfitandLoss" element={<ProfitandLossReport />}></Route>
+        <Route path="/report/DetailedSalaryReport" element={<DetailedSalaryReport />}></Route>
+        <Route path="/report/SalaryReport" element={<SalaryReport />}></Route>
 
 
         {/* <Route path="/accounting/viewexpense" element={<ViewExpense />}></Route> */}
@@ -135,7 +154,17 @@ function App() {
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
         <Route path="/accounting/updateexpense/:id" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}
+        
+        {/* website */}
+        <Route path="/WHomepage" element={<WHomepage />}></Route>
+        <Route path="/Frocks" element={<FrockCategory/>}></Route> 
+        <Route path="/Blouses" element={<BlouseCategory />}></Route>
+        <Route path="/T-Shirts" element={<TShirtCategory />}></Route>
+        <Route path="/Skirts" element={<SkirtCategory />}></Route>
+        <Route path="/Quotations" element={<Quotations />}></Route>
+      
       </Routes>
+      {/* <Footer/> */}
     </BrowserRouter>
 
   );

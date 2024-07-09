@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as Components from "../../components/Login/LoginComponent";
 import logo from "../../Assets/Garment-Industry.png";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigation
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigationimport Cookies from 'js-cookie'; // Import js-cookie for managing cookies
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -30,6 +31,10 @@ function Login() {
         console.log("Login successful!");
         setPosition(employee.position); // Save user's position
         setLoggedIn(true); // Set isLoggedIn state to true
+
+        localStorage.setItem('username', employee.name); // Store username in localStorage
+        localStorage.setItem('position', employee.position); // Store position in localStorage
+
       } else {
         // Display error if login credentials are invalid
         alert("Invalid email or password. Please try again.");

@@ -66,6 +66,7 @@ const AttendanceTable = () => {
                             value={searchDate}
                             onChange={date => setSearchDate(date)}
                             renderInput={(params) => <TextField {...params} />}
+                            slotProps={{textField:{size:"small"},field: { clearable: true}}}
                         />
                     </LocalizationProvider>
                     <TextField
@@ -73,6 +74,7 @@ const AttendanceTable = () => {
                         variant="outlined"
                         value={searchEmpID}
                         onChange={e => setSearchEmpID(e.target.value)}
+                        size="small"
                     />
                 </Grid>
             </Grid>
@@ -99,10 +101,10 @@ const AttendanceTable = () => {
                                     <TableCell sx={{textAlign:"center"}}>{attendance.outTime}</TableCell>
                                     <TableCell sx={{textAlign:"center"}}>{attendance.empId}</TableCell>
                                     <TableCell sx={{textAlign:"center"}}>
-                                        <Button variant="outlined" size="small" color="primary" onClick={() => updateAttendance(attendance.attendanceId)}>
+                                        <Button variant="outlined" size="small" color="primary" sx={{fontWeight:"bold"}} onClick={() => updateAttendance(attendance.attendanceId)}>
                                             Update
                                         </Button>
-                                        <Button variant="outlined" size="small" color="error" onClick={() => handleDelete(attendance.attendanceId)} style={{ marginLeft: '10px' }}>
+                                        <Button variant="outlined" size="small" color="error" sx={{fontWeight:"bold"}} onClick={() => handleDelete(attendance.attendanceId)} style={{ marginLeft: '10px' }}>
                                             Delete
                                         </Button>
                                     </TableCell>

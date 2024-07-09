@@ -6,27 +6,36 @@ import { Link } from "react-router-dom";
 
 export default function FirstPage() {
   return (
-    <div className="firstPageContainer">
-      <div className="cardContainerBox">
-        <Card1 />
-      </div>
-      <div className="Inventory_Page">
-            <div className="Bottons">
-                <Link to={`/inventory/addInventory`}><button className="btn">
-                <p className="Task">Add Material Details</p>
-                </button></Link>
+    // Container for the entire first page
+<div className="firstPageContainer">
+    {/* // Container for the card component */}
+    <div className="cardContainerBox">
+        <Card1 /> {/* Rendering the Card1 component */}
+    </div>
+    {/* // Main container for the inventory page content */}
+    <div className="Inventory_Page">
+        {/* // Container for buttons */}
+        <div className="Bottons">
+            {/* Link to the Add Inventory page */}
+            <Link to={`/inventory/addInventory`}>
+                <button className="btn">
+                    <p className="Task">Add Material Details</p> {/* Button text */}
+                </button>
+            </Link>
 
-                <Link to={`/inventory/viewInventory`}>
-                  <button className="btn" onClick="url">
-                  <p className="Task">View Material Details</p>
-                  </button>
-                </Link>
-                
-            </div>
-            <div className="Graph">
-                <img src={backImage} alt="image" className="Image" />
-            </div>
+            {/* Link to the View Inventory page */}
+            <Link to={`/inventory/viewInventory`}>
+                <button className="btn">
+                    <p className="Task">View Material Details</p> {/* Button text */}
+                </button>
+            </Link>
+        </div>
+        {/* // Container for the graph/image */}
+        <div className="Graph">
+            <img src={backImage} alt="image" className="Image" /> {/* Show an image with a background */}
         </div>
     </div>
+</div>
+
   );
 }

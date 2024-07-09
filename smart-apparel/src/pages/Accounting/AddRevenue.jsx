@@ -5,6 +5,7 @@ import Sidebar from "../../components/Sidebar";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./Revenue.css"
 
 const RevenueAdd = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const RevenueAdd = () => {
   const fetchCompletedOrderIds = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/v1/order/completedOrderId"
+        "http://localhost:8080/order/completedOrderId"
       );
 
       if (response.data && response.data.content) {
@@ -112,7 +113,7 @@ const RevenueAdd = () => {
             </div>
             <div className="row">
               <div className="offset-lg-2 col-lg-8">
-                <form className="container" onSubmit={handleSubmit}>
+                <form className="container revenue-form" onSubmit={handleSubmit}>
                   <div style={{ textAlign: "left" }}>
                     <div className="card-body">
                       <div className="row">
