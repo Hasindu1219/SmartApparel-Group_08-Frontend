@@ -126,14 +126,15 @@ const Qtatn_Con = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <WNavbar />
-      <div className="container">
+      <div>
+      <div >
         <h1>Quotation Generation Form</h1>
         <p>Add here your details to generate your quotation</p>
-        <hr />
+        <hr /></div>
         {isSubmitted ? (
           <p className="success-message">Successfully submitted!</p>
         ) : (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="container">
             <div>
               <label htmlFor="name">Name:</label>
               <input
@@ -242,7 +243,7 @@ const Qtatn_Con = () => {
             )}
             <div className="button-group">
               <button type="submit">Submit</button>
-              <button type="button" onClick={handleClear}>Clear</button>
+              <button type="button" className="clearbutton" onClick={handleClear}>Clear</button>
             </div>
           </form>
         )}

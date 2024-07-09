@@ -1,98 +1,103 @@
 /* General styling for the container */
 .container {
-    width: 90%;
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Styling for the form */
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  /* Styling for form labels and inputs */
-  label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    display: inline-block;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  select,
-  input[type="file"],
-  input[type="number"] {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  /* Styling for clothing types checkboxes */
-  .clothing-types {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .clothing-types > div {
-    display: flex;
-    align-items: center;
-  }
-  
-  .clothing-types input[type="checkbox"] {
-    margin-right: 0.5rem;
-  }
-  
-  /* Styling for the category quantities */
-  .category-quantities {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  
-  .category-quantities > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Styling for the button group */
-  .button-group {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  button {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  button[type="submit"] {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  button[type="button"] {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  /* Styling for the success message */
-  .success-message {
-    font-size: 1.5rem;
-    color: green;
-    text-align: center;
-  }
-  
+  width: 90%;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #1914a3;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.quotation_header{
+  width: 100%;
+  background-color: #f9f9f9;
+}
+
+
+/* Styling for the form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Styling for form labels and inputs */
+label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+input[type="file"],
+input[type="number"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Styling for clothing types checkboxes */
+.clothing-types {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.clothing-types > div {
+  display: flex;
+  align-items: center;
+}
+
+.clothing-types input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+/* Styling for the category quantities */
+.category-quantities {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.category-quantities > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styling for the button group */
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+}
+
+.clearbutton{
+  background-color: #f44336;
+  color: white;
+}
+
+/* Styling for the success message */
+.success-message {
+  font-size: 1.5rem;
+  color: green;
+  text-align: center;
+}
