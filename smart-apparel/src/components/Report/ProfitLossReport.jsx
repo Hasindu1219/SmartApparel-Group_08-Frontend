@@ -32,10 +32,11 @@ const ProfitLossReport = () => {
         axios.get("http://localhost:8080/api/v1/expense/viewExpense"),
       ]);
 
+      console.log('Revenue Response:', revenueResponse.data);
+      console.log('Expense Response:', expenseResponse.data);
+
       if (revenueResponse.data && revenueResponse.data.content) {
         setRevenueData(revenueResponse.data.content);
-
-        // Calculate total revenue amount
         const totalRevenue = revenueResponse.data.content.reduce(
           (sum, item) => sum + item.amount,
           0
@@ -45,8 +46,6 @@ const ProfitLossReport = () => {
 
       if (expenseResponse.data && expenseResponse.data.content) {
         setExpenseData(expenseResponse.data.content);
-
-        // Calculate total expense amount
         const totalExpense = expenseResponse.data.content.reduce(
           (sum, item) => sum + item.amount,
           0
