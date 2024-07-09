@@ -150,6 +150,7 @@ export default function OrderDetails() {
           <Error1 errorDisplay={error} />
           <div className="updateConatiner" style={{ display: modelView }}>
             <form action="" className="form-class">
+              {/* Input fields */}
               <div className="formBox">
                 <Row>
                   <Col xs={2}>

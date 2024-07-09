@@ -53,29 +53,6 @@ export default function LineSupervisorCoveredAmountForm() {
     }
   }, [orderId]);
 
-  // // Handle the update button click
-  // const handleUpdateBtn = async () => {
-  //   if (!coveredAmount) {
-  //     setError("block");
-  //     setErrorType(errorMsg[0]);
-  //     setTimeout(() => {
-  //       setError("none");
-  //     }, 2000);
-  //   } else {
-  //     const formData = {
-  //       coveredAmount,
-  //     };
-  //     await axios
-  //       .put("http://localhost:8080/order/updateOrder/{orderId}", formData)
-  //       .then((res) => {
-  //         alert("Successfully Updated");
-  //       })
-  //       .catch((err) => {
-  //         alert(err.message);
-  //       });
-  //   }
-  // };
-
   // Handle the update button click
   const handleUpdateBtn = async () => {
     if (!coveredAmount) {

@@ -10,7 +10,6 @@ import axios from "axios";
 
 export default function CustomerRegister() {
   // State variables for form inputs
-
   const [customerName, setCustomerName] = useState("");
   const [customerAddress, setCustomerAddress] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
@@ -65,7 +64,6 @@ export default function CustomerRegister() {
           setTimeout(() => {
             navigate("/customerdetails");
           }, 3000);
-          // alert("Successfully Registered");
         })
         .catch((err) => {
           alert(err.message);

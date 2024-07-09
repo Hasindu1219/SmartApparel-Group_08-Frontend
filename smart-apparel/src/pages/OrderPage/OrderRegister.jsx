@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import CheckInventory from "./CheckInventory";
 
 export default function OrderRegister() {
+  // State variables for form inputs
   const [orderCustomerName, setOrderCustomerName] = useState("");
   const [orderAgreedPrice, setOrderAgreedPrice] = useState("");
   const [smallSize, setSmallSize] = useState("");
@@ -27,18 +28,22 @@ export default function OrderRegister() {
   const initialModelName = location.state?.modelName || "";
   const [modelName, setModelName] = useState(initialModelName);
 
+  // Function to handle Add button click
   const handleAddBtn = async (e) => {
     e.preventDefault();
     setError("none");
     setErrorType("none");
 
+    // Check if all fields are filled
     if (!orderCustomerName || !orderAgreedPrice || !smallSize || !mediumSize || !largeSize || !clothMaterial) {
+      // Display error message if any field is empty
       setError("block");
       setErrorType(errorMsg[0]);
       setTimeout(() => {
         setError("none");
       }, 2000);
     } else {
+      // Prepare form data to be sent to the server
       const formData = {
         orderCustomerName,
         orderAgreedPrice,
@@ -51,23 +56,27 @@ export default function OrderRegister() {
       };
       console.log(formData);
       
-
+      // Send a POST request to save the order
       try {
         const res = await axios.post("http://localhost:8080/order/saveOrder", formData);
         if (res.data.code === "00") {
+          // Display success message and navigate to order details
           setError("block");
           setErrorType("success");
           setTimeout(() => {
             navigate("/orderdetails");
           }, 3000);
         } else if (res.data.code === "06") {
+          // Display warning message
           setError("block");
           setErrorType("warning");
         } else {
+          // Display error message
           setError("block");
           setErrorType("danger");
         }
       } catch (err) {
+        // Display error message if request fails
         setError("block");
         setErrorType("danger");
         console.error("Error saving order:", err);
@@ -75,10 +84,12 @@ export default function OrderRegister() {
     }
   };
 
+  // Function to handle Back button click
   const handleBackBtn = () => {
     navigate("/ordermodels");
   };
 
+  // Function to handle Clear button click
   const handleClearBtn = () => {
     window.location.reload();
   };
@@ -92,8 +103,10 @@ export default function OrderRegister() {
           <h1 style={{ color: "black", marginTop: "6rem", marginLeft: "2rem", fontWeight: "bold" }}>
             Order Register
           </h1>
+          {/* Error component for displaying error messages */}
           <Error errorDisplay={error} errorMessage={errorType} />
           <form className="form-class">
+            {/* Form input fields */}
             <div className="formBox">
               <Row>
                 <Col xs={2}>
@@ -248,6 +261,7 @@ export default function OrderRegister() {
               </Row>
             </div>
           </form>
+          {/* Form action buttons */}
           <div className="formButtonSection">
             <button id="backBtn" onClick={handleBackBtn}>Back</button>
             <button id="clearBtn" onClick={handleClearBtn}>Clear</button>
