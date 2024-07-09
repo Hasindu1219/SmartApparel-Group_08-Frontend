@@ -99,7 +99,7 @@ export default function Overview() {
           <h1>Home</h1>
           <Grid container spacing={7}>
             <CardModel totalvalue={"Rs.  "+(totalExpense/1000000)+"Mn"} cardname={"Total Expenses"} style={gradientStyle}  />
-            <CardModel totalvalue={"Rs.  "+(totalSales/1000000)+"Mn"} cardname={"Total Revenue"} style={gradientStyle} />
+            <CardModel totalvalue={"Rs.  "+(totalSales/1000000)+"Mn"} cardname={"Total Sales"} style={gradientStyle} />
             <CardModel totalvalue={"Rs.  "+(totalSales-totalExpense)/1000000+"Mn"} cardname={"Total Profit"} style={gradientStyle} />
             <CardModel totalvalue={totalEmployees} cardname={"Total Employees"} style={gradientStyle2}  />
             <CardModel totalvalue={totalCustomers} cardname={"Total Customers"} style={gradientStyle2} />
