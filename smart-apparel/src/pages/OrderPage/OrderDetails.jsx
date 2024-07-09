@@ -333,9 +333,12 @@ export default function OrderDetails() {
                         setOrderStatus(e.target.value);
                       }}
                     >
-                      <option value="PENDING">PENDING</option>
-                      <option value="PROCESSING">PROCESSING</option>
-                      <option value="PROCESSED">PROCESSED</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Started">Started</option>
+                      <option value="Processing">Processing</option>
+                      <option value="Quality Certified">Quality Certified</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Delivered">Delivered</option>
                     </select>
                   </Col>
                 </Row>
