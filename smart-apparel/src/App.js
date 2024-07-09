@@ -12,7 +12,6 @@ import EmployeeUpdate from './pages/Employee/EmployeeUpdate';
 import Sales from './pages/Sales';
 import Customers from './pages/Customers';
 import Orders from './pages/Orders';
-import Suppliers from './pages/Suppliers';
 import Inventory from './pages/Inventory';
 import ViewMaterials from './pages/InventoryPage/ViewMaterials';
 
@@ -61,6 +60,7 @@ import ProfitandLossReport from './pages/Report/ProfitandLossReport';
 import DetailedSalaryReport from './pages/Report/DetailedSalaryReport';
 import SalaryReport from './pages/Report/SalaryReport';
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -89,8 +89,6 @@ function App() {
         <Route path='/attendance/addattendance' element={<AttendanceAdd/>}> </Route>
         <Route path='/attendance/updateattendance/:Id' element={<AttendanceUpdate />}> </Route>
         
-        
-        <Route path="/suppliers" element={<Suppliers />}></Route>
 
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
@@ -140,6 +138,7 @@ function App() {
         <Route path="/accounting/addexpense" element={<AddExpense />}></Route>
         <Route path="/accounting/updateexpense/:id" element={<UpdateExpense />}></Route>
         {/* <Route path="/overview" element={<App />}></Route> */}
+
       </Routes>
     </BrowserRouter>
 
