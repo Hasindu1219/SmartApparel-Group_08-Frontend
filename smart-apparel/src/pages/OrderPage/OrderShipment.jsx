@@ -114,9 +114,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import Error1 from "../../components/Error1/ErrorShipping";
 import Error2 from "../../components/Error1/Error2";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import "./OrderShipment.css";
 
 function OrderShipment() {
+  const navigate = useNavigate();
   const [orderId, setOrderId] = useState("");
   const [isShipped, setIsShipped] = useState(false);
   const [error1, setError1] = useState(null);
@@ -194,6 +198,7 @@ function OrderShipment() {
             }}
           >
             Order Shipment
+            <Button onClick={() => { navigate('/orders') }}> <ArrowBackIosNewIcon/> </Button>
           </h1>
           <div>
             {error1 && <Error1 errorDisplay="block" errorMessage={error1} />}
