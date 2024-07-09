@@ -48,7 +48,7 @@ function Login() {
   // Use useEffect to log the updated Position state and navigate accordingly
   useEffect(() => {
     console.log("Updated Position:", Position);
-    if (Position === "admin") {
+    if (Position === "Admin") {
       navigate('/overview');
     }
   }, [Position, navigate]);
