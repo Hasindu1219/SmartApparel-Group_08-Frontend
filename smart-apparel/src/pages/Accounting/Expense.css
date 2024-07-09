@@ -1,0 +1,55 @@
+.expense-form {
+    background: linear-gradient(95deg, #003554, #004e89, #1a659e);
+    padding: 70px;
+    margin: 1.5rem auto 2rem auto;
+    width: 65%;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .formBodyContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .formBox {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    /* gap: 2rem; */ /* Uncomment this if you want to add a gap between form elements */
+  }
+  
+  .expense-form label {
+    color: white;
+    font-weight: bold;
+  }
+  
+  .expense-form input[type="text"],
+  .expense-form input[type="date"],
+  .expense-form select,
+  .expense-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .expense-form button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 25px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  .expense-form button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  

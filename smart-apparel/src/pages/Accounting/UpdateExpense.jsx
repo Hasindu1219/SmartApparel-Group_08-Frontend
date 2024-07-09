@@ -5,6 +5,8 @@ import Sidebar from "../../components/Sidebar";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import "./Expense.css";
+
 
 const UpdateExpense = () => {
   const navigate = useNavigate();
@@ -99,7 +101,7 @@ const UpdateExpense = () => {
             </div>
             <div className="row">
               <div className="offset-lg-2 col-lg-8">
-                <form className="container" onSubmit={handleSubmit}>
+                <form className="container expense-form" onSubmit={handleSubmit}>
                   <div style={{ textAlign: "left" }}>
                     <div className="card-body">
                       <div className="row">
@@ -148,7 +150,7 @@ const UpdateExpense = () => {
                         </div>
                         <div className="col-lg-12">
                           <div className="form-group">
-                            <label>Amount (Currency)</label>
+                            <label>Amount(Rs.)</label>
                             <input
                               type="number"
                               step="0.01"

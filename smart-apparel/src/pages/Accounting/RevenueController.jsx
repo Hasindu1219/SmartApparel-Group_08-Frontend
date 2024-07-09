@@ -80,14 +80,14 @@ const RevenueController = () => {
                     <th>Date</th>
                     <th>Description</th>
                     <th>Status</th>
-                    <th>Amount</th>
+                    <th>Amount(Rs.)</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {revenuedata.map((item) => (
                     <tr key={item.revenue_ID}>
-                      <td>{item.revenue_ID}</td>          
+                      <td>{item.revenue_ID}</td>  
                       <td>{item.order_Id}</td>
                       <td>{item.cheque_Id}</td>
                       <td>{item.date}</td>

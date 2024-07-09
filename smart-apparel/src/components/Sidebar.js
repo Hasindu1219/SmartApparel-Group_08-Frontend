@@ -21,6 +21,7 @@ import EngineeringIcon from '@mui/icons-material/Engineering';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import StoreIcon from '@mui/icons-material/Store';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../appStore';
 
@@ -100,20 +101,8 @@ export default function Sidebar() {
           <Divider />
           <List>
             <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/overview")}}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
+                <ListItemButton sx={{minHeight: 48,justifyContent: open ? 'initial' : 'center',px: 2.5,}}>
+                  <ListItemIcon sx={{minWidth: 0,mr: open ? 3 : 'auto',justifyContent: 'center',}}>
                     <DashboardIcon />
                   </ListItemIcon>
                   <ListItemText primary="Overview" sx={{ opacity: open ? 1 : 0 }} />
@@ -121,62 +110,26 @@ export default function Sidebar() {
               </ListItem>
 
               <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/accounting")}}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
+                <ListItemButton sx={{minHeight: 48,justifyContent: open ? 'initial' : 'center',px: 2.5,}}>
+                  <ListItemIcon sx={{minWidth: 0,mr: open ? 3 : 'auto',justifyContent: 'center',}}>
                     <AccountBalanceIcon />
                   </ListItemIcon>
                   <ListItemText primary="Accounting" sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
               </ListItem>
 
-              <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/sales")}}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <LocalAtmIcon />
+              <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/report")}}>
+                <ListItemButton sx={{minHeight: 48,justifyContent: open ? 'initial' : 'center',px: 2.5,}}>
+                  <ListItemIcon sx={{minWidth: 0,mr: open ? 3 : 'auto',justifyContent: 'center',}}>
+                    <AssessmentIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Sales" sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary="Reports" sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
               </ListItem>
 
               <ListItem  disablePadding sx={{ display: 'block' }}  onClick={()=>{navigate("/customers")}}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
+                <ListItemButton sx={{minHeight: 48,justifyContent: open ? 'initial' : 'center',px: 2.5,}}>
+                  <ListItemIcon sx={{minWidth: 0,mr: open ? 3 : 'auto',justifyContent: 'center',}}>
                     <Groups2Icon />
                   </ListItemIcon>
                   <ListItemText primary="Customers" sx={{ opacity: open ? 1 : 0 }} />
@@ -184,20 +137,8 @@ export default function Sidebar() {
               </ListItem>
 
               <ListItem  disablePadding sx={{ display: 'block' }}  onClick={()=>{navigate("/orders")}}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
+                <ListItemButton sx={{minHeight: 48,justifyContent: open ? 'initial' : 'center',px: 2.5,}}>
+                  <ListItemIcon sx={{minWidth: 0,mr: open ? 3 : 'auto',justifyContent: 'center',}}>
                     <ShoppingCartCheckoutIcon />
                   </ListItemIcon>
                   <ListItemText primary="Orders" sx={{ opacity: open ? 1 : 0 }} />
@@ -205,20 +146,8 @@ export default function Sidebar() {
               </ListItem>
 
               <ListItem  disablePadding sx={{ display: 'block' }}  onClick={()=>{navigate("/employees")}}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
+                <ListItemButton sx={{minHeight: 48,justifyContent: open ? 'initial' : 'center',px: 2.5,}}>
+                  <ListItemIcon sx={{minWidth: 0,mr: open ? 3 : 'auto',justifyContent: 'center',}}>
                     <EngineeringIcon />
                   </ListItemIcon>
                   <ListItemText primary="Employees" sx={{ opacity: open ? 1 : 0 }} />
@@ -244,20 +173,8 @@ export default function Sidebar() {
               </ListItem>
               
               <ListItem  disablePadding sx={{ display: 'block' }}  onClick={()=>{navigate("/suppliers")}}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
+                <ListItemButton sx={{minHeight: 48,justifyContent: open ? 'initial' : 'center',px: 2.5,}}>
+                  <ListItemIcon sx={{minWidth: 0,mr: open ? 3 : 'auto',justifyContent: 'center',}}>
                     <LocalShippingIcon />
                   </ListItemIcon>
                   <ListItemText primary="Supplier" sx={{ opacity: open ? 1 : 0 }} />
@@ -266,20 +183,8 @@ export default function Sidebar() {
 
               
               <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/inventory")}}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
+                <ListItemButton sx={{minHeight: 48,justifyContent: open ? 'initial' : 'center',px: 2.5,}}>
+                  <ListItemIcon sx={{minWidth: 0,mr: open ? 3 : 'auto',justifyContent: 'center',}}>
                     <StoreIcon />
                   </ListItemIcon>
                   <ListItemText primary="Inventory" sx={{ opacity: open ? 1 : 0 }} />
@@ -287,24 +192,12 @@ export default function Sidebar() {
               </ListItem>
           </List>
 
-          <Divider />
+          <Divider sx={{ backgroundColor: 'darkgrey' }} />
 
           <List>
             <ListItem  disablePadding sx={{ display: 'block' }} onClick={()=>{navigate("/login")}}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
+               <ListItemButton sx={{minHeight: 48,justifyContent: open ? 'initial' : 'center',px: 2.5,}}>
+                  <ListItemIcon sx={{minWidth: 0,mr: open ? 3 : 'auto',justifyContent: 'center',}}>
                     <LogoutIcon />
                   </ListItemIcon>
                   <ListItemText primary="Logout" sx={{ opacity: open ? 1 : 0 }} />
@@ -312,7 +205,6 @@ export default function Sidebar() {
               </ListItem>
           </List>
         
-
       </Drawer>
     </Box>
   );

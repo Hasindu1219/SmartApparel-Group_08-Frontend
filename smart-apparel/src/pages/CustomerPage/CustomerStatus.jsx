@@ -1,21 +1,46 @@
-import React from 'react';
-import './CustomerStatus.css';
-import Navbar from '../../components/Navbar/Navbar';
-import Sidebar from '../../components/Sidebar';
+import React, { useState } from "react";
+import axios from "axios";
+import "./CustomerStatus.css";
+import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../../components/Sidebar";
+import Error from "../../components/Error1/ErrorId";
 
 export default function CustomerStatus() {
-  // Render CustomerStatus component
+  const [orderId, setOrderId] = useState("");
+  const [orderStatus, setOrderStatus] = useState(null);
+
+  const [error, setError] = useState(null);
+  const [errorType, setErrorType] = useState("none");
+  const errorMsg = ["Invalid Order ID"];
+
+  const handleInputChange = (event) => {
+    setOrderId(event.target.value);
+  };
+
+  const fetchOrderStatus = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await axios.get(
+        `http://localhost:8080/order/viewOrder/${orderId}`
+      );
+      setOrderStatus(res.data.content.orderStatus);
+      setError(null);
+    } catch (error) {
+      setOrderStatus(errorMsg);
+      setError(errorMsg);
+    }
+  };
+
   return (
-    <div className="addItemContainer">
+    <div>
       <div>
-        {/* Navbar component */}
         <Navbar />
       </div>
       <div className="formBodyContainer">
-        {/* Sidebar component */}
         <Sidebar />
-        <div style={{ width: "100%", backgroundColor: "#d7e3fc", height: "100vh" }}>
-          {/* Title for Customer Status */}
+        <div
+          style={{ width: "100%", backgroundColor: "#d7e3fc", height: "100vh" }}
+        >
           <h1
             style={{
               color: "black",
@@ -26,6 +51,23 @@ export default function CustomerStatus() {
           >
             Customer Status
           </h1>
+          <div>
+          {error && <Error errorDisplay="block" errorMessage={error} />}
+            <div className="App">
+              <form onSubmit={fetchOrderStatus}>
+                <input
+                  type="text"
+                  value={orderId}
+                  onChange={handleInputChange}
+                  placeholder="Enter Order ID"
+                />
+                <button id="searchBtn" type="submit">
+                  Search
+                </button>
+              </form>
+              <div id="statusBox">Order Status: {orderStatus}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

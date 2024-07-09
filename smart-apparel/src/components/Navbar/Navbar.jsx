@@ -180,7 +180,7 @@ export default function Navbar() {
                 <AccountCircle/>
                 <div style={{ padding: '10px' }}> {/* Added padding to the div */}
                     <Typography variant="body1"  style={{ fontSize: '15px' }}>
-                    Madushan Liyanage
+                    Saman Fernando
                     </Typography>
                     <Typography variant="body2" style={{ fontSize: '10px' ,color: '#BDBDBD'}}>
                     Chief Executive Officer
@@ -251,7 +251,7 @@ export default function Navbar() {
                 <AccountCircle/>
                 <div style={{ padding: '10px' }}> {/* Added padding to the div */}
                     <Typography variant="body1"  style={{ fontSize: '15px' }}>
-                    Madushan Liyanage
+                    Saman Fernando
                     </Typography>
                     <Typography variant="body2" style={{ fontSize: '10px' ,color: '#BDBDBD'}}>
                     Chief Executive Officer
