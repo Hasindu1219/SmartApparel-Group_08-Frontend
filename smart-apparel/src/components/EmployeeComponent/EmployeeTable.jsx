@@ -65,7 +65,7 @@ function EmployeeTable({ employees }) {
               <TableCell>NIC</TableCell>
               <TableCell>Position</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>Password</TableCell>
+              {/* <TableCell>Password</TableCell> */}
               <TableCell>Phone Number</TableCell>
               <TableCell>Date Of Birth</TableCell>
               <TableCell>Bank Account Number</TableCell>
@@ -86,7 +86,7 @@ function EmployeeTable({ employees }) {
                   <TableCell>{employee.nic}</TableCell>
                   <TableCell>{employee.position}</TableCell>
                   <TableCell>{employee.email}</TableCell>
-                  <TableCell>{employee.password}</TableCell>
+                  {/* <TableCell>{employee.password}</TableCell> */}
                   <TableCell>{employee.phoneNumber}</TableCell>
                   <TableCell>{employee.dateOfBirth}</TableCell>
                   <TableCell>{employee.accountNumber}</TableCell>

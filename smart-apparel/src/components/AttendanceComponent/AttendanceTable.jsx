@@ -101,10 +101,10 @@ const AttendanceTable = () => {
                                     <TableCell sx={{textAlign:"center"}}>{attendance.outTime}</TableCell>
                                     <TableCell sx={{textAlign:"center"}}>{attendance.empId}</TableCell>
                                     <TableCell sx={{textAlign:"center"}}>
-                                        <Button variant="outlined" size="small" color="primary" onClick={() => updateAttendance(attendance.attendanceId)}>
+                                        <Button variant="outlined" size="small" color="primary" sx={{fontWeight:"bold"}} onClick={() => updateAttendance(attendance.attendanceId)}>
                                             Update
                                         </Button>
-                                        <Button variant="outlined" size="small" color="error" onClick={() => handleDelete(attendance.attendanceId)} style={{ marginLeft: '10px' }}>
+                                        <Button variant="outlined" size="small" color="error" sx={{fontWeight:"bold"}} onClick={() => handleDelete(attendance.attendanceId)} style={{ marginLeft: '10px' }}>
                                             Delete
                                         </Button>
                                     </TableCell>
