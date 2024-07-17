@@ -66,7 +66,7 @@ export default function LineSupervisorOrderCoveredAmount() {
             }}
           >
             Order Covered Amount
-            <Button onClick={() => { navigate('/linesupervisororderhome') }}> <ArrowBackIosNewIcon/> </Button>
+            <Button onClick={() => { navigate('/orders') }}> <ArrowBackIosNewIcon/> </Button>
           </h1>
           <div>
             {error && <Error errorDisplay="block" errorMessage={error} />}
