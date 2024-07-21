@@ -1,5 +1,5 @@
 import React from 'react';
-import './OrderHome.css';
+import '../OrderPage/OrderHome.css';
 import OrderHomeImage from '../../Images/OrderHome.jpg';
 import { Link } from "react-router-dom";
 
@@ -25,12 +25,6 @@ export default function OrderHome() {
                 <Link to={'/ordershipment'}>
                     <button className="btn1">
                         <p className="Task1">Order Shipment</p>
-                    </button>
-                </Link>
-                {/* Link to Order Covered Amount */}
-                <Link to={'/linesupervisorordercoveredamount'}>
-                    <button className="btn1">
-                        <p className="Task1">Order Covered Amount</p>
                     </button>
                 </Link>
             </div>
