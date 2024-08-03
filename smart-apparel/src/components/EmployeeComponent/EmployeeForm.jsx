@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 //apiMethod -> post , put
 //submitBtnName -> Send , submit or any relevant
-//resetBtnName -> clear , Reset or any relevant
+//resetBtnName -> clear , Rset or any relevent
 //defaultFieldValues -> pass the employee object
 function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues }) {
 
@@ -170,44 +170,77 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
         } else {
             return '';
         }
-
-        const isFemale = dayCount > 500;
-        if (isFemale) {
+    
+        let month, day;
+        // let isMale = true;
+    
+        if (dayCount > 500) {
             dayCount -= 500;
+            // isMale = false;
         }
-
-        const date = new Date(year, 0);
-        date.setDate(dayCount);
-
-        return date.toISOString().split('T')[0];
+    
+        if (dayCount > 335) {
+            month = 12;
+            day = dayCount - 335;
+        } else if (dayCount > 305) {
+            month = 11;
+            day = dayCount - 305;
+        } else if (dayCount > 274) {
+            month = 10;
+            day = dayCount - 274;
+        } else if (dayCount > 244) {
+            month = 9;
+            day = dayCount - 244;
+        } else if (dayCount > 213) {
+            month = 8;
+            day = dayCount - 213;
+        } else if (dayCount > 182) {
+            month = 7;
+            day = dayCount - 182;
+        } else if (dayCount > 152) {
+            month = 6;
+            day = dayCount - 152;
+        } else if (dayCount > 121) {
+            month = 5;
+            day = dayCount - 121;
+        } else if (dayCount > 91) {
+            month = 4;
+            day = dayCount - 91;
+        } else if (dayCount > 60) {
+            month = 3;
+            day = dayCount - 60;
+        } else if (dayCount > 31) {
+            month = 2;
+            day = dayCount - 31;
+        } else {
+            month = 1;
+            day = dayCount;
+        }
+    
+        const dateOfBirth = new Date(Date.UTC(year, month - 1, day));
+        const formattedDateOfBirth = dateOfBirth.toISOString().split('T')[0];
+        return formattedDateOfBirth;
     };
+    
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-
+    
+        let newFormValues = { ...formValues, [name]: value };
+    
         if (name === "nic") {
             const generatedBirthDate = birthDateGenerate(value);
-
-            setFormValues({
-                ...formValues,
+            newFormValues = {
+                ...newFormValues,
                 dateOfBirth: generatedBirthDate,
-                [name]: value,
-            });
-            setFormErrors({
-                ...formErrors,
-                dateOfBirth: validateField('dateOfBirth', generatedBirthDate),
-                [name]: validateField(name, value),
-            });
-        } else {
-            setFormValues({
-                ...formValues,
-                [name]: value,
-            });
-            setFormErrors({
-                ...formErrors,
-                [name]: validateField(name, value),
-            });
+            };
         }
+    
+        setFormValues(newFormValues);
+        setFormErrors({
+            ...formErrors,
+            [name]: validateField(name, value),
+        });
     };
 
     const handleSubmit = async (event) => {
@@ -219,45 +252,78 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
             const error = validateField(name, formValues[name]);
             if (error) {
                 valid = false;
+                newErrors[name] = error;
             }
-            newErrors[name] = error;
         });
 
         setFormErrors(newErrors);
 
-        if (valid) {
+        if (valid && apiMethod === "post") {
+            // console.log("Object is ready to send backend, no errors in fields");
             try {
-                const response = await axios[apiMethod]('http://localhost:8080/employees', formValues);
-                if (response.data.code === "00") {
-                    alert(response.data.message);
-                    navigate("/employees");
-                } else {
-                    alert("Error: " + response.data.message);
+                const response = await axios.post("http://localhost:8080/employee/add", formValues);
+                console.log("Response: ", response);
+                // alert(response.data.message);
+                if (response.status === 202) {
+                    alert("New employee added successfully");
+                    window.location.reload();
                 }
             } catch (error) {
-                console.error("API Error:", error);
-                alert("API Error: " + error.message);
+                if (error.response.status === 409 || error.response.status === 500) {
+                    alert("Error: " + error.response.data.message);
+                    // console.log(error);
+                } else {
+                    console.error("Error submitting form:", error);
+                    alert("Error submitting form: " + error.message);
+                }
+            }
+        }
+        else if (valid && apiMethod === "put") {
+            if (JSON.stringify(defaultFieldValues) === JSON.stringify(formValues)) {
+                alert("There is no change to update!")
+            } else {
+                try {
+                    const response = await axios.put("http://localhost:8080/employee/update", formValues);
+
+                    if (response.status === 202) {
+                        alert("Employee updated successfully.");
+                        navigate("/employees");
+                    }
+                } catch (error) {
+                    if (error.response.status === 400 || error.response.status === 500) {
+                        alert("Error: " + error.response.data.message);
+                        // console.log(error);
+                    } else {
+                        console.error("Error submitting form:", error);
+                        alert("Error submitting form: " + error.message);
+                    }
+                }
             }
         }
     };
 
-    const handleReset = () => {
-        setFormValues({
-            empId: '',
-            name: '',
-            address: '',
-            nic: '',
-            position: '--Select the Position--',
-            email: '',
-            password: '',
-            phoneNumber: '',
-            dateOfBirth: '',
-            accountNumber: '',
-            holderName: '',
-            branchName: '',
-            bankName: ''
-        });
-        setFormErrors({});
+    const handleClear = () => {
+        if (apiMethod === "post") {
+            setFormValues({
+                empId: '',
+                name: '',
+                address: '',
+                nic: '',
+                position: '--Select the Position--',
+                email: '',
+                password: '',
+                phoneNumber: '',
+                dateOfBirth: '',
+                accountNumber: '',
+                holderName: '',
+                branchName: '',
+                bankName: ''
+            });
+            setFormErrors({});
+        } else {
+            setFormValues(defaultFieldValues);
+            setFormErrors({});
+        }
     };
 
     const handleClickShowPassword = () => {
@@ -268,144 +334,119 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
         event.preventDefault();
     };
 
+    const fields = [
+        { name: 'empId', label: 'Employee ID', required: true },
+        { name: 'name', label: 'Employee Name', required: true },
+        { name: 'address', label: 'Address', required: true },
+        { name: 'nic', label: 'NIC', required: true },
+        {
+            name: 'position', label: 'Position', required: true,
+            options: ["Director", "Production Manager", "HR Manager", "Accounting Manager", "Supervisor", "Helper"]
+        },
+        { name: 'email', label: 'Email', required: true },
+        { name: 'password', label: 'Password', required: true },
+        { name: 'phoneNumber', label: 'Phone Number', required: true },
+        { name: 'dateOfBirth', label: 'Date of Birth', required: true },
+        { name: 'accountNumber', label: 'Account Number', required: true },
+        { name: 'holderName', label: 'Holder Name', required: true },
+        { name: 'branchName', label: 'Branch Name', required: true },
+        { name: 'bankName', label: 'Bank Name', required: true }
+    ];
+
     return (
         <form onSubmit={handleSubmit}>
-            <Box display="grid" gridTemplateColumns="1fr 1fr" gap={2}>
-                <TextField
-                    name="empId"
-                    label="Employee ID"
-                    value={formValues.empId}
-                    onChange={handleChange}
-                    error={!!formErrors.empId}
-                    helperText={formErrors.empId}
-                />
-                <TextField
-                    name="name"
-                    label="Name"
-                    value={formValues.name}
-                    onChange={handleChange}
-                    error={!!formErrors.name}
-                    helperText={formErrors.name}
-                />
-                <TextField
-                    name="address"
-                    label="Address"
-                    value={formValues.address}
-                    onChange={handleChange}
-                    error={!!formErrors.address}
-                    helperText={formErrors.address}
-                />
-                <TextField
-                    name="nic"
-                    label="NIC"
-                    value={formValues.nic}
-                    onChange={handleChange}
-                    error={!!formErrors.nic}
-                    helperText={formErrors.nic}
-                />
-                <TextField
-                    select
-                    name="position"
-                    label="Position"
-                    value={formValues.position}
-                    onChange={handleChange}
-                    error={!!formErrors.position}
-                    helperText={formErrors.position}
-                >
-                    <MenuItem value="--Select the Position--">--Select the Position--</MenuItem>
-                    {salaryParams.map((param) => (
-                        <MenuItem key={param.id} value={param.position}>{param.position}</MenuItem>
-                    ))}
-                </TextField>
-                <TextField
-                    name="email"
-                    label="Email"
-                    value={formValues.email}
-                    onChange={handleChange}
-                    error={!!formErrors.email}
-                    helperText={formErrors.email}
-                />
-                <FormControl variant="outlined">
-                    <InputLabel htmlFor="password">Password</InputLabel>
-                    <OutlinedInput
-                        id="password"
-                        type={showPassword ? 'text' : 'password'}
-                        value={formValues.password}
+            {fields.map((field) => (
+                field.name === "position" ? (
+                    <TextField
+                        select
+                        key={field.name}
+                        required={field.required}
+                        error={!!formErrors[field.name]}
+                        label={field.label}
+                        name={field.name}
+                        value={formValues[field.name]}
                         onChange={handleChange}
-                        name="password"
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                >
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </InputAdornment>
-                        }
-                        label="Password"
+                        helperText={formErrors[field.name]}
+                        margin="dense"
+                        style={{ width: "48%", marginLeft: "2%" }}
+                    >
+                        <MenuItem value="--Select the Position--">
+                            --Select the Position--
+                        </MenuItem>
+                        {salaryParams.map((param) => (
+                            <MenuItem key={param.position} value={param.position}>
+                                {param.position}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                ) : field.name === "password" ? (
+                    <FormControl
+                        key={field.name}
+                        required={field.required}
+                        error={!!formErrors[field.name]}
+                        margin="dense"
+                        style={{ width: "48%", marginLeft: "2%" }}
+                    >
+                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-password"
+                            type={showPassword ? 'text' : 'password'}
+                            value={formValues.password}
+                            name={field.name}
+                            onChange={handleChange}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            label="Password"
+                        />
+                        <FormHelperText>{formErrors[field.name]}</FormHelperText>
+                    </FormControl>
+                ) : field.name === "dateOfBirth" ? (
+                    <TextField
+                        type="date"
+                        key={field.name}
+                        required={field.required}
+                        error={!!formErrors[field.name]}
+                        label={field.label}
+                        name={field.name}
+                        value={formValues[field.name]}
+                        onChange={handleChange}
+                        helperText={formErrors[field.name]}
+                        InputLabelProps={{ shrink: true }}
+                        margin="dense"
+                        style={{ width: "48%", marginLeft: "2%" }}
                     />
-                    {formErrors.password && <FormHelperText error>{formErrors.password}</FormHelperText>}
-                </FormControl>
-                <TextField
-                    name="phoneNumber"
-                    label="Phone Number"
-                    value={formValues.phoneNumber}
-                    onChange={handleChange}
-                    error={!!formErrors.phoneNumber}
-                    helperText={formErrors.phoneNumber}
-                />
-                <TextField
-                    name="dateOfBirth"
-                    label="Date of Birth"
-                    type="date"
-                    InputLabelProps={{ shrink: true }}
-                    value={formValues.dateOfBirth}
-                    onChange={handleChange}
-                    error={!!formErrors.dateOfBirth}
-                    helperText={formErrors.dateOfBirth}
-                />
-                <TextField
-                    name="accountNumber"
-                    label="Account Number"
-                    value={formValues.accountNumber}
-                    onChange={handleChange}
-                    error={!!formErrors.accountNumber}
-                    helperText={formErrors.accountNumber}
-                />
-                <TextField
-                    name="holderName"
-                    label="Holder Name"
-                    value={formValues.holderName}
-                    onChange={handleChange}
-                    error={!!formErrors.holderName}
-                    helperText={formErrors.holderName}
-                />
-                <TextField
-                    name="branchName"
-                    label="Branch Name"
-                    value={formValues.branchName}
-                    onChange={handleChange}
-                    error={!!formErrors.branchName}
-                    helperText={formErrors.branchName}
-                />
-                <TextField
-                    name="bankName"
-                    label="Bank Name"
-                    value={formValues.bankName}
-                    onChange={handleChange}
-                    error={!!formErrors.bankName}
-                    helperText={formErrors.bankName}
-                />
-            </Box>
-            <Box display="flex" justifyContent="space-between" mt={2}>
-                <Button type="submit" variant="contained" color="primary" disabled={submitBtnActiveState}>
-                    {submitBtnName}
-                </Button>
-                <Button type="button" variant="outlined" onClick={handleReset}>
+                ) : (
+                    <TextField
+                        disabled={apiMethod === "put" && field.name === "empId" ? true : false}
+                        key={field.name}
+                        required={field.required}
+                        error={!!formErrors[field.name]}
+                        label={field.label}
+                        name={field.name}
+                        value={formValues[field.name]}
+                        onChange={handleChange}
+                        helperText={formErrors[field.name]}
+                        margin="dense"
+                        style={{ width: "48%", marginLeft: "2%" }}
+                    />
+                )
+            ))}
+            <Box style={{ textAlign: "center", display: "block", marginTop: "20px" }}>
+                <Button type="reset" variant='outlined' style={{ margin: "0 20px",fontWeight:"bold",}} onClick={handleClear}>
                     {resetBtnName}
+                </Button>
+                <Button disabled={submitBtnActiveState} type="submit" variant="contained" color='success' style={{ margin: "0 20px",fontWeight:"bold"}}>
+                    {submitBtnName}
                 </Button>
             </Box>
         </form>
