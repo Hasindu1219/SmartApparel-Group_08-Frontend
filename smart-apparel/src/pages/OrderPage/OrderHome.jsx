@@ -27,11 +27,12 @@ export default function OrderHome() {
                         <p className="Task1">Order Shipment</p>
                     </button>
                 </Link>
-                {/* Link to Order Covered Amount */}
-                <Link to={'/linesupervisorordercoveredamount'}>
-                    <button className="btn1">
-                        <p className="Task1">Order Covered Amount</p>
-                    </button>
+
+                {/* Link to Order Covered Amount page */}
+                <Link to={`/linesupervisorordercoveredamount`}>
+                  <button className="btn1">
+                    <p className="Task1">Order Covered Amount</p>
+                  </button>
                 </Link>
             </div>
             {/* Image Frame */}
