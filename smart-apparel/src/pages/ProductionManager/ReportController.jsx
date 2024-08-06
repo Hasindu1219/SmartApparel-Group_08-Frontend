@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../../components/ProductionManager/Sidebar";
 import Box from "@mui/material/Box";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/ProductionManager/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import ReportCard from "../../components/Report/ReportCard";
 import ReportImage from "../../Assets/report.png";

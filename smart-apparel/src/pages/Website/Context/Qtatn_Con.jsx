@@ -188,7 +188,7 @@ const Qtatn_Con = () => {
                 ))}
               </div>
               <div className="designImagesContainerView">
-                {["Front", "Back", "Side"].map((view) => (
+                {["Front View", "Back View", "Side View"].map((view) => (
                   <p key={view}>{view}</p>
                 ))}
               </div>

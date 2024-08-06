@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../InventoryPage/ViewMaterials.css";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/ProductionManager/Navbar/Navbar";
 import Sidebar from "../../components/ProductionManager/Sidebar";
 import axios from "axios";
 import DatePicker from "react-datepicker";

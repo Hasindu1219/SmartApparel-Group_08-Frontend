@@ -80,6 +80,9 @@ import PMReport from './pages/ProductionManager/ReportController';
 import PMProfitandLossReport from './pages/ProductionManager/ProfitandLossReport';
 import PMDetailedSalaryReport from './pages/ProductionManager/DetailedSalaryReport';
 import PMSalaryReport from './pages/ProductionManager/SalaryReport';
+import PMProfileEdit from './pages/ProductionManager/EmployeeUpdate';
+
+
 import EmployeeProfile from './pages/Employee/EmployeeProfile';
 
 
@@ -179,6 +182,7 @@ function App() {
         <Route path="/PM/report/ProfitandLoss" element={<PMProfitandLossReport />}></Route>
         <Route path="/PM/report/DetailedSalaryReport" element={<PMDetailedSalaryReport />}></Route>
         <Route path="/PM/report/SalaryReport" element={<PMSalaryReport />}></Route>
+        <Route path="/PM/ProfileEdit" element={<PMProfileEdit />}></Route>
         
 
       </Routes>

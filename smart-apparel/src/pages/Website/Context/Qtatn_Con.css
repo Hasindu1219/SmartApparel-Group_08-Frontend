@@ -61,14 +61,14 @@
   gap: 20px;
 }
 .designImages{
-  width: 5rem;
-  height: 5rem;
+  width: 8rem;
+  height: 8rem;
   border-radius: 10px;
 }
 .designImagesContainerView{
   display: flex;
   align-items: center;
-  gap: 70px;
+  gap: 80px;
 }
 .designImagesContainerView p {
   color: white;

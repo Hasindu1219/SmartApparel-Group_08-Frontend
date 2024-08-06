@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/ProductionManager/Navbar/Navbar";
 import Sidebar from "../../components/ProductionManager/Sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
