@@ -75,7 +75,7 @@ export default function CustomerRegister() {
 
   // Function to handle the Back button click event
   const handleBackBtn = () => {
-    navigate("/customer");
+    navigate("/customers");
   };
 
   // Function to handle the Clear button click event
@@ -229,7 +229,7 @@ export default function CustomerRegister() {
               </Col>
               <Col>
               <input
-                type="text"
+                type="password"
                 placeholder="Enter Customer Password"
                 onChange={(e) => {
                   setCustomerPassword(e.target.value);

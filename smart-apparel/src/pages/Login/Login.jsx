@@ -26,14 +26,17 @@ function Login() {
         (employee) => employee.email === email && employee.password === password
       );
 
+      // console.log("Fined employee:-",employee)
+
       if (employee) {
         // Perform successful login actions
         console.log("Login successful!");
         setPosition(employee.position); // Save user's position
         setLoggedIn(true); // Set isLoggedIn state to true
 
-        localStorage.setItem('username', employee.name); // Store username in localStorage
-        localStorage.setItem('position', employee.position); // Store position in localStorage
+        localStorage.setItem('user',JSON.stringify(employee))
+        // localStorage.setItem('username', employee.name); // Store username in localStorage
+        // localStorage.setItem('position', employee.position); // Store position in localStorage
 
       } else {
         // Display error if login credentials are invalid
@@ -47,9 +50,11 @@ function Login() {
 
   // Use useEffect to log the updated Position state and navigate accordingly
   useEffect(() => {
-    console.log("Updated Position:", Position);
+    // console.log("Updated Position:", localStorage.getItem('position'));
     if (Position === "Admin") {
       navigate('/overview');
+    }else if (Position === "Production Manager") {
+      navigate('/PM/overview');
     }
   }, [Position, navigate]);
 

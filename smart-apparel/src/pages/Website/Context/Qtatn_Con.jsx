@@ -1,254 +1,224 @@
-import React, { useState } from 'react';
+import { useState, useEffect, useRef } from "react";
+import './Qtatn_Con.css';
+import design1 from '../../../Assets/WebAssets/WAssets/frontView.jpg';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { app } from "../../../components/Website/firebase";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import WNavbar from '../../../components/Website/Navbar/WNavbar';
 import Footer from '../../../components/Website/Footer/Footer';
-import './Qtatn_Con.css';
 
 const Qtatn_Con = () => {
+  
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
-    contactNumber: '',
-    clothingTypes: {
-      skirts: false,
-      blouses: false,
-      frocks: false,
-      tshirts: false,
-    },
-    images: {
-      skirts: { front: null, back: null, side: null },
-      blouses: { front: null, back: null, side: null },
-      frocks: { front: null, back: null, side: null },
-      tshirts: { front: null, back: null, side: null },
-    },
-    quantities: {
-      skirts: { small: 0, medium: 0, large: 0, xl: 0 },
-      blouses: { small: 0, medium: 0, large: 0, xl: 0 },
-      frocks: { small: 0, medium: 0, large: 0, xl: 0 },
-      tshirts: { small: 0, medium: 0, large: 0, xl: 0 },
-    },
+    contactNo: '',
+    clothType: 'Tshirts',
+    smallSize: 0,
+    mediumSize: 0,
+    largeSize: 0,
+    xtraLargeSize: 0
+  });
+  const navigate = useNavigate();
+  const [clothItems, setClothItems] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState({});
+  const [fileUploadError, setFileUploadError] = useState(false);
+  const [uploadedImages, setUploadedImages] = useState({
+    imageOne: null,
+    imageTwo: null,
+    imageThree: null
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const imageOneRef = useRef(null);
+  const imageTwoRef = useRef(null);
+  const imageThreeRef = useRef(null);
 
   const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
+    const { id, value } = e.target;
+    setFormData(prev => ({...prev, [id]: value}));
+  };
 
-    if (type === 'checkbox') {
-      setFormData((prevData) => ({
-        ...prevData,
-        clothingTypes: {
-          ...prevData.clothingTypes,
-          [name]: checked,
-        },
-      }));
-    } else if (files) {
-      const [category, position] = name.split('-');
-      setFormData((prevData) => ({
-        ...prevData,
-        images: {
-          ...prevData.images,
-          [category]: {
-            ...prevData.images[category],
-            [position]: files[0],
-          },
-        },
-      }));
-    } else if (['small', 'medium', 'large', 'xl'].includes(name.split('-')[1])) {
-      const [category, size] = name.split('-');
-      setFormData((prevData) => ({
-        ...prevData,
-        quantities: {
-          ...prevData.quantities,
-          [category]: {
-            ...prevData.quantities[category],
-            [size]: parseInt(value) || 0,
-          },
-        },
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
+  const handleAddNewCloth = (e) => {
+    e.preventDefault();
+    const { username, email, contactNo, ...clothData } = formData;
+    const newClothItem = {
+      ...clothData,
+      images: { ...uploadedImages }
+    };
+    setClothItems(prev => [...prev, newClothItem]);
+    
+    // Reset clothing-related fields and images
+    setFormData(prev => ({
+      ...prev,
+      clothType: 'Tshirts',
+      smallSize: 0,
+      mediumSize: 0,
+      largeSize: 0,
+      xtraLargeSize: 0,
+    }));
+    setUploadedImages({
+      imageOne: null,
+      imageTwo: null,
+      imageThree: null
+    });
+    setImageFiles([]);
+  };
+
+  const handleFileChange = (e, fileType) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFiles(prev => [...prev, { file, type: fileType }]);
     }
   };
 
-  const handleSubmit = async (e) => {
+  useEffect(() => {
+    imageFiles.forEach(fileObj => {
+      handleFileUpload(fileObj.file, fileObj.type);
+    });
+  }, [imageFiles]);
+
+  const handleFileUpload = (file, fileType) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(prev => ({ ...prev, [file.name]: Math.round(progress) }));
+      },
+      (error) => {
+        setFileUploadError(true);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
+            setUploadedImages(prev => ({ ...prev, [fileType]: downloadURL }));
+          });
+      });
+  };
+
+  const handleSubmitBtn = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    
+    const submissionData = {
+      userInfo: {
+        username: formData.username,
+        email: formData.email,
+        contactNo: formData.contactNo
+      },
+      clothItems: clothItems.map(item => ({
+        ...item,
+        images: item.images // This includes the uploaded image URLs for each cloth item
+      }))
+    };
 
     try {
-      const response = await fetch('/api/quotations', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-      } else {
-        console.error('Failed to submit the form');
+      const result = await axios.post('http://localhost:8080/smart-apperal/api/quotation', submissionData);
+      if (result.success === false) {
+        alert('error');
+        return;
       }
+      alert("Quotation Successfully Created");
+      
+      console.log(submissionData);
     } catch (error) {
-      console.error('Error:', error);
+      alert(error.message);
     }
+    //console.log("Submission Data:", submissionData);
   };
 
-  const handleClear = () => {
+
+  const handleClearBtn = () => {
     setFormData({
-      name: '',
+      username: '',
       email: '',
-      contactNumber: '',
-      clothingTypes: {
-        skirts: false,
-        blouses: false,
-        frocks: false,
-        tshirts: false,
-      },
-      images: {
-        skirts: { front: null, back: null, side: null },
-        blouses: { front: null, back: null, side: null },
-        frocks: { front: null, back: null, side: null },
-        tshirts: { front: null, back: null, side: null },
-      },
-      quantities: {
-        skirts: { small: 0, medium: 0, large: 0, xl: 0 },
-        blouses: { small: 0, medium: 0, large: 0, xl: 0 },
-        frocks: { small: 0, medium: 0, large: 0, xl: 0 },
-        tshirts: { small: 0, medium: 0, large: 0, xl: 0 },
-      },
+      contactNo: '',
+      clothType: 'Tshirts',
+      smallSize: 0,
+      mediumSize: 0,
+      largeSize: 0,
+      xtraLargeSize: 0
     });
-    setIsSubmitted(false);
+    setClothItems([]);
+    setUploadedImages({
+      imageOne: null,
+      imageTwo: null,
+      imageThree: null
+    });
+    setImageFiles([]);
+    setFileUploadError(false);
+    setUploadProgress({});
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div>
       <WNavbar />
-      <div>
-      <div >
-        <h1>Quotation Generation Form</h1>
-        <p>Add here your details to generate your quotation</p>
-        <hr /></div>
-        {isSubmitted ? (
-          <p className="success-message">Successfully submitted!</p>
-        ) : (
-          <form onSubmit={handleSubmit} className="Qtatn-container form-Qtatn-con">
-            <div>
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="contactNumber">Contact Number:</label>
-              <input
-                type="tel"
-                id="contactNumber"
-                name="contactNumber"
-                value={formData.contactNumber}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="clothing-types">
-              <label>Clothing Types:</label>
-              {['skirts', 'blouses', 'frocks', 'tshirts'].map((type) => (
-                <div key={type}>
-                  <input
-                    type="checkbox"
-                    id={type}
-                    name={type}
-                    checked={formData.clothingTypes[type]}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</label>
-                </div>
-              ))}
-            </div>
-            {Object.keys(formData.clothingTypes).map(
-              (type) =>
-                formData.clothingTypes[type] && (
-                  <div key={type} className="clothing-section">
-                    <h3>{type.charAt(0).toUpperCase() + type.slice(1)}</h3>
-                    <div>
-                      <label htmlFor={`${type}-front`}>Front View Image:</label>
-                      <input
-                        type="file"
-                        id={`${type}-front`}
-                        name={`${type}-front`}
-                        accept="image/*"
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor={`${type}-back`}>Back View Image:</label>
-                      <input
-                        type="file"
-                        id={`${type}-back`}
-                        name={`${type}-back`}
-                        accept="image/*"
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor={`${type}-side`}>Side View Image:</label>
-                      <input
-                        type="file"
-                        id={`${type}-side`}
-                        name={`${type}-side`}
-                        accept="image/*"
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <div className="category-quantities">
-                      {['small', 'medium', 'large', 'xl'].map((size) => (
-                        <div key={`${type}-${size}`}>
-                          <label htmlFor={`${type}-${size}`}>
-                            {size.charAt(0).toUpperCase() + size.slice(1)}:
-                          </label>
-                          <input
-                            type="number"
-                            id={`${type}-${size}`}
-                            name={`${type}-${size}`}
-                            value={formData.quantities[type][size]}
-                            onChange={handleChange}
-                            min="0"
-                          />
-                        </div>
-                      ))}
-                    </div>
+      <div className="quotationContainer">
+        <h1>Quotation Form</h1>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="quotationFormContainer">
+            <div className="quotationForm">
+              <input type="text" placeholder="Enter your name" id="username" value={formData.username} onChange={handleChange} />
+              <input type="email" placeholder="Enter your email" id="email" value={formData.email} onChange={handleChange} />
+              <input type="tel" placeholder="Enter your contact number" id="contactNo" value={formData.contactNo} onChange={handleChange} />
+              <select id="clothType" className="clothSelector" value={formData.clothType} onChange={handleChange}>
+                
+                <option value="Tshirts">Tshirts</option>
+                <option value="Blouses">Blouses</option>
+                <option value="Frocks">Frocks</option>
+                <option value="Skirts">Skirts</option>
+              </select>
+              <div style={{ display: 'flex', gap: "10px" }}>
+                {['small', 'medium', 'large', 'xtraLarge'].map((size) => (
+                  <div key={size} className="sizesContainer">
+                    <p style={{ color: 'white' }}>({size.charAt(0).toUpperCase()})</p> {/* Updated color to white */}
+                    <input
+                      type="number"
+                      id={`${size}Size`}
+                      className="sizesInput"
+                      value={formData[`${size}Size`]}
+                      onChange={handleChange}
+                      min="0"
+                    />
                   </div>
-                )
-            )}
-            <div className="button-group">
-              <button className="bttn sbmit-bttn" type="submit">Submit</button>
-              <button className="bttn clearbutton" type="button" onClick={handleClear}>Clear</button>
+                ))}
+              </div>
+              <div className="designImagesContainerView">
+                {["Front", "Back", "Side"].map((view) => (
+                  <p key={view}>{view}</p>
+                ))}
+              </div>
+              <div className="designImagesContainer">
+                {['One', 'Two', 'Three'].map((num) => (
+                  <div key={num}>
+                    <input
+                      type="file"
+                      hidden
+                      ref={eval(`image${num}Ref`)}
+                      accept="image/*"
+                      onChange={(e) => handleFileChange(e, `image${num}`)}
+                    />
+                    <img
+                      src={uploadedImages[`image${num}`] || design1}
+                      alt={`Design ${num}`}
+                      className="designImages"
+                      onClick={() => eval(`image${num}Ref`).current.click()}
+                    />
+                  </div>
+                ))}
+              </div>
+              <button className="newQuotationBtn" onClick={handleAddNewCloth}>Add another cloth</button>
+              <button className="submitQuotationBtn" onClick={handleSubmitBtn}>Submit quotation</button>
+              <button className="clearQuotationBtn" onClick={handleClearBtn}>Clear</button>
             </div>
-          </form>
-        )}
-        <Footer />
+          </div>
+        </form>
       </div>
+      <Footer />
     </div>
   );
 };

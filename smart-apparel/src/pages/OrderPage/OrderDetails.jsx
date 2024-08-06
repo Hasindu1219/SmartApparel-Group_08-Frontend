@@ -308,13 +308,16 @@ export default function OrderDetails() {
                     >
                       <option value="Cotton-Red">Cotton-Red</option>
                       <option value="Cotton-Green">Cotton-Green</option>
+                      <option value="Cotton-Purple">Cotton-Purple</option>
                       <option value="Cotton-Blue">Cotton-Blue</option>
-                      <option value="Silk-Red">Silk-Red</option>
-                      <option value="Silk-Green">Silk-Green</option>
-                      <option value="Silk-Blue">Silk-Blue</option>
-                      <option value="Velvet-Red">Velvet-Red</option>
-                      <option value="Velvet-Green">Velvet-Green</option>
-                      <option value="Velvet-Blue">Velvet-Blue</option>
+                      <option value="Linen-Red">Linen-Red</option>
+                      <option value="Linen-Green">Linen-Green</option>
+                      <option value="Linen-Purple">Linen-Purple</option>
+                      <option value="Linen-Blue">Linen-Blue</option>
+                      <option value="Lace-Red">Lace-Red</option>
+                      <option value="Lace-Green">Lace-Green</option>
+                      <option value="Lace-Purple">Lace-Purple</option>
+                      <option value="Lace-Blue">Lace-Blue</option>
                     </select>
                   </Col>
                 </Row>

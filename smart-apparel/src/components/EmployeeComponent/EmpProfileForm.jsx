@@ -11,8 +11,7 @@ import { useNavigate } from 'react-router-dom';
 //submitBtnName -> Send , submit or any relevant
 //resetBtnName -> clear , Rset or any relevent
 //defaultFieldValues -> pass the employee object
-function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues }) {
-
+function EmpProfileForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValues }) {
     const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         empId: '',
@@ -158,85 +157,12 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
         return error;
     };
 
-    const birthDateGenerate = (nicNumber) => {
-        let year, dayCount;
-        if (nicNumber.length === 10) {
-            year = parseInt(nicNumber.slice(0, 2), 10);
-            year = year < 21 ? 2000 + year : 1900 + year;
-            dayCount = parseInt(nicNumber.slice(2, 5), 10);
-        } else if (nicNumber.length === 12) {
-            year = parseInt(nicNumber.slice(0, 4), 10);
-            dayCount = parseInt(nicNumber.slice(4, 7), 10);
-        } else {
-            return '';
-        }
-    
-        let month, day;
-        // let isMale = true;
-    
-        if (dayCount > 500) {
-            dayCount -= 500;
-            // isMale = false;
-        }
-    
-        if (dayCount > 335) {
-            month = 12;
-            day = dayCount - 335;
-        } else if (dayCount > 305) {
-            month = 11;
-            day = dayCount - 305;
-        } else if (dayCount > 274) {
-            month = 10;
-            day = dayCount - 274;
-        } else if (dayCount > 244) {
-            month = 9;
-            day = dayCount - 244;
-        } else if (dayCount > 213) {
-            month = 8;
-            day = dayCount - 213;
-        } else if (dayCount > 182) {
-            month = 7;
-            day = dayCount - 182;
-        } else if (dayCount > 152) {
-            month = 6;
-            day = dayCount - 152;
-        } else if (dayCount > 121) {
-            month = 5;
-            day = dayCount - 121;
-        } else if (dayCount > 91) {
-            month = 4;
-            day = dayCount - 91;
-        } else if (dayCount > 60) {
-            month = 3;
-            day = dayCount - 60;
-        } else if (dayCount > 31) {
-            month = 2;
-            day = dayCount - 31;
-        } else {
-            month = 1;
-            day = dayCount;
-        }
-    
-        const dateOfBirth = new Date(Date.UTC(year, month - 1, day));
-        const formattedDateOfBirth = dateOfBirth.toISOString().split('T')[0];
-        return formattedDateOfBirth;
-    };
-    
-
     const handleChange = (event) => {
         const { name, value } = event.target;
-    
-        let newFormValues = { ...formValues, [name]: value };
-    
-        if (name === "nic") {
-            const generatedBirthDate = birthDateGenerate(value);
-            newFormValues = {
-                ...newFormValues,
-                dateOfBirth: generatedBirthDate,
-            };
-        }
-    
-        setFormValues(newFormValues);
+        setFormValues({
+            ...formValues,
+            [name]: value,
+        });
         setFormErrors({
             ...formErrors,
             [name]: validateField(name, value),
@@ -257,7 +183,7 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
         });
 
         setFormErrors(newErrors);
-
+//-st-----------------------------------------------------------------------------------------------------
         if (valid && apiMethod === "post") {
             // console.log("Object is ready to send backend, no errors in fields");
             try {
@@ -278,6 +204,7 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                 }
             }
         }
+//--end-------------------------------------------------------------------------------------------------------
         else if (valid && apiMethod === "put") {
             if (JSON.stringify(defaultFieldValues) === JSON.stringify(formValues)) {
                 alert("There is no change to update!")
@@ -303,6 +230,7 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
     };
 
     const handleClear = () => {
+//----st------------------------------------------------
         if (apiMethod === "post") {
             setFormValues({
                 empId: '',
@@ -320,6 +248,7 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                 bankName: ''
             });
             setFormErrors({});
+//----end-------------------------------------------------
         } else {
             setFormValues(defaultFieldValues);
             setFormErrors({});
@@ -359,6 +288,7 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
                 field.name === "position" ? (
                     <TextField
                         select
+                        disabled={true}
                         key={field.name}
                         required={field.required}
                         error={!!formErrors[field.name]}
@@ -453,4 +383,4 @@ function EmployeeForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldValu
     );
 }
 
-export default EmployeeForm;
+export default EmpProfileForm

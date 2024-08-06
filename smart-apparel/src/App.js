@@ -71,6 +71,17 @@ import ProfitandLossReport from './pages/Report/ProfitandLossReport';
 import DetailedSalaryReport from './pages/Report/DetailedSalaryReport';
 import SalaryReport from './pages/Report/SalaryReport';
 
+//Production Manager
+import PMOverview from './pages/ProductionManager/Overview';
+import PMInventory from './pages/ProductionManager/Inventory';
+import PMInventoryView from './pages/ProductionManager/ViewMaterials';
+import PMInventoryAdd from './pages/ProductionManager/AddMaterial';
+import PMReport from './pages/ProductionManager/ReportController';
+import PMProfitandLossReport from './pages/ProductionManager/ProfitandLossReport';
+import PMDetailedSalaryReport from './pages/ProductionManager/DetailedSalaryReport';
+import PMSalaryReport from './pages/ProductionManager/SalaryReport';
+import EmployeeProfile from './pages/Employee/EmployeeProfile';
+
 
 function App() {
   return (
@@ -87,6 +98,7 @@ function App() {
         <Route path="/employees" element={<EmployeesHome />}></Route>
         <Route path="/employee/addemployee" element={<EmployeeAdd />}> </Route>
         <Route path="/employee/updateemployee/:Id" element={<EmployeeUpdate />}> </Route>
+        <Route path="/profile" element={<EmployeeProfile/>}/>
 
         {/*SALARY*/}
         <Route path="/salary" element={<SalaryHome />}></Route>
@@ -157,7 +169,18 @@ function App() {
         <Route path="/T-Shirts" element={<TShirtCategory />}></Route>
         <Route path="/Skirts" element={<SkirtCategory />}></Route>
         <Route path="/Quotations" element={<Quotations />}></Route>
-      
+
+        {/* Production Manager */}
+        <Route path="/PM/Overview" element={<PMOverview />}></Route>
+        <Route path="/PM/Inventory" element={<PMInventory />}></Route>
+        <Route path="/PM/Inventory/ViewMaterials" element={<PMInventoryView />}></Route>
+        <Route path="/PM/Inventory/AddMaterials" element={<PMInventoryAdd />}></Route>
+        <Route path="/PM/Report" element={<PMReport />}></Route>
+        <Route path="/PM/report/ProfitandLoss" element={<PMProfitandLossReport />}></Route>
+        <Route path="/PM/report/DetailedSalaryReport" element={<PMDetailedSalaryReport />}></Route>
+        <Route path="/PM/report/SalaryReport" element={<PMSalaryReport />}></Route>
+        
+
       </Routes>
       {/* <Footer/> */}
     </BrowserRouter>
