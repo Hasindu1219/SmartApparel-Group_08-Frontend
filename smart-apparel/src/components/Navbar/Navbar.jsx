@@ -16,9 +16,9 @@ import { useAppStore } from '../../appStore';
 import ForumIcon from '@mui/icons-material/Forum';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import { useNavigate } from 'react-router-dom';
 // import SearchIcon from '@mui/icons-material/Search';
 // import MailIcon from '@mui/icons-material/Mail';
-
 
 
 const AppBar = styled(MuiAppBar, {
@@ -72,6 +72,14 @@ export default function Navbar() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const updateOpen = useAppStore((state) => state.updateOpen);
   const dopen = useAppStore((state) => state.dopen);
+  const navigate = useNavigate();
+
+  const [loggedUser,setLoggedUser] = React.useState({});
+
+  React.useEffect(()=>{
+    console.log(JSON.parse(localStorage.getItem('user'))) 
+    setLoggedUser(JSON.parse(localStorage.getItem('user')))
+  },[]);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -111,7 +119,7 @@ export default function Navbar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
     </Menu>
   );
 
@@ -180,10 +188,10 @@ export default function Navbar() {
                 <AccountCircle/>
                 <div style={{ padding: '10px' }}> {/* Added padding to the div */}
                     <Typography variant="body1"  style={{ fontSize: '15px' }}>
-                    Saman Fernando
+                    {loggedUser.name}
                     </Typography>
                     <Typography variant="body2" style={{ fontSize: '10px' ,color: '#BDBDBD'}}>
-                    Chief Executive Officer
+                    {loggedUser.position}
                     </Typography>
                 </div>
             </IconButton>
@@ -219,6 +227,7 @@ export default function Navbar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             
+            {/*Notification ICon
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -227,7 +236,9 @@ export default function Navbar() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton>*/}
+
+            {/*Messages ICon
             <IconButton
               size="large"
               edge="end"
@@ -238,8 +249,9 @@ export default function Navbar() {
               color="inherit"
             >
               <ForumIcon />
-            </IconButton>
+            </IconButton>*/}
 
+            {/* profile picture */}
             <IconButton
                 size="large"
                 edge="end"
@@ -247,19 +259,20 @@ export default function Navbar() {
                 aria-controls={menuId}
                 aria-haspopup="true"
                 color="inherit"
+                onClick={()=>{navigate('/profile')}}
                 >
                 <AccountCircle/>
-                <div style={{ padding: '10px' }}> {/* Added padding to the div */}
+                <div style={{ padding: '10px' }}> 
                     <Typography variant="body1"  style={{ fontSize: '15px' }}>
-                    Saman Fernando
+                    {loggedUser.name}
                     </Typography>
                     <Typography variant="body2" style={{ fontSize: '10px' ,color: '#BDBDBD'}}>
-                    Chief Executive Officer
+                    {loggedUser.position}
                     </Typography>
                 </div>
             </IconButton>
 
-
+            {/* settings */}
             <IconButton
               size="large"
               edge="end"
@@ -274,7 +287,7 @@ export default function Navbar() {
 
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -283,8 +296,8 @@ export default function Navbar() {
               color="inherit"
             >
               <MoreIcon />
-            </IconButton>
-
+            </IconButton> */}
+{/** 
             <IconButton
                 size="large"
                 edge="end"
@@ -294,7 +307,7 @@ export default function Navbar() {
                 color="inherit"
                 >
                 <AccountCircle/>
-                <div style={{ padding: '10px' }}> {/* Added padding to the div */}
+                <div style={{ padding: '10px' }}>
                     <Typography variant="body1"  style={{ fontSize: '15px' }}>
                     Madushan Liyanage
                     </Typography>
@@ -302,7 +315,7 @@ export default function Navbar() {
                     Chief Executive Officer
                     </Typography>
                 </div>
-            </IconButton>
+            </IconButton>*/}
 
             <IconButton
               size="large"
@@ -319,7 +332,7 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+      {/* {renderMobileMenu} */}
       {renderMenu}
     </Box>
   );

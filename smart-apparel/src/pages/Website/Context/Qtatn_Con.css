@@ -1,103 +1,75 @@
-/* General styling for the container */
-.Qtatn-container {
-  width: 90%;
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #1914a3;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.quotation_header{
-  width: 100%;
-  background-color: #f9f9f9;
-}
-
-
-/* Styling for the form */
-.form-Qtatn-con {
+.quotationForm{
+  border: 5px solid rgb(18, 1, 79);
+  background-color: rgb(1, 1, 82);
+  padding: 20px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* Styling for form labels and inputs */
-label {
-  font-weight: bold;
+  align-items: center;
+  gap: 1rem;
   margin-bottom: 0.5rem;
-  display: inline-block;
+  /* background-color: aqua; */
+  width: 50%;
+  margin: 10px auto;
 }
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-select,
-input[type="file"],
-input[type="number"] {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
+.quotationForm > input{
+  padding: 3px;
+  width: 25rem;
 }
-
-/* Styling for clothing types checkboxes */
-.clothing-types {
+.quotationForm > p{
+  color: white;
+  text-align: start;
+}
+.clothSelector{
+  padding: 3px;
+  width: 25rem;
+}
+.sizesContainer{
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  gap: 10px;
 }
-
-.clothing-types > div {
-  display: flex;
-  align-items: center;
+.sizesInput{
+  width: 3rem;
+  padding: 3px;
+  height: 30px;
 }
-
-.clothing-types input[type="checkbox"] {
-  margin-right: 0.5rem;
-}
-
-/* Styling for the category quantities */
-.category-quantities {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.category-quantities > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Styling for the button group */
-.button-group {
-  display: flex;
-  gap: 1rem;
-}
-
-.bttn {
-  padding: 0.75rem 1.5rem;
+.newQuotationBtn{
+  width: 25rem;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.sbmit-bttn{
-  background-color: #4caf50;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: gray;
   color: white;
 }
-
-.clearbutton{
-  background-color: #f44336;
+.submitQuotationBtn{
+  width: 25rem;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: green;
   color: white;
 }
-
-/* Styling for the success message */
-.success-message {
-  font-size: 1.5rem;
-  color: green;
-  text-align: center;
+.newQuotationBtn:hover{
+  opacity: 85%;
+}
+.submitQuotationBtn:hover{
+  opacity: 85%;
+}
+.designImagesContainer{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.designImages{
+  width: 5rem;
+  height: 5rem;
+  border-radius: 10px;
+}
+.designImagesContainerView{
+  display: flex;
+  align-items: center;
+  gap: 70px;
+}
+.designImagesContainerView p {
+  color: white;
 }

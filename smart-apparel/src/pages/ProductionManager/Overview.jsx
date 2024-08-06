@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/ProductionManager/Sidebar";
 import Box from "@mui/material/Box";
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import Grid from "@mui/material/Grid";
-import CardModel from "../components/Card";
+import CardModel from "../../components/Card";
 
 
 //function for set values to the cards
@@ -47,10 +47,10 @@ export default function Overview() {
         throw new Error("Failed to fetch total customers");
       }
       if (!totalOrderResponse.ok) {
-        throw new Error("Failed to fetch total customers");
+        throw new Error("Failed to fetch total Order");
       }
       if (!totalCompletedOrderResponse.ok) {
-        throw new Error("Failed to fetch total customers");
+        throw new Error("Failed to fetch total Completed Order");
       }
      
     
@@ -91,12 +91,12 @@ export default function Overview() {
   
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Box height={60} />
       <Box sx={{ display: "flex" }}>
         <Sidebar />
         <Box component="main" sx={{ flexGrow: 1, p: 3 ,backgroundColor: "#d7e3fc"}} >
-          <h1>Overview</h1>
+          <h1>Home</h1>
           <Grid container spacing={7}>
             <CardModel totalvalue={"Rs.  "+(totalExpense/1000000)+"Mn"} cardname={"Total Expenses"} style={gradientStyle}  />
             <CardModel totalvalue={"Rs.  "+(totalSales/1000000)+"Mn"} cardname={"Total Sales"} style={gradientStyle} />
