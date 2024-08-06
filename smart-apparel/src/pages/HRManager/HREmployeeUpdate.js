@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Box, Button } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from '../../components/HRManager/Navbar/Navbar';
 import Sidebar from "../../components/HRManager/HRSidebar";
 import EmployeeForm from '../../components/EmployeeComponent/EmployeeForm';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';

@@ -1,6 +1,6 @@
 import React from 'react'
 import EmployeeForm from '../../components/EmployeeComponent/EmployeeForm'
-import Navbar from '../../components/Navbar/Navbar'
+import Navbar from '../../components/HRManager/Navbar/Navbar'
 import { Box, Button } from '@mui/material'
 import Sidebar from "../../components/HRManager/HRSidebar";
 import { useNavigate } from 'react-router-dom'

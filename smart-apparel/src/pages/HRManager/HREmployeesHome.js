@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/HRManager/Navbar/Navbar";
 import Sidebar from "../../components/HRManager/HRSidebar";
 import Grid from "@mui/material/Grid";
 import EmployeeCard from "../../components/EmployeeComponent/EmployeeCard";
