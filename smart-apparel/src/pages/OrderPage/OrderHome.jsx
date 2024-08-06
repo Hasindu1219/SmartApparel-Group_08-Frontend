@@ -33,6 +33,7 @@ export default function OrderHome() {
                   <button className="btn1">
                     <p className="Task1">Order Covered Amount</p>
                   </button>
+
                 </Link>
             </div>
             {/* Image Frame */}
