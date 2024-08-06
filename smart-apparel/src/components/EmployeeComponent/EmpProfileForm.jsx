@@ -264,22 +264,22 @@ function EmpProfileForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
     };
 
     const fields = [
-        { name: 'empId', label: 'Employee ID', required: true },
-        { name: 'name', label: 'Employee Name', required: true },
-        { name: 'address', label: 'Address', required: true },
-        { name: 'nic', label: 'NIC', required: true },
+        { name: 'empId', label: 'Employee ID', required: true ,disable:true},
+        { name: 'name', label: 'Employee Name', required: true,disable:true },
+        { name: 'address', label: 'Address', required: true ,disable:false},
+        { name: 'nic', label: 'NIC', required: true ,disable:true},
         {
-            name: 'position', label: 'Position', required: true,
+            name: 'position', label: 'Position', required: true,disable:true,
             options: ["Director", "Production Manager", "HR Manager", "Accounting Manager", "Supervisor", "Helper"]
         },
-        { name: 'email', label: 'Email', required: true },
-        { name: 'password', label: 'Password', required: true },
-        { name: 'phoneNumber', label: 'Phone Number', required: true },
-        { name: 'dateOfBirth', label: 'Date of Birth', required: true },
-        { name: 'accountNumber', label: 'Account Number', required: true },
-        { name: 'holderName', label: 'Holder Name', required: true },
-        { name: 'branchName', label: 'Branch Name', required: true },
-        { name: 'bankName', label: 'Bank Name', required: true }
+        { name: 'email', label: 'Email', required: true,disable:false},
+        { name: 'password', label: 'Password', required: true,disable:true },
+        { name: 'phoneNumber', label: 'Phone Number', required: true ,disable:false},
+        { name: 'dateOfBirth', label: 'Date of Birth', required: true ,disable:true},
+        { name: 'accountNumber', label: 'Account Number', required: true ,disable:false},
+        { name: 'holderName', label: 'Holder Name', required: true ,disable:false},
+        { name: 'branchName', label: 'Branch Name', required: true ,disable:false},
+        { name: 'bankName', label: 'Bank Name', required: true ,disable:false}
     ];
 
     return (
@@ -288,7 +288,7 @@ function EmpProfileForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
                 field.name === "position" ? (
                     <TextField
                         select
-                        disabled={true}
+                        disabled={field.disable}
                         key={field.name}
                         required={field.required}
                         error={!!formErrors[field.name]}
@@ -343,6 +343,7 @@ function EmpProfileForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
                 ) : field.name === "dateOfBirth" ? (
                     <TextField
                         type="date"
+                        disabled={field.disable}
                         key={field.name}
                         required={field.required}
                         error={!!formErrors[field.name]}
@@ -357,7 +358,7 @@ function EmpProfileForm({ apiMethod, submitBtnName, resetBtnName, defaultFieldVa
                     />
                 ) : (
                     <TextField
-                        disabled={apiMethod === "put" && field.name === "empId" ? true : false}
+                        disabled={field.disable}
                         key={field.name}
                         required={field.required}
                         error={!!formErrors[field.name]}
