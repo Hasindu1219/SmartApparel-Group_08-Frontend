@@ -81,6 +81,22 @@ import PMProfitandLossReport from './pages/ProductionManager/ProfitandLossReport
 import PMDetailedSalaryReport from './pages/ProductionManager/DetailedSalaryReport';
 import PMSalaryReport from './pages/ProductionManager/SalaryReport';
 import EmployeeProfile from './pages/Employee/EmployeeProfile';
+import HROverview from './pages/HRManager/HROverview';
+import HREmployeesHome from './pages/HRManager/HREmployeesHome';
+import HRAttendanceHome from './pages/HRManager/HRAttendanceHome';
+import HRSalaryHome from './pages/HRManager/HRSalaryHome';
+import HRReportController from './pages/HRManager/HRReportController';
+import HRProfitandLossReport from './pages/HRManager/HRProfitandLossReport';
+import HRDetailedSalaryReport from './pages/HRManager/HRDetailedSalaryReport';
+import HRSalaryReport from './pages/HRManager/HRSalaryReport';
+import HREmployeeAdd from './pages/HRManager/HREmployeeAdd';
+import HREmployeeUpdatePage from './pages/HRManager/HREmployeeUpdate';
+import HRAttendanceAdd from './pages/HRManager/HRAttendanceAdd';
+import HRAttendanceUpdate from './pages/HRManager/HRAttendanceUpdate';
+import HRSalaryAdd from './pages/HRManager/HRSalaryAdd';
+import HRSalaryUpdate from './pages/HRManager/HRSalaryUpdate';
+import HRSalaryAddPage from './pages/HRManager/HRSalaryParamAdd';
+import HRSalaryParamUpdate from './pages/HRManager/HRSalaryParamUpdate';
 
 
 function App() {
@@ -179,6 +195,25 @@ function App() {
         <Route path="/PM/report/ProfitandLoss" element={<PMProfitandLossReport />}></Route>
         <Route path="/PM/report/DetailedSalaryReport" element={<PMDetailedSalaryReport />}></Route>
         <Route path="/PM/report/SalaryReport" element={<PMSalaryReport />}></Route>
+
+        {/* HR Manager */}
+        <Route path="/HR/Overview" element={<HROverview/>}></Route>
+        <Route path="/HR/Employees" element={<HREmployeesHome/>}></Route>
+        <Route path="/HR/employee/addemployee" element={<HREmployeeAdd />}> </Route>
+        <Route path="/HR/employee/updateemployee/:Id" element={<HREmployeeUpdatePage/>}> </Route>
+        <Route path="/HR/Attendance" element={<HRAttendanceHome/>}></Route>
+        <Route path='/HR/attendance/addattendance' element={<HRAttendanceAdd/>}> </Route>
+        <Route path='/HR/attendance/updateattendance/:Id' element={<HRAttendanceUpdate />}> </Route>
+        <Route path="/HR/Salary" element={<HRSalaryHome/>}></Route>
+        <Route path='/HR/salary/addsalary' element={<HRSalaryAdd />}></Route>
+        <Route path='/HR/salary/updatesalary/:Id' element={<HRSalaryUpdate />}></Route>
+        <Route path='/HR/salary/add-salary-param' element={<HRSalaryAddPage />}></Route>
+        <Route path='/HR/salary/update-salary-param/:spId' element={<HRSalaryParamUpdate />}></Route>
+
+        <Route path="/HR/Report" element={<HRReportController />}></Route>
+        <Route path="/HR/report/ProfitandLoss" element={<HRProfitandLossReport />}></Route>
+        <Route path="/HR/report/DetailedSalaryReport" element={<HRDetailedSalaryReport />}></Route>
+        <Route path="/HR/report/SalaryReport" element={<HRSalaryReport />}></Route>
         
 
       </Routes>

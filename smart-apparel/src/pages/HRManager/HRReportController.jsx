@@ -1,11 +1,11 @@
 import React from "react";
-import Sidebar from "../../components/ProductionManager/Sidebar";
+import Sidebar from "../../components/HRManager/HRSidebar";
 import Box from "@mui/material/Box";
 import Navbar from "../../components/Navbar/Navbar";
 import ReportCard from "../../components/Report/ReportCard";
 import ReportImage from "../../Assets/report.png";
 
-export default function ReportController() {
+export default function HRReportController() {
   return (
     <>
       <Navbar />
