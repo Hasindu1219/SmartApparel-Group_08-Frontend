@@ -55,6 +55,8 @@ function Login() {
       navigate('/overview');
     }else if (Position === "Production Manager") {
       navigate('/PM/overview');
+    }else if (Position === "HR Manager") {
+      navigate('/HR/overview');
     }
   }, [Position, navigate]);
 
