@@ -2,11 +2,10 @@ import React from "react";
 import { Chart } from "react-google-charts";
 
 export const data = [
-  ["Year", "Sales", "Expenses","Revenue"],
-  ["2004", 1000, 400,100],
-  ["2005", 1170, 460,400],
-  ["2006", 660, 1120,700],
-  ["2007", 1030, 540,845],
+  ["Year", "Sales", "Expenses"],
+  ["2024 May", 1000, 400],
+  ["2024 June", 1170, 460],
+  ["2024 July", 660, 1120],
 ];
 
 export const options = {

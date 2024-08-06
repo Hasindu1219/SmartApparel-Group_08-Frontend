@@ -5,7 +5,7 @@ import Sidebar from "../../components/Sidebar";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Revenue.css"
+import "./Revenue.css";
 
 const RevenueAdd = () => {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ const RevenueAdd = () => {
   const [description, setDescription] = useState("");
   const [currency, setCurrency] = useState("");
   const [completedOrderIds, setCompletedOrderIds] = useState([]);
+  const [excludedOrderIds, setExcludedOrderIds] = useState([]);
 
   // Function to fetch completed order IDs from the API
   const fetchCompletedOrderIds = async () => {
@@ -34,9 +35,41 @@ const RevenueAdd = () => {
     }
   };
 
-  // Use useEffect to fetch completed order IDs when the component mounts
+  // Function to fetch order details based on selected order ID
+  const fetchOrderDetails = async (orderId) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/order/viewOrder/${orderId}`);
+
+      if (response.data && response.data.content) {
+        const { largeSize, mediumSize, smallSize, orderAgreedPrice } = response.data.content;
+        const amount = (largeSize + mediumSize + smallSize) * orderAgreedPrice;
+        setCurrency(amount.toFixed(2)); // Set the calculated amount to the currency field
+      }
+
+    } catch (error) {
+      console.error("Error fetching order details:", error);
+    }
+  };
+
+  // Function to fetch revenue data and get excluded order IDs
+  const fetchRevenueData = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/v1/revenue/viewRevenue");
+
+      if (response.data && response.data.content) {
+        const orderIds = response.data.content.map(revenue => revenue.order_Id);
+        setExcludedOrderIds(orderIds);
+      }
+
+    } catch (error) {
+      console.error("Error fetching revenue data:", error);
+    }
+  };
+
+  // Use useEffect to fetch completed order IDs and revenue data when the component mounts
   useEffect(() => {
     fetchCompletedOrderIds();
+    fetchRevenueData();
   }, []); // Empty dependency array ensures this effect runs only once on component mount
 
   // Function to handle form submission
@@ -79,6 +112,9 @@ const RevenueAdd = () => {
       console.error("Revenue save error:", error);
     }
   };
+
+  // Filtered order IDs for the dropdown
+  const filteredOrderIds = completedOrderIds.filter(orderId => !excludedOrderIds.includes(orderId.toString()));
 
   return (
     <>
@@ -126,10 +162,13 @@ const RevenueAdd = () => {
                               id="orderId"
                               className="form-control"
                               value={orderId}
-                              onChange={(e) => setOrderId(e.target.value)}
+                              onChange={(e) => {
+                                setOrderId(e.target.value);
+                                fetchOrderDetails(e.target.value); // Fetch order details when an order ID is selected
+                              }}
                             >
                               <option value="">Select an order ID...</option>
-                              {completedOrderIds.map((orderId) => (
+                              {filteredOrderIds.map((orderId) => (
                                 <option key={orderId} value={orderId}>
                                   {orderId}
                                 </option>
@@ -184,7 +223,7 @@ const RevenueAdd = () => {
                               type="text"
                               required
                               value={currency}
-                              onChange={(e) => setCurrency(e.target.value)}
+                              readOnly // Make this field read-only as it is calculated
                               className="form-control"
                             />
                           </div>
