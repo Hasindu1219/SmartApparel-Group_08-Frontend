@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../../components/ProductionManager/Sidebar";
 import Box from "@mui/material/Box";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/ProductionManager/Navbar/Navbar";
 import Grid from "@mui/material/Grid";
 import CardModel from "../../components/Card";
 

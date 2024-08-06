@@ -23,249 +23,147 @@ import B18 from './B18.jpg';
 import B19 from './B19.jpg';
 import B20 from './B20.jpg';
 
-// import F21 from './F21.jpg';
-// import F22 from './F22.jpg';
-// import F23 from './F23.jpg';
-// import F24 from './F24.jpg';
-
-// import F25 from './F25.jpg';
-// import F26 from './F26.jpg';
-// import F27 from './F27.jpg';
-// import F28 from './F28.jpg';
-
-// import F29 from './F29.jpg';
-// import F30 from './F30.jpg';
-// import F31 from './F31.jpg';
-// import F32 from './F24.jpg';
-
 const Blouses = [
   {
     id: 1,
-    name: "Bloues 1",
+    name: "Blouse 1",
     image: B1,
-    new_price: 29.99,
-    old_price: 39.99
+    new_price: "Rs. 2000",
+    old_price: "Rs. 2500"
   },
   {
     id: 2,
-    name: "Bloues 2",
+    name: "Blouse 2",
     image: B2,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1500",
+    old_price: "Rs. 2000"
   },
   {
     id: 3,
-    name: "Bloues 3",
+    name: "Blouse 3",
     image: B3,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1700",
+    old_price: "Rs. 2200"
   },
   {
     id: 4,
-    name: "Bloues 4",
+    name: "Blouse 4",
     image: B4,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1800",
+    old_price: "Rs. 2300"
   },
   {
     id: 5,
-    name: "Bloues 5",
+    name: "Blouse 5",
     image: B5,
-    new_price: 29.99,
-    old_price: 39.99
+    new_price: "Rs. 1900",
+    old_price: "Rs. 2400"
   },
   {
     id: 6,
-    name: "Bloues 6",
+    name: "Blouse 6",
     image: B6,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1600",
+    old_price: "Rs. 2100"
   },
   {
     id: 7,
-    name: "Bloues 7",
+    name: "Blouse 7",
     image: B7,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1700",
+    old_price: "Rs. 2200"
   },
   {
     id: 8,
-    name: "Bloues 8",
+    name: "Blouse 8",
     image: B8,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1800",
+    old_price: "Rs. 2300"
   },
   {
     id: 9,
-    name: "Bloues 9",
+    name: "Blouse 9",
     image: B9,
-    new_price: 29.99,
-    old_price: 39.99
+    new_price: "Rs. 1900",
+    old_price: "Rs. 2400"
   },
   {
     id: 10,
-    name: "Bloues 10",
+    name: "Blouse 10",
     image: B10,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1600",
+    old_price: "Rs. 2100"
   },
   {
     id: 11,
-    name: "Bloues 11",
+    name: "Blouse 11",
     image: B11,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1700",
+    old_price: "Rs. 2200"
   },
   {
     id: 12,
-    name: "Bloues 12",
+    name: "Blouse 12",
     image: B12,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1800",
+    old_price: "Rs. 2300"
   },
   {
     id: 13,
-    name: "Bloues 13",
+    name: "Blouse 13",
     image: B13,
-    new_price: 29.99,
-    old_price: 39.99
+    new_price: "Rs. 1900",
+    old_price: "Rs. 2400"
   },
   {
     id: 14,
-    name: "Bloues 14",
+    name: "Blouse 14",
     image: B14,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1600",
+    old_price: "Rs. 2100"
   },
   {
     id: 15,
-    name: "Bloues 15",
+    name: "Blouse 15",
     image: B15,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1700",
+    old_price: "Rs. 2200"
   },
   {
     id: 16,
-    name: "Bloues 16",
+    name: "Blouse 16",
     image: B16,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1800",
+    old_price: "Rs. 2300"
   },
   {
     id: 17,
-    name: "Bloues 17",
+    name: "Blouse 17",
     image: B17,
-    new_price: 29.99,
-    old_price: 39.99
+    new_price: "Rs. 1900",
+    old_price: "Rs. 2400"
   },
   {
     id: 18,
-    name: "Bloues 18",
+    name: "Blouse 18",
     image: B18,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1600",
+    old_price: "Rs. 2100"
   },
   {
     id: 19,
-    name: "Bloues 19",
+    name: "Blouse 19",
     image: B19,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1700",
+    old_price: "Rs. 2200"
   },
   {
     id: 20,
-    name: "Bloues 20",
+    name: "Blouse 20",
     image: B20,
-    new_price: 25.99,
-    old_price: 35.99
+    new_price: "Rs. 1800",
+    old_price: "Rs. 2300"
   }
-//   {
-//     id: 21,
-//     name: "Frock 21",
-//     image: F21,
-//     new_price: 29.99,
-//     old_price: 39.99
-//   },
-//   {
-//     id: 22,
-//     name: "Frock 22",
-//     image: F22,
-//     new_price: 25.99,
-//     old_price: 35.99
-//   },
-//   {
-//     id: 23,
-//     name: "Frock 23",
-//     image: F23,
-//     new_price: 25.99,
-//     old_price: 35.99
-//   },
-//   {
-//     id: 24,
-//     name: "Frock 24",
-//     image: F24,
-//     new_price: 25.99,
-//     old_price: 35.99
-//   },
-//   {
-//     id: 25,
-//     name: "Frock 25",
-//     image: F25,
-//     new_price: 29.99,
-//     old_price: 39.99
-//   },
-//   {
-//     id: 26,
-//     name: "Frock 26",
-//     image: F26,
-//     new_price: 25.99,
-//     old_price: 35.99
-//   },
-//   {
-//     id: 27,
-//     name: "Frock 27",
-//     image: F27,
-//     new_price: 25.99,
-//     old_price: 35.99
-//   },
-//   {
-//     id: 28,
-//     name: "Frock 28",
-//     image: F28,
-//     new_price: 25.99,
-//     old_price: 35.99
-//   },
-//   {
-//     id: 29,
-//     name: "Frock 29",
-//     image: F29,
-//     new_price: 29.99,
-//     old_price: 39.99
-//   },
-//   {
-//     id: 30,
-//     name: "Frock 30",
-//     image: F30,
-//     new_price: 25.99,
-//     old_price: 35.99
-//   },
-//   {
-//     id: 31,
-//     name: "Frock 31",
-//     image: F31,
-//     new_price: 25.99,
-//     old_price: 35.99
-//   },
-//   {
-//     id: 32,
-//     name: "Frock 32",
-//     image: F32,
-//     new_price: 25.99,
-//     old_price: 35.99
-//   },
-
-
-
 ];
 
 export default Blouses;

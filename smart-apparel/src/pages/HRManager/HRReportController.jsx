@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../../components/HRManager/HRSidebar";
 import Box from "@mui/material/Box";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/HRManager/Navbar/Navbar";
 import ReportCard from "../../components/Report/ReportCard";
 import ReportImage from "../../Assets/report.png";
 

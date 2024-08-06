@@ -27,6 +27,7 @@ const RevenueAdd = () => {
       );
 
       if (response.data && response.data.content) {
+        console.log("Completed Order IDs:", response.data.content); // Debugging log
         setCompletedOrderIds(response.data.content);
       }
 
@@ -58,6 +59,7 @@ const RevenueAdd = () => {
 
       if (response.data && response.data.content) {
         const orderIds = response.data.content.map(revenue => revenue.order_Id);
+        console.log("Excluded Order IDs:", orderIds); // Debugging log
         setExcludedOrderIds(orderIds);
       }
 

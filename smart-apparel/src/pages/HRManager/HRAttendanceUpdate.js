@@ -1,5 +1,5 @@
 import AttendanceForm from "../../components/AttendanceComponent/AttendanceForm";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/HRManager/Navbar/Navbar";
 import Sidebar from "../../components/HRManager/HRSidebar";
 import { Box, Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";

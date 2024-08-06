@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Navbar from "../../components/Navbar/Navbar";
-import Sidebar from "../../components/ProductionManager/Sidebar";
+import Navbar from "../../components/HRManager/Navbar/Navbar";
+import Sidebar from "../../components/HRManager/HRSidebar";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DetailedSalaryReport from "../../components/Report/DetailedSalaryReport";
@@ -36,7 +36,7 @@ export default function HRDetailedSalaryReport() {
               }}
             >
               {/* Expense Listing title */}
-              <button id="backBtnExpense" onClick={() => navigate("/PM/Report")}>
+              <button id="backBtnExpense" onClick={() => navigate("/HR/Report")}>
                 <ArrowBackIcon />
               </button>
             </div>

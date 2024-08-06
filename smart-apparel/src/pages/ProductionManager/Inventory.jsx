@@ -1,7 +1,7 @@
 import React from 'react'
 import Box from "@mui/material/Box";
 import Sidebar from "../../components/ProductionManager/Sidebar";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/ProductionManager/Navbar/Navbar";
 import FirstPage from '../ProductionManager/FirstPage';
 
 export default function Inventory() {

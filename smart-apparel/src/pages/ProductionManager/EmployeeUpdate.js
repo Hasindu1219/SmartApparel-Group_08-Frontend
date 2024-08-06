@@ -2,12 +2,12 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Box, Button } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Navbar from '../../components/HRManager/Navbar/Navbar';
-import Sidebar from "../../components/HRManager/HRSidebar";
+import Navbar from '../../components/Navbar/Navbar';
+import Sidebar from '../../components/Sidebar';
 import EmployeeForm from '../../components/EmployeeComponent/EmployeeForm';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-function HREmployeeUpdatePage() {
+function EmployeeUpdatePage() {
   const { Id } = useParams();
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ function HREmployeeUpdatePage() {
 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Box style={{ fontSize: "2em", fontWeight: "Bold", margin: "10px" }}>
-            <Button onClick={() => { navigate("/HR/Employees") }}><ArrowBackIosNewIcon /></Button>
+            <Button onClick={() => { navigate('/employees') }}><ArrowBackIosNewIcon /></Button>
             Update Employee
           </Box>
 
@@ -62,4 +62,4 @@ function HREmployeeUpdatePage() {
   );
 };
 
-export default HREmployeeUpdatePage;
+export default EmployeeUpdatePage;

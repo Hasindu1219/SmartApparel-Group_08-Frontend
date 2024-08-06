@@ -80,7 +80,11 @@ import PMReport from './pages/ProductionManager/ReportController';
 import PMProfitandLossReport from './pages/ProductionManager/ProfitandLossReport';
 import PMDetailedSalaryReport from './pages/ProductionManager/DetailedSalaryReport';
 import PMSalaryReport from './pages/ProductionManager/SalaryReport';
+import PMProfileEdit from './pages/ProductionManager/EmployeeProfile';
+
+
 import EmployeeProfile from './pages/Employee/EmployeeProfile';
+
 import HROverview from './pages/HRManager/HROverview';
 import HREmployeesHome from './pages/HRManager/HREmployeesHome';
 import HRAttendanceHome from './pages/HRManager/HRAttendanceHome';
@@ -97,6 +101,7 @@ import HRSalaryAdd from './pages/HRManager/HRSalaryAdd';
 import HRSalaryUpdate from './pages/HRManager/HRSalaryUpdate';
 import HRSalaryAddPage from './pages/HRManager/HRSalaryParamAdd';
 import HRSalaryParamUpdate from './pages/HRManager/HRSalaryParamUpdate';
+import HRProfileEdit from './pages/HRManager/EmployeeProfile';
 
 
 function App() {
@@ -195,6 +200,7 @@ function App() {
         <Route path="/PM/report/ProfitandLoss" element={<PMProfitandLossReport />}></Route>
         <Route path="/PM/report/DetailedSalaryReport" element={<PMDetailedSalaryReport />}></Route>
         <Route path="/PM/report/SalaryReport" element={<PMSalaryReport />}></Route>
+        <Route path="/PM/ProfileEdit" element={<PMProfileEdit />}></Route>
 
         {/* HR Manager */}
         <Route path="/HR/Overview" element={<HROverview/>}></Route>
@@ -209,6 +215,7 @@ function App() {
         <Route path='/HR/salary/updatesalary/:Id' element={<HRSalaryUpdate />}></Route>
         <Route path='/HR/salary/add-salary-param' element={<HRSalaryAddPage />}></Route>
         <Route path='/HR/salary/update-salary-param/:spId' element={<HRSalaryParamUpdate />}></Route>
+        <Route path="/HR/ProfileEdit" element={<HRProfileEdit />}></Route>
 
         <Route path="/HR/Report" element={<HRReportController />}></Route>
         <Route path="/HR/report/ProfitandLoss" element={<HRProfitandLossReport />}></Route>

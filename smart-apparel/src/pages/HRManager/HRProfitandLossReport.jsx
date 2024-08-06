@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/HRManager/Navbar/Navbar";
 import Sidebar from "../../components/HRManager/HRSidebar";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -36,7 +36,7 @@ export default function HRProfitandLossReport() {
               }}
             >
               {/* Expense Listing title */}
-              <button id="backBtnExpense" onClick={() => navigate("/PM/Report")}>
+              <button id="backBtnExpense" onClick={() => navigate("/HR/Report")}>
                 <ArrowBackIcon />
               </button>
             </div>
