@@ -35,16 +35,19 @@ import LineSupervisorOrderCoveredAmount from './pages/OrderPage/LineSupervisorOr
 import LineSupervisorCoveredAmountForm from './pages/OrderPage/LineSupervisorCoveredAmountForm';
 
 // import Login from './pages/Login';
-import RevenueController from './pages/Accounting/RevenueController'
+import RevenueController from './pages/Accounting/RevenueController';
+import RevenueAdd from './pages/Accounting/AddRevenue';
+import UpdateRevenue from './pages/Accounting/UpdateRevenue';
+
+import ExpenseController from './pages/Accounting/ExpenseController';
 import AddExpense from './pages/Accounting/AddExpense';
 import UpdateExpense from './pages/Accounting/UpdateExpense';
+
 import Login from './pages/Login/Login';
 import ForgotPassword from './pages/Login/ForgotPassword';
 import ChangePassword from './pages/Login/changePassword';
 
-import ExpenseController from './pages/Accounting/ExpenseController';
-import RevenueAdd from './pages/Accounting/AddRevenue';
-import UpdateRevenue from './pages/Accounting/UpdateRevenue';
+
 import AttendanceUpdate from './pages/Attendance/AttendanceUpdate';
 import SalaryParamAdd from './pages/Salary/SalaryParamAdd';
 import AddMaterial from './pages/InventoryPage/AddMaterial';
@@ -102,6 +105,20 @@ import HRSalaryUpdate from './pages/HRManager/HRSalaryUpdate';
 import HRSalaryAddPage from './pages/HRManager/HRSalaryParamAdd';
 import HRSalaryParamUpdate from './pages/HRManager/HRSalaryParamUpdate';
 import HRProfileEdit from './pages/HRManager/EmployeeProfile';
+
+import AMOverview from './pages/AccountingManager/AMOverview';
+import AMReportController from './pages/AccountingManager/AMReportController';
+import AMProfitandLossReport from './pages/AccountingManager/AMProfitandLossReport';
+import AMDetailedSalaryReport from './pages/AccountingManager/AMDetailedSalaryReport';
+import AMSalaryReport from './pages/AccountingManager/AMSalaryReport';
+import AMAccounting from './pages/AccountingManager/AMAccounting';
+import AMExpenseController from './pages/AccountingManager/AMExpenseController';
+import AMAddExpense from './pages/AccountingManager/AMAddExpense';
+import AMUpdateExpense from './pages/AccountingManager/AMUpdateExpense';
+import AMRevenueController from './pages/AccountingManager/AMRevenueController';
+import AMRevenueAdd from './pages/AccountingManager/AMAddRevenue';
+import AMUpdateRevenue from './pages/AccountingManager/AMUpdateRevenue';
+import AMProfileEdit from './pages/AccountingManager/EmployeeProfile';
 
 
 function App() {
@@ -221,8 +238,24 @@ function App() {
         <Route path="/HR/report/ProfitandLoss" element={<HRProfitandLossReport />}></Route>
         <Route path="/HR/report/DetailedSalaryReport" element={<HRDetailedSalaryReport />}></Route>
         <Route path="/HR/report/SalaryReport" element={<HRSalaryReport />}></Route>
-        
 
+
+         {/* Accounting Manager */}
+        <Route path="/AM/Overview" element={<AMOverview/>}></Route>
+        <Route path="/AM/ProfileEdit" element={<AMProfileEdit />}></Route>
+
+        <Route path="/AM/Report" element={<AMReportController />}></Route>
+        <Route path="/AM/report/ProfitandLoss" element={<AMProfitandLossReport />}></Route>
+        <Route path="/AM/report/DetailedSalaryReport" element={<AMDetailedSalaryReport />}></Route>
+        <Route path="/AM/report/SalaryReport" element={<AMSalaryReport />}></Route>
+        <Route path="/AM/Accounting" element={<AMAccounting />}></Route> 
+        <Route path="/AM/accounting/expensecontroller" element={<AMExpenseController />}></Route>
+        <Route path="/AM/accounting/expensecontroller/addexpense" element={<AMAddExpense />}></Route>
+        <Route path="/AM/accounting/updateexpense/:id" element={<AMUpdateExpense />}></Route>
+        <Route path="/AM/accounting/revenuecontroller" element={<AMRevenueController />}></Route>
+        <Route path="/AM/accounting/addrevenue" element={<AMRevenueAdd />}></Route>
+        <Route path="/AM/accounting/updaterevenue/:id" element={<AMUpdateRevenue />}></Route>
+        
       </Routes>
       {/* <Footer/> */}
     </BrowserRouter>

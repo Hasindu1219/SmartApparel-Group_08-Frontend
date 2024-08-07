@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
-import Navbar from "../../components/Navbar/Navbar";
-import Sidebar from "../../components/Sidebar";
+import Navbar from "../../components/AccountingManager/Navbar/Navbar";
+import Sidebar from "../../components/AccountingManager/Sidebar";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Revenue.css";
 
-const RevenueAdd = () => {
+const UpdateRevenue = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  // State variables to manage form inputs
   const [chequeId, setChequeId] = useState("");
   const [orderId, setOrderId] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [currency, setCurrency] = useState("");
+  const [status, setStatus] = useState("");
   const [completedOrderIds, setCompletedOrderIds] = useState([]);
-  const [excludedOrderIds, setExcludedOrderIds] = useState([]);
-  const [chequeIdError, setChequeIdError] = useState("");
 
-  // Function to fetch completed order IDs from the API
   const fetchCompletedOrderIds = async () => {
     try {
       const response = await axios.get(
@@ -28,119 +26,76 @@ const RevenueAdd = () => {
       );
 
       if (response.data && response.data.content) {
-        console.log("Completed Order IDs:", response.data.content); // Debugging log
         setCompletedOrderIds(response.data.content);
       }
+
     } catch (error) {
       console.error("Error fetching completed order IDs:", error);
     }
   };
 
-  // Function to fetch order details based on selected order ID
-  const fetchOrderDetails = async (orderId) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/order/viewOrder/${orderId}`
-      );
-
-      if (response.data && response.data.content) {
-        const { largeSize, mediumSize, smallSize, orderAgreedPrice } =
-          response.data.content;
-        const amount = (largeSize + mediumSize + smallSize) * orderAgreedPrice;
-        setCurrency(amount.toFixed(2)); // Set the calculated amount to the currency field
-      }
-    } catch (error) {
-      console.error("Error fetching order details:", error);
-    }
-  };
-
-  // Function to fetch revenue data and get excluded order IDs
-  const fetchRevenueData = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8080/api/v1/revenue/viewRevenue"
-      );
-
-      if (response.data && response.data.content) {
-        const orderIds = response.data.content.map(
-          (revenue) => revenue.order_Id
-        );
-        console.log("Excluded Order IDs:", orderIds); // Debugging log
-        setExcludedOrderIds(orderIds);
-      }
-    } catch (error) {
-      console.error("Error fetching revenue data:", error);
-    }
-  };
-
-  // Use useEffect to fetch completed order IDs and revenue data when the component mounts
+  // Use useEffect to fetch completed order IDs when the component mounts
   useEffect(() => {
     fetchCompletedOrderIds();
+  }, []);
+
+
+  useEffect(() => {
+
+    const fetchRevenueData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/v1/revenue/searchRevenue/${id}`
+        );
+
+        const revenueData = response.data.content;
+
+        setOrderId(revenueData.order_Id);
+        setChequeId(revenueData.cheque_Id);
+        setStatus(revenueData.status);
+        setDate(revenueData.date);
+        setDescription(revenueData.description);
+        setCurrency(String(revenueData.amount)); // Convert amount to string
+
+      } catch (error) {
+        console.error("Error fetching expense data:", error);
+      }
+    };
+
     fetchRevenueData();
-  }, []); // Empty dependency array ensures this effect runs only once on component mount
+  }, [id]);
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
-    // Check for chequeId validity before submission
-    if (!/^\d+$/.test(chequeId)) {
-      alert("Cheque ID must be a numeric value.");
-      return;
-    }
-
-    // Create revenue data object to send to backend
-    const revenueData = {
+    const updatedRevenueData = {
+      revenue_ID: id,
       order_Id: orderId,
       cheque_Id: chequeId,
       date: date,
       description: description,
-      status: "Pending",
-      amount: parseFloat(currency), // Assuming currency input represents amount
+      status: status,
+      amount: parseFloat(currency), 
     };
 
     try {
-      console.log("Revenue data:", revenueData);
-      // Make POST request to backend API
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/revenue/saveRevenue",
-        revenueData
+      console.log("Updated revenue data:", updatedRevenueData);
+      const response = await axios.put(
+        "http://localhost:8080/api/v1/revenue/updateRevenue",
+        updatedRevenueData
       );
 
-      // Handle response statuses
       if (response.status === 202) {
-        // Successful response
-        alert("Revenue saved successfully.");
+        alert("Revenue updated successfully.");
         navigate("/accounting/revenuecontroller");
-      } else if (response.status === 400) {
-        // Duplicate or invalid request
-        alert("Expense already registered or invalid request.");
       } else {
-        // Other failure cases
-        alert("Error occurred while saving revenue.");
+        alert("Error occurred while updating revenue.");
       }
     } catch (error) {
-      // Handle network or server errors
-      alert("An error occurred while saving revenue.");
-      console.error("Revenue save error:", error);
+      alert("An error occurred while updating revenue.");
+      console.error("Revenue update error:", error);
     }
   };
-
-  // Handle Cheque ID input change and validation
-  const handleChequeIdChange = (e) => {
-    const value = e.target.value;
-    if (/^\d*$/.test(value)) { // Validate numeric input
-      setChequeId(value);
-      setChequeIdError(""); // Clear error message
-    } else {
-      setChequeIdError("Cheque ID must be a numeric value.");
-    }
-  };
-
-  // Filtered order IDs for the dropdown
-  const filteredOrderIds = completedOrderIds.filter(
-    (orderId) => !excludedOrderIds.includes(orderId.toString())
-  );
 
   return (
     <>
@@ -167,22 +122,20 @@ const RevenueAdd = () => {
             >
               <button
                 id="backBtnExpense"
-                onClick={() => navigate("/accounting/revenuecontroller")}
+                onClick={() => navigate("/AM/accounting/revenuecontroller")}
               >
                 <ArrowBackIcon />
               </button>
-              <h2 style={{ marginLeft: "40px" }}>Sales Adding Form</h2>
+              <h2 style={{ marginLeft: "40px" }}>Revenue Updating Form</h2>
             </div>
             <div className="row">
               <div className="offset-lg-2 col-lg-8">
-                <form
-                  className="container revenue-form"
-                  onSubmit={handleSubmit}
-                >
+                <form className="container revenue-form" onSubmit={handleSubmit}>
                   <div style={{ textAlign: "left" }}>
                     <div className="card-body">
                       <div className="row">
-                        <div className="col-lg-12">
+
+                      <div className="col-lg-12">
                           <div className="form-group">
                             <label htmlFor="categorySelect">Order Id</label>
                             <select
@@ -190,13 +143,10 @@ const RevenueAdd = () => {
                               id="orderId"
                               className="form-control"
                               value={orderId}
-                              onChange={(e) => {
-                                setOrderId(e.target.value);
-                                fetchOrderDetails(e.target.value); // Fetch order details when an order ID is selected
-                              }}
+                              onChange={(e) => setOrderId(e.target.value)}
                             >
                               <option value="">Select an order ID...</option>
-                              {filteredOrderIds.map((orderId) => (
+                              {completedOrderIds.map((orderId) => (
                                 <option key={orderId} value={orderId}>
                                   {orderId}
                                 </option>
@@ -212,14 +162,9 @@ const RevenueAdd = () => {
                               type="text"
                               required
                               value={chequeId}
-                              onChange={handleChequeIdChange}
+                              onChange={(e) => setChequeId(e.target.value)}
                               className="form-control"
                             />
-                            {chequeIdError && (
-                              <span style={{ color: "red" }}>
-                                {chequeIdError}
-                              </span>
-                            )}
                           </div>
                         </div>
 
@@ -251,24 +196,38 @@ const RevenueAdd = () => {
 
                         <div className="col-lg-12">
                           <div className="form-group">
+                            <label htmlFor="categorySelect">Status</label>
+                            <select
+                              required
+                              id="status"
+                              className="form-control"
+                              value={status}
+                              onChange={(e) => setStatus(e.target.value)} // Update status state
+                            >
+                              <option value="Pending">Pending</option>
+                              <option value="Successful">Successful</option>
+                              <option value="Rejected">Rejected</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div className="col-lg-12">
+                          <div className="form-group">
                             <label>Amount(Rs.)</label>
                             <input
                               type="text"
                               required
                               value={currency}
-                              readOnly // Make this field read-only as it is calculated
+                              onChange={(e) => setCurrency(e.target.value)}
                               className="form-control"
                             />
                           </div>
                         </div>
 
                         <div className="col-lg-12">
-                          <div
-                            className="form-group"
-                            style={{ textAlign: "center" }}
-                          >
+                          <div className="form-group" style={{ textAlign: "center" }}>
                             <button id="updateBtnExpense" type="submit">
-                              Save
+                              Update
                             </button>
                           </div>
                         </div>
@@ -285,4 +244,4 @@ const RevenueAdd = () => {
   );
 };
 
-export default RevenueAdd;
+export default UpdateRevenue;
