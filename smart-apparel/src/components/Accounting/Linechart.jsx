@@ -11,9 +11,11 @@ export default function LineChart() {
       const response = await axios.get(
         "http://localhost:8080/api/v1/revenue/viewRevenue"
       );
-      if (response.data && response.data.content) {
-        const revenueData = response.data.content;
-        return revenueData;
+      if (response.data && Array.isArray(response.data.content)) {
+        return response.data.content;
+      } else {
+        console.error("Unexpected revenue data format:", response.data);
+        return [];
       }
     } catch (error) {
       console.error("Error fetching revenue data:", error);
@@ -27,9 +29,11 @@ export default function LineChart() {
       const response = await axios.get(
         "http://localhost:8080/api/v1/expense/viewExpense"
       );
-      if (response.data && response.data.content) {
-        const expenseData = response.data.content;
-        return expenseData;
+      if (response.data && Array.isArray(response.data.content)) {
+        return response.data.content;
+      } else {
+        console.error("Unexpected expense data format:", response.data);
+        return [];
       }
     } catch (error) {
       console.error("Error fetching expense data:", error);
@@ -41,10 +45,9 @@ export default function LineChart() {
   const aggregateByMonth = (data, isRevenue = true) => {
     const aggregate = {};
     data.forEach((item) => {
-      const month = new Date(item.date).toLocaleString("default", {
-        month: "long",
-      });
-      const year = new Date(item.date).getFullYear();
+      const date = new Date(item.date);
+      const month = date.toLocaleString("default", { month: "long" });
+      const year = date.getFullYear();
       const key = `${year} ${month}`;
       if (!aggregate[key]) {
         aggregate[key] = { sales: 0, expenses: 0 };
