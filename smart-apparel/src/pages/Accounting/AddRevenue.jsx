@@ -27,9 +27,11 @@ const RevenueAdd = () => {
         "http://localhost:8080/order/completedOrderId"
       );
 
-      if (response.data && response.data.content) {
+      if (response.data && Array.isArray(response.data.content)) {
         console.log("Completed Order IDs:", response.data.content); // Debugging log
         setCompletedOrderIds(response.data.content);
+      } else {
+        console.error("Invalid response format for completed order IDs:", response.data);
       }
     } catch (error) {
       console.error("Error fetching completed order IDs:", error);
@@ -48,6 +50,8 @@ const RevenueAdd = () => {
           response.data.content;
         const amount = (largeSize + mediumSize + smallSize) * orderAgreedPrice;
         setCurrency(amount.toFixed(2)); // Set the calculated amount to the currency field
+      } else {
+        console.error("Invalid response format for order details:", response.data);
       }
     } catch (error) {
       console.error("Error fetching order details:", error);
@@ -61,12 +65,14 @@ const RevenueAdd = () => {
         "http://localhost:8080/api/v1/revenue/viewRevenue"
       );
 
-      if (response.data && response.data.content) {
+      if (response.data && Array.isArray(response.data.content)) {
         const orderIds = response.data.content.map(
           (revenue) => revenue.order_Id
         );
         console.log("Excluded Order IDs:", orderIds); // Debugging log
         setExcludedOrderIds(orderIds);
+      } else {
+        console.error("Invalid response format for revenue data:", response.data);
       }
     } catch (error) {
       console.error("Error fetching revenue data:", error);
@@ -110,7 +116,7 @@ const RevenueAdd = () => {
       // Handle response statuses
       if (response.status === 202) {
         // Successful response
-        alert("Revenue saved successfully.");
+        alert("Sale added successfully.");
         navigate("/accounting/revenuecontroller");
       } else if (response.status === 400) {
         // Duplicate or invalid request
@@ -196,11 +202,15 @@ const RevenueAdd = () => {
                               }}
                             >
                               <option value="">Select an order ID...</option>
-                              {filteredOrderIds.map((orderId) => (
-                                <option key={orderId} value={orderId}>
-                                  {orderId}
-                                </option>
-                              ))}
+                              {filteredOrderIds.length > 0 ? (
+                                filteredOrderIds.map((orderId) => (
+                                  <option key={orderId} value={orderId}>
+                                    {orderId}
+                                  </option>
+                                ))
+                              ) : (
+                                <option value="">No orders available</option>
+                              )}
                             </select>
                           </div>
                         </div>
